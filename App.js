@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
-import { mapping, light as lightTheme } from '@eva-design/eva';
+import { mapping, light as lightTheme, dark } from '@eva-design/eva';
 import { ApplicationProvider } from 'react-native-ui-kitten';
 
-import ListExample from './src/components/ListExample';
-import NavBar from './src/components/NavBar';
+import { Router } from './src/core/navigation/routes';
 
 export default class App extends Component {
   render() {
     return (
       <ApplicationProvider
         mapping={mapping}
-        theme={lightTheme}>
-        <ListExample />
-        <NavBar />
+        theme={dark}>
+        <Router />
       </ApplicationProvider>
     );
   }

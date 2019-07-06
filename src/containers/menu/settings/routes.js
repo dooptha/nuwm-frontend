@@ -1,10 +1,10 @@
 export const routes = [
   {
-    title: 'Themes',
+    title: 'settings.theme',
     route: 'Themes',
   },
   {
-    title: 'Language',
+    title: 'settings.language',
     route: 'Language',
   },
 ];

@@ -10,7 +10,7 @@ import {
 import { SafeAreaView } from './safeAreaView.component';
 
 class TopNavigationBarComponent extends Component {
-  
+
   renderBackButton(source) {
     return (
       <TopNavigationAction

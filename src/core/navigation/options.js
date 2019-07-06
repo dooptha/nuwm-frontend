@@ -13,6 +13,7 @@ import {
   getCurrentRouteIndex,
 } from './util';
 import { KEY_NAVIGATION_BACK } from './constants';
+import I18n from '../localization';
 
 const MenuTopNavigationParams = {
   header: (props) => {
@@ -23,7 +24,7 @@ const MenuTopNavigationParams = {
     return (
       <TopNavigationBar
         {...props}
-        title={routeName}
+        title={I18n.t('routes.'+routeName)}
         backIcon={ isRootRoute(index) && ArrowIosBackFill}
         onBackPress={() => {
           props.navigation.goBack(KEY_NAVIGATION_BACK);

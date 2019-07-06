@@ -4,6 +4,7 @@ import {
   List,
   ListItem,
 } from 'react-native-ui-kitten';
+import I18n from '../../core/localization';
 
 export class SettingsList extends Component {
   constructor(props) {
@@ -16,7 +17,7 @@ export class SettingsList extends Component {
     this.renderItem = (info) => {
       return (
         <ListItem
-          title={info.item.title}
+          title={I18n.t(info.item.title)}
           onPress={(i) => props.onItemSelect(i)}
         />
       );

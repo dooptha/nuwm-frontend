@@ -15,6 +15,7 @@ import {
   LayoutIconOutline,
   MessageCircleIcon
 } from '../../assets/icons';
+import I18n from '../../core/localization';
 
 class MenuComponent extends Component {
   render() {
@@ -28,15 +29,15 @@ class MenuComponent extends Component {
             selectedIndex={selectedIndex}
             onSelect={onTabSelect}>
             <BottomNavigationTab
-              title='Timetable'
+              title={I18n.t('tabs.timetable')}
               icon={LayoutIconOutline}
             />
             <BottomNavigationTab
-              title='Chat'
+              title={I18n.t('tabs.chat')}
               icon={MessageCircleIcon}
             />
             <BottomNavigationTab
-              title='Settings'
+              title={I18n.t('tabs.settings')}
               icon={GridIconOutline}
             />
           </BottomNavigation>

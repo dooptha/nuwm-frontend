@@ -8,24 +8,19 @@ import {
 } from 'react-navigation';
 
 import {
-  MenuContainer
+  MenuContainer,
+  SettingsContainer
 } from '../../containers/menu';
+
+import {
+  MenuNavigationOptions,
+} from './options';
 
 class TimetableScreen extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>Timetable!</Text>
-      </View>
-    );
-  }
-}
-
-class SettingsScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Settings!</Text>
       </View>
     );
   }
@@ -41,19 +36,72 @@ class ChatScreen extends React.Component {
   }
 }
 
-// , {
-//   // tabBarComponent: MenuContainer,
-// }
+class ThemesContainer extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Themes!</Text>
+      </View>
+    );
+  }
+}
+
+class LanguageContainer extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Langiage!</Text>
+      </View>
+    );
+  }
+}
+
+const SettingsNavigationMap = {
+  ['Themes']: {
+    screen:ThemesContainer,
+    navigationOptions: MenuNavigationOptions,
+  },
+  ['Language']: {
+    screen:LanguageContainer,
+    navigationOptions: MenuNavigationOptions,
+  }
+};
+
+const TimetableNavigator = createStackNavigator(
+  {
+    ['Timetable']: TimetableScreen,
+  }, {
+    defaultNavigationOptions: MenuNavigationOptions,
+  },
+);
+
+const ChatNavigator = createStackNavigator(
+  {
+    ['Chat']: ChatScreen,
+  }, {
+    defaultNavigationOptions: MenuNavigationOptions,
+  },
+);
+
+const SettingsNavigator = createStackNavigator(
+  {
+    ['Settings']: SettingsContainer,
+  }, {
+    defaultNavigationOptions: MenuNavigationOptions,
+  },
+);
+
 const MenuNavigator = createBottomTabNavigator({
-  Timetable: TimetableScreen,
-  Chat: ChatScreen,
-  Settings: SettingsScreen
+  Timetable: TimetableNavigator,
+  Chat: ChatNavigator,
+  Settings: SettingsNavigator
 }, {
   tabBarComponent: MenuContainer,
 });
 
 const AppNavigator = createStackNavigator({
-  ['Home']: MenuNavigator
+  ['Home']: MenuNavigator,
+  ...SettingsNavigationMap,
 }, {
   headerMode: 'screen',
   defaultNavigationOptions: {

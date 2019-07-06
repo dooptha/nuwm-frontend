@@ -10,6 +10,11 @@ import {
 } from 'react-native-ui-kitten';
 
 import { themes } from '../../core/themes';
+import {
+  GridIconOutline,
+  LayoutIconOutline,
+  MessageCircleIcon
+} from '../../assets/icons';
 
 class MenuComponent extends Component {
   render() {
@@ -24,15 +29,15 @@ class MenuComponent extends Component {
             onSelect={onTabSelect}>
             <BottomNavigationTab
               title='Timetable'
-              // icon={LayoutIconOutline}
+              icon={LayoutIconOutline}
             />
             <BottomNavigationTab
               title='Chat'
-              // icon={StarIconOutline}
+              icon={MessageCircleIcon}
             />
             <BottomNavigationTab
               title='Settings'
-              // icon={ColorPaletteIconOutline}
+              icon={GridIconOutline}
             />
           </BottomNavigation>
         </ThemeProvider>

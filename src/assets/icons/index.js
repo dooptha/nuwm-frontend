@@ -9,3 +9,27 @@ export const ArrowIosBackFill = (style) => {
 
   return Icon(source, style);
 };
+
+export const GridIconOutline = (style) => {
+  const source: IconSource = {
+    imageSource: require('./eva/grid-outline.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const LayoutIconOutline = (style) => {
+  const source: IconSource = {
+    imageSource: require('./eva/layout-outline.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const MessageCircleIcon = (style) => {
+  const source: IconSource = {
+    imageSource: require('./eva/message-circle.png'),
+  };
+
+  return Icon(source, style);
+};

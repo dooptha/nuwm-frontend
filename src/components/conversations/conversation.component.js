@@ -5,6 +5,7 @@ import {
   ListItem,
 } from 'react-native-ui-kitten';
 import I18n from '../../core/localization';
+import { Message } from './message.component';
 
 export class Conversation extends Component {
   constructor(props) {
@@ -26,8 +27,7 @@ export class Conversation extends Component {
   const { themedStyle } = this.props;
 
   return (
-    <ChatMessage
-      style={themedStyle.message}
+    <Message
       index={info.index}
       message={info.item}
     />
@@ -38,7 +38,7 @@ export class Conversation extends Component {
     return (
       <List
         data={this.data}
-        renderItem={this.renderItem}
+        renderItem={(info) => this.renderMessage(info)}
       />
     );
   }

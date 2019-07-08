@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { View, Platform } from 'react-native';
-import { withStyles, Input } from 'react-native-ui-kitten';
+import { withStyles, Input, Button } from 'react-native-ui-kitten';
 import { Conversation as Chat } from '../../components/conversations';
 import { AvoidKeyboard } from '../../components/common';
+import {
+  PaperPlaneIconFill,
+} from '../../assets/icons';
 
 const ConversationComponent = (props) => {
-  const { themedStyle, data, onItemSelect } = props;
-  let newMessage = '';
+  const { themedStyle, data, onItemSelect, newMessage, onNewMessageChange } = props;
 
   const keyboardOffset = (height) => {
     return Platform.select({
@@ -14,6 +16,18 @@ const ConversationComponent = (props) => {
       android: 0,
     });
   };
+
+  const renderSendMessageButton = () => {
+  return (
+    <Button
+      style={themedStyle.addMessageButton}
+      appearance='ghost'
+      size='large'
+      icon={PaperPlaneIconFill}
+      onPress={() => console.log('add message')}
+    />
+  );
+};
 
   return (
     <AvoidKeyboard
@@ -31,7 +45,9 @@ const ConversationComponent = (props) => {
             style={themedStyle.messageInput}
             value={newMessage}
             placeholder='Message...'
+            onChangeText={(m) => onNewMessageChange(m)}
           />
+          {renderSendMessageButton()}
         </View>
     </AvoidKeyboard>
   );
@@ -44,9 +60,6 @@ export const Conversation = withStyles(ConversationComponent, (theme) => ({
   chatContainer: {
     paddingHorizontal: 16,
     paddingVertical: 12,
-  },
-  message: {
-    marginVertical: 12,
   },
   inputContainer: {
     padding: 16,
@@ -63,5 +76,6 @@ export const Conversation = withStyles(ConversationComponent, (theme) => ({
   messageInput: {
     flex: 1,
     marginHorizontal: 8,
+    backgroundColor: theme['background-basic-color-1'],
   },
 }));

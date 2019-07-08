@@ -10,75 +10,105 @@ export class ConversationContainer extends Component {
 
     this.data = [{
       body: 'Sono chino sadame',
-      sender: 'false'
+      sender: false,
+date: '13: 00',
+      date: '13: 00'
     },{
       body: 'Sono chino sadame',
-      sender: 'false'
+      sender: false,
+date: '13: 00'
     },{
       body: 'Sono chino sadame',
-      sender: 'false'
+      sender: false,
+date: '13: 00'
     },{
       body: 'Sono chino sadame',
-      sender: 'true'
+      sender: 'true',
+date: '13: 00'
     },{
       body: 'Sono chino sadame',
-      sender: 'false'
+      sender: false,
+date: '13: 00'
     },{
       body: 'Sono chino sadame',
-      sender: 'false'
+      sender: false,
+date: '13: 00'
     },{
       body: 'Sono chino sadame',
-      sender: 'false'
+      sender: false,
+date: '13: 00'
     },{
       body: 'Sono chino sadame',
-      sender: 'false'
+      sender: false,
+date: '13: 00'
     },{
       body: 'Sono chino sadame',
-      sender: 'false'
+      sender: false,
+date: '13: 00'
     },{
       body: 'Sono chino sadame',
-      sender: 'false'
+      sender: false,
+date: '13: 00'
     },{
       body: 'Sono chino sadame',
-      sender: 'false'
+      sender: 'true',
+date: '13: 00'
     },{
       body: 'Sono chino sadame',
-      sender: 'false'
+      sender: false,
+date: '13: 00'
     },{
       body: 'Sono chino sadame',
-      sender: 'false'
+      sender: false,
+date: '13: 00'
     },{
       body: 'Sono chino sadame',
-      sender: 'false'
+      sender: false,
+date: '13: 00'
     },{
       body: 'Sono chino sadame',
-      sender: 'false'
+      sender: false,
+date: '13: 00'
     },{
       body: 'Sono chino sadame',
-      sender: 'false'
+      sender: false,
+date: '13: 00'
     },{
       body: 'Sono chino sadame',
-      sender: 'false'
+      sender: false,
+date: '13: 00'
     },{
       body: 'Sono chino sadame',
-      sender: 'false'
+      sender: false,
+date: '13: 00'
     },{
       body: 'Sono chino sadame',
-      sender: 'false'
+      sender: false,
+date: '13: 00'
     },{
       body: 'Sono chino sadame',
-      sender: 'false'
+      sender: false,
+date: '13: 00'
     },{
       body: 'Sono chino sadame',
-      sender: 'false'
+      sender: false,
+date: '13: 00'
     },{
       body: 'Sono chino sadame',
-      sender: 'false'
+      sender: false,
+date: '13: 00'
     },{
       body: 'Sono chino sadame',
-      sender: 'false'
+      sender: false,
+date: '13: 00'
     },];
+
+    this.state = { newMessage: '' }
   }
+
+  onNewMessageChange(newMessage) {
+    this.setState({ newMessage });
+  };
 
   updatePropetry(key, value) {
     storeData(key, value);
@@ -96,7 +126,12 @@ export class ConversationContainer extends Component {
 
   render() {
     return(
-      <Conversation data={this.data} onItemSelect={(i) => this.onItemSelect(i)} />
+      <Conversation
+        data={this.data}
+        onItemSelect={(i) => this.onItemSelect(i)}
+        onNewMessageChange={(m) => this.onNewMessageChange(m)}
+        newMessage={this.state.newMessage}
+        />
     )
   }
-}
+};

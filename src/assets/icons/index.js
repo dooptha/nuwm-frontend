@@ -33,3 +33,11 @@ export const MessageCircleIcon = (style) => {
 
   return Icon(source, style);
 };
+
+export const PaperPlaneIconFill = (style) => {
+  const source: IconSource = {
+    imageSource: require('./eva/paper-plane.png'),
+  };
+
+  return Icon(source, style);
+};

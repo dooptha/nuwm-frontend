@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { withStyles } from 'react-native-ui-kitten';
-import { LanguageList } from '../../../components/settings';
+import { ConversationsList } from '../../../components/conversations';
 
-const ThemeComponent = (props) => {
+const ConversationsComponent = (props) => {
   const { themedStyle, data, onItemSelect } = props;
-
   return (
     <View style={themedStyle.container}>
-      <LanguageList
+      <ConversationsList
         contentContainerStyle={themedStyle.contentContainer}
         data={data}
         onItemSelect={(i) => onItemSelect(i)}
@@ -17,7 +16,7 @@ const ThemeComponent = (props) => {
   );
 };
 
-export const Theme = withStyles(ThemeComponent, (theme) => ({
+export const Conversations = withStyles(ConversationsComponent, (theme) => ({
   container: {
     flex: 1,
     backgroundColor: theme['background-basic-color-2'],

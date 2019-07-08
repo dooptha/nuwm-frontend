@@ -18,7 +18,6 @@ import { StateContext } from '../utils/context';
 
 const MenuTopNavigationParams = {
   header: (props) => {
-    // @ts-ignore (private API)
     const { routeName } = getCurrentRouteState(props.navigation);
     const index = getCurrentRouteIndex(props.navigation);
 
@@ -41,7 +40,43 @@ const MenuTopNavigationParams = {
   },
 };
 
+const ConversationTopNavigationParams = {
+  header: (props) => {
+    const { routeName } = getCurrentRouteState(props.navigation);
+    const index = getCurrentRouteIndex(props.navigation);
+
+    const route = props.navigation.state.routes[1];
+    let title = '';
+
+    if(route) {
+      title = route.params.conversation.title;
+    }
+
+    return (
+      <StateContext.Consumer>
+        {
+          (context) => (
+            <TopNavigationBar
+              {...props}
+              title={title}
+              backIcon={ isRootRoute(index) && ArrowIosBackFill}
+              onBackPress={() => {
+                props.navigation.goBack(KEY_NAVIGATION_BACK);
+              }}
+            />
+          )
+        }
+      </StateContext.Consumer>
+    );
+  },
+};
+
+
 
 export const MenuNavigationOptions = {
   ...MenuTopNavigationParams,
+};
+
+export const ConversationNavigationOptions = {
+  ...ConversationTopNavigationParams
 };

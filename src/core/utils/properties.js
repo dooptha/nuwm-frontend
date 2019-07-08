@@ -2,7 +2,7 @@ import { getData } from './storage';
 
 export const DEFAULT_PROPERTIES = {
   language: 'ua',
-  theme: 'Eva Light'
+  theme: 'NUWM Dark'
 };
 
 export const getProperties = async () => {

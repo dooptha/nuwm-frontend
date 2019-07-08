@@ -15,7 +15,7 @@ export default {
   },
   'routes': {
     'Timetable': 'Розклад',
-    'Chat': 'Розмови',
+    'Conversations': 'Розмови',
     'Settings': 'Налаштування',
     'Themes': 'Вигляд',
     'Language':'Мова'

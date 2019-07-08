@@ -9,7 +9,8 @@ import {
 
 import {
   MenuContainer,
-  SettingsContainer
+  SettingsContainer,
+  ConversationsContainer
 } from '../../containers/menu';
 
 import {
@@ -18,7 +19,12 @@ import {
 } from '../../containers/settings';
 
 import {
+  ConversationContainer
+} from '../../containers/conversations';
+
+import {
   MenuNavigationOptions,
+  ConversationNavigationOptions
 } from './options';
 
 import { useStateValue } from '../utils/context';
@@ -35,15 +41,6 @@ class TimetableScreen extends React.Component {
   }
 }
 
-class ChatScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Chat!</Text>
-      </View>
-    );
-  }
-}
 
 const SettingsNavigationMap = {
   ['Themes']: {
@@ -56,6 +53,13 @@ const SettingsNavigationMap = {
   }
 };
 
+const ConversationsNavigationMap = {
+  ['Conversation']: {
+    screen: ConversationContainer,
+    navigationOptions: ConversationNavigationOptions,
+  }
+};
+
 const TimetableNavigator = createStackNavigator(
   {
     ['Timetable']: TimetableScreen,
@@ -64,9 +68,9 @@ const TimetableNavigator = createStackNavigator(
   },
 );
 
-const ChatNavigator = createStackNavigator(
+const ConversationsNavigator = createStackNavigator(
   {
-    ['Chat']: ChatScreen,
+    ['Conversations']: ConversationsContainer,
   }, {
     defaultNavigationOptions: MenuNavigationOptions,
   },
@@ -82,7 +86,7 @@ const SettingsNavigator = createStackNavigator(
 
 const MenuNavigator = createBottomTabNavigator({
   Timetable: TimetableNavigator,
-  Chat: ChatNavigator,
+  Conversations: ConversationsNavigator,
   Settings: SettingsNavigator
 }, {
   tabBarComponent: MenuContainer,
@@ -91,6 +95,7 @@ const MenuNavigator = createBottomTabNavigator({
 const AppNavigator = createStackNavigator({
   ['Home']: MenuNavigator,
   ...SettingsNavigationMap,
+  ...ConversationsNavigationMap
 }, {
   headerMode: 'screen',
   defaultNavigationOptions: {

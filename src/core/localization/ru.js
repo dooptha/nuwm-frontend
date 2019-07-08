@@ -15,7 +15,7 @@ export default {
   },
   'routes': {
     'Timetable': 'Расписание',
-    'Chat': 'Чат',
+    'Conversations': 'Чат',
     'Settings': 'Настройки',
     'Themes': 'Тема',
     'Language':'Язык'

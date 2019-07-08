@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Language } from './theme.component';
+import { Theme } from './theme.component';
 import { themes } from './data';
 import { StateContext } from '../../../core/utils/context';
 import { storeData } from '../../../core/utils/storage';
@@ -16,7 +16,7 @@ export class ThemeContainer extends Component {
 
   updatePropetry(key, value) {
     storeData(key, value);
-    
+
     this.context[1]({
       type: 'setProperty',
       key: key,
@@ -31,7 +31,7 @@ export class ThemeContainer extends Component {
 
   render() {
     return(
-      <Language data={this.data} onItemSelect={(i) => this.onItemSelect(i)} />
+      <Theme data={this.data} onItemSelect={(i) => this.onItemSelect(i)} />
     )
   }
 }

@@ -7,4 +7,8 @@ export const themes = [
     title: 'Eva Dark',
     theme: 'Eva Dark',
   },
+  {
+    title: 'NUWM Dark',
+    theme: 'NUWM Dark',
+  },
 ]

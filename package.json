@@ -6,7 +6,8 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
-    "ios": "react-native run-ios --simulator='iPhone 7'"
+    "ios": "react-native run-ios --simulator='iPhone 7'",
+    "android": "react-native run-android"
   },
   "dependencies": {
     "@eva-design/eva": "^1.0.1",

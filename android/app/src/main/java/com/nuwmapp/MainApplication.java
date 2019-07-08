@@ -30,6 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
       packages.add(new RNLocalizePackage());
       packages.add(new RNGestureHandlerPackage());
       packages.add(new RNScreensPackage());
+      packages.add(new AsyncStoragePackage());
       return packages;
     }
 

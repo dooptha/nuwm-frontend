@@ -15,10 +15,8 @@ I18n.translations = {
   en,
 };
 
-export const setLocale = (locale) => {
-
+export const setLocale = (locale) => { 
   I18n.locale = locale
 }
 
-setLocale('ua')
 export default I18n;

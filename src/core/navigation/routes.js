@@ -13,8 +13,17 @@ import {
 } from '../../containers/menu';
 
 import {
+  LanguageContainer,
+  ThemeContainer
+} from '../../containers/settings';
+
+import {
   MenuNavigationOptions,
 } from './options';
+
+import { useStateValue } from '../utils/context';
+
+
 
 class TimetableScreen extends React.Component {
   render() {
@@ -36,33 +45,13 @@ class ChatScreen extends React.Component {
   }
 }
 
-class ThemesContainer extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Themes!</Text>
-      </View>
-    );
-  }
-}
-
-class LanguageContainer extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Langiage!</Text>
-      </View>
-    );
-  }
-}
-
 const SettingsNavigationMap = {
   ['Themes']: {
-    screen:ThemesContainer,
+    screen: ThemeContainer,
     navigationOptions: MenuNavigationOptions,
   },
   ['Language']: {
-    screen:LanguageContainer,
+    screen: LanguageContainer,
     navigationOptions: MenuNavigationOptions,
   }
 };
@@ -113,5 +102,10 @@ const createAppRouter = (container) => {
   useScreens();
   return createAppContainer(container);
 };
+
+const App = () => {
+  useStateValue();
+  return(<AppNavigator />)
+}
 
 export const Router = createAppRouter(AppNavigator);

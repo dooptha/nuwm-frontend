@@ -6,7 +6,12 @@ export default {
   },
   'settings': {
     'theme': 'Вигляд',
-    'language':'Мова'
+    'language':'Мова',
+    'languages': {
+      'ua': 'Ukrainian',
+      'ru': 'Russian',
+      'en': 'English'
+    }
   },
   'routes': {
     'Timetable': 'Розклад',

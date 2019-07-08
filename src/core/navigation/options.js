@@ -14,6 +14,7 @@ import {
 } from './util';
 import { KEY_NAVIGATION_BACK } from './constants';
 import I18n from '../localization';
+import { StateContext } from '../utils/context';
 
 const MenuTopNavigationParams = {
   header: (props) => {
@@ -22,14 +23,20 @@ const MenuTopNavigationParams = {
     const index = getCurrentRouteIndex(props.navigation);
 
     return (
-      <TopNavigationBar
-        {...props}
-        title={I18n.t('routes.'+routeName)}
-        backIcon={ isRootRoute(index) && ArrowIosBackFill}
-        onBackPress={() => {
-          props.navigation.goBack(KEY_NAVIGATION_BACK);
-        }}
-      />
+      <StateContext.Consumer>
+        {
+          (context) => (
+            <TopNavigationBar
+              {...props}
+              title={I18n.t('routes.'+routeName)}
+              backIcon={ isRootRoute(index) && ArrowIosBackFill}
+              onBackPress={() => {
+                props.navigation.goBack(KEY_NAVIGATION_BACK);
+              }}
+            />
+          )
+        }
+      </StateContext.Consumer>
     );
   },
 };

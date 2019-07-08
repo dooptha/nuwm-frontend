@@ -5,10 +5,12 @@
   "scripts": {
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "ios": "react-native run-ios --simulator='iPhone 7'"
   },
   "dependencies": {
     "@eva-design/eva": "^1.0.1",
+    "@react-native-community/async-storage": "^1.5.0",
     "i18n-js": "^3.3.0",
     "react": "16.8.6",
     "react-native": "0.60.0",

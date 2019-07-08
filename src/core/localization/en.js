@@ -6,7 +6,12 @@ export default {
   },
   'settings': {
     'theme': 'Theme',
-    'language':'Language'
+    'language':'Language',
+    'languages': {
+      'ua': 'Ukrainian',
+      'ru': 'Russian',
+      'en': 'English'
+    }
   },
   'routes': {
     'Timetable': 'Timetable',

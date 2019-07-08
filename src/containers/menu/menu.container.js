@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavigationScreenProps } from 'react-navigation';
 import { Menu } from './menu.component';
+import { StateContext } from '../../core/utils/context';
 
 export class MenuContainer extends Component {
   constructor(props) {
@@ -21,10 +22,16 @@ export class MenuContainer extends Component {
 
   render() {
     return (
-      <Menu
-        selectedIndex={this.props.navigation.state.index}
-        onTabSelect={(index) => this.onTabSelect(index)}
-      />
+      <StateContext.Consumer>
+        {
+          (context) => (
+            <Menu
+              selectedIndex={this.props.navigation.state.index}
+              onTabSelect={(index) => this.onTabSelect(index)}
+            />
+          )
+        }
+      </StateContext.Consumer>
     );
   }
 }

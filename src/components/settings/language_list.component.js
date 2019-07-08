@@ -6,7 +6,7 @@ import {
 } from 'react-native-ui-kitten';
 import I18n from '../../core/localization';
 
-export class SettingsList extends Component {
+export class LanguageList extends Component {
   constructor(props) {
     super(props);
 

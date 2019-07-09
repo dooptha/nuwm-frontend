@@ -4,6 +4,7 @@ import { ApplicationProvider } from 'react-native-ui-kitten';
 
 import { DynamicStatusBar } from './src/components/common';
 import { Router } from './src/core/navigation/routes';
+import NavigationService from './src/core/navigation/NavigationService'
 import {
   themes
 } from './src/core/themes';
@@ -44,7 +45,11 @@ export default class App extends Component {
         mapping={mapping}
         theme={themes[this.state.theme]}>
         <DynamicStatusBar currentTheme={this.state.theme}/>
-        <Router />
+        <Router
+          ref={navigatorRef => {
+            NavigationService.setTopLevelNavigator(navigatorRef);
+          }}
+        />
       </ApplicationProvider>
     );
   }

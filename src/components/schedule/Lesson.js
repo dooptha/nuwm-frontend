@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { ListItem } from 'react-native-ui-kitten'
 import { View } from 'react-native'
 import DetailedLesson from './DetailedLesson'
+import NavigationService from '../../core/navigation/NavigationService'
 
 export default class extends Component {
   constructor (props) {
@@ -16,7 +17,7 @@ export default class extends Component {
 
     // this.setState({ showFullSubject: true })
 
-    this.props.navigation.navigate('DetailedLesson',
+    NavigationService.navigate('DetailedLesson',
       { subject: this.props.subject }
     )
   }

@@ -16,15 +16,8 @@ import {
   MenuNavigationOptions,
 } from './options';
 
-class TimetableScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Timetable!</Text>
-      </View>
-    );
-  }
-}
+import Schedule from '../../components/schedule'
+import DetailedLesson from '../../components/schedule/DetailedLesson'
 
 class ChatScreen extends React.Component {
   render() {
@@ -56,6 +49,13 @@ class LanguageContainer extends React.Component {
   }
 }
 
+const ScheduleNavigationMap = {
+  ['DetailedLesson']: {
+    screen: DetailedLesson,
+    navigationOptions: MenuNavigationOptions
+  }
+}
+
 const SettingsNavigationMap = {
   ['Themes']: {
     screen:ThemesContainer,
@@ -69,7 +69,7 @@ const SettingsNavigationMap = {
 
 const TimetableNavigator = createStackNavigator(
   {
-    ['Timetable']: TimetableScreen,
+    ['Timetable']: Schedule,
   }, {
     defaultNavigationOptions: MenuNavigationOptions,
   },
@@ -102,6 +102,7 @@ const MenuNavigator = createBottomTabNavigator({
 const AppNavigator = createStackNavigator({
   ['Home']: MenuNavigator,
   ...SettingsNavigationMap,
+  ...ScheduleNavigationMap
 }, {
   headerMode: 'screen',
   defaultNavigationOptions: {

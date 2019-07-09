@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
-import Subject from './Subject'
+import Lesson from './Lesson'
 
 export default class extends Component {
   constructor (props) {
@@ -10,7 +10,7 @@ export default class extends Component {
 
   renderAllSubjects () {
     return this.props.day.subjects.map(subject =>
-      <Subject
+      <Lesson
         key={subject.day}
         subject={subject}
         navigation={this.props.navigation}

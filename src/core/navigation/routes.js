@@ -15,7 +15,7 @@ import {
 
 import {
   LanguageContainer,
-  ThemeContainer
+  ThemesContainer
 } from '../../containers/settings';
 
 import {
@@ -44,7 +44,7 @@ class TimetableScreen extends React.Component {
 
 const SettingsNavigationMap = {
   ['Themes']: {
-    screen: ThemeContainer,
+    screen: ThemesContainer,
     navigationOptions: MenuNavigationOptions,
   },
   ['Language']: {

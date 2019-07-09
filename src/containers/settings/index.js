@@ -1,2 +1,2 @@
 export { LanguageContainer } from './language/language.container';
-export { ThemeContainer } from './theme/theme.container';
+export { ThemesContainer } from './themes/themes.container';

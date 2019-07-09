@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
-import { Modal, Text, Button, ListItem } from 'react-native-ui-kitten'
+import { Modal, Text, Button, ListItem, withStyles } from 'react-native-ui-kitten'
 
-export default class extends Component {
+export default class DetailedLessonComponent extends Component {
   constructor (props) {
     super(props)
     this.state = {}
@@ -26,10 +26,21 @@ export default class extends Component {
     } = lesson
 
     return (
-      <ListItem
-        title={subgroup}
-        description={lecturer}
-      />
+      <View>
+        <Text>
+          Title:
+        </Text>
+        <Text>
+          Wow:
+        </Text>
+      </View>
+
     )
   }
 }
+
+export const DetailedLesson = withStyles(DetailedLessonComponent, (theme) => ({
+  safeAreaContainer: {
+    backgroundColor: theme['background-basic-color-1']
+  }
+}))

@@ -67,7 +67,6 @@ export default class Schedule extends Component {
   }
 
   render () {
-
     return (
       <View>
         { this.state.schedule.length > 1 ? <Day day={this.state.schedule[1]} navigation={this.props.navigation} /> : null }

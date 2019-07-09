@@ -6,13 +6,14 @@ export default {
   },
   'settings': {
     'theme': 'Вигляд',
-    'language':'Мова'
+    'language': 'Мова'
   },
   'routes': {
     'Timetable': 'Розклад',
     'Chat': 'Розмови',
     'Settings': 'Налаштування',
     'Themes': 'Вигляд',
-    'Language':'Мова'
+    'Language': 'Мова',
+    'DetailedLesson': 'Деталі'
   }
 }

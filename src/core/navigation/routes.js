@@ -17,7 +17,7 @@ import {
 } from './options';
 
 import Schedule from '../../components/schedule'
-import DetailedLesson from '../../components/schedule/DetailedLesson'
+import { DetailedLesson } from '../../components/schedule/DetailedLesson'
 
 class ChatScreen extends React.Component {
   render() {

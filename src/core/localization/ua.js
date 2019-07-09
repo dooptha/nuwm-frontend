@@ -6,7 +6,7 @@ export default {
   },
   'settings': {
     'theme': 'Вигляд',
-    'language':'Мова',
+    'language': 'Мова',
     'languages': {
       'ua': 'Ukrainian',
       'ru': 'Russian',
@@ -18,6 +18,6 @@ export default {
     'Conversations': 'Розмови',
     'Settings': 'Налаштування',
     'Themes': 'Вигляд',
-    'Language':'Мова'
+    'Language': 'Мова'
   }
 }

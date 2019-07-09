@@ -1,30 +1,27 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   View,
   StatusBar,
-  ViewProps,
-  StatusBarStyle,
-  Platform,
-} from 'react-native';
+  Platform
+} from 'react-native'
 import {
   withStyles
-} from 'react-native-ui-kitten';
+} from 'react-native-ui-kitten'
 
 class DynamicStatusBarComponent extends Component {
-
-  getStatusBarContent() {
+  getStatusBarContent () {
     if (this.props.currentTheme === 'Eva Light') {
-      return 'dark-content';
+      return 'dark-content'
     } else {
-      return 'light-content';
+      return 'light-content'
     }
   };
 
-  render() {
-    const { themedStyle } = this.props;
+  render () {
+    const { themedStyle } = this.props
 
-    const androidStatusBarBgColor = themedStyle.container.backgroundColor;
-    const barStyle = this.getStatusBarContent();
+    const androidStatusBarBgColor = themedStyle.container.backgroundColor
+    const barStyle = this.getStatusBarContent()
 
     return (
       <View style={themedStyle.container}>
@@ -33,7 +30,7 @@ class DynamicStatusBarComponent extends Component {
           barStyle={barStyle}
         />
       </View>
-    );
+    )
   }
 }
 
@@ -42,7 +39,7 @@ export const DynamicStatusBar = withStyles(DynamicStatusBarComponent, (theme) =>
     backgroundColor: theme['background-basic-color-1'],
     height: Platform.select({
       ios: 10,
-      android: 0,
-    }),
-  },
-}));
+      android: 0
+    })
+  }
+}))

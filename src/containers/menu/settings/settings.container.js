@@ -1,27 +1,26 @@
-import React, { Component } from 'react';
-import { Settings } from './settings.component';
-import { routes } from './routes';
-import { StateContext } from '../../../core/utils/context';
+import React, { Component } from 'react'
+import { Settings } from './settings.component'
+import { routes } from './data'
+import { StateContext } from '../../../core/utils/context'
 
 export class SettingsContainer extends Component {
+  constructor (props) {
+    super(props)
 
-  constructor(props) {
-    super(props);
-
-    this.data = routes;
-    this.navigationKey = 'SettingsContainter';
+    this.data = routes
+    this.navigationKey = 'SettingsContainter'
   }
 
-  onItemSelect(index) {
-    const selectedItem = this.data[index];
+  onItemSelect (index) {
+    const selectedItem = this.data[index]
 
     this.props.navigation.navigate({
       key: this.navigationKey,
-      routeName: selectedItem.route,
-    });
-  };
+      routeName: selectedItem.route
+    })
+  }
 
-  render() {
+  render () {
     return (
       <StateContext.Consumer>
         {
@@ -33,6 +32,6 @@ export class SettingsContainer extends Component {
           )
         }
       </StateContext.Consumer>
-    );
+    )
   }
 }

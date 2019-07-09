@@ -1,117 +1,124 @@
-import React, { Component } from 'react';
-import { Conversation } from './conversation.component';
-import { storeData } from '../../core/utils/storage';
-import { setLocale } from '../../core/localization/';
+import React, {
+  Component
+} from 'react'
+import {
+  Conversation
+} from './conversation.component'
+import {
+  storeData
+} from '../../core/utils/storage'
 
 export class ConversationContainer extends Component {
-
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
 
     this.data = [{
       body: 'Sono chino sadame',
       sender: false,
-date: '13: 00',
       date: '13: 00'
-    },{
+    }, {
       body: 'Sono chino sadame',
       sender: false,
-date: '13: 00'
-    },{
+      date: '13: 00'
+    }, {
       body: 'Sono chino sadame',
       sender: false,
-date: '13: 00'
-    },{
+      date: '13: 00'
+    }, {
       body: 'Sono chino sadame',
       sender: 'true',
-date: '13: 00'
-    },{
+      date: '13: 00'
+    }, {
       body: 'Sono chino sadame',
       sender: false,
-date: '13: 00'
-    },{
+      date: '13: 00'
+    }, {
       body: 'Sono chino sadame',
       sender: false,
-date: '13: 00'
-    },{
+      date: '13: 00'
+    }, {
       body: 'Sono chino sadame',
       sender: false,
-date: '13: 00'
-    },{
+      date: '13: 00'
+    }, {
       body: 'Sono chino sadame',
       sender: false,
-date: '13: 00'
-    },{
+      date: '13: 00'
+    }, {
       body: 'Sono chino sadame',
       sender: false,
-date: '13: 00'
-    },{
+      date: '13: 00'
+    }, {
       body: 'Sono chino sadame',
       sender: false,
-date: '13: 00'
-    },{
+      date: '13: 00'
+    }, {
       body: 'Sono chino sadame',
       sender: 'true',
-date: '13: 00'
-    },{
+      date: '13: 00'
+    }, {
       body: 'Sono chino sadame',
       sender: false,
-date: '13: 00'
-    },{
+      date: '13: 00'
+    }, {
       body: 'Sono chino sadame',
       sender: false,
-date: '13: 00'
-    },{
+      date: '13: 00'
+    }, {
       body: 'Sono chino sadame',
       sender: false,
-date: '13: 00'
-    },{
+      date: '13: 00'
+    }, {
       body: 'Sono chino sadame',
       sender: false,
-date: '13: 00'
-    },{
+      date: '13: 00'
+    }, {
       body: 'Sono chino sadame',
       sender: false,
-date: '13: 00'
-    },{
+      date: '13: 00'
+    }, {
       body: 'Sono chino sadame',
       sender: false,
-date: '13: 00'
-    },{
+      date: '13: 00'
+    }, {
       body: 'Sono chino sadame',
       sender: false,
-date: '13: 00'
-    },{
+      date: '13: 00'
+    }, {
       body: 'Sono chino sadame',
       sender: false,
-date: '13: 00'
-    },{
+      date: '13: 00'
+    }, {
       body: 'Sono chino sadame',
       sender: false,
-date: '13: 00'
-    },{
+      date: '13: 00'
+    }, {
       body: 'Sono chino sadame',
       sender: false,
-date: '13: 00'
-    },{
+      date: '13: 00'
+    }, {
       body: 'Sono chino sadame',
       sender: false,
-date: '13: 00'
-    },{
+      date: '13: 00'
+    }, {
       body: 'Sono chino sadame',
       sender: false,
-date: '13: 00'
-    },];
+      date: '13: 00'
+    }]
 
-    this.state = { newMessage: '' }
+    this.state = {
+      newMessage: ''
+    }
   }
 
-  onNewMessageChange(newMessage) {
-    this.setState({ newMessage });
+  onNewMessageChange (newMessage) {
+    this.setState({
+      newMessage
+    })
   };
 
-  updatePropetry(key, value) {
-    storeData(key, value);
+  updatePropetry (key, value) {
+    storeData(key, value)
 
     this.context[1]({
       type: 'setProperty',
@@ -120,18 +127,17 @@ date: '13: 00'
     })
   }
 
-  onItemSelect(index) {
-    //click on message
+  onItemSelect (index) {
+    // click on message
   };
 
-  render() {
-    return(
-      <Conversation
-        data={this.data}
+  render () {
+    return (
+      <Conversation data={this.data}
         onItemSelect={(i) => this.onItemSelect(i)}
         onNewMessageChange={(m) => this.onNewMessageChange(m)}
         newMessage={this.state.newMessage}
-        />
+      />
     )
   }
-};
+}

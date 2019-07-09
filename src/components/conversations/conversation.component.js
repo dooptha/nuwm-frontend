@@ -1,17 +1,15 @@
-import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import React, { Component } from 'react'
 import {
   List,
-  ListItem,
-} from 'react-native-ui-kitten';
-import I18n from '../../core/localization';
-import { Message } from './message.component';
+  ListItem
+} from 'react-native-ui-kitten'
+import { Message } from './message.component'
 
 export class Conversation extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
 
-    this.data = props.data;
+    this.data = props.data
 
     this.renderItem = (info) => {
       return (
@@ -19,27 +17,25 @@ export class Conversation extends Component {
           title={info.item.body}
           onPress={(i) => props.onItemSelect(i)}
         />
-      );
-    };
+      )
+    }
   }
 
-  renderMessage(info) {
-  const { themedStyle } = this.props;
+  renderMessage (info) {
+    return (
+      <Message
+        index={info.index}
+        message={info.item}
+      />
+    )
+  }
 
-  return (
-    <Message
-      index={info.index}
-      message={info.item}
-    />
-  );
-};
-
-  render() {
+  render () {
     return (
       <List
         data={this.data}
         renderItem={(info) => this.renderMessage(info)}
       />
-    );
+    )
   }
 };

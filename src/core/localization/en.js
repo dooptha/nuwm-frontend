@@ -6,7 +6,7 @@ export default {
   },
   'settings': {
     'theme': 'Theme',
-    'language':'Language',
+    'language': 'Language',
     'languages': {
       'ua': 'Ukrainian',
       'ru': 'Russian',
@@ -18,6 +18,6 @@ export default {
     'Conversations': 'Chat',
     'Settings': 'Settings',
     'Themes': 'Theme',
-    'Language':'Language'
+    'Language': 'Language'
   }
 }

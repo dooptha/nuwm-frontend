@@ -1,18 +1,16 @@
-import { getData } from './storage';
+import { getData } from './storage'
 
 export const DEFAULT_PROPERTIES = {
   language: 'ua',
   theme: 'NUWM Dark'
-};
+}
 
 export const getProperties = async () => {
-  let properties = {
-
-  }
+  let properties = {}
 
   for (var key in DEFAULT_PROPERTIES) {
-    properties[key] = await getData(key).then((value) => value? value : DEFAULT_PROPERTIES[key])
+    properties[key] = await getData(key).then((value) => value || DEFAULT_PROPERTIES[key])
   }
 
-  return properties;
-};
+  return properties
+}

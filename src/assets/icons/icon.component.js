@@ -1,16 +1,15 @@
-import React from 'react';
+import React from 'react'
 import {
   Image
-} from 'react-native';
-
+} from 'react-native'
 
 export class RemoteIcon {
-  constructor(source) {
-    this.source = source;
+  constructor (source) {
+    this.source = source
   }
 
-  imageSource() {
-    return { uri: this.source };
+  imageSource () {
+    return { uri: this.source }
   }
 }
 
@@ -20,5 +19,5 @@ export const Icon = (source, style) => {
       style={style}
       source={source.imageSource}
     />
-  );
-};
+  )
+}

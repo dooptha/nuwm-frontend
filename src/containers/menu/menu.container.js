@@ -1,26 +1,25 @@
-import React, { Component } from 'react';
-import { NavigationScreenProps } from 'react-navigation';
-import { Menu } from './menu.component';
-import { StateContext } from '../../core/utils/context';
+import React, { Component } from 'react'
+import { Menu } from './menu.component'
+import { StateContext } from '../../core/utils/context'
 
 export class MenuContainer extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
-    this.navigationKey = 'MenuContainer';
+    this.navigationKey = 'MenuContainer'
   }
 
-  onTabSelect(index) {
-    const { navigation } = this.props;
-    const { [index]: selectedRoute } = navigation.state.routes;
+  onTabSelect (index) {
+    const { navigation } = this.props
+    const { [index]: selectedRoute } = navigation.state.routes
 
     this.props.navigation.navigate({
       key: this.navigationKey,
-      routeName: selectedRoute.routeName,
-    });
-  };
+      routeName: selectedRoute.routeName
+    })
+  }
 
-  render() {
+  render () {
     return (
       <StateContext.Consumer>
         {
@@ -32,6 +31,6 @@ export class MenuContainer extends Component {
           )
         }
       </StateContext.Consumer>
-    );
+    )
   }
 }

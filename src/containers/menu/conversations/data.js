@@ -7,5 +7,5 @@ export const routes = [
         title: 'Flood'
       }
     }
-  },
-];
+  }
+]

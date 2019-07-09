@@ -1,11 +1,11 @@
 export {
   textStyle
-} from './style';
+} from './style'
 
 export {
   DynamicStatusBar
-} from './dynamicStatusBar.component';
+} from './dynamicStatusBar.component'
 
 export {
   AvoidKeyboard
-} from './avoid_keyboard.component';
+} from './avoid_keyboard.component'

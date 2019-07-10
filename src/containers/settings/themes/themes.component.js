@@ -6,7 +6,6 @@ import { Message } from '../../../components/conversations'
 
 const ThemesComponent = (props) => {
   const { themedStyle, data, onItemSelect } = props
-
   const messages = [
     {
       body: 'Колись мені сказали',

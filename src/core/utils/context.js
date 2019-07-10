@@ -1,43 +1,47 @@
-import React, { createContext, useContext, useReducer } from 'react'
+import React, { createContext, useContext, useReducer, useState, useEffect } from 'react'
+import { getProperties, DEFAULT_PROPERTIES } from '../../utils/properties'
 
 export const StateContext = createContext()
 
-export const StateProvider = ({ reducer, initialState, children }) => (
-  <StateContext.Provider value={useReducer(reducer, initialState)}>
-    {children}
-  </StateContext.Provider>
-)
+const reducer = (state, action) => {
+  let properties
+  switch (action.type) {
+    case 'setProperty':
+      properties = state && state.properties
+      properties[action.key] = action.value
 
-export const GlobalState = ({ initialState, children }) => {
-  const reducer = (state, action) => {
-    let properties
-    switch (action.type) {
-      case 'setProperty':
-        properties = state && state.properties
-        properties[action.key] = action.value
+      return {
+        ...state,
+        properties
+      }
 
-        return {
-          ...state,
-          properties
-        }
+    case 'loadProperties':
+      properties = { ...action.properties }
 
-      case 'loadProperties':
-        properties = { ...action.properties }
-
-        return {
-          ...state,
-          properties
-        }
-      default:
-        return state
-    }
+      return {
+        ...state,
+        properties
+      }
+    default:
+      return state
   }
+}
+
+export const GlobalState = ({ children }) => {
+  const [value, setValue] = useState({
+    properties: DEFAULT_PROPERTIES
+  })
+
+  useEffect(() => {
+    getProperties()
+      .then((properties) => setValue(...value, { properties }))
+  })
 
   return (
-    <StateProvider initialState={initialState} reducer={reducer}>
+    <StateContext.Provider value={useReducer(reducer, value)}>
       {children}
-    </StateProvider>
+    </StateContext.Provider>
   )
 }
 
-export const useStateValue = () => useContext(StateContext)
+export const useGlobalState = () => useContext(StateContext)

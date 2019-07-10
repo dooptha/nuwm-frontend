@@ -49,4 +49,4 @@ export class ThemesContainer extends Component {
   }
 }
 
-Themes.contextType = StateContext
+ThemesContainer.contextType = StateContext

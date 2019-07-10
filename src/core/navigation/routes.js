@@ -27,7 +27,7 @@ import {
   ConversationNavigationOptions
 } from './options';
 
-import { useStateValue } from '../utils/context';
+import { useGlobalState } from '../utils/context';
 
 
 
@@ -109,7 +109,7 @@ const createAppRouter = (container) => {
 };
 
 const App = () => {
-  useStateValue();
+  useGlobalState();
   return(<AppNavigator />)
 }
 

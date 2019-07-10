@@ -1,12 +1,11 @@
 {
   "name": "NuwmApp",
   "version": "0.0.1",
-  "private": true,
+  "private": "true",
   "scripts": {
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint .",
-    "style": "standard && node my-tests.js",
+    "style": "eslint .",
     "ios": "react-native run-ios --simulator='iPhone 7'",
     "android": "react-native run-android"
   },
@@ -15,6 +14,7 @@
     "@react-native-community/async-storage": "^1.5.0",
     "i18n-js": "^3.3.0",
     "jetifier": "^1.6.1",
+    "npm": "^6.10.0",
     "react": "16.8.6",
     "react-native": "0.60.0",
     "react-native-gesture-handler": "^1.3.0",
@@ -29,10 +29,14 @@
     "@babel/runtime": "7.4.5",
     "@react-native-community/eslint-config": "0.0.3",
     "babel-jest": "24.8.0",
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb": "^17.1.1",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.2",
     "jest": "24.8.0",
     "metro-react-native-babel-preset": "0.54.1",
-    "react-test-renderer": "16.8.6",
-    "standard": "^12.0.1"
+    "react-test-renderer": "16.8.6"
   },
   "jest": {
     "preset": "react-native"

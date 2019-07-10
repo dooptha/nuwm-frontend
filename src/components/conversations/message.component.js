@@ -6,8 +6,7 @@ import {
 import { RightMessage } from './right_message.component'
 import { LeftMessage } from './left_message.component'
 
-const MessageComponent = (props) => {
-  const { message, themedStyle } = props
+const MessageComponent = ({ message, themedStyle }) => {
   const alignmentStyle = { justifyContent: message.sender ? 'flex-end' : 'flex-start' }
 
   return (

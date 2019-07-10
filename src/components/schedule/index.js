@@ -1,104 +1,71 @@
-import React, { Component } from 'react'
-import { View } from 'react-native'
+import React, { Component } from 'react';
+import axios from 'axios';
+import {
+  Tab, Text, TabView, withStyles,
+} from 'react-native-ui-kitten';
 
-import { TopNavigationAction, Tab, Text, TabView, withStyles } from 'react-native-ui-kitten'
-import axios from 'axios'
+import Day from './Day';
+import Search from './Search';
 
-import Day from './Day'
-import { Search } from './Search'
-
-class ScheduleComponent extends Component {
-  constructor (props) {
-    super(props)
+class Schedule extends Component {
+  constructor(props) {
+    super(props);
     this.state = {
-      defaultGroup: 'ПМ-41',
       schedule: [],
-      selectedIndex: 0
-    }
+      selectedIndex: 0,
+    };
   }
 
-  componentDidMount () {
-    let group = 'ПМ-41'
-    let startDate = '01.09.2017'
-    let endDate = '31.12.2018'
+  componentDidMount() {
+    const group = 'ПМ-41';
+    const startDate = '01.09.2017';
+    const endDate = '31.12.2018';
 
     axios.get('http://localhost:3000/', { params: { group, endDate, startDate } })
-      .then(data => {
-        this.setState({ schedule: data.data.body.response.schedule })
-
-        console.log(this.state.schedule)
+      .then((data) => {
+        this.setState({ schedule: data.data.body.response.schedule });
       })
-      .catch(err => console.log(err))
+      .catch((err) => console.log(err));
   }
 
-  getTodaySchedule () {
-    /*  Api.getSchedule({
-      group: this.state.defaultGroup,
-      startDate: this.startDate.state.date,
-      endDate: this.endDate.state.date,
-    }).then((data) => {
-      console.log('here')
-      console.log(data);
-    }); */
+  onIndexChange(index) {
+    this.setState({ selectedIndex: index });
   }
 
-  onPress () {
-
-    /*  Api.getSchedule({
-      group: this.state.defaultGroup,
-      startDate: this.startDate.state.date,
-      endDate: this.endDate.state.date,
-    }).then((data) => {
-      console.log('here')
-      console.log(data);
-    }); */
+  changeTab(index) {
+    this.setState({ selectedIndex: index });
   }
 
-  renderRightControl () {
-    return (
-      <TopNavigationAction
-        title='Tomorrow'
-      />
-    )
-  }
-
-  onIndexChange (index) {
-    this.setState({ selectedIndex: index })
-  }
-
-  changeTab (index) {
-    this.setState({ selectedIndex: index })
-  }
-
-  render () {
-    const { themedStyle } = this.props
+  render() {
+    const { themedStyle } = this.props;
+    const { schedule, selectedIndex } = this.state;
 
     return (
       <TabView
-        selectedIndex={this.state.selectedIndex}
+        selectedIndex={selectedIndex}
         onSelect={(index) => this.changeTab(index)}
         style={themedStyle.tabViewContainer}
       >
-        <Tab title='Пошук'>
+        <Tab title="Пошук">
           <Search />
         </Tab>
-        <Tab title='Сьогодні'>
-          { this.state.schedule.length > 1 ? <Day day={this.state.schedule[1]} navigation={this.props.navigation} /> : null }
+        <Tab title="Сьогодні">
+          {schedule.length > 1 ? <Day day={schedule[1]} /> : null }
         </Tab>
-        <Tab title='Завтра'>
+        <Tab title="Завтра">
           <Text>Tab 2</Text>
         </Tab>
-        <Tab title='Тиждень'>
+        <Tab title="Тиждень">
           <Text>Tab 3</Text>
         </Tab>
       </TabView>
-    )
+    );
   }
 }
 
-export const Schedule = withStyles(ScheduleComponent, (theme) => ({
+export default withStyles(Schedule, (theme) => ({
   tabViewContainer: {
     height: '100%',
-    backgroundColor: theme['background-basic-color-2']
-  }
-}))
+    backgroundColor: theme['background-basic-color-2'],
+  },
+}));

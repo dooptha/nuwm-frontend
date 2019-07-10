@@ -29,8 +29,8 @@ import {
 
 import { useGlobalState } from '../../utils/context';
 
-import { Schedule } from '../../components/schedule'
-import { DetailedLesson } from '../../components/schedule/DetailedLesson'
+import Schedule from '../../components/schedule';
+import DetailedLesson from '../../components/schedule/DetailedLesson';
 
 class TimetableScreen extends React.Component {
   render() {
@@ -43,33 +43,33 @@ class TimetableScreen extends React.Component {
 }
 
 const ScheduleNavigationMap = {
-  ['DetailedLesson']: {
+  DetailedLesson: {
     screen: DetailedLesson,
-    navigationOptions: MenuNavigationOptions
-  }
-}
+    navigationOptions: MenuNavigationOptions,
+  },
+};
 
 const SettingsNavigationMap = {
-  ['Themes']: {
+  Themes: {
     screen: ThemesContainer,
     navigationOptions: MenuNavigationOptions,
   },
-  ['Language']: {
+  Language: {
     screen: LanguageContainer,
     navigationOptions: MenuNavigationOptions,
-  }
+  },
 };
 
 const ConversationsNavigationMap = {
-  ['Conversation']: {
+  Conversation: {
     screen: ConversationContainer,
     navigationOptions: ConversationNavigationOptions,
-  }
+  },
 };
 
 const TimetableNavigator = createStackNavigator(
   {
-    ['Timetable']: Schedule,
+    Timetable: Schedule,
   }, {
     defaultNavigationOptions: MenuNavigationOptions,
   },
@@ -77,7 +77,7 @@ const TimetableNavigator = createStackNavigator(
 
 const ConversationsNavigator = createStackNavigator(
   {
-    ['Conversations']: ConversationsContainer,
+    Conversations: ConversationsContainer,
   }, {
     defaultNavigationOptions: MenuNavigationOptions,
   },
@@ -85,7 +85,7 @@ const ConversationsNavigator = createStackNavigator(
 
 const SettingsNavigator = createStackNavigator(
   {
-    ['Settings']: SettingsContainer,
+    Settings: SettingsContainer,
   }, {
     defaultNavigationOptions: MenuNavigationOptions,
   },
@@ -94,16 +94,16 @@ const SettingsNavigator = createStackNavigator(
 const MenuNavigator = createBottomTabNavigator({
   Timetable: TimetableNavigator,
   Conversations: ConversationsNavigator,
-  Settings: SettingsNavigator
+  Settings: SettingsNavigator,
 }, {
   tabBarComponent: MenuContainer,
 });
 
 const AppNavigator = createStackNavigator({
-  ['Home']: MenuNavigator,
+  Home: MenuNavigator,
   ...SettingsNavigationMap,
   ...ConversationsNavigationMap,
-  ...ScheduleNavigationMap
+  ...ScheduleNavigationMap,
 }, {
   headerMode: 'screen',
   defaultNavigationOptions: {
@@ -118,7 +118,7 @@ const createAppRouter = (container) => {
 
 const App = () => {
   useGlobalState();
-  return(<AppNavigator />)
-}
+  return (<AppNavigator />);
+};
 
 export const Router = createAppRouter(AppNavigator);

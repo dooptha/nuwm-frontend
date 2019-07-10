@@ -1,41 +1,43 @@
-import React, { Component } from 'react'
-import DatePicker from 'react-native-datepicker'
+import React, { Component } from 'react';
+import DatePicker from 'react-native-datepicker';
 
 export default class extends Component {
-  constructor (props) {
-    super(props)
+  constructor(props) {
+    super(props);
 
     this.state = {
-      date: this.transformDate(new Date())
-    }
+      date: this.transformDate(new Date()),
+    };
   }
 
-  setTwoFixedNumbers (int) {
-    return ('0' + int).slice(-2)
+  setDate(date) {
+    this.setState({ date: date.replace(/-/g, '.') });
   }
 
-  transformDate (date) {
-    let day = this.setTwoFixedNumbers(date.getDate())
-    let month = this.setTwoFixedNumbers(date.getMonth())
-    let year = date.getFullYear()
-
-    return day + '.' + month + '.' + year
+  setTwoFixedNumbers(int) {
+    return (`0${int}`).slice(-2);
   }
 
-  setDate (date) {
-    this.setState({ date: date.replace(/-/g, '.') })
+  transformDate(date) {
+    const day = this.setTwoFixedNumbers(date.getDate());
+    const month = this.setTwoFixedNumbers(date.getMonth());
+    const year = date.getFullYear();
+
+    return `${day}.${month}.${year}`;
   }
 
-  render () {
+  render() {
+    const { date } = this.state;
+
     return (
       <DatePicker
-        date={this.state.date}
-        mode='date'
-        confirmBtnText='Confirm'
-        cancelBtnText='Cancel'
-        format='DD-MM-YYYY'
-        onDateChange={(date) => this.setDate(date)}
+        date={date}
+        mode="date"
+        confirmBtnText="Confirm"
+        cancelBtnText="Cancel"
+        format="DD-MM-YYYY"
+        onDateChange={(chosenDate) => this.setDate(chosenDate)}
       />
-    )
+    );
   }
 }

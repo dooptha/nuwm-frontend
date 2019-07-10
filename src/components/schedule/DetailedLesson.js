@@ -1,23 +1,26 @@
-import React, { Component } from 'react'
-import { View } from 'react-native'
-import { Modal, Text, Button, ListItem, withStyles } from 'react-native-ui-kitten'
+import React, { Component } from 'react';
+import { View } from 'react-native';
+import {
+  Text, withStyles,
+} from 'react-native-ui-kitten';
 
-class DetailedLessonComponent extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {}
+class DetailedLesson extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
   }
 
-  drawLine (data) {
-    const { themedStyle } = this.props
-    const { title, info } = data
+  drawLine(data) {
+    const { themedStyle } = this.props;
+    const { title, info } = data;
 
     if (info) {
       return (
         <View style={themedStyle.list}>
-          <Text style={themedStyle.title}
-            appearance='hint'
-            category='s2'
+          <Text
+            style={themedStyle.title}
+            appearance="hint"
+            category="s2"
           >
             { title }
           </Text>
@@ -25,31 +28,24 @@ class DetailedLessonComponent extends Component {
             { info }
           </Text>
         </View>
-      )
-    } else {
-      return null
+      );
     }
+    return null;
   }
 
-  render () {
-    let lesson = this.props.navigation.getParam('subject', 'NO-ID');
-
-    console.log(lesson)
-
-    const { themedStyle } = this.props
-
-    console.log(this.props)
-
+  render() {
+    const { navigation, themedStyle } = this.props;
+    const lesson = navigation.getParam('subject', 'NO-ID');
     const {
       classroom,
       lecturer,
       subgroup,
       streams_type,
-      lessonNum,
+      /* lessonNum, */
       time,
       type,
-      subject
-    } = lesson
+      subject,
+    } = lesson;
 
     return (
       <View style={themedStyle.detailsWrapper}>
@@ -61,15 +57,15 @@ class DetailedLessonComponent extends Component {
         { this.drawLine({ title: 'Час', info: time }) }
         { this.drawLine({ title: 'Тип', info: type }) }
       </View>
-    )
+    );
   }
 }
 
-export const DetailedLesson = withStyles(DetailedLessonComponent, (theme) => ({
+export default withStyles(DetailedLesson, (theme) => ({
   detailsWrapper: {
     paddingTop: 25,
     height: '100%',
-    backgroundColor: theme['background-basic-color-2']
+    backgroundColor: theme['background-basic-color-2'],
   },
   list: {
     marginTop: 5,
@@ -78,18 +74,18 @@ export const DetailedLesson = withStyles(DetailedLessonComponent, (theme) => ({
     alignItems: 'stretch',
     width: '100%',
     borderBottomColor: theme['background-basic-color-1'],
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
   },
   title: {
     width: '30%',
     paddingTop: 10,
     paddingBottom: 10,
-    paddingLeft: 25
+    paddingLeft: 25,
   },
   info: {
     width: '70%',
     paddingTop: 10,
     paddingBottom: 10,
-    paddingLeft: 35
-  }
-}))
+    paddingLeft: 35,
+  },
+}));

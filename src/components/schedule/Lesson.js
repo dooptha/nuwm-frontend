@@ -1,25 +1,21 @@
-import React, { Component } from 'react'
-import { ListItem } from 'react-native-ui-kitten'
-import { View } from 'react-native'
-import NavigationService from '../../core/navigation/NavigationService'
+import React, { Component } from 'react';
+import { ListItem } from 'react-native-ui-kitten';
+import { View } from 'react-native';
+import NavigationService from '../../core/navigation/NavigationService';
 
 export default class extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {}
+  constructor(props) {
+    super(props);
+    this.state = {};
   }
 
-  onPress () {
+  onPress() {
+    const { subject } = this.props;
     NavigationService.navigate('DetailedLesson',
-      { subject: this.props.subject }
-    )
+      { subject });
   }
 
-  openModal () {
-
-  }
-
-  render () {
+  render() {
     const {
       classroom,
       /* lecturer,
@@ -28,19 +24,17 @@ export default class extends Component {
       lessonNum, */
       time,
       /* type, */
-      subject
-    } = this.props.subject
-
-    console.log('rerender')
+      subject,
+    } = this.props.subject;
 
     return (
       <View>
         <ListItem
-          title={'(' + classroom + ') ' + subject}
+          title={`(${classroom}) ${subject}`}
           description={time}
           onPress={() => this.onPress()}
         />
       </View>
-    )
+    );
   }
 }

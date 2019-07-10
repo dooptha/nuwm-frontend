@@ -32,7 +32,7 @@ const ThemesComponent = (props) => {
   )
 }
 
-export const Themes = withStyles(ThemesComponent, (theme) => ({
+export default withStyles(ThemesComponent, (theme) => ({
   container: {
     flex: 1,
     backgroundColor: theme['background-basic-color-2']

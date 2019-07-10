@@ -1,31 +1,32 @@
-import React, { Component } from 'react'
-import { SafeAreaView } from '../../core/navigation'
+import React, { Component } from 'react';
 import {
   ThemeProvider,
   withStyles,
   BottomNavigation,
-  BottomNavigationTab
-} from 'react-native-ui-kitten'
+  BottomNavigationTab,
+} from 'react-native-ui-kitten';
+import { SafeAreaView } from '../../core/navigation';
 
-import { themes } from '../../core/themes'
+import themes from '../../utils/themes';
 import {
   GridIconOutline,
   LayoutIconOutline,
-  MessageCircleIcon
-} from '../../assets/icons'
-import I18n from '../../core/localization'
+  MessageCircleIcon,
+} from '../../assets/icons';
+import I18n from '../../core/localization';
 
 class MenuComponent extends Component {
-  render () {
-    const { selectedIndex, themedStyle, onTabSelect } = this.props
+  render() {
+    const { selectedIndex, themedStyle, onTabSelect } = this.props;
 
     return (
       <SafeAreaView style={themedStyle.safeAreaContainer}>
-        <ThemeProvider theme={{ ...this.props.theme, ...themes['App Theme'] }} >
+        <ThemeProvider theme={{ ...this.props.theme, ...themes['App Theme'] }}>
           <BottomNavigation
-            appearance='noIndicator'
+            appearance="noIndicator"
             selectedIndex={selectedIndex}
-            onSelect={onTabSelect}>
+            onSelect={onTabSelect}
+          >
             <BottomNavigationTab
               title={I18n.t('tabs.timetable')}
               icon={LayoutIconOutline}
@@ -41,12 +42,12 @@ class MenuComponent extends Component {
           </BottomNavigation>
         </ThemeProvider>
       </SafeAreaView>
-    )
+    );
   }
 }
 
-export const Menu = withStyles(MenuComponent, (theme) => ({
+export const Menu = withStyles(MenuComponent, theme => ({
   safeAreaContainer: {
-    backgroundColor: theme['background-basic-color-1']
-  }
-}))
+    backgroundColor: theme['background-basic-color-1'],
+  },
+}));

@@ -1,52 +1,53 @@
-import React, { Component } from 'react'
-import { Themes } from './themes.component'
-import { themes } from './data'
-import { StateContext } from '../../../core/utils/context'
-import { storeData } from '../../../core/utils/storage'
+import React, { Component } from 'react';
+import Themes from './themes.component';
+import data from './data';
+import { StateContext } from '../../../utils/context';
+import { storeData } from '../../../utils/storage';
 
-export class ThemesContainer extends Component {
-  constructor (props) {
-    super(props)
+class ThemesContainer extends Component {
+  constructor(props) {
+    super(props);
 
-    this.data = themes
-    this.selectedTheme = false
+    this.data = data;
+    this.selectedTheme = false;
   }
 
-  selectTheme () {
-    const selectedTheme = this.context[0].properties.theme
+  onItemSelect(index) {
+    const selectedItem = this.data[index];
+    this.updatePropetry('theme', selectedItem.theme);
+  }
+
+  selectTheme() {
+    const selectedTheme = this.context[0].properties.theme;
 
     this.data = this.data.map((el) => {
-      el.selected = el.theme === selectedTheme
-      return el
-    })
+      el.selected = el.theme === selectedTheme;
+      return el;
+    });
   }
 
-  updatePropetry (key, value) {
-    storeData(key, value)
+  updatePropetry(key, value) {
+    storeData(key, value);
 
     this.context[1]({
       type: 'setProperty',
-      key: key,
-      value: value
-    })
+      key,
+      value,
+    });
 
-    this.selectTheme()
+    this.selectTheme();
   }
 
-  onItemSelect (index) {
-    const selectedItem = this.data[index]
-    this.updatePropetry('theme', selectedItem.theme)
-  }
-
-  render () {
+  render() {
     if (!this.selectedTheme) {
-      this.selectedTheme = true
-      this.selectTheme()
+      this.selectedTheme = true;
+      this.selectTheme();
     }
     return (
       <Themes data={this.data} onItemSelect={(i) => this.onItemSelect(i)} />
-    )
+    );
   }
 }
 
-ThemesContainer.contextType = StateContext
+ThemesContainer.contextType = StateContext;
+export default ThemesContainer;

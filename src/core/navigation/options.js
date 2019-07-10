@@ -1,5 +1,4 @@
 import React from 'react';
-import { Alert } from 'react-native';
 import {
   NavigationParams,
   NavigationScreenProps,
@@ -14,7 +13,7 @@ import {
 } from './util';
 import { KEY_NAVIGATION_BACK } from './constants';
 import I18n from '../localization';
-import { StateContext } from '../utils/context';
+import { StateContext } from '../../utils/context';
 
 const MenuTopNavigationParams = {
   header: (props) => {

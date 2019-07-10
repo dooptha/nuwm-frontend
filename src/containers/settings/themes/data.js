@@ -1,4 +1,4 @@
-export const themes = [
+export default [
   {
     title: 'Eva Light',
     theme: 'Eva Light'

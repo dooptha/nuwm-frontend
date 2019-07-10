@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Settings } from './settings.component'
 import { routes } from './data'
-import { StateContext } from '../../../core/utils/context'
+import { StateContext } from '../../../utils/context'
 
 export class SettingsContainer extends Component {
   constructor (props) {

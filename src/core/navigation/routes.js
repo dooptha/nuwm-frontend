@@ -10,24 +10,24 @@ import {
 import {
   MenuContainer,
   SettingsContainer,
-  ConversationsContainer
+  ConversationsContainer,
 } from '../../containers/menu';
 
 import {
   LanguageContainer,
-  ThemesContainer
+  ThemesContainer,
 } from '../../containers/settings';
 
 import {
-  ConversationContainer
+  ConversationContainer,
 } from '../../containers/conversations';
 
 import {
   MenuNavigationOptions,
-  ConversationNavigationOptions
+  ConversationNavigationOptions,
 } from './options';
 
-import { useGlobalState } from '../utils/context';
+import { useGlobalState } from '../../utils/context';
 
 import { Schedule } from '../../components/schedule'
 import { DetailedLesson } from '../../components/schedule/DetailedLesson'

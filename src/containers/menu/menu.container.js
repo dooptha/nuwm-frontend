@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Menu } from './menu.component'
-import { StateContext } from '../../core/utils/context'
+import { StateContext } from '../../utils/context'
 
 export class MenuContainer extends Component {
   constructor (props) {

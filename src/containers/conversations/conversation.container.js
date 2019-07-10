@@ -6,7 +6,7 @@ import {
 } from './conversation.component'
 import {
   storeData
-} from '../../core/utils/storage'
+} from '../../utils/storage'
 
 export class ConversationContainer extends Component {
   constructor (props) {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Conversations } from './conversations.component'
 import { routes } from './data'
-import { StateContext } from '../../../core/utils/context'
+import { StateContext } from '../../../utils/context'
 
 export class ConversationsContainer extends Component {
   constructor (props) {

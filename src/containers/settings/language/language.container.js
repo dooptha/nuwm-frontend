@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Language } from './language.component'
 import { languages } from './data'
-import { StateContext } from '../../../core/utils/context'
-import { storeData } from '../../../core/utils/storage'
+import { StateContext } from '../../../utils/context'
+import { storeData } from '../../../utils/storage'
 import { setLocale } from '../../../core/localization/'
 
 export class LanguageContainer extends Component {

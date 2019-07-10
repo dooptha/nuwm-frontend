@@ -1,7 +1,7 @@
 import {
   dark,
-  light
-} from '@eva-design/eva'
+  light,
+} from '@eva-design/eva';
 
 const nuwmDark = {
   ...dark,
@@ -39,11 +39,11 @@ const nuwmDark = {
   'border-basic-color-4': '$color-basic-1000',
   'border-basic-color-5': '$color-basic-1100',
 
-  'text-disabled-color': '$color-basic-600'
-}
+  'text-disabled-color': '$color-basic-600',
+};
 
-export const themes = {
+export default {
   'Eva Light': light,
   'Eva Dark': dark,
-  'NUWM Dark': nuwmDark
-}
+  'NUWM Dark': nuwmDark,
+};

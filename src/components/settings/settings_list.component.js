@@ -4,7 +4,7 @@ import {
   List,
   ListItem
 } from 'react-native-ui-kitten'
-import I18n from '../../core/localization'
+import I18n from '../../utils/i18n'
 
 export class SettingsList extends Component {
   constructor (props) {

@@ -11,26 +11,26 @@ import {
   MenuContainer,
   SettingsContainer,
   ConversationsContainer,
-} from '../../containers/menu';
+} from '../containers/menu';
 
 import {
   LanguageContainer,
   ThemesContainer,
-} from '../../containers/settings';
+} from '../containers/settings';
 
 import {
   ConversationContainer,
-} from '../../containers/conversations';
+} from '../containers/conversations';
 
 import {
   MenuNavigationOptions,
   ConversationNavigationOptions,
 } from './options';
 
-import { useGlobalState } from '../../utils/context';
+import { useGlobalState } from '../utils/context';
 
-import Schedule from '../../components/schedule';
-import DetailedLesson from '../../components/schedule/DetailedLesson';
+import Schedule from '../components/schedule';
+import DetailedLesson from '../components/schedule/DetailedLesson';
 
 class TimetableScreen extends React.Component {
   render() {
@@ -114,11 +114,6 @@ const AppNavigator = createStackNavigator({
 const createAppRouter = (container) => {
   useScreens();
   return createAppContainer(container);
-};
-
-const App = () => {
-  useGlobalState();
-  return (<AppNavigator />);
 };
 
 export const Router = createAppRouter(AppNavigator);

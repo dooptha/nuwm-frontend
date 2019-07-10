@@ -35,9 +35,7 @@ export const RightMessage = withStyles(MessageComponent, (theme) => ({
     borderBottomWidth: 15,
     borderLeftColor: 'transparent',
     borderRightColor: 'transparent',
-    backgroundColor: 'transparent'
-  },
-  triangleRight: {
+    backgroundColor: 'transparent',
     transform: [{ rotate: '90deg' }],
     borderBottomColor: theme['background-basic-color-1']
   },

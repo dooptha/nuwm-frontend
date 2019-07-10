@@ -8,7 +8,7 @@ import {
   getProperties,
   DEFAULT_PROPERTIES,
 } from './properties';
-import { setLocale } from '../core/localization';
+import { setLocale } from './i18n';
 
 export const StateContext = createContext();
 

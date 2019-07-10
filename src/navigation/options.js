@@ -1,19 +1,14 @@
 import React from 'react';
-import {
-  NavigationParams,
-  NavigationScreenProps,
-} from 'react-navigation';
-import { ArrowIosBackFill } from '../../assets/icons';
+import { ArrowIosBackFill } from '../assets/icons';
 import { TopNavigationBar } from './components/topNavigationBar.component';
 import {
   getCurrentRouteState,
   isRootRoute,
-  NavigationRouteState,
   getCurrentRouteIndex,
 } from './util';
 import { KEY_NAVIGATION_BACK } from './constants';
-import I18n from '../localization';
-import { StateContext } from '../../utils/context';
+import I18n from '../utils/i18n';
+import { StateContext } from '../utils/context';
 
 const MenuTopNavigationParams = {
   header: (props) => {
@@ -26,8 +21,8 @@ const MenuTopNavigationParams = {
           (context) => (
             <TopNavigationBar
               {...props}
-              title={I18n.t('routes.'+routeName)}
-              backIcon={ isRootRoute(index) && ArrowIosBackFill}
+              title={I18n.t(`routes.${routeName}`)}
+              backIcon={isRootRoute(index) && ArrowIosBackFill}
               onBackPress={() => {
                 props.navigation.goBack(KEY_NAVIGATION_BACK);
               }}
@@ -47,7 +42,7 @@ const ConversationTopNavigationParams = {
     const route = props.navigation.state.routes[1];
     let title = '';
 
-    if(route) {
+    if (route) {
       title = route.params.conversation.title;
     }
 
@@ -58,7 +53,7 @@ const ConversationTopNavigationParams = {
             <TopNavigationBar
               {...props}
               title={title}
-              backIcon={ isRootRoute(index) && ArrowIosBackFill}
+              backIcon={isRootRoute(index) && ArrowIosBackFill}
               onBackPress={() => {
                 props.navigation.goBack(KEY_NAVIGATION_BACK);
               }}
@@ -71,11 +66,10 @@ const ConversationTopNavigationParams = {
 };
 
 
-
 export const MenuNavigationOptions = {
   ...MenuTopNavigationParams,
 };
 
 export const ConversationNavigationOptions = {
-  ...ConversationTopNavigationParams
+  ...ConversationTopNavigationParams,
 };

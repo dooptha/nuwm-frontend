@@ -2,13 +2,13 @@ import React, {
   createContext,
   useContext,
   useReducer,
-  useState,
   useEffect,
 } from 'react';
 import {
   getProperties,
   DEFAULT_PROPERTIES,
 } from './properties';
+import { setLocale } from '../core/localization';
 
 export const StateContext = createContext();
 
@@ -38,20 +38,26 @@ const reducer = (state, action) => {
 
 export const GlobalState = ({ children }) => {
   // Default global state
-  const [value, setValue] = useState({
+  const [state, dispatch] = useReducer(reducer, {
     properties: DEFAULT_PROPERTIES,
   });
 
-  console.log("GlobalState initialize")
-
   useEffect(() => {
-    console.log("useEffect")
-    getProperties()
-      .then((properties) => setValue(...value, { properties }));
+    // Load properties from storage first time
+    if (!state.properties.loaded) {
+      getProperties()
+        .then((properties) => {
+          // Set locale and update state
+          setLocale(properties.language);
+          dispatch({ type: 'loadProperties', properties });
+        });
+    }
+
+    return undefined;
   });
 
   return (
-    <StateContext.Provider value={useReducer(reducer, value)}>
+    <StateContext.Provider value={[state, dispatch]}>
       {children}
     </StateContext.Provider>
   );

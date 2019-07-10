@@ -6,14 +6,25 @@ export const DEFAULT_PROPERTIES = {
 };
 
 export const getProperties = async () => {
-  const properties = {};
+  const propsPromises = [];
 
-  DEFAULT_PROPERTIES.forEach((key) => {
-    properties[key] = getData(key).then((value) => value || DEFAULT_PROPERTIES[key]);
+  Object.keys(DEFAULT_PROPERTIES).forEach((key) => {
+    propsPromises.push(
+      getData(key)
+        .then((value) => [key, value || DEFAULT_PROPERTIES[key]]),
+    );
   });
 
-  const loadedProperties = await Promise.all(properties);
+  const loadedPropertiesArray = await Promise.all(propsPromises);
+  const properties = {};
 
-  console.log('properties', loadedProperties);
-  return loadedProperties;
+  loadedPropertiesArray.forEach((property) => {
+    const [key, value] = property;
+    properties[key] = value;
+  });
+
+  // Flag to check if properties are loaded from storage
+  properties.loaded = true;
+
+  return properties;
 };

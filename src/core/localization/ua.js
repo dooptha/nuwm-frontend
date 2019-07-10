@@ -18,6 +18,7 @@ export default {
     'Conversations': 'Розмови',
     'Settings': 'Налаштування',
     'Themes': 'Вигляд',
-    'Language': 'Мова'
+    'Language': 'Мова',
+    'DetailedLesson': 'Деталі'
   }
 }

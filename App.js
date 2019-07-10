@@ -5,6 +5,7 @@ import { DynamicStatusBar } from './src/components/common';
 import { Router } from './src/core/navigation/routes';
 import { themes } from './src/core/themes';
 import { GlobalState, useGlobalState } from './src/core/utils/context';
+import NavigationService from './src/core/navigation/NavigationService';
 
 const App = () => {
   const [globals] = useGlobalState();
@@ -16,7 +17,11 @@ const App = () => {
       theme={theme}
     >
       <DynamicStatusBar currentTheme={theme} />
-      <Router />
+      <Router
+        ref={
+          navigatorRef => NavigationService.setTopLevelNavigator(navigatorRef)
+        }
+      />
     </ApplicationProvider>
   );
 };

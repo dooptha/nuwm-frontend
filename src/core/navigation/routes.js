@@ -29,7 +29,8 @@ import {
 
 import { useGlobalState } from '../utils/context';
 
-
+import { Schedule } from '../../components/schedule'
+import { DetailedLesson } from '../../components/schedule/DetailedLesson'
 
 class TimetableScreen extends React.Component {
   render() {
@@ -41,6 +42,12 @@ class TimetableScreen extends React.Component {
   }
 }
 
+const ScheduleNavigationMap = {
+  ['DetailedLesson']: {
+    screen: DetailedLesson,
+    navigationOptions: MenuNavigationOptions
+  }
+}
 
 const SettingsNavigationMap = {
   ['Themes']: {
@@ -62,7 +69,7 @@ const ConversationsNavigationMap = {
 
 const TimetableNavigator = createStackNavigator(
   {
-    ['Timetable']: TimetableScreen,
+    ['Timetable']: Schedule,
   }, {
     defaultNavigationOptions: MenuNavigationOptions,
   },
@@ -95,7 +102,8 @@ const MenuNavigator = createBottomTabNavigator({
 const AppNavigator = createStackNavigator({
   ['Home']: MenuNavigator,
   ...SettingsNavigationMap,
-  ...ConversationsNavigationMap
+  ...ConversationsNavigationMap,
+  ...ScheduleNavigationMap
 }, {
   headerMode: 'screen',
   defaultNavigationOptions: {

@@ -7,7 +7,7 @@
     "test": "jest",
     "style": "eslint .",
     "ios": "react-native run-ios --simulator='iPhone 7'",
-    "android": "react-native run-android"
+    "android": "react-native run-android --deviceId=08e9b953"
   },
   "dependencies": {
     "@eva-design/eva": "^1.0.1",
@@ -16,7 +16,6 @@
     "express": "^4.17.1",
     "i18n-js": "^3.3.0",
     "jetifier": "^1.6.1",
-    "npm": "^6.10.0",
     "react": "16.8.6",
     "react-native": "0.60.0",
     "react-native-datepicker": "^1.7.2",

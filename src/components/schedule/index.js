@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 
-import { TopNavigationAction } from 'react-native-ui-kitten'
+import { TopNavigationAction, Tab, Text, TabView, withStyles } from 'react-native-ui-kitten'
 import axios from 'axios'
 
-/* import DatePicker from './DatePicker' */
 import Day from './Day'
+import { Search } from './Search'
 
-export default class Schedule extends Component {
+class ScheduleComponent extends Component {
   constructor (props) {
     super(props)
     this.state = {
       defaultGroup: 'ПМ-41',
       schedule: [],
-      selectedIndex: 1
+      selectedIndex: 0
     }
   }
 
@@ -66,17 +66,39 @@ export default class Schedule extends Component {
     this.setState({ selectedIndex: index })
   }
 
+  changeTab (index) {
+    this.setState({ selectedIndex: index })
+  }
+
   render () {
+    const { themedStyle } = this.props
+
     return (
-      <View>
-        { this.state.schedule.length > 1 ? <Day day={this.state.schedule[1]} navigation={this.props.navigation} /> : null }
-      </View>
+      <TabView
+        selectedIndex={this.state.selectedIndex}
+        onSelect={(index) => this.changeTab(index)}
+        style={themedStyle.tabViewContainer}
+      >
+        <Tab title='Пошук'>
+          <Search />
+        </Tab>
+        <Tab title='Сьогодні'>
+          { this.state.schedule.length > 1 ? <Day day={this.state.schedule[1]} navigation={this.props.navigation} /> : null }
+        </Tab>
+        <Tab title='Завтра'>
+          <Text>Tab 2</Text>
+        </Tab>
+        <Tab title='Тиждень'>
+          <Text>Tab 3</Text>
+        </Tab>
+      </TabView>
     )
   }
 }
 
-/*  <DatePicker
-    ref = { (node) => { this.startDate = node }} />
-  <DatePicker
-    ref = { (node) => { this.endDate = node }} />
-  <Button onPress = {() => this.onPress()}>Find</Button>  */
+export const Schedule = withStyles(ScheduleComponent, (theme) => ({
+  tabViewContainer: {
+    height: '100%',
+    backgroundColor: theme['background-basic-color-2']
+  }
+}))

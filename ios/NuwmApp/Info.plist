@@ -32,94 +32,73 @@
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>calc.nuwm.edu.ua:3002</key>
-	    <dict>
-	      <!--Include to allow subdomains-->
-	      <key>NSIncludesSubdomains</key>
-	      <true/>
-	      <!--Include to allow HTTP requests-->
-	      <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
-	      <true/>
-	      <!--Include to specify minimum TLS version-->
-	      <key>NSTemporaryExceptionMinimumTLSVersion</key>
-	      <string>TLSv1.1</string>
-	    </dict>
-			<key>nuwm.edu.ua:3002</key>
-	    <dict>
-	      <!--Include to allow subdomains-->
-	      <key>NSIncludesSubdomains</key>
-	      <true/>
-	      <!--Include to allow HTTP requests-->
-	      <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
-	      <true/>
-	      <!--Include to specify minimum TLS version-->
-	      <key>NSTemporaryExceptionMinimumTLSVersion</key>
-	      <string>TLSv1.1</string>
-	    </dict>
-			<key>nuwm.edu.ua</key>
-	    <dict>
-	      <!--Include to allow subdomains-->
-	      <key>NSIncludesSubdomains</key>
-	      <true/>
-	      <!--Include to allow HTTP requests-->
-	      <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
-	      <true/>
-	      <!--Include to specify minimum TLS version-->
-	      <key>NSTemporaryExceptionMinimumTLSVersion</key>
-	      <string>TLSv1.1</string>
-	    </dict>
 			<key>calc.nuwm.edu.ua</key>
-	    <dict>
-	      <!--Include to allow subdomains-->
-	      <key>NSIncludesSubdomains</key>
-	      <true/>
-	      <!--Include to allow HTTP requests-->
-	      <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
-	      <true/>
-	      <!--Include to specify minimum TLS version-->
-	      <key>NSTemporaryExceptionMinimumTLSVersion</key>
-	      <string>TLSv1.1</string>
-	    </dict>
-			<key>http://nuwm.edu.ua</key>
-	    <dict>
-	      <!--Include to allow subdomains-->
-	      <key>NSIncludesSubdomains</key>
-	      <true/>
-	      <!--Include to allow HTTP requests-->
-	      <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
-	      <true/>
-	      <!--Include to specify minimum TLS version-->
-	      <key>NSTemporaryExceptionMinimumTLSVersion</key>
-	      <string>TLSv1.1</string>
-	    </dict>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSTemporaryExceptionMinimumTLSVersion</key>
+				<string>TLSv1.1</string>
+			</dict>
+			<key>calc.nuwm.edu.ua:3002</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSTemporaryExceptionMinimumTLSVersion</key>
+				<string>TLSv1.1</string>
+			</dict>
 			<key>http://calc.nuwm.edu.ua</key>
-	    <dict>
-	      <!--Include to allow subdomains-->
-	      <key>NSIncludesSubdomains</key>
-	      <true/>
-	      <!--Include to allow HTTP requests-->
-	      <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
-	      <true/>
-	      <!--Include to specify minimum TLS version-->
-	      <key>NSTemporaryExceptionMinimumTLSVersion</key>
-	      <string>TLSv1.1</string>
-	    </dict>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSTemporaryExceptionMinimumTLSVersion</key>
+				<string>TLSv1.1</string>
+			</dict>
 			<key>http://calc.nuwm.edu.ua:3002</key>
-	    <dict>
-	      <!--Include to allow subdomains-->
-	      <key>NSIncludesSubdomains</key>
-	      <true/>
-	      <!--Include to allow HTTP requests-->
-	      <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
-	      <true/>
-	      <!--Include to specify minimum TLS version-->
-	      <key>NSTemporaryExceptionMinimumTLSVersion</key>
-	      <string>TLSv1.1</string>
-	    </dict>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSTemporaryExceptionMinimumTLSVersion</key>
+				<string>TLSv1.1</string>
+			</dict>
+			<key>http://nuwm.edu.ua</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSTemporaryExceptionMinimumTLSVersion</key>
+				<string>TLSv1.1</string>
+			</dict>
 			<key>localhost</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<true/>
+			</dict>
+			<key>nuwm.edu.ua</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSTemporaryExceptionMinimumTLSVersion</key>
+				<string>TLSv1.1</string>
+			</dict>
+			<key>nuwm.edu.ua:3002</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSTemporaryExceptionMinimumTLSVersion</key>
+				<string>TLSv1.1</string>
 			</dict>
 		</dict>
 	</dict>

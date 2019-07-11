@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { withStyles, Input } from 'react-native-ui-kitten';
 import DatePicker from 'react-native-datepicker';
+import I18n from '../../../utils/i18n';
 
 class CustomDatePicker extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       date: this.transformDate(new Date()),
     };
@@ -38,8 +38,8 @@ class CustomDatePicker extends Component {
         <DatePicker
           date={date}
           mode="date"
-          confirmBtnText="Confirm"
-          cancelBtnText="Cancel"
+          confirmBtnText={I18n.t('datePicker.Confirm')}
+          cancelBtnText={I18n.t('datePicker.Cancel')}
           format="dddd DD MMMM YYYY"
           showIcon={false}
           style={themedStyle.datePicker}

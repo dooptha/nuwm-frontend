@@ -12,7 +12,7 @@ class Schedule extends Component {
     super(props);
     this.state = {
       schedule: [],
-      selectedIndex: 0,
+      selectedIndex: 1,
     };
   }
 

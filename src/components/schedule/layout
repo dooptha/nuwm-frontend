@@ -1,0 +1,21 @@
+import React, { Component } from 'react';
+import { View } from 'react-native';
+import { withStyles } from 'react-native-ui-kitten';
+
+class Name extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { themedStyle } = this.props;
+
+    return (
+      <View />
+    );
+  }
+}
+
+export default withStyles(Name, (theme) => ({
+}));

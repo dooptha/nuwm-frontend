@@ -1,46 +1,27 @@
-import React from 'react';
-import { View, Text } from 'react-native';
 import { useScreens } from 'react-native-screens';
 import {
   createAppContainer,
   createBottomTabNavigator,
   createStackNavigator,
 } from 'react-navigation';
-
 import {
   MenuContainer,
   SettingsContainer,
   ConversationsContainer,
 } from '../containers/menu';
-
 import {
   LanguageContainer,
   ThemesContainer,
 } from '../containers/settings';
-
 import {
   ConversationContainer,
 } from '../containers/conversations';
-
 import {
   MenuNavigationOptions,
   ConversationNavigationOptions,
 } from './options';
-
-import { useGlobalState } from '../utils/context';
-
 import Schedule from '../components/schedule';
 import DetailedLesson from '../components/schedule/DetailedLesson';
-
-class TimetableScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Timetable!</Text>
-      </View>
-    );
-  }
-}
 
 const ScheduleNavigationMap = {
   DetailedLesson: {
@@ -116,4 +97,4 @@ const createAppRouter = (container) => {
   return createAppContainer(container);
 };
 
-export const Router = createAppRouter(AppNavigator);
+export default createAppRouter(AppNavigator);

@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import { Platform } from 'react-native';
-import {
-  SafeAreaView as SafeAreaViewReactNavigation,
-  SafeAreaViewProps,
-} from 'react-navigation';
+import { SafeAreaView as SafeAreaViewReactNavigation } from 'react-navigation';
 
-export class SafeAreaView extends Component {
-
+class SafeAreaView extends Component {
   constructor(props) {
     super(props);
 
@@ -22,8 +18,8 @@ export class SafeAreaView extends Component {
   }
 
   render() {
-    return (
-      <SafeAreaViewReactNavigation {...this.props}/>
-    );
+    return <SafeAreaViewReactNavigation {...this.props} />;
   }
 }
+
+export default SafeAreaView;

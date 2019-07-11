@@ -1,24 +1,21 @@
 import React, { Component } from 'react';
 import {
   withStyles,
-} from 'react-native-ui-kitten';
-import { ImageProps } from 'react-native';
-import {
   TopNavigation,
   TopNavigationAction,
 } from 'react-native-ui-kitten';
-import { SafeAreaView } from './safeAreaView.component';
+import SafeAreaView from './safeAreaView.component';
 
-class TopNavigationBarComponent extends Component {
-
+class TopNavigationBar extends Component {
   renderBackButton(source) {
+    const { onBackPress } = this.props;
     return (
       <TopNavigationAction
         icon={source}
-        onPress={() => this.props.onBackPress()}
+        onPress={() => onBackPress()}
       />
     );
-  };
+  }
 
   render() {
     const { themedStyle, title, backIcon } = this.props;
@@ -28,7 +25,7 @@ class TopNavigationBarComponent extends Component {
     return (
       <SafeAreaView style={themedStyle.safeArea}>
         <TopNavigation
-          alignment='center'
+          alignment="center"
           title={title}
           // titleStyle={textStyle.subtitle}
           // subtitleStyle={textStyle.caption1}
@@ -39,7 +36,7 @@ class TopNavigationBarComponent extends Component {
   }
 }
 
-export const TopNavigationBar = withStyles(TopNavigationBarComponent, (theme) => ({
+export default withStyles(TopNavigationBar, (theme) => ({
   safeArea: {
     backgroundColor: theme['background-basic-color-1'],
   },

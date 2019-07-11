@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowIosBackFill } from '../assets/icons';
-import { TopNavigationBar } from './components/topNavigationBar.component';
+import TopNavigationBar from './components/topNavigationBar.component';
 import {
   getCurrentRouteState,
   isRootRoute,
@@ -11,21 +11,18 @@ import I18n from '../utils/i18n';
 import { StateContext } from '../utils/context';
 
 const MenuTopNavigationParams = {
-  header: (props) => {
-    const { routeName } = getCurrentRouteState(props.navigation);
-    const index = getCurrentRouteIndex(props.navigation);
+  header: ({ navigation }) => {
+    const { routeName } = getCurrentRouteState(navigation);
+    const index = getCurrentRouteIndex(navigation);
 
     return (
       <StateContext.Consumer>
         {
-          (context) => (
+          () => (
             <TopNavigationBar
-              {...props}
               title={I18n.t(`routes.${routeName}`)}
               backIcon={isRootRoute(index) && ArrowIosBackFill}
-              onBackPress={() => {
-                props.navigation.goBack(KEY_NAVIGATION_BACK);
-              }}
+              onBackPress={() => navigation.goBack(KEY_NAVIGATION_BACK)}
             />
           )
         }
@@ -35,27 +32,21 @@ const MenuTopNavigationParams = {
 };
 
 const ConversationTopNavigationParams = {
-  header: (props) => {
-    const { routeName } = getCurrentRouteState(props.navigation);
-    const index = getCurrentRouteIndex(props.navigation);
+  header: ({ navigation }) => {
+    const index = getCurrentRouteIndex(navigation);
 
-    const route = props.navigation.state.routes[1];
-    let title = '';
-
-    if (route) {
-      title = route.params.conversation.title;
-    }
+    const route = navigation.state.routes[1];
+    const { title } = route ? route.params.conversation : '';
 
     return (
       <StateContext.Consumer>
         {
-          (context) => (
+          () => (
             <TopNavigationBar
-              {...props}
               title={title}
               backIcon={isRootRoute(index) && ArrowIosBackFill}
               onBackPress={() => {
-                props.navigation.goBack(KEY_NAVIGATION_BACK);
+                navigation.goBack(KEY_NAVIGATION_BACK);
               }}
             />
           )

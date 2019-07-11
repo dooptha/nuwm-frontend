@@ -2,13 +2,13 @@ import React, {
   createContext,
   useContext,
   useReducer,
-  useEffect,
 } from 'react';
 import {
   getProperties,
   DEFAULT_PROPERTIES,
 } from './properties';
 import { setLocale } from './i18n';
+import { socket, initSockets } from '../api/socket';
 
 export const StateContext = createContext();
 
@@ -37,24 +37,27 @@ const reducer = (state, action) => {
 };
 
 export const GlobalState = ({ children }) => {
+  // Should find workaround async loading of properties
+  const init = (state) => {
+    getProperties()
+      .then((properties) => {
+        // Set locale and update state
+        setLocale(properties.language);
+        // eslint-disable-next-line
+        dispatch({ type: 'loadProperties', properties });
+      });
+
+    // eslint-disable-next-line
+    initSockets({ dispatch });
+
+    return state;
+  };
+
   // Default global state
   const [state, dispatch] = useReducer(reducer, {
     properties: DEFAULT_PROPERTIES,
-  });
-
-  useEffect(() => {
-    // Load properties from storage first time
-    if (!state.properties.loaded) {
-      getProperties()
-        .then((properties) => {
-          // Set locale and update state
-          setLocale(properties.language);
-          dispatch({ type: 'loadProperties', properties });
-        });
-    }
-
-    return undefined;
-  });
+    socket,
+  }, init);
 
   return (
     <StateContext.Provider value={[state, dispatch]}>

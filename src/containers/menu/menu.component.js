@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   ThemeProvider,
   withStyles,
@@ -15,38 +15,41 @@ import {
 } from '../../assets/icons';
 import I18n from '../../utils/i18n';
 
-class MenuComponent extends Component {
-  render() {
-    const { selectedIndex, themedStyle, onTabSelect } = this.props;
+const Menu = (props) => {
+  const {
+    selectedIndex,
+    themedStyle,
+    onTabSelect,
+    theme,
+  } = props;
 
-    return (
-      <SafeAreaView style={themedStyle.safeAreaContainer}>
-        <ThemeProvider theme={{ ...this.props.theme, ...themes['App Theme'] }}>
-          <BottomNavigation
-            appearance="noIndicator"
-            selectedIndex={selectedIndex}
-            onSelect={onTabSelect}
-          >
-            <BottomNavigationTab
-              title={I18n.t('tabs.timetable')}
-              icon={LayoutIconOutline}
-            />
-            <BottomNavigationTab
-              title={I18n.t('tabs.chat')}
-              icon={MessageCircleIcon}
-            />
-            <BottomNavigationTab
-              title={I18n.t('tabs.settings')}
-              icon={GridIconOutline}
-            />
-          </BottomNavigation>
-        </ThemeProvider>
-      </SafeAreaView>
-    );
-  }
-}
+  return (
+    <SafeAreaView style={themedStyle.safeAreaContainer}>
+      <ThemeProvider theme={{ ...theme, ...themes['App Theme'] }}>
+        <BottomNavigation
+          appearance="noIndicator"
+          selectedIndex={selectedIndex}
+          onSelect={onTabSelect}
+        >
+          <BottomNavigationTab
+            title={I18n.t('tabs.timetable')}
+            icon={LayoutIconOutline}
+          />
+          <BottomNavigationTab
+            title={I18n.t('tabs.chat')}
+            icon={MessageCircleIcon}
+          />
+          <BottomNavigationTab
+            title={I18n.t('tabs.settings')}
+            icon={GridIconOutline}
+          />
+        </BottomNavigation>
+      </ThemeProvider>
+    </SafeAreaView>
+  );
+};
 
-export const Menu = withStyles(MenuComponent, theme => ({
+export default withStyles(Menu, (theme) => ({
   safeAreaContainer: {
     backgroundColor: theme['background-basic-color-1'],
   },

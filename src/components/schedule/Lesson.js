@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ListItem } from 'react-native-ui-kitten';
 import { View } from 'react-native';
-import NavigationService from '../../core/navigation/NavigationService';
+import NavigationService from '../../navigation/NavigationService';
 
 export default class extends Component {
   constructor(props) {

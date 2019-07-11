@@ -12,7 +12,7 @@ class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedIndex: 1,
+      selectedIndex: 0,
       lecturer: '',
       group: '',
       showOnlyLabs: false,
@@ -32,16 +32,16 @@ class Search extends Component {
 
     const body = selectedIndex === 0
       ? (
-        <ListRow label="Початок">
+        <ListRow label="Дата">
           <DatePicker ref={(node) => { this.startDate = node; }} />
         </ListRow>
       )
       : (
         <View>
-          <ListRow label="Початок">
+          <ListRow label="Від">
             <DatePicker ref={(node) => { this.startDate = node; }} />
           </ListRow>
-          <ListRow label="Кінець">
+          <ListRow label="До">
             <DatePicker ref={(node) => { this.endDate = node; }} />
           </ListRow>
         </View>
@@ -49,7 +49,7 @@ class Search extends Component {
 
     return (
       <View style={themedStyle.searchContainer}>
-        <ListRow label="Дата">
+        <ListRow label="Тип">
           <BottomNavigation
             style={themedStyle.tabContainer}
             selectedIndex={selectedIndex}

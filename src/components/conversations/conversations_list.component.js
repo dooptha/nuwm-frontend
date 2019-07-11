@@ -1,19 +1,20 @@
-import React from 'react'
-import { View } from 'react-native'
+import React from 'react';
+import { View } from 'react-native';
 import {
   List,
-  ListItem
-} from 'react-native-ui-kitten'
+  ListItem,
+} from 'react-native-ui-kitten';
 
-export const ConversationsList = ({ data, onItemSelect }) => {
-  const renderItem = (info) => {
-    return (
-      <ListItem
-        title={info.item.params.conversation.title}
-        onPress={(i) => onItemSelect(i)}
-      />
-    )
-  }
+const ConversationsList = ({
+  data,
+  onItemSelect,
+}) => {
+  const renderItem = (info) => (
+    <ListItem
+      title={info.item.params.conversation.title}
+      onPress={(i) => onItemSelect(i)}
+    />
+  );
 
   return (
     <View>
@@ -22,5 +23,7 @@ export const ConversationsList = ({ data, onItemSelect }) => {
         renderItem={renderItem}
       />
     </View>
-  )
-}
+  );
+};
+
+export default ConversationsList;

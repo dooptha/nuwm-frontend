@@ -1,1 +1,1 @@
-export { ConversationContainer } from './conversation.container'
+export ConversationContainer from './conversation.container'

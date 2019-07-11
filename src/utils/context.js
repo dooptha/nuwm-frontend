@@ -14,6 +14,8 @@ export const StateContext = createContext();
 
 const reducer = (state, action) => {
   let properties;
+  const { messages } = state;
+
   switch (action.type) {
     case 'setProperty':
       properties = state && state.properties;
@@ -31,6 +33,15 @@ const reducer = (state, action) => {
         ...state,
         properties,
       };
+
+    case 'sendMessage':
+      messages.push(action.message);
+
+      return {
+        ...state,
+        messages,
+      };
+
     default:
       return state;
   }
@@ -56,6 +67,7 @@ export const GlobalState = ({ children }) => {
   // Default global state
   const [state, dispatch] = useReducer(reducer, {
     properties: DEFAULT_PROPERTIES,
+    messages: [],
     socket,
   }, init);
 

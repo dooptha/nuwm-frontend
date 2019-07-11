@@ -1,41 +1,46 @@
-import React from 'react'
-import { View, Platform } from 'react-native'
-import { withStyles, Input, Button } from 'react-native-ui-kitten'
-import { Conversation as Chat } from '../../components/conversations'
-import { AvoidKeyboard } from '../../components/common'
+import React from 'react';
+import { View, Platform } from 'react-native';
+import { withStyles, Input, Button } from 'react-native-ui-kitten';
+import { Conversation as Chat } from '../../components/conversations';
+import { AvoidKeyboard } from '../../components/common';
 import {
-  PaperPlaneIconFill
-} from '../../assets/icons'
+  PaperPlaneIconFill,
+} from '../../assets/icons';
 
 const ConversationComponent = (props) => {
-  const { themedStyle, data, onItemSelect, newMessage, onNewMessageChange } = props
+  const {
+    themedStyle,
+    data,
+    onItemSelect,
+    newMessage,
+    onNewMessageChange,
+    sendMessage,
+  } = props;
 
-  const keyboardOffset = (height) => {
-    return Platform.select({
-      ios: height,
-      android: 0
-    })
-  }
+  const keyboardOffset = (height) => Platform.select({
+    ios: height,
+    android: 0,
+  });
 
-  const renderSendMessageButton = () => {
-    return (
-      <Button
-        style={themedStyle.addMessageButton}
-        appearance='ghost'
-        size='large'
-        icon={PaperPlaneIconFill}
-        onPress={() => console.log('add message')}
-      />
-    )
-  }
+  const onMessageButtonPress = () => sendMessage();
+
+  const renderSendMessageButton = () => (
+    <Button
+      style={themedStyle.addMessageButton}
+      appearance="ghost"
+      size="large"
+      icon={PaperPlaneIconFill}
+      onPress={onMessageButtonPress}
+    />
+  );
 
   return (
     <AvoidKeyboard
       style={themedStyle.container}
       autoDismiss={false}
-      offset={keyboardOffset}>
+      offset={keyboardOffset}
+    >
       <Chat
-        renderItem={this.renderMessage}
         contentContainerStyle={themedStyle.chatContainer}
         data={data}
         onItemSelect={(i) => onItemSelect(i)}
@@ -44,38 +49,38 @@ const ConversationComponent = (props) => {
         <Input
           style={themedStyle.messageInput}
           value={newMessage}
-          placeholder='Message...'
+          placeholder="Message..."
           onChangeText={(m) => onNewMessageChange(m)}
         />
         {renderSendMessageButton()}
       </View>
     </AvoidKeyboard>
-  )
-}
+  );
+};
 
 export const Conversation = withStyles(ConversationComponent, (theme) => ({
   container: {
-    flex: 1
+    flex: 1,
   },
   chatContainer: {
     paddingHorizontal: 16,
-    paddingVertical: 12
+    paddingVertical: 12,
   },
   inputContainer: {
     padding: 16,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: theme['background-basic-color-2']
+    backgroundColor: theme['background-basic-color-2'],
   },
   addMessageButton: {
     width: 26,
     height: 26,
-    borderRadius: 26
+    borderRadius: 26,
   },
   messageInput: {
     flex: 1,
     marginHorizontal: 8,
-    backgroundColor: theme['background-basic-color-1']
-  }
-}))
+    backgroundColor: theme['background-basic-color-1'],
+  },
+}));

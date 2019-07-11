@@ -9,12 +9,12 @@ import NavigationService from './src/navigation/NavigationService';
 
 const App = () => {
   const [globals] = useGlobalState();
-  const theme = themes[globals.properties.theme];
+  const { theme } = globals.properties;
 
   return (
     <ApplicationProvider
       mapping={mapping}
-      theme={theme}
+      theme={themes[theme]}
     >
       <DynamicStatusBar currentTheme={theme} />
       <Router

@@ -1,143 +1,66 @@
 import React, {
-  Component
-} from 'react'
+  Component,
+} from 'react';
 import {
-  Conversation
-} from './conversation.component'
-import {
-  storeData
-} from '../../utils/storage'
+  Conversation,
+} from './conversation.component';
+import { storeData } from '../../utils/storage';
+import { StateContext } from '../../utils/context';
+import { socket } from '../../api/socket';
 
-export class ConversationContainer extends Component {
-  constructor (props) {
-    super(props)
-
-    this.data = [{
-      body: 'Sono chino sadame',
-      sender: false,
-      date: '13: 00'
-    }, {
-      body: 'Sono chino sadame',
-      sender: false,
-      date: '13: 00'
-    }, {
-      body: 'Sono chino sadame',
-      sender: false,
-      date: '13: 00'
-    }, {
-      body: 'Sono chino sadame',
-      sender: 'true',
-      date: '13: 00'
-    }, {
-      body: 'Sono chino sadame',
-      sender: false,
-      date: '13: 00'
-    }, {
-      body: 'Sono chino sadame',
-      sender: false,
-      date: '13: 00'
-    }, {
-      body: 'Sono chino sadame',
-      sender: false,
-      date: '13: 00'
-    }, {
-      body: 'Sono chino sadame',
-      sender: false,
-      date: '13: 00'
-    }, {
-      body: 'Sono chino sadame',
-      sender: false,
-      date: '13: 00'
-    }, {
-      body: 'Sono chino sadame',
-      sender: false,
-      date: '13: 00'
-    }, {
-      body: 'Sono chino sadame',
-      sender: 'true',
-      date: '13: 00'
-    }, {
-      body: 'Sono chino sadame',
-      sender: false,
-      date: '13: 00'
-    }, {
-      body: 'Sono chino sadame',
-      sender: false,
-      date: '13: 00'
-    }, {
-      body: 'Sono chino sadame',
-      sender: false,
-      date: '13: 00'
-    }, {
-      body: 'Sono chino sadame',
-      sender: false,
-      date: '13: 00'
-    }, {
-      body: 'Sono chino sadame',
-      sender: false,
-      date: '13: 00'
-    }, {
-      body: 'Sono chino sadame',
-      sender: false,
-      date: '13: 00'
-    }, {
-      body: 'Sono chino sadame',
-      sender: false,
-      date: '13: 00'
-    }, {
-      body: 'Sono chino sadame',
-      sender: false,
-      date: '13: 00'
-    }, {
-      body: 'Sono chino sadame',
-      sender: false,
-      date: '13: 00'
-    }, {
-      body: 'Sono chino sadame',
-      sender: false,
-      date: '13: 00'
-    }, {
-      body: 'Sono chino sadame',
-      sender: false,
-      date: '13: 00'
-    }, {
-      body: 'Sono chino sadame',
-      sender: false,
-      date: '13: 00'
-    }]
+class ConversationContainer extends Component {
+  constructor(props) {
+    super(props);
 
     this.state = {
-      newMessage: ''
-    }
+      newMessage: '',
+    };
   }
 
-  onNewMessageChange (newMessage) {
+  onNewMessageChange(newMessage) {
     this.setState({
-      newMessage
-    })
-  };
-
-  updatePropetry (key, value) {
-    storeData(key, value)
-
-    this.context[1]({
-      type: 'setProperty',
-      key: key,
-      value: value
-    })
+      newMessage,
+    });
   }
 
-  onItemSelect (index) {
-    // click on message
-  };
+  sendMessage() {
+    const { newMessage } = this.state;
 
-  render () {
+    if (newMessage === '') return false;
+
+    const message = {
+      body: newMessage,
+      date: '13:00',
+      sender: true,
+    };
+
+    const [, dispatch] = this.context;
+    dispatch({
+      type: 'sendMessage',
+      message,
+    });
+
+    socket.emit('message:send', { message });
+
+    this.setState({ newMessage: '' });
+
+    return true;
+  }
+
+  render() {
+    const { newMessage } = this.state;
+    const [context] = this.context;
+
     return (
-      <Conversation data={this.data}
-        onItemSelect={(i) => this.onItemSelect(i)}
+      <Conversation
+        data={context.messages}
         onNewMessageChange={(m) => this.onNewMessageChange(m)}
-        newMessage={this.state.newMessage}
+        newMessage={newMessage}
+        sendMessage={() => this.sendMessage()}
       />
-    )
+    );
   }
 }
+
+ConversationContainer.contextType = StateContext;
+export default ConversationContainer;

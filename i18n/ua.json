@@ -20,5 +20,31 @@
     "Themes": "Вигляд",
     "Language": "Мова",
     "DetailedLesson": "Деталі"
+  },
+  "datePicker": {
+    "Confirm": "Підтвердити",
+    "Cancel": "Відмінити"
+  },
+  "timetable": {
+    "tabs": {
+      "Search": "Пошук",
+      "Today": "Сьогодні",
+      "Tomorrow": "Завтра",
+      "Week": "Тиждень"
+    },
+    "search":{
+      "Type": "Тип",
+      "Date": "Дата",
+      "Lecturer": "Викладач",
+      "Group": "Группа",
+      "PracticsOnly": "Тільки Практика",
+      "Search": "Пошук",
+      "GroupExample": "Приклад: ПМ-41",
+      "LecturerExample": "Приклад: Мічута Ольга Романівна",
+      "From": "З",
+      "To": "До",
+      "OnlyDay": "День",
+      "Range": "Проміжок"
+    }
   }
 }

@@ -18,6 +18,33 @@
     "Conversations": "Chat",
     "Settings": "Settings",
     "Themes": "Theme",
-    "Language": "Language"
+    "Language": "Language",
+    "DetailedLesson": "Details"
+  },
+  "datePicker": {
+    "Confirm": "Confirm",
+    "Cancel": "Cancel"
+  },
+  "timetable": {
+    "tabs": {
+      "Search": "Search",
+      "Today": "Today",
+      "Tomorrow": "Tomorrow",
+      "Week": "Week"
+    },
+    "search":{
+      "Type": "Type",
+      "Date": "Date",
+      "Lecturer": "Lecturer",
+      "Group": "Group",
+      "Search": "Search",
+      "PracticsOnly": "Practics Only",
+      "GroupExample": "Example: ПМ-41",
+      "LecturerExample": "Example: Мічута Ольга Романівна",
+      "From": "From",
+      "To": "To",
+      "OnlyDay": "Day",
+      "Range": "Range"
+    }
   }
 }

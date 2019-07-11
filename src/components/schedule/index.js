@@ -3,7 +3,7 @@ import axios from 'axios';
 import {
   Tab, Text, TabView, withStyles,
 } from 'react-native-ui-kitten';
-
+import I18n from '../../utils/i18n';
 import Day from './Day';
 import Search from './Search';
 
@@ -18,7 +18,7 @@ class Schedule extends Component {
 
   componentDidMount() {
     const group = 'ПМ-41';
-    const startDate = '01.09.2017';
+    const startDate = '01.09.2017' || new Date();
     const endDate = '31.12.2018';
 
     axios.get('http://localhost:3000/', { params: { group, endDate, startDate } })
@@ -46,16 +46,16 @@ class Schedule extends Component {
         onSelect={(index) => this.changeTab(index)}
         style={themedStyle.tabViewContainer}
       >
-        <Tab title="Пошук">
+        <Tab title={I18n.t('timetable.tabs.Search')}>
           <Search />
         </Tab>
-        <Tab title="Сьогодні">
+        <Tab title={I18n.t('timetable.tabs.Today')}>
           {schedule.length > 1 ? <Day day={schedule[1]} /> : null }
         </Tab>
-        <Tab title="Завтра">
+        <Tab title={I18n.t('timetable.tabs.Tomorrow')}>
           <Text>Tab 2</Text>
         </Tab>
-        <Tab title="Тиждень">
+        <Tab title={I18n.t('timetable.tabs.Week')}>
           <Text>Tab 3</Text>
         </Tab>
       </TabView>

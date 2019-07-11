@@ -18,6 +18,33 @@
     "Conversations": "Чат",
     "Settings": "Настройки",
     "Themes": "Тема",
-    "Language": "Язык"
+    "Language": "Язык",
+    "DetailedLesson": "Детали"
+  },
+  "datePicker": {
+    "Confirm": "Подтвердить",
+    "Cancel": "Отменить"
+  },
+  "timetable": {
+    "tabs": {
+      "Search": "Поиск",
+      "Today": "Сегодня",
+      "Tomorrow": "Завтра",
+      "Week": "Неделя"
+    },
+    "search":{
+      "Type": "Тип",
+      "Date": "Дата",
+      "Lecturer": "Преподаватель",
+      "Group": "Группа",
+      "PracticsOnly": "Только Практика",
+      "Search": "Поиск",
+      "GroupExample": " Пример: ПМ-41",
+      "LecturerExample": "Пример: Мічута Ольга Романівна",
+      "From": "С",
+      "To": "По",
+      "OnlyDay": "День",
+      "Range": "Промежуток"
+    }
   }
 }

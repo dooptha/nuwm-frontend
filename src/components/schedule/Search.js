@@ -3,14 +3,16 @@ import {
   View,
 } from 'react-native';
 import {
-  Button, withStyles, BottomNavigation, BottomNavigationTab, Input, CheckBox, Text, Toggle,
+  Button, withStyles, BottomNavigation, BottomNavigationTab, Input, Toggle,
 } from 'react-native-ui-kitten';
-import DatePicker from './DatePicker';
-import ListRow from './ListRow';
+import DatePicker from './common/DatePicker';
+import ListRow from './common/ListRow';
+import I18n from '../../utils/i18n';
 
 class Search extends Component {
   constructor(props) {
     super(props);
+    this.localize = (t) => I18n.t(`timetable.search.${t}`);
     this.state = {
       selectedIndex: 0,
       lecturer: '',
@@ -19,68 +21,94 @@ class Search extends Component {
     };
   }
 
-  changeTab(index) {
-    console.log(index);
+  getData() {
+    const { lecturer, group } = this.state;
+
+    const data = {
+      startDate: this.startDate.state.date,
+      endDate: this.endDate.state.date,
+      lecturer,
+      group,
+    };
+    console.log(data);
+  }
+
+  switchTab(index) {
     this.setState({ selectedIndex: index });
   }
 
-  render() {
-    const {
-      selectedIndex, lecturer, group, showOnlyLabs,
-    } = this.state;
-    const { themedStyle } = this.props;
+  renderDatePickers() {
+    const { selectedIndex } = this.state;
 
-    const body = selectedIndex === 0
-      ? (
-        <ListRow label="Дата">
+    if (selectedIndex === 0) {
+      return (
+        <ListRow label={this.localize('Date')}>
           <DatePicker ref={(node) => { this.startDate = node; }} />
         </ListRow>
-      )
-      : (
-        <View>
-          <ListRow label="Від">
-            <DatePicker ref={(node) => { this.startDate = node; }} />
-          </ListRow>
-          <ListRow label="До">
-            <DatePicker ref={(node) => { this.endDate = node; }} />
-          </ListRow>
-        </View>
       );
+    }
+    return (
+      <View>
+        <ListRow label={this.localize('From')}>
+          <DatePicker ref={(node) => { this.startDate = node; }} />
+        </ListRow>
+        <ListRow label={this.localize('To')}>
+          <DatePicker ref={(node) => { this.endDate = node; }} />
+        </ListRow>
+      </View>
+    );
+  }
+
+  renderTabs() {
+    const { themedStyle } = this.props;
+    const { selectedIndex } = this.state;
+
+    return (
+      <ListRow label={this.localize('Type')}>
+        <BottomNavigation
+          style={themedStyle.tabContainer}
+          selectedIndex={selectedIndex}
+          onSelect={(index) => this.switchTab(index)}
+          indicatorStyle={themedStyle.indicatorStyle}
+        >
+          <BottomNavigationTab title={this.localize('OnlyDay')} />
+          <BottomNavigationTab title={this.localize('Range')} />
+        </BottomNavigation>
+      </ListRow>
+    );
+  }
+
+  render() {
+    const { themedStyle } = this.props;
+    const { lecturer, group, showOnlyLabs } = this.state;
+
+    const body = this.renderDatePickers();
+    const tabs = this.renderTabs();
 
     return (
       <View style={themedStyle.searchContainer}>
-        <ListRow label="Тип">
-          <BottomNavigation
-            style={themedStyle.tabContainer}
-            selectedIndex={selectedIndex}
-            onSelect={(index) => this.changeTab(index)}
-            indicatorStyle={themedStyle.indicatorStyle}
-          >
-            <BottomNavigationTab title="Лише один день" selected />
-            <BottomNavigationTab title="Проміжок" />
-          </BottomNavigation>
-        </ListRow>
+        { tabs }
         { body }
 
-        <ListRow label="Викладач">
+        <ListRow label={this.localize('Lecturer')}>
           <Input
             style={themedStyle.input}
             value={lecturer}
-            placeholder="Приклад: Мічута Ольга Вікторівна"
+            placeholder={this.localize('LecturerExample')}
             onChangeText={(value) => { this.setState({ lecturer: value }); }}
           />
         </ListRow>
 
-        <ListRow label="Группа">
+        <ListRow label={this.localize('Group')}>
           <Input
             value={group}
             style={themedStyle.input}
-            placeholder="Приклад: ПМ-41"
+            placeholder={this.localize('GroupExample')}
             onChangeText={(value) => { this.setState({ group: value }); }}
           />
         </ListRow>
 
-        <ListRow label="Тільки практика">
+        <ListRow label={this.localize('PracticsOnly')}>
           <Toggle
             style={themedStyle.checkbox}
             checked={showOnlyLabs}
@@ -88,7 +116,9 @@ class Search extends Component {
           />
         </ListRow>
 
-        <Button style={themedStyle.button} onPress={() => this.onPress()}>Знайти</Button>
+        <Button style={themedStyle.button} onPress={() => this.getData()}>
+          {this.localize('Search')}
+        </Button>
       </View>
     );
   }

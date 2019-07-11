@@ -3,7 +3,7 @@ import { Language } from './language.component'
 import { languages } from './data'
 import { StateContext } from '../../../utils/context'
 import { storeData } from '../../../utils/storage'
-import { setLocale } from '../../../core/localization/'
+import { setLocale } from '../../../utils/i18n'
 
 export class LanguageContainer extends Component {
   constructor (props) {

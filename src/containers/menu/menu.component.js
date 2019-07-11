@@ -5,7 +5,7 @@ import {
   BottomNavigation,
   BottomNavigationTab,
 } from 'react-native-ui-kitten';
-import { SafeAreaView } from '../../core/navigation';
+import { SafeAreaView } from '../../navigation';
 
 import themes from '../../utils/themes';
 import {
@@ -13,7 +13,7 @@ import {
   LayoutIconOutline,
   MessageCircleIcon,
 } from '../../assets/icons';
-import I18n from '../../core/localization';
+import I18n from '../../utils/i18n';
 
 class MenuComponent extends Component {
   render() {

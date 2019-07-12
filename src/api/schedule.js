@@ -15,8 +15,8 @@ class ScheduleApi {
     return axios.get(this.api, { params: { group, startDate, endDate } })
       .then((res) => res.data.schedule)
       .catch((err) => {
-        console.error(err);
-        return { error: true };
+        console.log(err);
+        return [];
       });
   }
 }

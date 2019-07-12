@@ -1,6 +1,6 @@
 export const routes = [
   {
-    route: 'Conversation',
+    routeName: 'Conversation',
     params: {
       conversation: {
         id: '0',

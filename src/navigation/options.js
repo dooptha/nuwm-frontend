@@ -20,6 +20,28 @@ const MenuTopNavigationParams = {
         {
           () => (
             <TopNavigationBar
+              border
+              title={I18n.t(`routes.${routeName}`)}
+              backIcon={isRootRoute(index) && ArrowIosBackFill}
+              onBackPress={() => navigation.goBack(KEY_NAVIGATION_BACK)}
+            />
+          )
+        }
+      </StateContext.Consumer>
+    );
+  },
+};
+
+const SheduleTopNavigationParams = {
+  header: ({ navigation }) => {
+    const { routeName } = getCurrentRouteState(navigation);
+    const index = getCurrentRouteIndex(navigation);
+
+    return (
+      <StateContext.Consumer>
+        {
+          () => (
+            <TopNavigationBar
               title={I18n.t(`routes.${routeName}`)}
               backIcon={isRootRoute(index) && ArrowIosBackFill}
               onBackPress={() => navigation.goBack(KEY_NAVIGATION_BACK)}
@@ -43,6 +65,7 @@ const ConversationTopNavigationParams = {
         {
           () => (
             <TopNavigationBar
+              border
               title={title}
               backIcon={isRootRoute(index) && ArrowIosBackFill}
               onBackPress={() => {
@@ -59,6 +82,10 @@ const ConversationTopNavigationParams = {
 
 export const MenuNavigationOptions = {
   ...MenuTopNavigationParams,
+};
+
+export const SheduleNavigationOptions = {
+  ...SheduleTopNavigationParams,
 };
 
 export const ConversationNavigationOptions = {

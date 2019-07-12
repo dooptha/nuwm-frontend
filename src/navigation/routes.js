@@ -12,6 +12,7 @@ import {
 import {
   LanguageContainer,
   ThemesContainer,
+  UserContainer,
 } from '../containers/settings';
 import {
   ConversationContainer,
@@ -19,6 +20,7 @@ import {
 import {
   MenuNavigationOptions,
   ConversationNavigationOptions,
+  SheduleNavigationOptions,
 } from './options';
 import Schedule from '../components/schedule';
 import DetailedLesson from '../components/schedule/DetailedLesson';
@@ -39,6 +41,10 @@ const SettingsNavigationMap = {
     screen: LanguageContainer,
     navigationOptions: MenuNavigationOptions,
   },
+  User: {
+    screen: UserContainer,
+    navigationOptions: MenuNavigationOptions,
+  },
 };
 
 const ConversationsNavigationMap = {
@@ -52,7 +58,7 @@ const TimetableNavigator = createStackNavigator(
   {
     Timetable: Schedule,
   }, {
-    defaultNavigationOptions: MenuNavigationOptions,
+    defaultNavigationOptions: SheduleNavigationOptions,
   },
 );
 

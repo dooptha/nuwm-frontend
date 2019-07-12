@@ -9,6 +9,7 @@ import {
 } from './properties';
 import { setLocale } from './i18n';
 import { socket, initSockets } from '../api/socket';
+import { DefaultUserImage } from '../assets/images';
 
 export const StateContext = createContext();
 
@@ -69,6 +70,11 @@ export const GlobalState = ({ children }) => {
     properties: DEFAULT_PROPERTIES,
     messages: [],
     onlineCount: 1,
+    currentUser: {
+      image: DefaultUserImage.imageSource,
+      name: 'Marsik',
+      email: 'not authorized'
+    },
     socket,
   }, init);
 

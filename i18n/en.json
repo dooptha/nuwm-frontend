@@ -19,7 +19,8 @@
     "Settings": "Settings",
     "Themes": "Theme",
     "Language": "Language",
-    "DetailedLesson": "Details"
+    "DetailedLesson": "Details",
+    "User": "User"
   },
   "datePicker": {
     "Confirm": "Confirm",

@@ -18,12 +18,17 @@ class TopNavigationBar extends Component {
   }
 
   render() {
-    const { themedStyle, title, backIcon } = this.props;
+    const {
+      themedStyle,
+      title,
+      backIcon,
+      border,
+    } = this.props;
 
     const leftControlElement = backIcon ? this.renderBackButton(backIcon) : null;
 
     return (
-      <SafeAreaView style={themedStyle.safeArea}>
+      <SafeAreaView style={border ? themedStyle.safeAreaWithBorder : themedStyle.safeArea}>
         <TopNavigation
           alignment="center"
           title={title}
@@ -39,5 +44,10 @@ class TopNavigationBar extends Component {
 export default withStyles(TopNavigationBar, (theme) => ({
   safeArea: {
     backgroundColor: theme['background-basic-color-1'],
+  },
+  safeAreaWithBorder: {
+    backgroundColor: theme['background-basic-color-1'],
+    borderBottomWidth: 2,
+    borderBottomColor: theme['background-basic-color-3']
   },
 }));

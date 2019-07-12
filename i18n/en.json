@@ -46,5 +46,10 @@
       "OnlyDay": "Day",
       "Range": "Range"
     }
+  },
+  "flood": {
+    "title": "Flood",
+    "description": "Description",
+    "online": "Online"
   }
 }

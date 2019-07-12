@@ -68,6 +68,7 @@ export const GlobalState = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, {
     properties: DEFAULT_PROPERTIES,
     messages: [],
+    onlineCount: 1,
     socket,
   }, init);
 

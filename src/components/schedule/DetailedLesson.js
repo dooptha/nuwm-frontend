@@ -44,12 +44,12 @@ class DetailedLesson extends Component {
       /* lessonNum, */
       time,
       type,
-      subject,
+      name,
     } = lesson;
 
     return (
       <View style={themedStyle.detailsWrapper}>
-        { this.drawLine({ title: 'Предмет', info: subject }) }
+        { this.drawLine({ title: 'Предмет', info: name }) }
         { this.drawLine({ title: 'Аудиторія', info: classroom }) }
         { this.drawLine({ title: 'Викладач', info: lecturer }) }
         { this.drawLine({ title: 'Группа', info: subgroup }) }

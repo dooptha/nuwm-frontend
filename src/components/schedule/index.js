@@ -6,6 +6,7 @@ import {
 import I18n from '../../utils/i18n';
 import Day from './Day';
 import Search from './Search';
+import Api from '../../api/schedule';
 
 class Schedule extends Component {
   constructor(props) {
@@ -13,32 +14,35 @@ class Schedule extends Component {
     this.state = {
       schedule: [],
       selectedIndex: 1,
+      fetchingData: true,
     };
   }
 
   componentDidMount() {
-    const group = 'ПМ-41';
-    const startDate = '01.09.2017' || new Date();
-    const endDate = '31.12.2018';
-
-    axios.get('http://localhost:3000/', { params: { group, endDate, startDate } })
-      .then((data) => {
-        this.setState({ schedule: data.data.body.response.schedule });
-      })
-      .catch((err) => console.log(err));
-  }
-
-  onIndexChange(index) {
-    this.setState({ selectedIndex: index });
+    Api.getScheduleOnWeek().then((data) => {
+      console.log(data);
+      this.setState({ fetchingData: false, schedule: data });
+    });
   }
 
   changeTab(index) {
     this.setState({ selectedIndex: index });
   }
 
+  renderWeek() {
+    const { schedule } = this.state;
+
+    return schedule.map((day) => (
+      <Day key={day.date} day={day} />
+    ));
+  }
+
   render() {
     const { themedStyle } = this.props;
     const { schedule, selectedIndex } = this.state;
+
+    const today = schedule.filter((day) => day.date === '04.09.2018')[0];
+    const tomorrow = schedule.filter((day) => day.date === '05.09.2018')[0];
 
     return (
       <TabView
@@ -50,13 +54,13 @@ class Schedule extends Component {
           <Search />
         </Tab>
         <Tab title={I18n.t('timetable.tabs.Today')}>
-          {schedule.length > 1 ? <Day day={schedule[1]} /> : null }
+          {today ? <Day day={today} /> : null }
         </Tab>
         <Tab title={I18n.t('timetable.tabs.Tomorrow')}>
-          <Text>Tab 2</Text>
+          {tomorrow ? <Day day={tomorrow} /> : null }
         </Tab>
         <Tab title={I18n.t('timetable.tabs.Week')}>
-          <Text>Tab 3</Text>
+          { schedule.length > 0 ? this.renderWeek() : null}
         </Tab>
       </TabView>
     );

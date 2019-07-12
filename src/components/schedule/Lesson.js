@@ -24,13 +24,13 @@ export default class extends Component {
       lessonNum, */
       time,
       /* type, */
-      subject,
+      name,
     } = this.props.subject;
 
     return (
       <View>
         <ListItem
-          title={`(${classroom}) ${subject}`}
+          title={`(${classroom}) ${name}`}
           description={time}
           onPress={() => this.onPress()}
         />

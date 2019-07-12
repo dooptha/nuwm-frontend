@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, ScrollView, RefreshControl } from 'react-native';
-import { withStyles } from 'react-native-ui-kitten';
+import { withStyles, Text } from 'react-native-ui-kitten';
 import Day from './Day';
 
 class ScheduleList extends Component {
@@ -9,17 +9,31 @@ class ScheduleList extends Component {
     this.state = {};
   }
 
+  renderNoContentMessage() {
+    const { themedStyle } = this.props;
+
+    return (
+      <View style={themedStyle.messageWrapper}>
+        <Text style={themedStyle.messageText}>
+          Нема пар, можна в батлу
+        </Text>
+      </View>
+    );
+  }
+
   renderSchedule() {
-    const { schedule } = this.props;
+    const { schedule, refreshing } = this.props;
+
+    const message = refreshing ? null : this.renderNoContentMessage();
 
     return schedule.length > 0
       ? schedule.map((day) => (
         <Day key={day.date} day={day} />
-      )) : null;
+      )) : message;
   }
 
   render() {
-    const { themedStyle, refreshing, onRefresh } = this.props;
+    const { refreshing, onRefresh } = this.props;
 
     return (
       <ScrollView
@@ -37,4 +51,13 @@ class ScheduleList extends Component {
 }
 
 export default withStyles(ScheduleList, (theme) => ({
+  messageText: {
+    color: theme['text-basic-color'],
+  },
+  messageWrapper: {
+    marginTop: '40%',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 }));

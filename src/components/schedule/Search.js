@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  View,
+  View, ScrollView,
 } from 'react-native';
 import {
   Button, withStyles, BottomNavigation, BottomNavigationTab, Input, Toggle,
@@ -86,7 +86,7 @@ class Search extends Component {
     const tabs = this.renderTabs();
 
     return (
-      <View style={themedStyle.searchContainer}>
+      <ScrollView style={themedStyle.searchContainer}>
         { tabs }
         { body }
 
@@ -119,7 +119,7 @@ class Search extends Component {
         <Button style={themedStyle.button} onPress={() => this.getData()}>
           {this.localize('Search')}
         </Button>
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -128,17 +128,14 @@ export default withStyles(Search, (theme) => ({
   searchContainer: {
     height: '100%',
     paddingTop: 15,
-    backgroundColor: theme['background-basic-color-3'],
   },
   titleText: {
-    color: theme['background-basic-color-2'],
   },
   indicatorStyle: {
     display: 'none',
   },
   tabContainer: {
     width: '80%',
-    backgroundColor: theme['background-basic-color-1'],
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     borderRadius: 5,
@@ -147,7 +144,6 @@ export default withStyles(Search, (theme) => ({
     marginTop: 25,
     width: '46%',
     marginLeft: '27%',
-    backgroundColor: theme['background-basic-color-1'],
     borderWidth: 0,
   },
   input: {
@@ -155,6 +151,5 @@ export default withStyles(Search, (theme) => ({
     width: '80%',
   },
   checkbox: {
-    bgColor: theme['background-basic-color-1'],
   },
 }));

@@ -20,6 +20,7 @@ class CustomDatePicker extends Component {
     const { date } = this.state;
     const { themedStyle } = this.props;
 
+
     return (
       <View style={themedStyle.datePickerContainer}>
         <Input style={themedStyle.backgroundInput} disabled />
@@ -47,12 +48,13 @@ class CustomDatePicker extends Component {
 export default withStyles(CustomDatePicker, (theme) => ({
   datePicker: {
     position: 'absolute',
-    width: '80%',
+    width: '55%',
     paddingTop: 4,
     paddingLeft: '0%',
   },
   datePickerInput: {
-    color: theme['background-basic-color-1'],
+    textAlign: 'left',
+    color: theme['text-hint-color'],
   },
   datePickerContainer: {
     width: '100%',

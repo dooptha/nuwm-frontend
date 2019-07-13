@@ -19,6 +19,23 @@ class ScheduleApi {
         return [];
       });
   }
+
+  getSchedule(data) {
+    const {
+      group, name, startDate, endDate,
+    } = data;
+
+    return axios.get(this.api, {
+      params: {
+        group, name, startDate, endDate,
+      },
+    })
+      .then((res) => res.data.schedule)
+      .catch((err) => {
+        console.log(err);
+        return [];
+      });
+  }
 }
 
 export default new ScheduleApi();

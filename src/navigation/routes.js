@@ -24,10 +24,15 @@ import {
 } from './options';
 import Schedule from '../components/schedule';
 import DetailedLesson from '../components/schedule/DetailedLesson';
+import ScheduleList from '../components/schedule/ScheduleList';
 
 const ScheduleNavigationMap = {
   DetailedLesson: {
     screen: DetailedLesson,
+    navigationOptions: MenuNavigationOptions,
+  },
+  ScheduleList: {
+    screen: ScheduleList,
     navigationOptions: MenuNavigationOptions,
   },
 };

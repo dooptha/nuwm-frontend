@@ -8,6 +8,9 @@ import {
 import DatePicker from './common/DatePicker';
 import ListRow from './common/ListRow';
 import I18n from '../../utils/i18n';
+import Api from '../../api/schedule';
+import TimeHelper from '../../utils/time';
+import NavigationService from '../../navigation/NavigationService';
 
 class Search extends Component {
   constructor(props) {
@@ -22,15 +25,21 @@ class Search extends Component {
   }
 
   getData() {
-    const { lecturer, group } = this.state;
+    const { lecturer, group, selectedIndex } = this.state;
 
-    const data = {
-      startDate: this.startDate.state.date,
-      endDate: this.endDate.state.date,
+    const startDate = TimeHelper.toApiDateFormat(new Date(this.startDate.state.date));
+    const endDate = TimeHelper.toApiDateFormat(new Date(selectedIndex === 0 ? this.startDate.state.date : this.endDate.state.date));
+
+    const searchData = {
+      startDate,
+      endDate,
       lecturer,
       group,
     };
-    console.log(data);
+
+    Api.getSchedule(searchData).then((data) => {
+      NavigationService.navigate('ScheduleList', { schedule: data, refreshing: false, onRefresh: () => {} });
+    });
   }
 
   switchTab(index) {

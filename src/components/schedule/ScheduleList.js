@@ -21,9 +21,7 @@ class ScheduleList extends Component {
     );
   }
 
-  renderSchedule() {
-    const { schedule, refreshing } = this.props;
-
+  renderSchedule(refreshing, schedule) {
     const message = refreshing ? null : this.renderNoContentMessage();
 
     return schedule.length > 0
@@ -32,11 +30,14 @@ class ScheduleList extends Component {
       )) : message;
   }
 
-  render() {
-    const { refreshing, onRefresh } = this.props;
-
+  renderList(props) {
+    const {
+      refreshing, onRefresh, schedule,
+    } = props;
+    const { themedStyle } = this.props;
     return (
       <ScrollView
+        style={themedStyle.listWrapper}
         refreshControl={(
           <RefreshControl
             refreshing={refreshing}
@@ -44,13 +45,27 @@ class ScheduleList extends Component {
           />
         )}
       >
-        { this.renderSchedule() }
+        { this.renderSchedule(refreshing, schedule) }
       </ScrollView>
     );
+  }
+
+  render() {
+    console.log(this.props);
+
+    if (this.props.schedule) {
+      const { refreshing, onRefresh, schedule } = this.props;
+      return this.renderList({ refreshing, onRefresh, schedule });
+    }
+    const { refreshing, onRefresh, schedule } = this.props.navigation.state.params;
+    return this.renderList({ refreshing, onRefresh, schedule });
   }
 }
 
 export default withStyles(ScheduleList, (theme) => ({
+  listWrapper: {
+    backgroundColor: theme['background-basic-color-2'],
+  },
   messageText: {
     color: theme['text-basic-color'],
   },

@@ -5,7 +5,7 @@ class TimeHelper {
 
   toApiDateFormat(date) {
     const day = this.setTwoFixedNumbers(date.getDate());
-    const month = this.setTwoFixedNumbers(date.getMonth());
+    const month = this.setTwoFixedNumbers(date.getMonth() + 1);
     const year = date.getFullYear();
 
     return `${day}.${month}.${year}`;

@@ -11,6 +11,7 @@ import I18n from '../../utils/i18n';
 import Api from '../../api/schedule';
 import TimeHelper from '../../utils/time';
 import NavigationService from '../../navigation/NavigationService';
+import BottomButton from './common/BottomButton';
 
 class Search extends Component {
   constructor(props) {
@@ -95,48 +96,59 @@ class Search extends Component {
     const tabs = this.renderTabs();
 
     return (
-      <ScrollView style={themedStyle.searchContainer}>
-        { tabs }
-        { body }
+      <View style={themedStyle.searchContainer}>
+        <ScrollView style={themedStyle.inputsContainer}>
+          <ListRow label="Дата">
+            { tabs }
+            { body }
+          </ListRow>
 
-        <ListRow label={this.localize('Lecturer')}>
-          <Input
-            style={themedStyle.input}
-            value={lecturer}
-            placeholder={this.localize('LecturerExample')}
-            onChangeText={(value) => { this.setState({ lecturer: value }); }}
-          />
-        </ListRow>
+          <ListRow label={this.localize('Lecturer')}>
+            <Input
+              style={themedStyle.input}
+              value={lecturer}
+              placeholder={this.localize('LecturerExample')}
+              onChangeText={(value) => { this.setState({ lecturer: value }); }}
+            />
+          </ListRow>
 
-        <ListRow label={this.localize('Group')}>
-          <Input
-            value={group}
-            style={themedStyle.input}
-            placeholder={this.localize('GroupExample')}
-            onChangeText={(value) => { this.setState({ group: value }); }}
-          />
-        </ListRow>
+          <ListRow label={this.localize('Group')}>
+            <Input
+              value={group}
+              style={themedStyle.input}
+              placeholder={this.localize('GroupExample')}
+              onChangeText={(value) => { this.setState({ group: value }); }}
+            />
+          </ListRow>
 
-        <ListRow label={this.localize('PracticsOnly')}>
-          <Toggle
-            style={themedStyle.checkbox}
-            checked={showOnlyLabs}
-            onChange={(state) => { this.setState({ showOnlyLabs: state }); }}
-          />
-        </ListRow>
+          <ListRow label={this.localize('PracticsOnly')}>
+            <Toggle
+              style={themedStyle.checkbox}
+              checked={showOnlyLabs}
+              onChange={(state) => { this.setState({ showOnlyLabs: state }); }}
+            />
+          </ListRow>
 
+        </ScrollView>
         <Button style={themedStyle.button} onPress={() => this.getData()}>
           {this.localize('Search')}
         </Button>
-      </ScrollView>
+      </View>
     );
   }
 }
 
 export default withStyles(Search, (theme) => ({
-  searchContainer: {
+  inputsContainer: {
     backgroundColor: theme['background-basic-color-1'],
     paddingTop: 5,
+  },
+  searchContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+    alignItems: 'stretch',
+    backgroundColor: theme['background-basic-color-1'],
   },
   titleText: {
   },
@@ -145,17 +157,20 @@ export default withStyles(Search, (theme) => ({
   },
   tabContainer: {
     width: '100%',
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5,
+    borderTopLeftRadius: 2,
+    borderTopRightRadius: 2,
     borderRadius: 1,
+    padding: 0,
     backgroundColor: theme['background-basic-color-2'],
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
   },
   button: {
-    marginTop: 25,
     width: '46%',
     marginLeft: '27%',
     borderWidth: 0,
-    marginBottom: 70,
+    marginBottom: 35,
+    marginTop: 8,
   },
   input: {
     borderRadius: 2,

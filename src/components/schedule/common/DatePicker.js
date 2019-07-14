@@ -1,87 +1,88 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
-import { withStyles, Input, Button } from 'react-native-ui-kitten';
-import DatePicker from 'react-native-date-ranges';
-import I18n from '../../../utils/i18n';
-import { Flip2OutlineIcon } from '../../../assets/icons';
+import { withStyles } from 'react-native-ui-kitten';
+import DatePicker from '../../../libs/react-native-date-ranges';
 
-class CustomDatePicker extends Component {
+class Name extends Component {
   constructor(props) {
     super(props);
+
+    this.placeholders = {
+      range: '...        ->         ...',
+      single: '...',
+    };
+
     this.state = {
-      date: new Date(),
-      mode: 'single',
+      mode: this.props.mode ? this.props.mode : 'range',
     };
   }
 
-  setDate(date) {
-    this.setState({ date });
-  }
-
-  changeDatePicker() {
-    console.log(this.datePickerNode.setState({ selected: '', showContent: false }));
+  switchPicker() {
     const { mode } = this.state;
+
+    this.datePickerNode.setState({ selected: '', showContent: false });
     this.setState({ mode: mode === 'single' ? 'range' : 'single' });
   }
 
   render() {
-    const { date, mode } = this.state;
     const { themedStyle } = this.props;
+    const { mode } = this.state;
 
-    const placeholder = mode === 'range' ? '...        ->         ...' : '...';
+    const placeholder = mode === 'range'
+      ? this.placeholders.range : this.placeholders.single;
 
     return (
-      <View style={themedStyle.datePickerContainer}>
-        <Input style={themedStyle.backgroundInput} />
-        <DatePicker
-          style={themedStyle.datePicker}
-          customStyles={{
-            placeholderText: themedStyle.datePickerInput, // placeHolder style
-            headerStyle: { }, // title container style
-            headerMarkTitle: { }, // title mark style
-            headerDateTitle: { }, // title Date style
-            contentInput: { }, // content text container style
-            contentText: themedStyle.datePickerInput, // after selected text Style
-          }} // optional
-          allowFontScaling={false} // optional
-          mode={mode}
-          outFormat="DD MMMM YY"
-          dateSplitter="-"
-          placeholder={placeholder}
-          ref={(node) => { this.datePickerNode = node; }}
-        />
-        <Button style={themedStyle.button} icon={Flip2OutlineIcon} onPress={() => this.changeDatePicker()} />
-      </View>
+      <DatePicker
+      // styles
+        style={themedStyle.datePicker}
+        customStyles={{
+          placeholderText: themedStyle.datePickerInput,
+          contentText: themedStyle.datePickerInput,
+          // colors
+          main: themedStyle.main,
+          sub: themedStyle.sub,
+          mainText: themedStyle.mainText,
+          subText: themedStyle.subText,
+        }}
+        selectedBgColor={themedStyle.main.backgroundColor}
+        selectedTextColor={themedStyle.mainText.color}
+
+      // locales
+        local="uk"
+        markText="Выберите Дату"
+        ButtonText="Готово"
+        startDateLabel="Старт"
+        endDateLabel="Конец"
+
+        outFormat="DD MMMM YY"
+        dateSplitter="-"
+
+        allowFontScaling={false}
+        mode={mode}
+        placeholder={placeholder}
+        ref={(node) => { this.datePickerNode = node; }}
+      />
     );
   }
 }
 
-export default withStyles(CustomDatePicker, (theme) => ({
+export default withStyles(Name, (theme) => ({
+  main: {
+    backgroundColor: theme['background-basic-color-1'],
+  },
+  sub: {
+    backgroundColor: theme['background-basic-color-2'],
+  },
+  mainText: {
+    color: theme['text-basic-color'],
+  },
+  subText: {
+    color: theme['text-hint-color'],
+  },
   datePicker: {
-    position: 'absolute',
-    paddingLeft: '0%',
-    marginLeft: '5%',
     borderWidth: 0,
-    width: '70%',
   },
   datePickerInput: {
     color: theme['text-hint-color'],
     fontSize: 15,
-  },
-  datePickerContainer: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'stretch',
-  },
-  backgroundInput: {
-    borderRadius: 2,
-    width: '75%',
-    marginRight: '5%',
-  },
-  button: {
-    width: '20%',
-    marginTop: 1,
-    height: 44,
   },
 }));

@@ -2,19 +2,14 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { withStyles, Text } from 'react-native-ui-kitten';
 
-class ListRow extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
+class FormItem extends Component {
   renderLabel() {
     const { label } = this.props;
     const { themedStyle } = this.props;
 
     if (label) {
       return (
-        <Text category="s2" style={themedStyle.topRow}>
+        <Text category="s2" style={themedStyle.label}>
           { label }
         </Text>
       );
@@ -24,19 +19,14 @@ class ListRow extends Component {
   }
 
   render() {
-    const {
-      themedStyle, children, row,
-    } = this.props;
-
-    const label = this.renderLabel();
+    const { themedStyle, children, row } = this.props;
     const wrapperStyle = row ? themedStyle.row : themedStyle.column;
-    const childrenStyle = row ? themedStyle.leftSide : themedStyle.bottomRow;
+    const childStyle = row ? themedStyle.rowChild : themedStyle.columnChild;
 
-    console.log(row);
     return (
       <View style={{ ...themedStyle.wrapper, ...wrapperStyle }}>
-        { label }
-        <View style={childrenStyle}>
+        { this.renderLabel() }
+        <View style={childStyle}>
           { children }
         </View>
       </View>
@@ -44,9 +34,9 @@ class ListRow extends Component {
   }
 }
 
-export default withStyles(ListRow, (theme) => ({
+export default withStyles(FormItem, (theme) => ({
   wrapper: {
-    marginBottom: 12,
+    marginBottom: 14,
     width: '100%',
   },
   column: {
@@ -59,16 +49,16 @@ export default withStyles(ListRow, (theme) => ({
     justifyContent: 'space-between',
     alignItems: 'flex-start',
   },
-  topRow: {
+  label: {
     paddingLeft: '5%',
     paddingBottom: 5,
     color: theme['text-hint-color'],
   },
-  bottomRow: {
+  columnChild: {
     width: '90%',
     marginLeft: '5%',
   },
-  leftSide: {
+  rowChild: {
     marginRight: '5%',
   },
 }));

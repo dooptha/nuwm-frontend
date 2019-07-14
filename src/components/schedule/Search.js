@@ -3,15 +3,14 @@ import {
   View, ScrollView,
 } from 'react-native';
 import {
-  Button, withStyles, BottomNavigation, BottomNavigationTab, Input, Toggle,
+  Button, withStyles, Input, Toggle,
 } from 'react-native-ui-kitten';
-import DatePicker from './common/DatePicker';
-import ListRow from './common/ListRow';
+import DatePickerMultiple from './common/DatePickerMultiple';
+import FormItem from './common/FormItem';
 import I18n from '../../utils/i18n';
 import Api from '../../api/schedule';
 import TimeHelper from '../../utils/time';
 import NavigationService from '../../navigation/NavigationService';
-import BottomButton from './common/BottomButton';
 
 class Search extends Component {
   constructor(props) {
@@ -47,56 +46,41 @@ class Search extends Component {
     this.setState({ selectedIndex: index });
   }
 
-  renderDatePickers() {
-    const { selectedIndex } = this.state;
-
-    if (selectedIndex === 0) {
-      return (
-        <DatePicker mode="single" ref={(node) => { this.startDate = node; }} />
-      );
-    }
-    return (
-      <DatePicker mode="range" ref={(node) => { this.startDate = node; }} />
-    );
-  }
-
   render() {
     const { themedStyle } = this.props;
     const { lecturer, group, showOnlyLabs } = this.state;
 
-    const body = this.renderDatePickers();
-
     return (
       <View style={themedStyle.searchContainer}>
         <ScrollView style={themedStyle.inputsContainer}>
-          <ListRow label="Дата">
-            { body }
-          </ListRow>
+          <FormItem label="Дата">
+            <DatePickerMultiple ref={(node) => { this.startDate = node; }} />
+          </FormItem>
 
-          <ListRow label={this.localize('Lecturer')}>
+          <FormItem label={this.localize('Lecturer')}>
             <Input
               style={themedStyle.input}
               value={lecturer}
               placeholder={this.localize('LecturerExample')}
               onChangeText={(value) => { this.setState({ lecturer: value }); }}
             />
-          </ListRow>
+          </FormItem>
 
-          <ListRow label={this.localize('Group')}>
+          <FormItem label={this.localize('Group')}>
             <Input
               value={group}
               style={themedStyle.input}
               placeholder={this.localize('GroupExample')}
               onChangeText={(value) => { this.setState({ group: value }); }}
             />
-          </ListRow>
+          </FormItem>
 
-          <ListRow label={this.localize('PracticsOnly')} row>
+          <FormItem row label={this.localize('PracticsOnly')}>
             <Toggle
               checked={showOnlyLabs}
               onChange={(state) => { this.setState({ showOnlyLabs: state }); }}
             />
-          </ListRow>
+          </FormItem>
 
         </ScrollView>
         <Button style={themedStyle.button} onPress={() => this.getData()}>
@@ -108,10 +92,6 @@ class Search extends Component {
 }
 
 export default withStyles(Search, (theme) => ({
-  inputsContainer: {
-    backgroundColor: theme['background-basic-color-1'],
-    paddingTop: 5,
-  },
   searchContainer: {
     flex: 1,
     paddingTop: 10,
@@ -120,26 +100,18 @@ export default withStyles(Search, (theme) => ({
     alignItems: 'stretch',
     backgroundColor: theme['background-basic-color-1'],
   },
-  titleText: {
+  inputsContainer: {
+    backgroundColor: theme['background-basic-color-1'],
+    paddingTop: 5,
   },
   indicatorStyle: {
     display: 'none',
-  },
-  tabContainer: {
-    width: '100%',
-    borderTopLeftRadius: 2,
-    borderTopRightRadius: 2,
-    borderRadius: 1,
-    padding: 0,
-    backgroundColor: theme['background-basic-color-2'],
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
   },
   button: {
     width: '46%',
     marginLeft: '27%',
     borderWidth: 0,
-    marginBottom: 35,
+    marginBottom: 45,
     marginTop: 8,
   },
   input: {

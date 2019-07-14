@@ -48,12 +48,14 @@ class CustomDatePicker extends Component {
 export default withStyles(CustomDatePicker, (theme) => ({
   datePicker: {
     position: 'absolute',
-    width: '55%',
-    paddingTop: 4,
     paddingLeft: '0%',
+    width: '100%',
   },
   datePickerInput: {
-    textAlign: 'left',
+    width: '100%',
+    paddingLeft: 40,
+    paddingTop: 10,
+    marginLeft: '-30%',
     color: theme['text-hint-color'],
   },
   datePickerContainer: {

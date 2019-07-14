@@ -11,12 +11,18 @@ class ListRow extends Component {
   render() {
     const { themedStyle, children, label } = this.props;
 
+    const rowLabel = label ? (
+      <Text category="s2" style={themedStyle.topRow}>
+        { label }
+      </Text>
+    ) : null;
+
     return (
       <View style={themedStyle.row}>
-        <Text style={themedStyle.leftColumn}>
-          { label }
-        </Text>
-        { children }
+        { rowLabel }
+        <View style={themedStyle.bottomRow}>
+          { children }
+        </View>
       </View>
     );
   }
@@ -24,16 +30,23 @@ class ListRow extends Component {
 
 export default withStyles(ListRow, (theme) => ({
   row: {
-    paddingLeft: 5,
-    paddingTop: 12,
-    paddingBottom: 12,
-    width: '80%',
-    flexDirection: 'row',
+    marginTop: 1,
+    marginBottom: 1,
+    paddingBottom: 4,
+    paddingTop: 4,
+    width: '100%',
+    flexDirection: 'column',
     justifyContent: 'flex-start',
-    alignItems: 'center',
+    alignItems: 'flex-start',
   },
-  leftColumn: {
-    paddingLeft: 15,
-    width: '35%',
+  topRow: {
+    paddingLeft: '5%',
+    paddingBottom: 5,
+    width: '100%',
+    color: theme['text-hint-color'],
+  },
+  bottomRow: {
+    width: '90%',
+    marginLeft: '5%',
   },
 }));

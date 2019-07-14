@@ -51,17 +51,17 @@ class Search extends Component {
 
     if (selectedIndex === 0) {
       return (
-        <ListRow label={this.localize('Date')}>
+        <ListRow>
           <DatePicker ref={(node) => { this.startDate = node; }} />
         </ListRow>
       );
     }
     return (
       <View>
-        <ListRow label={this.localize('From')}>
+        <ListRow>
           <DatePicker ref={(node) => { this.startDate = node; }} />
         </ListRow>
-        <ListRow label={this.localize('To')}>
+        <ListRow>
           <DatePicker ref={(node) => { this.endDate = node; }} />
         </ListRow>
       </View>
@@ -73,7 +73,7 @@ class Search extends Component {
     const { selectedIndex } = this.state;
 
     return (
-      <ListRow label={this.localize('Type')}>
+      <ListRow>
         <BottomNavigation
           style={themedStyle.tabContainer}
           selectedIndex={selectedIndex}
@@ -135,8 +135,8 @@ class Search extends Component {
 
 export default withStyles(Search, (theme) => ({
   searchContainer: {
-    height: '100%',
-    paddingTop: 15,
+    backgroundColor: theme['background-basic-color-1'],
+    paddingTop: 5,
   },
   titleText: {
   },
@@ -144,20 +144,22 @@ export default withStyles(Search, (theme) => ({
     display: 'none',
   },
   tabContainer: {
-    width: '80%',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    borderRadius: 5,
+    width: '100%',
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
+    borderRadius: 1,
+    backgroundColor: theme['background-basic-color-2'],
   },
   button: {
     marginTop: 25,
     width: '46%',
     marginLeft: '27%',
     borderWidth: 0,
+    marginBottom: 70,
   },
   input: {
-    borderRadius: 10,
-    width: '80%',
+    borderRadius: 2,
+    width: '100%',
   },
   checkbox: {
   },

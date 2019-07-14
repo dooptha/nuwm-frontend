@@ -8,19 +8,35 @@ class ListRow extends Component {
     this.state = {};
   }
 
+  renderLabel() {
+    const { label } = this.props;
+    const { themedStyle } = this.props;
+
+    if (label) {
+      return (
+        <Text category="s2" style={themedStyle.topRow}>
+          { label }
+        </Text>
+      );
+    }
+
+    return null;
+  }
+
   render() {
-    const { themedStyle, children, label } = this.props;
+    const {
+      themedStyle, children, row,
+    } = this.props;
 
-    const rowLabel = label ? (
-      <Text category="s2" style={themedStyle.topRow}>
-        { label }
-      </Text>
-    ) : null;
+    const label = this.renderLabel();
+    const wrapperStyle = row ? themedStyle.row : themedStyle.column;
+    const childrenStyle = row ? themedStyle.leftSide : themedStyle.bottomRow;
 
+    console.log(row);
     return (
-      <View style={themedStyle.row}>
-        { rowLabel }
-        <View style={themedStyle.bottomRow}>
+      <View style={{ ...themedStyle.wrapper, ...wrapperStyle }}>
+        { label }
+        <View style={childrenStyle}>
           { children }
         </View>
       </View>
@@ -29,24 +45,30 @@ class ListRow extends Component {
 }
 
 export default withStyles(ListRow, (theme) => ({
-  row: {
-    marginTop: 1,
-    marginBottom: 1,
-    paddingBottom: 4,
-    paddingTop: 4,
+  wrapper: {
+    marginBottom: 12,
     width: '100%',
+  },
+  column: {
     flexDirection: 'column',
     justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'flex-start',
   },
   topRow: {
     paddingLeft: '5%',
     paddingBottom: 5,
-    width: '100%',
     color: theme['text-hint-color'],
   },
   bottomRow: {
     width: '90%',
     marginLeft: '5%',
+  },
+  leftSide: {
+    marginRight: '5%',
   },
 }));

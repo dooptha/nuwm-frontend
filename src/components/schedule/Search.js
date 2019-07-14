@@ -52,39 +52,11 @@ class Search extends Component {
 
     if (selectedIndex === 0) {
       return (
-        <ListRow>
-          <DatePicker ref={(node) => { this.startDate = node; }} />
-        </ListRow>
+        <DatePicker mode="single" ref={(node) => { this.startDate = node; }} />
       );
     }
     return (
-      <View>
-        <ListRow>
-          <DatePicker ref={(node) => { this.startDate = node; }} />
-        </ListRow>
-        <ListRow>
-          <DatePicker ref={(node) => { this.endDate = node; }} />
-        </ListRow>
-      </View>
-    );
-  }
-
-  renderTabs() {
-    const { themedStyle } = this.props;
-    const { selectedIndex } = this.state;
-
-    return (
-      <ListRow>
-        <BottomNavigation
-          style={themedStyle.tabContainer}
-          selectedIndex={selectedIndex}
-          onSelect={(index) => this.switchTab(index)}
-          indicatorStyle={themedStyle.indicatorStyle}
-        >
-          <BottomNavigationTab title={this.localize('OnlyDay')} />
-          <BottomNavigationTab title={this.localize('Range')} />
-        </BottomNavigation>
-      </ListRow>
+      <DatePicker mode="range" ref={(node) => { this.startDate = node; }} />
     );
   }
 
@@ -93,13 +65,11 @@ class Search extends Component {
     const { lecturer, group, showOnlyLabs } = this.state;
 
     const body = this.renderDatePickers();
-    const tabs = this.renderTabs();
 
     return (
       <View style={themedStyle.searchContainer}>
         <ScrollView style={themedStyle.inputsContainer}>
           <ListRow label="Дата">
-            { tabs }
             { body }
           </ListRow>
 
@@ -121,9 +91,8 @@ class Search extends Component {
             />
           </ListRow>
 
-          <ListRow label={this.localize('PracticsOnly')}>
+          <ListRow label={this.localize('PracticsOnly')} row>
             <Toggle
-              style={themedStyle.checkbox}
               checked={showOnlyLabs}
               onChange={(state) => { this.setState({ showOnlyLabs: state }); }}
             />
@@ -145,6 +114,7 @@ export default withStyles(Search, (theme) => ({
   },
   searchContainer: {
     flex: 1,
+    paddingTop: 10,
     flexDirection: 'column',
     justifyContent: 'flex-end',
     alignItems: 'stretch',
@@ -175,7 +145,5 @@ export default withStyles(Search, (theme) => ({
   input: {
     borderRadius: 2,
     width: '100%',
-  },
-  checkbox: {
   },
 }));

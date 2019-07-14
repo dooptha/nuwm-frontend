@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import { withStyles, Input } from 'react-native-ui-kitten';
-import DatePicker from 'react-native-datepicker';
+import { withStyles, Input, Button } from 'react-native-ui-kitten';
+import DatePicker from 'react-native-date-ranges';
 import I18n from '../../../utils/i18n';
+import { Flip2OutlineIcon } from '../../../assets/icons';
 
 class CustomDatePicker extends Component {
   constructor(props) {
     super(props);
     this.state = {
       date: new Date(),
+      mode: 'single',
     };
   }
 
@@ -16,30 +18,39 @@ class CustomDatePicker extends Component {
     this.setState({ date });
   }
 
+  changeDatePicker() {
+    console.log(this.datePickerNode.setState({ selected: '', showContent: false }));
+    const { mode } = this.state;
+    this.setState({ mode: mode === 'single' ? 'range' : 'single' });
+  }
+
   render() {
-    const { date } = this.state;
+    const { date, mode } = this.state;
     const { themedStyle } = this.props;
 
+    const placeholder = mode === 'range' ? '...        ->         ...' : '...';
 
     return (
       <View style={themedStyle.datePickerContainer}>
-        <Input style={themedStyle.backgroundInput} disabled />
+        <Input style={themedStyle.backgroundInput} />
         <DatePicker
-          date={date}
-          mode="date"
-          confirmBtnText={I18n.t('datePicker.Confirm')}
-          cancelBtnText={I18n.t('datePicker.Cancel')}
-          format="dddd DD MMMM YYYY"
-          showIcon={false}
           style={themedStyle.datePicker}
           customStyles={{
-            dateText: themedStyle.datePickerInput,
-            dateInput: {
-              borderWidth: 0,
-            },
-          }}
-          onDateChange={(chosenDate) => this.setDate(chosenDate)}
+            placeholderText: themedStyle.datePickerInput, // placeHolder style
+            headerStyle: { }, // title container style
+            headerMarkTitle: { }, // title mark style
+            headerDateTitle: { }, // title Date style
+            contentInput: { }, // content text container style
+            contentText: themedStyle.datePickerInput, // after selected text Style
+          }} // optional
+          allowFontScaling={false} // optional
+          mode={mode}
+          outFormat="DD MMMM YY"
+          dateSplitter="-"
+          placeholder={placeholder}
+          ref={(node) => { this.datePickerNode = node; }}
         />
+        <Button style={themedStyle.button} icon={Flip2OutlineIcon} onPress={() => this.changeDatePicker()} />
       </View>
     );
   }
@@ -49,20 +60,28 @@ export default withStyles(CustomDatePicker, (theme) => ({
   datePicker: {
     position: 'absolute',
     paddingLeft: '0%',
-    width: '100%',
+    marginLeft: '5%',
+    borderWidth: 0,
+    width: '70%',
   },
   datePickerInput: {
-    width: '100%',
-    paddingLeft: 40,
-    paddingTop: 10,
-    marginLeft: '-30%',
     color: theme['text-hint-color'],
+    fontSize: 15,
   },
   datePickerContainer: {
     width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'stretch',
   },
   backgroundInput: {
-    borderRadius: 10,
-    width: '80%',
+    borderRadius: 2,
+    width: '75%',
+    marginRight: '5%',
+  },
+  button: {
+    width: '20%',
+    marginTop: 1,
+    height: 44,
   },
 }));

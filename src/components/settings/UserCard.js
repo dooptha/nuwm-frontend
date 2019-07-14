@@ -19,7 +19,7 @@ const style = StyleSheet.create({
   },
   name: {
   },
-  email: {
+  group: {
     color: 'grey',
   },
   userInfo: {
@@ -47,9 +47,9 @@ export default ({ user, onItemSelect }) => (
       </Text>
       <Text
         category="p1"
-        style={style.email}
+        style={style.group}
       >
-        {user.email}
+        {user.group}
       </Text>
     </View>
   </ListItem>

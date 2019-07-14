@@ -4,7 +4,7 @@ import React, {
 import {
   Conversation,
 } from './conversation.component';
-import { storeData } from '../../utils/storage';
+import { storeKey } from '../../utils/storage';
 import { StateContext } from '../../utils/context';
 import { socket } from '../../api/socket';
 

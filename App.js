@@ -8,15 +8,15 @@ import { GlobalState, useGlobalState } from './src/utils/context';
 import NavigationService from './src/navigation/NavigationService';
 
 const App = () => {
-  const [globals] = useGlobalState();
-  const { theme } = globals.properties;
+  const [context] = useGlobalState();
+  const { properties } = context;
 
   return (
     <ApplicationProvider
       mapping={mapping}
-      theme={themes[theme]}
+      theme={themes[properties.theme]}
     >
-      <DynamicStatusBar currentTheme={theme} />
+      <DynamicStatusBar currentTheme={properties.theme} />
       <Router
         ref={
           (navigatorRef) => NavigationService.setTopLevelNavigator(navigatorRef)

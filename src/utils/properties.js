@@ -1,4 +1,4 @@
-import { getData } from './storage';
+import { getKey } from './storage';
 
 export const DEFAULT_PROPERTIES = {
   language: 'ua',
@@ -10,8 +10,8 @@ export const getProperties = async () => {
 
   Object.keys(DEFAULT_PROPERTIES).forEach((key) => {
     propsPromises.push(
-      getData(key)
-        .then((value) => [key, value || DEFAULT_PROPERTIES[key]]),
+      getKey(key)
+        .then((value) => [key, value || DEFAULT_PROPERTIES[key]])
     );
   });
 

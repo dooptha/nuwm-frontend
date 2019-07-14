@@ -10,6 +10,7 @@ import {
 import { setLocale } from './i18n';
 import { socket, initSockets } from '../api/socket';
 import { DefaultUserImage } from '../assets/images';
+import { getObject } from './storage';
 
 export const StateContext = createContext();
 
@@ -34,7 +35,11 @@ const reducer = (state, action) => {
         ...state,
         properties,
       };
-
+    case 'updateUser':
+      return {
+        ...state,
+        ...{ currentUser: action.user },
+      };
     case 'sendMessage':
       messages.push(action.message);
 
@@ -49,22 +54,6 @@ const reducer = (state, action) => {
 };
 
 export const GlobalState = ({ children }) => {
-  // Should find workaround async loading of properties
-  const init = (state) => {
-    getProperties()
-      .then((properties) => {
-        // Set locale and update state
-        setLocale(properties.language);
-        // eslint-disable-next-line
-        dispatch({ type: 'loadProperties', properties });
-      });
-
-    // eslint-disable-next-line
-    initSockets({ dispatch });
-
-    return state;
-  };
-
   // Default global state
   const [state, dispatch] = useReducer(reducer, {
     properties: DEFAULT_PROPERTIES,
@@ -72,17 +61,43 @@ export const GlobalState = ({ children }) => {
     onlineCount: 1,
     currentUser: {
       image: DefaultUserImage.imageSource,
-      name: 'Marsik',
-      email: 'not authorized'
+      name: '',
+      email: 'not authorized',
     },
     socket,
-  }, init);
+  });
 
   return (
     <StateContext.Provider value={[state, dispatch]}>
       {children}
     </StateContext.Provider>
   );
+};
+
+export const loadInitialData = async (dispatch) => {
+  const currentUser = await getProperties()
+    .then(async (properties) => {
+      // Set locale and update state
+      setLocale(properties.language);
+      // eslint-disable-next-line
+      await dispatch({ type: 'loadProperties', properties });
+    })
+    .then(async () => {
+      const a = await getObject('user')
+        .then(async (user) => {
+          if (user) {
+            // eslint-disable-next-line
+            await dispatch({ type: 'updateUser', user });
+          }
+          return user;
+        });
+      return a;
+    });
+
+  // eslint-disable-next-line
+  initSockets({ dispatch });
+
+  return currentUser;
 };
 
 export const useGlobalState = () => useContext(StateContext);

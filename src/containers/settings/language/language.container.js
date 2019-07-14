@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Language } from './language.component'
 import { languages } from './data'
 import { StateContext } from '../../../utils/context'
-import { storeData } from '../../../utils/storage'
+import { storeKey } from '../../../utils/storage'
 import { setLocale } from '../../../utils/i18n'
 
 export class LanguageContainer extends Component {
@@ -14,7 +14,7 @@ export class LanguageContainer extends Component {
 
   updatePropetry (key, value) {
     setLocale(value)
-    storeData(key, value)
+    storeKey(key, value)
 
     this.context[1]({
       type: 'setProperty',

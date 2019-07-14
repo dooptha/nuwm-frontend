@@ -3,6 +3,7 @@ import {
   createAppContainer,
   createBottomTabNavigator,
   createStackNavigator,
+  createSwitchNavigator,
 } from 'react-navigation';
 import {
   MenuContainer,
@@ -25,6 +26,8 @@ import {
 import Schedule from '../components/schedule';
 import DetailedLesson from '../components/schedule/DetailedLesson';
 import ScheduleList from '../components/schedule/ScheduleList';
+import SplashScreen from '../containers/SplashScreen';
+import SignUpScreen from '../containers/auth/SignUp';
 
 const ScheduleNavigationMap = {
   DetailedLesson: {
@@ -109,4 +112,10 @@ const createAppRouter = (container) => {
   return createAppContainer(container);
 };
 
-export default createAppRouter(AppNavigator);
+const InitialNavigator = createSwitchNavigator({
+  Splash: SplashScreen,
+  SignUp: SignUpScreen,
+  App: AppNavigator,
+});
+
+export default createAppRouter(InitialNavigator);

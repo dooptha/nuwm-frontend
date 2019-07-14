@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Themes from './themes.component';
 import data from './data';
 import { StateContext } from '../../../utils/context';
-import { storeData } from '../../../utils/storage';
+import { storeKey } from '../../../utils/storage';
 
 class ThemesContainer extends Component {
   constructor(props) {
@@ -27,7 +27,7 @@ class ThemesContainer extends Component {
   }
 
   updatePropetry(key, value) {
-    storeData(key, value);
+    storeKey(key, value);
 
     this.context[1]({
       type: 'setProperty',

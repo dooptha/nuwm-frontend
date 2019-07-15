@@ -75,29 +75,18 @@ export const GlobalState = ({ children }) => {
 };
 
 export const loadInitialData = async (dispatch) => {
-  const currentUser = await getProperties()
-    .then(async (properties) => {
-      // Set locale and update state
-      setLocale(properties.language);
-      // eslint-disable-next-line
-      await dispatch({ type: 'loadProperties', properties });
-    })
-    .then(async () => {
-      const a = await getObject('user')
-        .then(async (user) => {
-          if (user) {
-            // eslint-disable-next-line
-            await dispatch({ type: 'updateUser', user });
-          }
-          return user;
-        });
-      return a;
-    });
+  const [properties, user] = await Promise.all([getProperties(), getObject('user')]);
 
-  // eslint-disable-next-line
+  setLocale(properties.language);
+  dispatch({ type: 'loadProperties', properties });
+
+  if (user) {
+    dispatch({ type: 'updateUser', user });
+  }
+
   initSockets({ dispatch });
 
-  return currentUser;
+  return user;
 };
 
 export const useGlobalState = () => useContext(StateContext);

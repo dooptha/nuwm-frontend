@@ -11,7 +11,7 @@ export const getProperties = async () => {
   Object.keys(DEFAULT_PROPERTIES).forEach((key) => {
     propsPromises.push(
       getKey(key)
-        .then((value) => [key, value || DEFAULT_PROPERTIES[key]])
+        .then((value) => [key, value || DEFAULT_PROPERTIES[key]]),
     );
   });
 

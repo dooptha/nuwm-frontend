@@ -92,7 +92,7 @@ const MenuNavigator = createBottomTabNavigator({
   Settings: SettingsNavigator,
 }, {
   tabBarComponent: MenuContainer,
-  initialRouteName: 'Timetable',
+  initialRouteName: 'Conversations',
 });
 
 const AppNavigator = createStackNavigator({

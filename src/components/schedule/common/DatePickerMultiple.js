@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import { withStyles, Input, Button } from 'react-native-ui-kitten';
+import { withStyles, Button } from 'react-native-ui-kitten';
 import DatePicker from './DatePicker';
-import I18n from '../../../utils/i18n';
+import FormInput from './Form/Input';
 import { Flip2OutlineIcon } from '../../../assets/icons';
 
 class CustomDatePicker extends Component {
-  setDate(date) {
-    this.setState({ date });
-  }
-
   render() {
     const { themedStyle } = this.props;
 
     return (
       <View style={themedStyle.datePickerContainer}>
-        <Input style={themedStyle.backgroundInput} />
+        <FormInput
+          style={themedStyle.backgroundInput}
+          ref={(node) => { this.inputNode = node; }}
+        />
         <View style={themedStyle.datePicker}>
           <DatePicker
             ref={(node) => { this.datePickerNode = node; }}

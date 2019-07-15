@@ -12,15 +12,37 @@ class Name extends Component {
     };
 
     this.state = {
-      mode: this.props.mode ? this.props.mode : 'range',
+      mode: this.props.mode || 'range',
+      startDate: null,
+      endDate: null,
     };
+  }
+
+  getDate() {
+    const { startDate, endDate } = this.state;
+    return { startDate, endDate };
+  }
+
+  setDate(data) {
+    const { currentDate, startDate, endDate } = data;
+
+    if (currentDate) {
+      this.setState({ startDate: currentDate, endDate: currentDate });
+    } else {
+      this.setState({ startDate, endDate });
+    }
   }
 
   switchPicker() {
     const { mode } = this.state;
+    console.log(this.getDate());
 
     this.datePickerNode.setState({ selected: '', showContent: false });
-    this.setState({ mode: mode === 'single' ? 'range' : 'single' });
+    this.setState({
+      mode: mode === 'single' ? 'range' : 'single',
+      startDate: null,
+      endDate: null,
+    });
   }
 
   render() {
@@ -53,13 +75,15 @@ class Name extends Component {
         startDateLabel="Старт"
         endDateLabel="Конец"
 
-        outFormat="DD MMMM YY"
+        outFormat="DD MMMM"
+        returnFormat="DD.MM.YYYY"
         dateSplitter="-"
 
         allowFontScaling={false}
         mode={mode}
         placeholder={placeholder}
         ref={(node) => { this.datePickerNode = node; }}
+        onConfirm={(data) => this.setDate(data)}
       />
     );
   }
@@ -84,5 +108,6 @@ export default withStyles(Name, (theme) => ({
   datePickerInput: {
     color: theme['text-hint-color'],
     fontSize: 15,
+    marginLeft: -5,
   },
 }));

@@ -3,7 +3,7 @@ import {
   List,
   ListItem,
 } from 'react-native-ui-kitten';
-import { Message } from './message.component';
+import Message from './Message';
 
 class Conversation extends Component {
   constructor(props) {

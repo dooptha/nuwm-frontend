@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View } from 'react-native';
 import {
   List,
@@ -10,7 +10,7 @@ import data from './data';
 import { StateContext } from '../../../utils/context';
 import { storeKey } from '../../../utils/storage';
 
-class ThemesContainer extends React.Component {
+class ThemesContainer extends Component {
   constructor(props) {
     super(props);
 

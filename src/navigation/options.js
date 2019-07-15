@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowIosBackFill } from '../assets/icons';
-import TopNavigationBar from './components/topNavigationBar.component';
+import TopNavigationBar from './components/TopNavigationBar';
 import {
   getCurrentRouteState,
   isRootRoute,

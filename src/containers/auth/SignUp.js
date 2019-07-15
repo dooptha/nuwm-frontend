@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View } from 'react-native';
 import {
   Input,
@@ -10,7 +10,7 @@ import { AvoidKeyboard } from '../../components/common';
 import { StateContext } from '../../utils/context';
 import { storeObject } from '../../utils/storage';
 
-class SignUp extends React.Component {
+class SignUp extends Component {
   constructor(props) {
     super(props);
 
@@ -118,5 +118,5 @@ export default withStyles(SignUp, () => ({
   },
   buttonContainer: {
     paddingTop: 20,
-  }
+  },
 }));

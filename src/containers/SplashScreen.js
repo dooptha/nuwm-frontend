@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View } from 'react-native';
 import { StateContext, loadInitialData } from '../utils/context';
 
-class SplashScreen extends React.Component {
+class SplashScreen extends Component {
   async componentDidMount() {
     const [, dispatch] = this.context;
     const currentUser = await loadInitialData(dispatch);

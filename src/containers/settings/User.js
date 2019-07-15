@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View } from 'react-native';
 import {
   Text,
@@ -9,7 +9,7 @@ import {
 import { StateContext } from '../../utils/context';
 import { removeKey } from '../../utils/storage';
 
-class UserContainer extends React.Component {
+class UserContainer extends Component {
   constructor(props) {
     super(props);
 

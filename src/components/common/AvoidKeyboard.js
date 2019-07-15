@@ -61,12 +61,13 @@ class AvoidKeyboard extends Component {
   }
 
   onKeyboardShow(event) {
+    // eslint-disable-next-line
     const offset = -this.props.offset(event.endCoordinates.height);
 
     this.createTranslateAnimation({ offset }).start();
   }
 
-  onKeyboardHide(event) {
+  onKeyboardHide() {
     const offset = 0;
 
     this.createTranslateAnimation({ offset }).start();

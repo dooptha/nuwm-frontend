@@ -4,7 +4,7 @@ import {
   TopNavigation,
   TopNavigationAction,
 } from 'react-native-ui-kitten';
-import SafeAreaView from './safeAreaView.component';
+import SafeAreaView from './SafeAreaView';
 
 class TopNavigationBar extends Component {
   renderBackButton(source) {
@@ -48,6 +48,6 @@ export default withStyles(TopNavigationBar, (theme) => ({
   safeAreaWithBorder: {
     backgroundColor: theme['background-basic-color-1'],
     borderBottomWidth: 2,
-    borderBottomColor: theme['background-basic-color-3']
+    borderBottomColor: theme['background-basic-color-3'],
   },
 }));

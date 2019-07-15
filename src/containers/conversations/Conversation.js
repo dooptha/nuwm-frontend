@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Platform } from 'react-native';
 import { withStyles, Input, Button } from 'react-native-ui-kitten';
 import { Conversation as Chat } from '../../components/conversations';
@@ -10,7 +10,7 @@ import {
 import { StateContext } from '../../utils/context';
 import { socket } from '../../api/socket';
 
-class ConversationContainer extends React.Component {
+class ConversationContainer extends Component {
   constructor(props) {
     super(props);
 

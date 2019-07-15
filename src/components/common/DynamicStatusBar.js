@@ -8,7 +8,7 @@ import {
   withStyles,
 } from 'react-native-ui-kitten';
 
-class DynamicStatusBarComponent extends Component {
+class DynamicStatusBar extends Component {
   getStatusBarContent() {
     const { currentTheme } = this.props;
 
@@ -34,7 +34,7 @@ class DynamicStatusBarComponent extends Component {
   }
 }
 
-export const DynamicStatusBar = withStyles(DynamicStatusBarComponent, (theme) => ({
+export default withStyles(DynamicStatusBar, (theme) => ({
   container: {
     backgroundColor: theme['background-basic-color-1'],
     height: Platform.select({

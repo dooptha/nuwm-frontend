@@ -1,1 +1,1 @@
-export SafeAreaView from './components/safeAreaView.component';
+export SafeAreaView from './components/SafeAreaView';

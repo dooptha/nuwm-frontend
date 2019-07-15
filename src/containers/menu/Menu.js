@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   withStyles,
   BottomNavigation,
@@ -13,7 +13,7 @@ import {
 import I18n from '../../utils/i18n';
 import { StateContext } from '../../utils/context';
 
-class MenuContainer extends React.Component {
+class MenuContainer extends Component {
   constructor(props) {
     super(props);
 

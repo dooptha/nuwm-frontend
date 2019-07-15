@@ -79,7 +79,6 @@ const ConversationTopNavigationParams = {
   },
 };
 
-
 export const MenuNavigationOptions = {
   ...MenuTopNavigationParams,
 };

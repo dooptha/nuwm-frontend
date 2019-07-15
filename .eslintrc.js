@@ -23,6 +23,7 @@ module.exports = {
     // }],
   "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
   "react/prop-types": [0],
-  "arrow-parens": [2, "always"]
+  "arrow-parens": [2, "always"],
+  "class-methods-use-this": [0]
   }
 }

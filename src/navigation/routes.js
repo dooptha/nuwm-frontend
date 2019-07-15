@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import { useScreens } from 'react-native-screens';
 import {
   createAppContainer,
@@ -11,7 +12,7 @@ import {
   ConversationsContainer,
 } from '../containers/menu';
 import {
-  LanguageContainer,
+  LanguagesContainer,
   ThemesContainer,
   UserContainer,
 } from '../containers/settings';
@@ -46,7 +47,7 @@ const SettingsNavigationMap = {
     navigationOptions: MenuNavigationOptions,
   },
   Language: {
-    screen: LanguageContainer,
+    screen: LanguagesContainer,
     navigationOptions: MenuNavigationOptions,
   },
   User: {

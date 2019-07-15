@@ -5,7 +5,7 @@ import {
   List,
   Text,
 } from 'react-native-ui-kitten';
-import items from './items';
+import data from './data';
 import { useGlobalState } from '../../../utils/context';
 import ListItem from '../../../components/settings/ListItem';
 import UserCard from '../../../components/settings/UserCard';
@@ -40,7 +40,7 @@ const SettingsContainer = ({ navigation, themedStyle }) => {
   return (
     <View style={themedStyle.container}>
       <List
-        data={items}
+        data={data}
         renderItem={renderItem}
       />
     </View>

@@ -5,7 +5,7 @@ import {
   ListItem,
   withStyles,
 } from 'react-native-ui-kitten';
-import { languages } from './data';
+import data from './data';
 import { StateContext } from '../../../utils/context';
 import { storeKey } from '../../../utils/storage';
 import I18n, { setLocale } from '../../../utils/i18n';
@@ -14,7 +14,7 @@ class LanguagesContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.data = languages;
+    this.data = data;
 
     this.onItemSelect = this.onItemSelect.bind(this);
     this.renderListItem = this.renderListItem.bind(this);

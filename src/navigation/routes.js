@@ -16,9 +16,7 @@ import {
   ThemesContainer,
   UserContainer,
 } from '../containers/settings';
-import {
-  ConversationContainer,
-} from '../containers/conversations';
+import ConversationContainer from '../containers/conversations/Conversation';
 import {
   MenuNavigationOptions,
   ConversationNavigationOptions,

@@ -1,35 +1,44 @@
 import React from 'react';
 import {
-  ThemeProvider,
   withStyles,
   BottomNavigation,
   BottomNavigationTab,
 } from 'react-native-ui-kitten';
 import { SafeAreaView } from '../../navigation';
-
-import themes from '../../utils/themes';
 import {
   GridIconOutline,
   LayoutIconOutline,
   MessageCircleIcon,
 } from '../../assets/icons';
 import I18n from '../../utils/i18n';
+import { StateContext } from '../../utils/context';
 
-const Menu = (props) => {
-  const {
-    selectedIndex,
-    themedStyle,
-    onTabSelect,
-    theme,
-  } = props;
+class MenuContainer extends React.Component {
+  constructor(props) {
+    super(props);
 
-  return (
-    <SafeAreaView style={themedStyle.safeAreaContainer}>
-      <ThemeProvider theme={{ ...theme, ...themes['App Theme'] }}>
+    this.onTabSelect = this.onTabSelect.bind(this);
+  }
+
+  onTabSelect(index) {
+    const { navigation } = this.props;
+    const { [index]: selectedRoute } = navigation.state.routes;
+
+    navigation.navigate({
+      key: 'MenuContainer',
+      routeName: selectedRoute.routeName,
+    });
+  }
+
+  render() {
+    const { themedStyle, navigation } = this.props;
+
+    return (
+      <SafeAreaView style={themedStyle.safeAreaContainer}>
         <BottomNavigation
           appearance="noIndicator"
-          selectedIndex={selectedIndex}
-          onSelect={onTabSelect}
+          selectedIndex={navigation.state.index}
+          onSelect={this.onTabSelect}
         >
           <BottomNavigationTab
             title={I18n.t('tabs.timetable')}
@@ -44,12 +53,14 @@ const Menu = (props) => {
             icon={GridIconOutline}
           />
         </BottomNavigation>
-      </ThemeProvider>
-    </SafeAreaView>
-  );
-};
+      </SafeAreaView>
+    );
+  }
+}
 
-export default withStyles(Menu, (theme) => ({
+MenuContainer.contextType = StateContext;
+
+export default withStyles(MenuContainer, (theme) => ({
   safeAreaContainer: {
     backgroundColor: theme['background-basic-color-1'],
   },

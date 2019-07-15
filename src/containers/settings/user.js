@@ -72,8 +72,9 @@ class UserContainer extends React.Component {
 
 UserContainer.contextType = StateContext;
 
-export default withStyles(UserContainer, () => ({
+export default withStyles(UserContainer, (theme) => ({
   container: {
+    backgroundColor: theme['background-basic-color-1'],
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,

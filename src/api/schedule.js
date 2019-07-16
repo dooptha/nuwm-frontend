@@ -1,5 +1,5 @@
 import axios from 'axios';
-import TimeHelper from '../utils/time';
+import moment from 'moment';
 
 class ScheduleApi {
   constructor() {
@@ -8,12 +8,14 @@ class ScheduleApi {
 
   getScheduleOnWeek() {
     const group = 'ПМ-41';
-    const now = '04.09.2018' || new Date();
-    const startDate = '04.09.2018' || TimeHelper.toApiDateFormat(now);
-    const endDate = '11.09.2018' || TimeHelper.toApiDateFormat(TimeHelper.getDateInAWeek(now));
+    const now = moment('09.05.2018') || moment(new Date());
+    const startDate = now.format('DD.MM.YYYY');
+    const endDate = now.add(7, 'days').format('DD.MM.YYYY');
+
+    console.log(startDate, endDate);
 
     return axios.get(this.api, { params: { group, startDate, endDate } })
-      .then((res) => res.data.schedule)
+      .then((res) => { console.log(res); return res.data.schedule; })
       .catch((err) => {
         console.log(err);
         return [];
@@ -22,12 +24,12 @@ class ScheduleApi {
 
   getSchedule(data) {
     const {
-      group, name, startDate, endDate,
+      group, name, startDate, endDate, practicsOnly,
     } = data;
 
     return axios.get(this.api, {
       params: {
-        group, name, startDate, endDate,
+        group, name, startDate, endDate, practicsOnly,
       },
     })
       .then((res) => res.data.schedule)

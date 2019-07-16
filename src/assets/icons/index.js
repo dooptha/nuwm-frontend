@@ -2,6 +2,14 @@ import {
   Icon,
 } from './icon.component';
 
+export const Flip2OutlineIcon = (style) => {
+  const source = {
+    imageSource: require('./eva/flip-2-outline.png'),
+  };
+
+  return Icon(source, style);
+};
+
 export const LoaderOutlineIcon = (style) => {
   const source = {
     imageSource: require('./eva/loader-outline.png'),

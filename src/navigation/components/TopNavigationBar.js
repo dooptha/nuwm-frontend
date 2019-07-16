@@ -17,15 +17,27 @@ class TopNavigationBar extends Component {
     );
   }
 
+  renderSubmitButton(source) {
+    const { onSubmitPress } = this.props;
+    return (
+      <TopNavigationAction
+        icon={source}
+        onPress={onSubmitPress}
+      />
+    );
+  }
+
   render() {
     const {
       themedStyle,
       title,
       backIcon,
       border,
+      submitIcon,
     } = this.props;
 
     const leftControlElement = backIcon ? this.renderBackButton(backIcon) : null;
+    const rightControlElement = submitIcon ? this.renderSubmitButton(submitIcon) : null;
 
     return (
       <SafeAreaView style={border ? themedStyle.safeAreaWithBorder : themedStyle.safeArea}>
@@ -35,6 +47,7 @@ class TopNavigationBar extends Component {
           // titleStyle={textStyle.subtitle}
           // subtitleStyle={textStyle.caption1}
           leftControl={leftControlElement}
+          rightControls={rightControlElement}
         />
       </SafeAreaView>
     );

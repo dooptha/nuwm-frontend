@@ -1,13 +1,34 @@
 import React from 'react';
 import {
+  StyleSheet,
+} from 'react-native';
+import {
   ListItem,
 } from 'react-native-ui-kitten';
-import I18n from '../../utils/i18n';
+import { CheckmarkOutlineIcon } from '../../assets/icons';
 
-export default ({ item, style, onItemSelect }) => (
-  <ListItem
-    style={style}
-    title={I18n.t(item.title)}
-    onPress={() => onItemSelect()}
-  />
-);
+const defaultStyle = StyleSheet.create({
+  selectedIcon: {
+    width: 24,
+    height: 24,
+  },
+});
+
+export default ({
+  index,
+  title,
+  style,
+  onPress,
+  selected,
+}) => {
+  const renderSelectedIcon = () => CheckmarkOutlineIcon(defaultStyle.selectedIcon);
+
+  return (
+    <ListItem
+      style={style}
+      title={title}
+      onPress={() => onPress(index)}
+      accessory={selected ? renderSelectedIcon : null}
+    />
+  );
+};

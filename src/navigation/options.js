@@ -1,5 +1,8 @@
 import React from 'react';
-import { ArrowIosBackFill } from '../assets/icons';
+import {
+  ArrowIosBackFill,
+  CheckmarkOutlineIcon,
+} from '../assets/icons';
 import TopNavigationBar from './components/TopNavigationBar';
 import {
   getCurrentRouteState,
@@ -23,6 +26,7 @@ const MenuTopNavigationParams = {
               border
               title={I18n.t(`routes.${routeName}`)}
               backIcon={isRootRoute(index) && ArrowIosBackFill}
+              rightControls={[]}
               onBackPress={() => navigation.goBack(KEY_NAVIGATION_BACK)}
             />
           )
@@ -79,6 +83,29 @@ const ConversationTopNavigationParams = {
   },
 };
 
+const UserSettingsNavigationParams = {
+  header: ({ navigation }) => {
+    const { routeName } = getCurrentRouteState(navigation);
+
+    return (
+      <StateContext.Consumer>
+        {
+          (context) => (
+            <TopNavigationBar
+              border
+              title={I18n.t(`routes.${routeName}`)}
+              backIcon={ArrowIosBackFill}
+              submitIcon={CheckmarkOutlineIcon}
+              onBackPress={() => navigation.goBack(KEY_NAVIGATION_BACK)}
+              onSubmitPress={context[0].actions.submitUserForm}
+            />
+          )
+        }
+      </StateContext.Consumer>
+    );
+  },
+};
+
 export const MenuNavigationOptions = {
   ...MenuTopNavigationParams,
 };
@@ -89,4 +116,8 @@ export const SheduleNavigationOptions = {
 
 export const ConversationNavigationOptions = {
   ...ConversationTopNavigationParams,
+};
+
+export const UserSettingsNavigationOptions = {
+  ...UserSettingsNavigationParams,
 };

@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import {
   List,
-  ListItem,
   withStyles,
 } from 'react-native-ui-kitten';
 import data from './data';
 import { StateContext } from '../../../utils/context';
 import { storeKey } from '../../../utils/storage';
+import ListItem from '../../../components/settings/ListItem';
 import I18n, { setLocale } from '../../../utils/i18n';
 
 class LanguagesContainer extends Component {
@@ -22,27 +22,30 @@ class LanguagesContainer extends Component {
 
   onItemSelect(index) {
     const selectedItem = this.data[index];
-    this.updateLanguage(selectedItem.locale);
-  }
+    const language = selectedItem.locale;
 
-  updateLanguage(value) {
-    setLocale(value);
-    storeKey('language', value);
+    setLocale(language);
+    storeKey('language', language);
 
     const [, dispatch] = this.context;
 
     dispatch({
       type: 'setProperty',
       key: 'language',
-      value,
+      value: language,
     });
   }
 
   renderListItem(info) {
+    const [context] = this.context;
+    const selected = context.properties.language === info.item.locale;
+
     return (
       <ListItem
+        index={info.index}
         title={I18n.t(info.item.title)}
-        onPress={this.onItemSelect}
+        onPress={(i) => this.onItemSelect(i)}
+        selected={selected}
       />
     );
   }

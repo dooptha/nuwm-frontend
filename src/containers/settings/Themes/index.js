@@ -2,19 +2,21 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import {
   List,
-  ListItem,
   withStyles,
 } from 'react-native-ui-kitten';
 import { Message } from '../../../components/conversations';
 import data from './data';
 import { StateContext } from '../../../utils/context';
 import { storeKey } from '../../../utils/storage';
+import ListItem from '../../../components/settings/ListItem';
 
 class ThemesContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.data = data;
+    this.state = {
+      themes: data,
+    };
 
     this.messages = [
       {
@@ -27,47 +29,48 @@ class ThemesContainer extends Component {
         date: '13:02',
         sender: true,
       }];
-
-    this.onItemSelect = this.onItemSelect.bind(this);
-    this.renderListItem = this.renderListItem.bind(this);
   }
 
   onItemSelect(index) {
-    const selectedItem = this.data[index];
-    this.updateTheme(selectedItem.theme);
-  }
+    const selectedItem = data[index];
+    const { theme } = selectedItem;
 
-  updateTheme(value) {
-    storeKey('theme', value);
+    storeKey('theme', theme);
 
     const [, dispatch] = this.context;
 
     dispatch({
       type: 'setProperty',
       key: 'theme',
-      value,
+      value: theme,
     });
   }
 
   renderListItem(info) {
+    const [context] = this.context;
+    const selected = context.properties.theme === info.item.title;
+
     return (
       <ListItem
+        index={info.index}
         title={info.item.title}
-        onPress={this.onItemSelect}
+        onPress={(i) => this.onItemSelect(i)}
+        selected={selected}
       />
     );
   }
 
   render() {
     const { themedStyle } = this.props;
+    const { themes } = this.state;
 
     return (
       <View style={themedStyle.container}>
         <Message message={this.messages[0]} />
         <Message message={this.messages[1]} />
         <List
-          data={this.data}
-          renderItem={this.renderListItem}
+          data={themes}
+          renderItem={(i) => this.renderListItem(i)}
         />
       </View>
     );

@@ -9,6 +9,7 @@ import data from './data';
 import { useGlobalState } from '../../../utils/context';
 import ListItem from '../../../components/settings/ListItem';
 import UserCard from '../../../components/settings/UserCard';
+import I18n from '../../../utils/i18n';
 
 const SettingsContainer = ({ navigation, themedStyle }) => {
   const [context] = useGlobalState();
@@ -33,7 +34,12 @@ const SettingsContainer = ({ navigation, themedStyle }) => {
       case 'Empty':
         return (<Text style={themedStyle.empty}>{'\n'}</Text>);
       default:
-        return (<ListItem item={item} onItemSelect={() => navigateTo(item.route)} />);
+        return (
+          <ListItem
+            title={I18n.t(item.title)}
+            onPress={() => navigateTo(item.route)}
+          />
+        );
     }
   };
 

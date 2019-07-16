@@ -49,3 +49,11 @@ export const PaperPlaneIconFill = (style) => {
 
   return Icon(source, style);
 };
+
+export const CheckmarkOutlineIcon = (style) => {
+  const source = {
+    imageSource: require('./eva/checkmark-outline.png'),
+  };
+
+  return Icon(source, style);
+};

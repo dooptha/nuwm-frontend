@@ -21,6 +21,7 @@ import {
   MenuNavigationOptions,
   ConversationNavigationOptions,
   SheduleNavigationOptions,
+  UserSettingsNavigationOptions,
 } from './options';
 import Schedule from '../components/schedule';
 import DetailedLesson from '../components/schedule/DetailedLesson';
@@ -50,7 +51,7 @@ const SettingsNavigationMap = {
   },
   User: {
     screen: UserContainer,
-    navigationOptions: MenuNavigationOptions,
+    navigationOptions: UserSettingsNavigationOptions,
   },
 };
 

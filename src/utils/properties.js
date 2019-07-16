@@ -5,13 +5,13 @@ export const DEFAULT_PROPERTIES = {
   theme: 'NUWM Dark',
 };
 
-export const getProperties = async () => {
+export const getProperties = async (useDefaults) => {
   const propsPromises = [];
 
   Object.keys(DEFAULT_PROPERTIES).forEach((key) => {
     propsPromises.push(
       getKey(key)
-        .then((value) => [key, value || DEFAULT_PROPERTIES[key]]),
+        .then((value) => [key, (!useDefaults && value) || DEFAULT_PROPERTIES[key]]),
     );
   });
 

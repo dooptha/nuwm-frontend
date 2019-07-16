@@ -11,29 +11,30 @@ import { setLocale } from './i18n';
 import { socket, initSockets } from '../api/socket';
 import { DefaultUserImage } from '../assets/images';
 import { getObject } from './storage';
+import config from './config';
 
 export const StateContext = createContext();
 
 const reducer = (state, action) => {
-  let properties;
+  let changes;
   const { messages } = state;
 
   switch (action.type) {
     case 'setProperty':
-      properties = state && state.properties;
-      properties[action.key] = action.value;
+      changes = state && state.properties;
+      changes[action.key] = action.value;
 
       return {
         ...state,
-        properties,
+        properties: changes,
       };
 
     case 'loadProperties':
-      properties = { ...action.properties };
+      changes = { ...action.properties };
 
       return {
         ...state,
-        properties,
+        properties: changes,
       };
     case 'updateUser':
       return {
@@ -48,6 +49,14 @@ const reducer = (state, action) => {
         messages,
       };
 
+    case 'setAction':
+      changes = { ...state.actions };
+      changes[action.key] = action.callback;
+
+      return {
+        ...state,
+        ...{ actions: changes },
+      };
     default:
       return state;
   }
@@ -64,6 +73,9 @@ export const GlobalState = ({ children }) => {
       name: '',
       email: 'not authorized',
     },
+    actions: {
+      submitUserForm: () => {},
+    },
     socket,
   });
 
@@ -75,7 +87,7 @@ export const GlobalState = ({ children }) => {
 };
 
 export const loadInitialData = async (dispatch) => {
-  const [properties, user] = await Promise.all([getProperties(), getObject('user')]);
+  const [properties, user] = await Promise.all([getProperties(config.USE_DEFAULT_PROPERTIES), getObject('user')]);
 
   setLocale(properties.language);
   dispatch({ type: 'loadProperties', properties });

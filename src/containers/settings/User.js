@@ -7,6 +7,7 @@ import {
 } from 'react-native-ui-kitten';
 import { StateContext } from '../../utils/context';
 import { removeKey, storeObject } from '../../utils/storage';
+import I18n from '../../utils/i18n';
 
 class UserContainer extends Component {
   constructor(props) {
@@ -74,7 +75,7 @@ class UserContainer extends Component {
       <View style={themedStyle.container}>
         <Input
           style={themedStyle.input}
-          label="Name"
+          label={I18n.t('settings.user.name')}
           name="name"
           value={name}
           onChangeText={(text) => this.onInputChange({ name: text })}
@@ -82,7 +83,7 @@ class UserContainer extends Component {
         />
         <Input
           style={themedStyle.input}
-          label="Group"
+          label={I18n.t('settings.user.group')}
           name="group"
           value={group}
           onChangeText={(text) => this.onInputChange({ group: text })}
@@ -93,7 +94,7 @@ class UserContainer extends Component {
           status="danger"
           onPress={() => this.logOut()}
         >
-          Вийти
+          {I18n.t('settings.user.logOut')}
         </Button>
       </View>
     );

@@ -5,12 +5,21 @@
     "settings": "Settings"
   },
   "settings": {
-    "theme": "Theme",
-    "language": "Language",
+    "themes": {
+        "title": "Theme",
+        "anotherUserMessage": "Somebody once told me",
+        "currentUserMessage": "the world is gonna roll me",
+      },
     "languages": {
+      "title": "Language",
       "ua": "Ukrainian",
       "ru": "Russian",
       "en": "English"
+    },
+    "user": {
+      "name": "Name",
+      "group": "Group",
+      "logOut": "Log out"
     }
   },
   "routes": {
@@ -53,5 +62,11 @@
     "title": "Flood",
     "description": "Description",
     "online": "Online"
+  },
+  "SignUp": {
+    "title": "Before we start",
+    "name": "Name",
+    "group": "Group",
+    "submit": "Sign up"
   }
 }

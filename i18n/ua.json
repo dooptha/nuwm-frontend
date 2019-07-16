@@ -5,12 +5,21 @@
     "settings": "Налаштування"
   },
   "settings": {
-    "theme": "Вигляд",
-    "language": "Мова",
+    "themes": {
+        "title": "Вигляд",
+        "anotherUserMessage": "Колись мені сказали",
+        "currentUserMessage": "що світ мене роздавить",
+      },
     "languages": {
+      "title": "Мова",
       "ua": "Ukrainian",
       "ru": "Russian",
       "en": "English"
+    },
+    "user": {
+      "name": "Ім'я",
+      "group": "Група",
+      "logOut": "Вийти"
     }
   },
   "routes": {
@@ -53,5 +62,11 @@
     "title": "Флуд",
     "description": "Цей чат призначений для срача, того залишається лише 100 останніх повідомлень",
     "online": "Онлайн"
+  },
+  "SignUp": {
+    "title": "Перед тим як почати",
+    "name": "Ім'я",
+    "group": "Група",
+    "submit": "Почати"
   }
 }

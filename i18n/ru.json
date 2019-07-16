@@ -5,12 +5,21 @@
     "settings": "Настройки"
   },
   "settings": {
-    "theme": "Тема",
-    "language": "Язык",
+    "themes": {
+        "title": "Тема",
+        "anotherUserMessage": "Когда то мне сказали",
+        "currentUserMessage": "что мир меня роздавит",
+      },
     "languages": {
+      "title": "Язык",
       "ua": "Ukrainian",
       "ru": "Russian",
       "en": "English"
+    },
+    "user": {
+      "name": "Имя",
+      "group": "Група",
+      "logOut": "Війті"
     }
   },
   "routes": {
@@ -53,5 +62,11 @@
     "title": "Флуд",
     "description": "Описание",
     "online": "Онлайн"
+  },
+  "SignUp": {
+    "title": "Before we start",
+    "name": "Name",
+    "group": "Group",
+    "submit": "Sign up"
   }
 }

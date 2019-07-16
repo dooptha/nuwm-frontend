@@ -7,12 +7,12 @@ export default [
     type: 'Empty',
   },
   {
-    title: 'settings.theme',
+    title: 'settings.themes.title',
     route: 'Themes',
     type: 'Default',
   },
   {
-    title: 'settings.language',
+    title: 'settings.languages.title',
     route: 'Language',
     type: 'Default',
   },

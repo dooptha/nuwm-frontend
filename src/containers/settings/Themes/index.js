@@ -9,6 +9,7 @@ import data from './data';
 import { StateContext } from '../../../utils/context';
 import { storeKey } from '../../../utils/storage';
 import ListItem from '../../../components/settings/ListItem';
+import I18n from '../../../utils/i18n';
 
 class ThemesContainer extends Component {
   constructor(props) {
@@ -20,12 +21,12 @@ class ThemesContainer extends Component {
 
     this.messages = [
       {
-        body: 'Колись мені сказали',
+        body: I18n.t('settings.themes.anotherUserMessage'),
         date: '13:00',
         sender: false,
       },
       {
-        body: 'Що світ мене роздавить',
+        body: I18n.t('settings.themes.currentUserMessage'),
         date: '13:02',
         sender: true,
       }];

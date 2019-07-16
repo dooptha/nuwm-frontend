@@ -47,10 +47,8 @@ class Schedule extends Component {
     const { themedStyle } = this.props;
     const { schedule, selectedIndex } = this.state;
 
-    console.log(schedule);
-
-    const today = schedule.filter((day) => day.date === '04.09.2018');
-    const tomorrow = schedule.filter((day) => day.date === '05.09.2018');
+    const today = schedule.filter((day) => day.date === '05.09.2018');
+    const tomorrow = schedule.filter((day) => day.date === '06.09.2018');
 
     return (
       <View>

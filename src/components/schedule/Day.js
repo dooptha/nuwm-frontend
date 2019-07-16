@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { withStyles, Text } from 'react-native-ui-kitten';
+import moment from 'moment';
 import Lesson from './Lesson';
 
 class Day extends Component {
@@ -23,10 +24,14 @@ class Day extends Component {
   render() {
     const { day, themedStyle } = this.props;
     const body = day.subjects.length > 0 ? this.renderAllSubjects() : null;
+    const date = moment(day.date).format('D MMMM');
 
     return (
       <View>
-        <Text style={themedStyle.title}>{ day.dayName }</Text>
+        <View style={themedStyle.titleWrapper}>
+          <Text style={themedStyle.title}>{ day.dayName }</Text>
+          <Text style={themedStyle.subtitle}>{ date }</Text>
+        </View>
         <View style={themedStyle.body}>
           { body }
         </View>
@@ -36,10 +41,19 @@ class Day extends Component {
 }
 
 export default withStyles(Day, (theme) => ({
-  title: {
-    paddingLeft: '5%',
+  titleWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
     paddingTop: 5,
     paddingBottom: 5,
+  },
+  title: {
+    paddingLeft: '5%',
+  },
+  subtitle: {
+    paddingRight: '4%',
+    color: theme['text-hint-color'],
   },
   body: {
     marginLeft: 15,

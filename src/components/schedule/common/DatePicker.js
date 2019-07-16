@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { withStyles } from 'react-native-ui-kitten';
 import DatePicker from '../../../libs/react-native-date-ranges';
+import { StateContext } from '../../../utils/context';
 
 class Name extends Component {
+  static contextType = StateContext;
+
   constructor(props) {
     super(props);
 
@@ -16,6 +19,15 @@ class Name extends Component {
       startDate: null,
       endDate: null,
     };
+  }
+
+  getCurrentLocale() {
+    switch (this.context[0].properties.language) {
+      case 'ua': return 'uk';
+      case 'ru': return 'ru';
+      case 'en': return 'en-ua';
+      default: return 'ua';
+    }
   }
 
   getDate() {
@@ -69,7 +81,7 @@ class Name extends Component {
         selectedTextColor={themedStyle.mainText.color}
 
       // locales
-        local="uk"
+        local={this.getCurrentLocale()}
         markText="Выберите Дату"
         ButtonText="Готово"
         startDateLabel="Старт"

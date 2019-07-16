@@ -3,132 +3,99 @@ import {
   View, ScrollView,
 } from 'react-native';
 import {
-  Button, withStyles, BottomNavigation, BottomNavigationTab, Input, Toggle,
+  Button, withStyles, Toggle,
 } from 'react-native-ui-kitten';
-import DatePicker from './common/DatePicker';
-import ListRow from './common/ListRow';
+import DatePickerMultiple from './common/DatePickerMultiple';
+import FormItem from './common/FormItem';
 import I18n from '../../utils/i18n';
 import Api from '../../api/schedule';
-import TimeHelper from '../../utils/time';
 import NavigationService from '../../navigation/NavigationService';
+import FormInput from './common/Form/Input';
 
 class Search extends Component {
   constructor(props) {
     super(props);
     this.localize = (t) => I18n.t(`timetable.search.${t}`);
-    this.state = {
-      selectedIndex: 0,
-      lecturer: '',
-      group: '',
-      showOnlyLabs: false,
+    this.state = { practicsOnly: false };
+  }
+
+  getDate() {
+    const { startDate, endDate } = this.dateNode.datePickerNode.getDate();
+    const group = this.groupNode.state.value;
+    const lecturer = this.lecturerNode.state.value;
+    const practicsOnly = this.state.practicsOnly;
+
+    return {
+      startDate, endDate, lecturer, group, practicsOnly,
     };
   }
 
-  getData() {
-    const { lecturer, group, selectedIndex } = this.state;
+  findSubjects() {
+    const searchData = this.getDate();
+    console.log(searchData);
 
-    const startDate = TimeHelper.toApiDateFormat(new Date(this.startDate.state.date));
-    const endDate = TimeHelper.toApiDateFormat(new Date(selectedIndex === 0 ? this.startDate.state.date : this.endDate.state.date));
+    let isEnoughData = true;
 
-    const searchData = {
-      startDate,
-      endDate,
-      lecturer,
-      group,
-    };
-
-    Api.getSchedule(searchData).then((data) => {
-      NavigationService.navigate('ScheduleList', { schedule: data, refreshing: false, onRefresh: () => {} });
-    });
-  }
-
-  switchTab(index) {
-    this.setState({ selectedIndex: index });
-  }
-
-  renderDatePickers() {
-    const { selectedIndex } = this.state;
-
-    if (selectedIndex === 0) {
-      return (
-        <ListRow label={this.localize('Date')}>
-          <DatePicker ref={(node) => { this.startDate = node; }} />
-        </ListRow>
-      );
+    if (!searchData.startDate || !searchData.endDate) {
+      this.dateNode.inputNode.setStatus('danger');
+      isEnoughData = false;
+    } else {
+      this.dateNode.inputNode.setStatus('primary');
     }
-    return (
-      <View>
-        <ListRow label={this.localize('From')}>
-          <DatePicker ref={(node) => { this.startDate = node; }} />
-        </ListRow>
-        <ListRow label={this.localize('To')}>
-          <DatePicker ref={(node) => { this.endDate = node; }} />
-        </ListRow>
-      </View>
-    );
-  }
 
-  renderTabs() {
-    const { themedStyle } = this.props;
-    const { selectedIndex } = this.state;
+    if (!searchData.group && !searchData.lecturer) {
+      this.groupNode.setStatus('danger');
+      this.lecturerNode.setStatus('danger');
+      isEnoughData = false;
+    } else {
+      this.groupNode.setStatus('primary');
+      this.lecturerNode.setStatus('primary');
+    }
 
-    return (
-      <ListRow label={this.localize('Type')}>
-        <BottomNavigation
-          style={themedStyle.tabContainer}
-          selectedIndex={selectedIndex}
-          onSelect={(index) => this.switchTab(index)}
-          indicatorStyle={themedStyle.indicatorStyle}
-        >
-          <BottomNavigationTab title={this.localize('OnlyDay')} />
-          <BottomNavigationTab title={this.localize('Range')} />
-        </BottomNavigation>
-      </ListRow>
-    );
+    if (isEnoughData) {
+      Api.getSchedule(searchData).then((data) => {
+        NavigationService.navigate('ScheduleList', { schedule: data, refreshing: false, onRefresh: () => {} });
+      });
+    }
   }
 
   render() {
     const { themedStyle } = this.props;
-    const { lecturer, group, showOnlyLabs } = this.state;
-
-    const body = this.renderDatePickers();
-    const tabs = this.renderTabs();
+    const { practicsOnly } = this.state;
 
     return (
-      <ScrollView style={themedStyle.searchContainer}>
-        { tabs }
-        { body }
+      <View style={themedStyle.searchContainer}>
+        <ScrollView style={themedStyle.inputsContainer}>
+          <FormItem label="Дата">
+            <DatePickerMultiple ref={(node) => { this.dateNode = node; }} />
+          </FormItem>
 
-        <ListRow label={this.localize('Lecturer')}>
-          <Input
-            style={themedStyle.input}
-            value={lecturer}
-            placeholder={this.localize('LecturerExample')}
-            onChangeText={(value) => { this.setState({ lecturer: value }); }}
-          />
-        </ListRow>
+          <FormItem label={this.localize('Lecturer')}>
+            <FormInput
+              placeholder={this.localize('LecturerExample')}
+              ref={(node) => { this.lecturerNode = node; }}
+            />
+          </FormItem>
 
-        <ListRow label={this.localize('Group')}>
-          <Input
-            value={group}
-            style={themedStyle.input}
-            placeholder={this.localize('GroupExample')}
-            onChangeText={(value) => { this.setState({ group: value }); }}
-          />
-        </ListRow>
+          <FormItem label={this.localize('Group')}>
+            <FormInput
+              placeholder={this.localize('GroupExample')}
+              ref={(node) => { this.groupNode = node; }}
+            />
+          </FormItem>
 
-        <ListRow label={this.localize('PracticsOnly')}>
-          <Toggle
-            style={themedStyle.checkbox}
-            checked={showOnlyLabs}
-            onChange={(state) => { this.setState({ showOnlyLabs: state }); }}
-          />
-        </ListRow>
+          <FormItem row label={this.localize('PracticsOnly')}>
+            <Toggle
+              checked={practicsOnly}
+              onChange={(v) => this.setState({ practicsOnly: v })}
+            />
+          </FormItem>
 
-        <Button style={themedStyle.button} onPress={() => this.getData()}>
+        </ScrollView>
+        <Button style={themedStyle.button} onPress={() => this.findSubjects()}>
           {this.localize('Search')}
         </Button>
-      </ScrollView>
+      </View>
     );
   }
 }
@@ -136,29 +103,24 @@ class Search extends Component {
 export default withStyles(Search, (theme) => ({
   searchContainer: {
     height: '100%',
-    paddingTop: 15,
+    paddingTop: 10,
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+    alignItems: 'stretch',
+    backgroundColor: theme['background-basic-color-1'],
   },
-  titleText: {
+  inputsContainer: {
+    backgroundColor: theme['background-basic-color-1'],
+    paddingTop: 5,
   },
   indicatorStyle: {
     display: 'none',
   },
-  tabContainer: {
-    width: '80%',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    borderRadius: 5,
-  },
   button: {
-    marginTop: 25,
     width: '46%',
     marginLeft: '27%',
     borderWidth: 0,
-  },
-  input: {
-    borderRadius: 10,
-    width: '80%',
-  },
-  checkbox: {
+    marginBottom: 45,
+    marginTop: 8,
   },
 }));

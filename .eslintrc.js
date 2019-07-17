@@ -26,5 +26,13 @@ module.exports = {
     "react/prop-types": [0],
     "arrow-parens": [2, "always"],
     "class-methods-use-this": [0]
-  }
+  },
+  "overrides": [
+      {
+        "files": ["tests/*"],
+        "rules": {
+          "no-console": "off",
+        }
+      }
+    ],
 }

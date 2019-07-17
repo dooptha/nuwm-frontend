@@ -44,8 +44,7 @@ class Schedule extends Component {
   }
 
   render() {
-    const { themedStyle } = this.props;
-    const { schedule, selectedIndex } = this.state;
+    const { props: { themedStyle }, state: { schedule, selectedIndex } } = this;
 
     const today = schedule.filter((day) => day.date === '05.09.2018');
     const tomorrow = schedule.filter((day) => day.date === '06.09.2018');

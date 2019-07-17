@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { withStyles, Input } from 'react-native-ui-kitten';
 
 class FormInput extends Component {
   state = {
     value: '',
     status: 'primary',
+  }
+
+  static defaultProps = {
+    placeholder: '',
+    style: {},
   }
 
   onChange(value) {
@@ -19,8 +25,10 @@ class FormInput extends Component {
   }
 
   render() {
-    const { themedStyle, placeholder, style = {} } = this.props;
-    const { value, status } = this.state;
+    const {
+      props: { themedStyle, placeholder, style },
+      state: { value, status },
+    } = this;
 
     return (
       <Input
@@ -34,8 +42,16 @@ class FormInput extends Component {
   }
 }
 
-export default withStyles(FormInput, (theme) => ({
+export default withStyles(FormInput, () => ({
   input: {
     borderRadius: 2,
   },
 }));
+
+FormInput.propTypes = {
+  placeholder: PropTypes.string,
+  style: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ])),
+};

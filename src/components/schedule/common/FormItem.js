@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import { withStyles, Text } from 'react-native-ui-kitten';
 
 class FormItem extends Component {
+  static defaultProps = {
+    row: false,
+  }
+
   renderLabel() {
-    const { label } = this.props;
-    const { themedStyle } = this.props;
+    const { label, themedStyle } = this.props;
 
     if (label) {
       return (
@@ -62,3 +66,7 @@ export default withStyles(FormItem, (theme) => ({
     marginRight: '5%',
   },
 }));
+
+FormItem.propTypes = {
+  row: PropTypes.bool,
+};

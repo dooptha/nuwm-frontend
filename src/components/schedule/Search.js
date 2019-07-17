@@ -5,12 +5,12 @@ import {
 import {
   Button, withStyles, Toggle,
 } from 'react-native-ui-kitten';
-import DatePickerMultiple from './common/DatePickerMultiple';
-import FormItem from './common/FormItem';
 import I18n from '../../utils/i18n';
 import Api from '../../api/schedule';
 import NavigationService from '../../navigation/NavigationService';
 import FormInput from './common/Form/Input';
+import DatePickerMultiple from './common/DatePickerMultiple';
+import FormItem from './common/FormItem';
 
 class Search extends Component {
   constructor(props) {
@@ -20,10 +20,13 @@ class Search extends Component {
   }
 
   getDate() {
-    const { startDate, endDate } = this.dateNode.datePickerNode.getDate();
-    const group = this.groupNode.state.value;
-    const lecturer = this.lecturerNode.state.value;
-    const practicsOnly = this.state.practicsOnly;
+    const {
+      state: { practicsOnly }, groupNode, lecturerNode, dateNode,
+    } = this;
+
+    const { startDate, endDate } = dateNode.datePickerNode.getDate();
+    const group = groupNode.state.value;
+    const lecturer = lecturerNode.state.value;
 
     return {
       startDate, endDate, lecturer, group, practicsOnly,
@@ -32,7 +35,6 @@ class Search extends Component {
 
   findSubjects() {
     const searchData = this.getDate();
-    console.log(searchData);
 
     let isEnoughData = true;
 

@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
+import PropTypes from 'prop-types';
 import { withStyles, Text } from 'react-native-ui-kitten';
 import moment from 'moment';
 import Lesson from './Lesson';
 
 class Day extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+  static defaultProps = {
+    day: {
+      subject: [],
+      date: 'none',
+      dayName: 'none',
+    },
   }
 
   renderAllSubjects() {
@@ -15,7 +19,7 @@ class Day extends Component {
 
     return day.subjects.map((subject) => (
       <Lesson
-        key={subject.day}
+        key={day.date + subject.time}
         subject={subject}
       />
     ));
@@ -59,3 +63,11 @@ export default withStyles(Day, (theme) => ({
     marginLeft: 15,
   },
 }));
+
+Day.propTypes = {
+  day: PropTypes.shape({
+    subjects: PropTypes.array,
+    date: PropTypes.string,
+    dayName: PropTypes.string,
+  }),
+};

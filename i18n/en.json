@@ -20,6 +20,15 @@
       "name": "Name",
       "group": "Group",
       "logOut": "Log out"
+    },
+    "timetable": {
+      "title": "Timetable"
+    },
+    "questions": {
+      "title": "Ask guestion",
+    },
+    "polls": {
+      "title": "Polls history",
     }
   },
   "routes": {

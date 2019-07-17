@@ -17,6 +17,21 @@ export default [
     type: 'Default',
   },
   {
+    title: 'settings.timetable.title',
+    route: 'Language',
+    type: 'Default',
+  },
+  {
     type: 'Empty',
+  },
+  {
+    title: 'settings.questions.title',
+    route: 'Language',
+    type: 'Default',
+  },
+  {
+    title: 'settings.polls.title',
+    route: 'Language',
+    type: 'Default',
   },
 ];

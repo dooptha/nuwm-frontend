@@ -20,6 +20,15 @@
       "name": "Имя",
       "group": "Група",
       "logOut": "Війті"
+    },
+    "timetable": {
+      "title": "Timetable"
+    },
+    "questions": {
+      "title": "Ask guestion",
+    },
+    "polls": {
+      "title": "Polls history",
     }
   },
   "routes": {

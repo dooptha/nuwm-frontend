@@ -29,7 +29,7 @@ module.exports = {
   },
   "overrides": [
       {
-        "files": ["tests/*"],
+        "files": ["*.test.js", "tests/setup.js"],
         "rules": {
           "no-console": "off",
         }

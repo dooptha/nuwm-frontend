@@ -41,12 +41,25 @@ const reducer = (state, action) => {
         ...state,
         ...{ currentUser: action.user },
       };
+
+    case 'updateCurrentPoll':
+      return {
+        ...state,
+        ...{ poll: { current: action.poll } },
+      };
+
     case 'sendMessage':
       messages.push(action.message);
 
       return {
         ...state,
         messages,
+      };
+
+    case 'updatePolls':
+      return {
+        ...state,
+        ...{ poll: { items: action.polls } },
       };
 
     case 'setAction':
@@ -76,6 +89,7 @@ export const GlobalState = ({ children }) => {
     actions: {
       submitUserForm: () => {},
     },
+    poll: {},
     socket,
   });
 

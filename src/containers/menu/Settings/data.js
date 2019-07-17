@@ -25,12 +25,12 @@ export default [
     type: 'Empty',
   },
   {
-    title: 'settings.questions.title',
-    route: 'Language',
+    title: 'settings.polls.title',
+    route: 'PollHistory',
     type: 'Default',
   },
   {
-    title: 'settings.polls.title',
+    title: 'settings.questions.title',
     route: 'Language',
     type: 'Default',
   },

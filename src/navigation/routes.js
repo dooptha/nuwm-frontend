@@ -15,6 +15,7 @@ import {
   LanguagesContainer,
   ThemesContainer,
   UserContainer,
+  PollHistory,
 } from '../containers/settings';
 import ConversationContainer from '../containers/conversations/Conversation';
 import {
@@ -52,6 +53,10 @@ const SettingsNavigationMap = {
   User: {
     screen: UserContainer,
     navigationOptions: UserSettingsNavigationOptions,
+  },
+  PollHistory: {
+    screen: PollHistory,
+    navigationOptions: MenuNavigationOptions,
   },
 };
 

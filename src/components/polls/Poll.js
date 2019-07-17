@@ -13,6 +13,7 @@ const Poll = ({
   poll,
   themedStyle,
   onVote,
+  style,
 }) => {
   if (!poll) {
     return null;
@@ -21,8 +22,13 @@ const Poll = ({
   const { question, options } = poll;
 
   return (
-    <View style={themedStyle.container}>
-      <Text style={themedStyle.question}>{question}</Text>
+    <View style={[themedStyle.container, style]}>
+      <Text
+        category="h3"
+        style={themedStyle.question}
+      >
+        {question}
+      </Text>
       {
         options.map((option, index) => (
           <Option
@@ -48,5 +54,6 @@ export default withStyles(Poll, (theme) => ({
   },
   question: {
     marginBottom: 10,
+    color: 'white',
   },
 }));

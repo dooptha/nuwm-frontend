@@ -16,8 +16,10 @@ class PollHistory extends Component {
   }
 
   renderListItem(info) {
+    const { themedStyle } = this.props;
     return (
       <Poll
+      style={themedStyle.poll}
         voted
         poll={info.item}
       />
@@ -46,9 +48,11 @@ export default withStyles(PollHistory, (theme) => ({
   container: {
     flex: 1,
     backgroundColor: theme['background-basic-color-2'],
+    paddingHorizontal: 15,
   },
-  contentContainer: {
-    paddingHorizontal: 16,
-    paddingVertical: 16,
+  poll: {
+    marginVertical: 5,
+    borderRadius: 20,
+    overflow: 'hidden',
   },
 }));

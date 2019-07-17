@@ -32,17 +32,22 @@ const ConversationsContainer = ({ navigation, themedStyle }) => {
 
   return (
     <ScrollView style={themedStyle.container}>
-      <View style={themedStyle.pollContainer}>
+      <View style={[themedStyle.pollContainer, themedStyle.box]}>
         <Poll
+          style={themedStyle.poll}
           voted={false}
           poll={poll.current}
           onVote={(i) => onVote(i)}
         />
       </View>
-      <FloodCard
-        onlineCount={onlineCount}
-        navigateToChat={navigateToChat}
-      />
+      <View style={themedStyle.floodShadowBox}>
+        <View style={themedStyle.box}>
+          <FloodCard
+            onlineCount={onlineCount}
+            navigateToChat={navigateToChat}
+          />
+        </View>
+      </View>
     </ScrollView>
   );
 };
@@ -52,8 +57,30 @@ export default withStyles(ConversationsContainer, (theme) => ({
   container: {
     backgroundColor: theme['background-basic-color-2'],
     flex: 1,
+    paddingTop: 20,
+    paddingLeft: 15,
+    paddingRight: 15,
+
+  },
+  box: {
+    borderRadius: 20,
+    overflow: 'hidden',
   },
   pollContainer: {
     marginBottom: 20,
   },
+  poll: {
+    backgroundColor: theme['color-warning-400'],
+  },
+  floodShadowBox: {
+    shadowColor: '#000',
+    shadowOffset: {
+    	width: 0,
+    	height: 8,
+    },
+    shadowOpacity: 0.20,
+    shadowRadius: 11.14,
+
+    elevation: 17,
+  }
 }));

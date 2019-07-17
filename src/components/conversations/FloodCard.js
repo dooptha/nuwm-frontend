@@ -10,7 +10,7 @@ import {
 } from 'react-native-ui-kitten';
 import I18n from '../../utils/i18n';
 import { FloodImage } from '../../assets/images';
-import { ArrowForwardOutline } from '../../assets/icons';
+import { ArrowForwardOutline, PeopleIcon } from '../../assets/icons';
 
 const FloodCard = ({
   themedStyle,
@@ -30,7 +30,7 @@ const FloodCard = ({
           <View style={themedStyle.onlineCircle}>
             <Text style={themedStyle.onlineCircleText}>{onlineCount}</Text>
           </View>
-          <Text style={themedStyle.onlineCounterText}>{I18n.t('flood.online')}</Text>
+          {PeopleIcon(themedStyle.onlineIcon)}
         </View>
         <Text category="h3">{I18n.t('flood.title')}</Text>
         <Text
@@ -99,14 +99,16 @@ export default withStyles(FloodCard, (theme) => ({
     width: 20,
     height: 20,
     borderRadius: 10,
-    backgroundColor: 'green',
+    backgroundColor: theme['color-success-700'],
     justifyContent: 'center',
     alignItems: 'center',
   },
   onlineCircleText: {
     color: 'white',
   },
-  onlineCounterText: {
-    paddingLeft: 5,
+  onlineIcon: {
+    width: 24,
+    height: 24,
+    tintColor: theme['text-basic-color'],
   },
 }));

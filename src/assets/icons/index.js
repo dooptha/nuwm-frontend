@@ -74,3 +74,11 @@ export const CheckmarkOutlineIcon = (style) => {
 
   return Icon(source, style);
 };
+
+export const PeopleIcon = (style) => {
+  const source = {
+    imageSource: require('./eva/people.png'),
+  };
+
+  return Icon(source, style);
+};

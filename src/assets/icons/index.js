@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {
   Icon,
 } from './icon.component';
@@ -21,6 +22,14 @@ export const LoaderOutlineIcon = (style) => {
 export const ArrowIosBackFill = (style) => {
   const source = {
     imageSource: require('./eva/arrow-ios-back.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const ArrowForwardOutline = (style) => {
+  const source = {
+    imageSource: require('./eva/arrow-forward-outline.png'),
   };
 
   return Icon(source, style);

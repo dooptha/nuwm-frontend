@@ -12,31 +12,29 @@ const Option = ({
   themedStyle,
   onVote,
   index,
-}) => {
-  return (
-    <View style={themedStyle.container}>
-      <View style={themedStyle.radioContainer}>
-        {
-          voted ?
-            <Text>{option.value}</Text>
-            : (
-              <Radio
-                style={themedStyle.radio}
-                onChange={() => onVote(index)}
-              />
-            )
-        }
-      </View>
-
-      <Text
-        category="s1"
-        style={themedStyle.textStyle}
-      >
-        {option.name}
-      </Text>
+}) => (
+  <View style={themedStyle.container}>
+    <View style={themedStyle.radioContainer}>
+      {
+        voted
+          ? <Text>{option.value}</Text>
+          : (
+            <Radio
+              style={themedStyle.radio}
+              onChange={() => onVote(index)}
+            />
+          )
+      }
     </View>
-  );
-};
+
+    <Text
+      category="s1"
+      style={themedStyle.textStyle}
+    >
+      {option.name}
+    </Text>
+  </View>
+);
 
 export default withStyles(Option, (theme) => ({
   container: {
@@ -53,6 +51,6 @@ export default withStyles(Option, (theme) => ({
     color: theme['color-warning-400'],
   },
   textStyle: {
-    color: 'white'
+    color: 'white',
   },
 }));

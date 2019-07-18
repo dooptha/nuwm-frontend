@@ -73,12 +73,12 @@ export default withStyles(ConversationsContainer, (theme) => ({
   floodShadowBox: {
     shadowColor: '#000',
     shadowOffset: {
-    	width: 0,
-    	height: 8,
+      width: 0,
+      height: 8,
     },
     shadowOpacity: 0.20,
     shadowRadius: 11.14,
 
     elevation: 17,
-  }
+  },
 }));

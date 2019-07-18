@@ -58,6 +58,12 @@ export const customMapping = {
             borderWidth: 2,
             backgroundColor: 'color-warning-400',
             borderColor: 'white',
+            state: {
+              active: {
+                borderColor: 'color-warning-400',
+                outlineBackgroundColor: 'white',
+              },
+            },
           },
         },
       },

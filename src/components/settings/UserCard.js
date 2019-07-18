@@ -9,6 +9,7 @@ import {
   Text,
 } from 'react-native-ui-kitten';
 import { ArrowForwardOutline } from '../../assets/icons';
+import { DefaultUserImage } from '../../assets/images';
 
 const style = StyleSheet.create({
   listItem: {
@@ -34,7 +35,7 @@ const style = StyleSheet.create({
     tintColor: 'grey',
     height: 24,
     width: 24,
-  }
+  },
 });
 
 export default ({ user, onItemSelect }) => (
@@ -45,7 +46,7 @@ export default ({ user, onItemSelect }) => (
     <View style={style.contentContainer}>
       <Avatar
         style={style.avatar}
-        source={user.image}
+        source={DefaultUserImage.imageSource}
         shape="round"
         size="giant"
       />

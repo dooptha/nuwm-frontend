@@ -26,10 +26,8 @@ const FloodCard = ({
         shape="rounded"
       />
       <View style={themedStyle.textContainer}>
-        <View style={themedStyle.onlineCounterContainer}>
-          <View style={themedStyle.onlineCircle}>
-            <Text style={themedStyle.onlineCircleText}>{onlineCount}</Text>
-          </View>
+        <View style={themedStyle.onlineContainer}>
+          <Text style={themedStyle.onlineText}>{onlineCount}</Text>
           {PeopleIcon(themedStyle.onlineIcon)}
         </View>
         <Text category="h3">{I18n.t('flood.title')}</Text>
@@ -89,26 +87,26 @@ export default withStyles(FloodCard, (theme) => ({
     height: 40,
     tintColor: 'grey',
   },
-  onlineCounterContainer: {
+  onlineContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     paddingTop: 10,
   },
-  onlineCircle: {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
-    backgroundColor: theme['color-success-700'],
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  onlineCircleText: {
-    color: 'white',
+  // onlineCircle: {
+  //   width: 20,
+  //   height: 20,
+  //   borderRadius: 10,
+  //   backgroundColor: theme['color-success-700'],
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  // },
+  onlineText: {
+    color: theme['text-disabled-color'],
   },
   onlineIcon: {
-    width: 24,
-    height: 24,
-    tintColor: theme['text-basic-color'],
+    width: 20,
+    height: 20,
+    tintColor: theme['text-disabled-color'],
   },
 }));

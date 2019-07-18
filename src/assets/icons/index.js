@@ -1,6 +1,7 @@
 /* eslint-disable */
 import {
   Icon,
+  FancyIcon,
 } from './icon.component';
 
 export const Flip2OutlineIcon = (style) => {
@@ -82,3 +83,11 @@ export const PeopleIcon = (style) => {
 
   return Icon(source, style);
 };
+
+export const PaletteFancyIcon = (color) => {
+  const source = {
+    imageSource: require('./eva/color-palette-outline.png'),
+  };
+
+  return FancyIcon(source, color);
+}

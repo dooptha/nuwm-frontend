@@ -91,3 +91,35 @@ export const PaletteFancyIcon = (color) => {
 
   return FancyIcon(source, color);
 }
+
+export const MapFancyIcon = (color) => {
+  const source = {
+    imageSource: require('./eva/map.png'),
+  };
+
+  return FancyIcon(source, color);
+}
+
+export const TimetableFancyIcon = (color) => {
+  const source = {
+    imageSource: require('./eva/layout-outline.png'),
+  };
+
+  return FancyIcon(source, color);
+}
+
+export const MessageFancyIcon = (color) => {
+  const source = {
+    imageSource: require('./eva/message-circle.png'),
+  };
+
+  return FancyIcon(source, color);
+}
+
+export const TVFancyIcon = (color) => {
+  const source = {
+    imageSource: require('./eva/tv.png'),
+  };
+
+  return FancyIcon(source, color);
+}

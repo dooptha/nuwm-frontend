@@ -35,6 +35,7 @@ const SettingsContainer = ({ navigation, themedStyle }) => {
         return (
           <ListItem
             title={I18n.t(item.title)}
+            icon={item.icon}
             onPress={() => navigateTo(item.route)}
           />
         );
@@ -53,7 +54,7 @@ const SettingsContainer = ({ navigation, themedStyle }) => {
 
 export default withStyles(SettingsContainer, (theme) => ({
   container: {
-    backgroundColor: theme['background-basic-color-2'],
+    backgroundColor: theme['background-basic-color-3'],
     flex: 1,
   },
   empty: {

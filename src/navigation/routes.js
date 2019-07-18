@@ -30,6 +30,8 @@ import ScheduleList from '../components/schedule/ScheduleList';
 import SplashScreen from '../containers/SplashScreen';
 import SignUpScreen from '../containers/auth/SignUp';
 
+import config from '../utils/config';
+
 const ScheduleNavigationMap = {
   DetailedLesson: {
     screen: DetailedLesson,
@@ -97,7 +99,7 @@ const MenuNavigator = createBottomTabNavigator({
   Settings: SettingsNavigator,
 }, {
   tabBarComponent: MenuContainer,
-  initialRouteName: 'Conversations',
+  initialRouteName: config.INITIAL_ROUTE_NAME,
 });
 
 const AppNavigator = createStackNavigator({

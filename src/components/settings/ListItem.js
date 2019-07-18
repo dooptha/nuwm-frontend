@@ -20,14 +20,17 @@ export default ({
   style,
   onPress,
   selected,
+  icon,
 }) => {
   const renderSelectedIcon = () => CheckmarkOutlineIcon(defaultStyle.selectedIcon);
+  const renderIcon = icon ? () => icon : null;
 
   return (
     <ListItem
       style={style}
       title={title}
       onPress={() => onPress(index)}
+      icon={renderIcon}
       accessory={selected ? renderSelectedIcon : null}
     />
   );

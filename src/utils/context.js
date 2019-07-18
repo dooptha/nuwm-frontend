@@ -12,85 +12,36 @@ import { socket, initSockets } from '../api/socket';
 import { DefaultUserImage } from '../assets/images';
 import { getObject } from './storage';
 import config from './config';
+import mainReducer from '../reducers';
 
 export const StateContext = createContext();
 
-const reducer = (state, action) => {
-  let changes;
-  const { messages } = state;
-
-  switch (action.type) {
-    case 'setProperty':
-      changes = state && state.properties;
-      changes[action.key] = action.value;
-
-      return {
-        ...state,
-        properties: changes,
-      };
-
-    case 'loadProperties':
-      changes = { ...action.properties };
-
-      return {
-        ...state,
-        properties: changes,
-      };
-    case 'updateUser':
-      return {
-        ...state,
-        ...{ currentUser: action.user },
-      };
-
-    case 'updateCurrentPoll':
-      return {
-        ...state,
-        ...{ poll: { current: action.poll } },
-      };
-
-    case 'sendMessage':
-      messages.push(action.message);
-
-      return {
-        ...state,
-        messages,
-      };
-
-    case 'updatePolls':
-      return {
-        ...state,
-        ...{ poll: { items: action.polls } },
-      };
-
-    case 'setAction':
-      changes = { ...state.actions };
-      changes[action.key] = action.callback;
-
-      return {
-        ...state,
-        ...{ actions: changes },
-      };
-    default:
-      return state;
-  }
-};
-
 export const GlobalState = ({ children }) => {
   // Default global state
-  const [state, dispatch] = useReducer(reducer, {
-    properties: DEFAULT_PROPERTIES,
-    messages: [],
-    onlineCount: 1,
-    currentUser: {
-      image: DefaultUserImage.imageSource,
-      name: '',
-      email: 'not authorized',
+  const [state, dispatch] = useReducer(mainReducer, {
+    app: {
+      actions: {
+        submitUserForm: () => {},
+      },
+      properties: DEFAULT_PROPERTIES,
     },
-    actions: {
-      submitUserForm: () => {},
+    conversations: {
+      messages: [],
     },
-    poll: {},
+    user: {
+      current: {
+        image: DefaultUserImage.imageSource,
+        name: '',
+        email: 'not authorized',
+      },
+    },
+    poll: {
+      current: {},
+      items: [],
+    },
     socket,
+    // Should move onlineCount to conversations reducer
+    onlineCount: 1,
   });
 
   return (

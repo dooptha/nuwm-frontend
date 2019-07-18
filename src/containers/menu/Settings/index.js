@@ -12,7 +12,7 @@ import UserCard from '../../../components/settings/UserCard';
 import I18n from '../../../utils/i18n';
 
 const SettingsContainer = ({ navigation, themedStyle }) => {
-  const [context] = useGlobalState();
+  const [{ user }] = useGlobalState();
 
   const navigateTo = (routeName, params) => navigation.navigate({
     key: 'SettingsContainer',
@@ -21,14 +21,12 @@ const SettingsContainer = ({ navigation, themedStyle }) => {
   });
 
   const renderItem = ({ item }) => {
-    const { currentUser } = context;
-
     switch (item.type) {
       case 'User':
         return (
           <UserCard
-            user={currentUser}
-            onItemSelect={() => navigateTo(item.route, { currentUser })}
+            user={user.current}
+            onItemSelect={() => navigateTo(item.route, { currentUser: user.current })}
           />
         );
       case 'Empty':

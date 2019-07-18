@@ -97,7 +97,7 @@ const UserSettingsNavigationParams = {
               backIcon={ArrowIosBackFill}
               submitIcon={CheckmarkOutlineIcon}
               onBackPress={() => navigation.goBack(KEY_NAVIGATION_BACK)}
-              onSubmitPress={context[0].actions.submitUserForm}
+              onSubmitPress={context[0].app.actions.submitUserForm}
             />
           )
         }

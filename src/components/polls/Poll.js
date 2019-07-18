@@ -15,7 +15,7 @@ const Poll = ({
   onVote,
   style,
 }) => {
-  if (!poll) {
+  if (!poll || !poll.options) {
     return null;
   }
 

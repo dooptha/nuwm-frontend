@@ -37,8 +37,8 @@ class LanguagesContainer extends Component {
   }
 
   renderListItem(info) {
-    const [context] = this.context;
-    const selected = context.properties.language === info.item.locale;
+    const [{ app }] = this.context;
+    const selected = app.properties.language === info.item.locale;
 
     return (
       <ListItem

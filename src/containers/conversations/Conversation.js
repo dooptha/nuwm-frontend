@@ -75,7 +75,7 @@ class ConversationContainer extends Component {
 
   render() {
     const { newMessage } = this.state;
-    const [context] = this.context;
+    const [{ conversations }] = this.context;
     const { themedStyle } = this.props;
 
     return (
@@ -86,7 +86,7 @@ class ConversationContainer extends Component {
       >
         <Chat
           contentContainerStyle={themedStyle.chatContainer}
-          data={context.messages}
+          data={conversations.messages}
         />
         <View style={themedStyle.inputContainer}>
           <Input

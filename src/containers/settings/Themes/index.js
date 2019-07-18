@@ -48,8 +48,8 @@ class ThemesContainer extends Component {
   }
 
   renderListItem(info) {
-    const [context] = this.context;
-    const selected = context.properties.theme === info.item.title;
+    const [{ app }] = this.context;
+    const selected = app.properties.theme === info.item.title;
 
     return (
       <ListItem

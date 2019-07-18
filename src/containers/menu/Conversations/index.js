@@ -13,10 +13,8 @@ import { FloodCard } from '../../../components/conversations';
 import Poll from '../../../components/polls/Poll';
 
 const ConversationsContainer = ({ navigation, themedStyle }) => {
-  const [context] = useGlobalState();
-
+  const [{ onlineCount, poll }] = useGlobalState();
   const { routeName, params } = routes[0];
-  const { onlineCount, poll } = context;
 
   const navigateToChat = () => {
     navigation.navigate({

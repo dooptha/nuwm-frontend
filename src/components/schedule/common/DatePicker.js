@@ -22,7 +22,9 @@ class Name extends Component {
   }
 
   getCurrentLocale() {
-    switch (this.context[0].properties.language) {
+    const [{ app }] = this.context;
+    
+    switch (app.properties.language) {
       case 'ua': return 'uk';
       case 'ru': return 'ru';
       case 'en': return 'en-ua';

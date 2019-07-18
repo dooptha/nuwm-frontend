@@ -8,10 +8,15 @@ import {
   ListItem,
   Text,
 } from 'react-native-ui-kitten';
+import { ArrowForwardOutline } from '../../assets/icons';
 
 const style = StyleSheet.create({
   listItem: {
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
+  },
+  contentContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   avatar: {
     marginTop: 10,
@@ -25,6 +30,11 @@ const style = StyleSheet.create({
   userInfo: {
     paddingLeft: 20,
   },
+  arrow: {
+    tintColor: 'grey',
+    height: 24,
+    width: 24,
+  }
 });
 
 export default ({ user, onItemSelect }) => (
@@ -32,25 +42,28 @@ export default ({ user, onItemSelect }) => (
     style={style.listItem}
     onPress={() => onItemSelect()}
   >
-    <Avatar
-      style={style.avatar}
-      source={user.image}
-      shape="round"
-      size="giant"
-    />
-    <View style={style.userInfo}>
-      <Text
-        category="s1"
-        style={style.name}
-      >
-        {user.name}
-      </Text>
-      <Text
-        category="p1"
-        style={style.group}
-      >
-        {user.group}
-      </Text>
+    <View style={style.contentContainer}>
+      <Avatar
+        style={style.avatar}
+        source={user.image}
+        shape="round"
+        size="giant"
+      />
+      <View style={style.userInfo}>
+        <Text
+          category="s1"
+          style={style.name}
+        >
+          {user.name}
+        </Text>
+        <Text
+          category="p1"
+          style={style.group}
+        >
+          {user.group}
+        </Text>
+      </View>
     </View>
+    {ArrowForwardOutline(style.arrow)}
   </ListItem>
 );

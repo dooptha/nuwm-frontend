@@ -61,6 +61,6 @@ export default withStyles(TopNavigationBar, (theme) => ({
   safeAreaWithBorder: {
     backgroundColor: theme['background-basic-color-1'],
     borderBottomWidth: 2,
-    borderBottomColor: theme['background-basic-color-3'],
+    borderBottomColor: theme['background-basic-color-2'],
   },
 }));

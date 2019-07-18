@@ -11,6 +11,7 @@ const defaultStyle = StyleSheet.create({
   selectedIcon: {
     width: 24,
     height: 24,
+    tintColor: 'grey',
   },
 });
 

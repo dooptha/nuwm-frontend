@@ -42,8 +42,25 @@ const nuwmDark = {
   'text-disabled-color': '$color-basic-600',
 };
 
-export default {
+export const themes = {
   'Eva Light': light,
   'Eva Dark': dark,
   'NUWM Dark': nuwmDark,
+};
+
+export const customMapping = {
+  components: {
+    Radio: {
+      meta: {},
+      appearances: {
+        default: {
+          mapping: {
+            borderWidth: 2,
+            backgroundColor: 'color-warning-400',
+            borderColor: 'white',
+          },
+        },
+      },
+    },
+  },
 };

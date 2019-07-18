@@ -8,11 +8,15 @@ const mainReducer = ({
   poll,
   conversations,
   user,
+  onlineCount,
+  socket,
 }, action) => ({
   poll: pollReducer(poll, action),
   app: appReducer(app, action),
   user: userReducer(user, action),
   conversations: conversationsReducer(conversations, action),
+  onlineCount,
+  socket,
 });
 
 export default mainReducer;

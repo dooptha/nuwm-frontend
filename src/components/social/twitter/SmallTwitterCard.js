@@ -6,9 +6,9 @@ import {
   withStyles,
   Text,
 } from 'react-native-ui-kitten';
-import { InstagramIcon } from '../../../assets/icons';
+import { TwitterIcon } from '../../../assets/icons';
 
-const InstagramCard = ({
+const SmallTwitterCard = ({
   onPress,
   themedStyle,
 }) => (
@@ -16,22 +16,20 @@ const InstagramCard = ({
     style={themedStyle.container}
     onPress={onPress}
   >
-    {InstagramIcon(themedStyle.icon)}
-
-    <Text style={themedStyle.title} category="h1">Інстаграм #воднік</Text>
+    {TwitterIcon(themedStyle.icon)}
+    <Text style={themedStyle.title} category="h3">Ми в твіттері</Text>
   </TouchableOpacity>
 );
 
-export default withStyles(InstagramCard, () => ({
+export default withStyles(SmallTwitterCard, () => ({
   container: {
-    paddingVertical: 40,
-    paddingRight: 40,
-    paddingLeft: 25,
+    padding: 20,
+    backgroundColor: '#1DA1F2',
     borderRadius: 20,
     overflow: 'hidden',
-    backgroundColor: '#D42A76',
-    flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
+    aspectRatio: 1,
   },
   title: {
     color: 'white',

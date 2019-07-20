@@ -12,8 +12,8 @@ import { useGlobalState } from '../../../utils/context';
 import { FloodCard } from '../../../components/conversations';
 import Poll from '../../../components/polls/Poll';
 import {
-  InstagramCard,
-  TwitterCard,
+  SmallInstagramCard,
+  SmallTwitterCard,
 } from '../../../components/social';
 
 const ConversationsContainer = ({ navigation, themedStyle }) => {
@@ -51,11 +51,13 @@ const ConversationsContainer = ({ navigation, themedStyle }) => {
           />
         </View>
       </View>
-      <View style={themedStyle.instagramContainer}>
-        <InstagramCard onPress={() => navigateTo('instagram')} />
-      </View>
-      <View style={themedStyle.twitterContainer}>
-        <TwitterCard onPress={() => navigateTo('twitter')} />
+      <View style={themedStyle.socialContainer}>
+        <View style={themedStyle.instagramContainer}>
+          <SmallInstagramCard onPress={() => navigateTo('instagram')} />
+        </View>
+        <View style={themedStyle.twitterContainer}>
+          <SmallTwitterCard onPress={() => navigateTo('twitter')} />
+        </View>
       </View>
     </ScrollView>
   );
@@ -92,10 +94,16 @@ export default withStyles(ConversationsContainer, (theme) => ({
 
     elevation: 17,
   },
+  socialContainer: {
+    flexDirection: 'row',
+  },
   instagramContainer: {
+    flex: 1,
     marginBottom: 20,
+    marginRight: 10,
   },
   twitterContainer: {
-    marginBottom: 100,
+    flex: 1,
+    marginBottom: 50,
   },
 }));

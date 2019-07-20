@@ -293,7 +293,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = M6RV2RH6PN;
+						DevelopmentTeam = UMCUFFGWD9;
 						ProvisioningStyle = Automatic;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -636,7 +636,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = M6RV2RH6PN;
+				DEVELOPMENT_TEAM = UMCUFFGWD9;
 				INFOPLIST_FILE = NuwmApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -644,7 +644,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.NuwmApp14881123132313;
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.NuwmApp148811231asd32313;
 				PRODUCT_NAME = NuwmApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -660,7 +660,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = M6RV2RH6PN;
+				DEVELOPMENT_TEAM = UMCUFFGWD9;
 				INFOPLIST_FILE = NuwmApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -668,7 +668,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.NuwmApp14881123132313;
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.NuwmApp148811231asd32313;
 				PRODUCT_NAME = NuwmApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;

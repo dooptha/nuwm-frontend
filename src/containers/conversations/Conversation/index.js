@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { View, Platform } from 'react-native';
 import { withStyles, Input, Button } from 'react-native-ui-kitten';
-import { Conversation as Chat } from '../../components/conversations';
-import { AvoidKeyboard } from '../../components/common';
+import { Conversation as Chat } from '../../../components/conversations';
+import { AvoidKeyboard } from '../../../components/common';
 import {
   PaperPlaneIconFill,
-} from '../../assets/icons';
+} from '../../../assets/icons';
+import { StateContext } from '../../../utils/context';
+import { socket } from '../../../api/socket';
 
-import { StateContext } from '../../utils/context';
-import { socket } from '../../api/socket';
-
-class ConversationContainer extends Component {
+class Conversation extends Component {
   constructor(props) {
     super(props);
 
@@ -102,9 +101,9 @@ class ConversationContainer extends Component {
   }
 }
 
-ConversationContainer.contextType = StateContext;
+Conversation.contextType = StateContext;
 
-export default withStyles(ConversationContainer, (theme) => ({
+export default withStyles(Conversation, (theme) => ({
   container: {
     flex: 1,
   },

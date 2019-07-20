@@ -25,6 +25,7 @@
     "react-native-range-datepicker": "^1.8.2",
     "react-native-screens": "^1.0.0-alpha.22",
     "react-native-ui-kitten": "^4.1.0",
+    "react-native-webview": "^5.12.1",
     "react-navigation": "^3.11.0",
     "socket.io-client": "^2.2.0",
     "ws": ">=3.3.1"

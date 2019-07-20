@@ -6,17 +6,19 @@ import {
 import {
   withStyles,
 } from 'react-native-ui-kitten';
-import { routes } from './data';
+import routes from './data';
 import { useGlobalState } from '../../../utils/context';
 // import I18n from '../../../utils/i18n';
 import { FloodCard } from '../../../components/conversations';
 import Poll from '../../../components/polls/Poll';
+import TwitterCard from '../../../components/social/twitter/TwitterCard';
 
 const ConversationsContainer = ({ navigation, themedStyle }) => {
   const [{ onlineCount, poll }] = useGlobalState();
-  const { routeName, params } = routes[0];
 
-  const navigateToChat = () => {
+  const navigateTo = (routeKey) => {
+    const { routeName, params } = routes[routeKey];
+
     navigation.navigate({
       key: 'ConversationsContainer',
       routeName,
@@ -42,9 +44,12 @@ const ConversationsContainer = ({ navigation, themedStyle }) => {
         <View style={themedStyle.box}>
           <FloodCard
             onlineCount={onlineCount}
-            navigateToChat={navigateToChat}
+            navigateToChat={() => navigateTo('chat')}
           />
         </View>
+      </View>
+      <View style={themedStyle.twitterContainer}>
+        <TwitterCard onPress={() => navigateTo('twitter')} />
       </View>
     </ScrollView>
   );
@@ -63,9 +68,9 @@ export default withStyles(ConversationsContainer, (theme) => ({
   box: {
     borderRadius: 20,
     overflow: 'hidden',
+    marginBottom: 20,
   },
   pollContainer: {
-    marginBottom: 20,
   },
   poll: {
     backgroundColor: theme['color-warning-400'],
@@ -80,5 +85,8 @@ export default withStyles(ConversationsContainer, (theme) => ({
     shadowRadius: 11.14,
 
     elevation: 17,
+  },
+  twitterContainer: {
+    marginBottom: 200,
   },
 }));

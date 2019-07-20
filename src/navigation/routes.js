@@ -17,7 +17,10 @@ import {
   UserContainer,
   PollHistory,
 } from '../containers/settings';
-import ConversationContainer from '../containers/conversations/Conversation';
+import {
+  Conversation,
+  Twitter,
+} from '../containers/conversations';
 import {
   MenuNavigationOptions,
   ConversationNavigationOptions,
@@ -64,8 +67,12 @@ const SettingsNavigationMap = {
 
 const ConversationsNavigationMap = {
   Conversation: {
-    screen: ConversationContainer,
+    screen: Conversation,
     navigationOptions: ConversationNavigationOptions,
+  },
+  Twitter: {
+    screen: Twitter,
+    navigationOptions: MenuNavigationOptions,
   },
 };
 

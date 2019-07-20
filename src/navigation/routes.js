@@ -20,6 +20,7 @@ import {
 import {
   Conversation,
   Twitter,
+  Instagram,
 } from '../containers/conversations';
 import {
   MenuNavigationOptions,
@@ -72,6 +73,10 @@ const ConversationsNavigationMap = {
   },
   Twitter: {
     screen: Twitter,
+    navigationOptions: MenuNavigationOptions,
+  },
+  Instagram: {
+    screen: Instagram,
     navigationOptions: MenuNavigationOptions,
   },
 };

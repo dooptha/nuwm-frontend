@@ -11,7 +11,10 @@ import { useGlobalState } from '../../../utils/context';
 // import I18n from '../../../utils/i18n';
 import { FloodCard } from '../../../components/conversations';
 import Poll from '../../../components/polls/Poll';
-import TwitterCard from '../../../components/social/twitter/TwitterCard';
+import {
+  InstagramCard,
+  TwitterCard,
+} from '../../../components/social';
 
 const ConversationsContainer = ({ navigation, themedStyle }) => {
   const [{ onlineCount, poll }] = useGlobalState();
@@ -47,6 +50,9 @@ const ConversationsContainer = ({ navigation, themedStyle }) => {
             navigateToChat={() => navigateTo('chat')}
           />
         </View>
+      </View>
+      <View style={themedStyle.instagramContainer}>
+        <InstagramCard onPress={() => navigateTo('instagram')} />
       </View>
       <View style={themedStyle.twitterContainer}>
         <TwitterCard onPress={() => navigateTo('twitter')} />
@@ -85,6 +91,9 @@ export default withStyles(ConversationsContainer, (theme) => ({
     shadowRadius: 11.14,
 
     elevation: 17,
+  },
+  instagramContainer: {
+    marginBottom: 20,
   },
   twitterContainer: {
     marginBottom: 200,

@@ -11,4 +11,7 @@ export default {
   twitter: {
     routeName: 'Twitter',
   },
+  instagram: {
+    routeName: 'Instagram',
+  },
 };

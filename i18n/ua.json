@@ -39,7 +39,9 @@
     "Language": "Мова",
     "DetailedLesson": "Деталі",
     "ScheduleList": "Розклад",
-    "User": "Користувач"
+    "User": "Користувач",
+    "Twitter": "Твіттер",
+    "Instagram": "Інстаграм"
   },
   "datePicker": {
     "Confirm": "Підтвердити",

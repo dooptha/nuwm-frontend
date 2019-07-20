@@ -123,3 +123,19 @@ export const TVFancyIcon = (color) => {
 
   return FancyIcon(source, color);
 }
+
+export const TwitterIcon = (style) => {
+  const source = {
+    imageSource: require('./eva/twitter.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const InstagramIcon = (style) => {
+  const source = {
+    imageSource: require('./instagram.png'),
+  };
+
+  return Icon(source, style);
+};

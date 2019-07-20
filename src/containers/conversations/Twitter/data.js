@@ -7,7 +7,7 @@ export default
     <meta name="apple-mobile-web-app-capable" content="yes">
   </head>
   <body>
-    <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/vladimirpihol/likes?ref_src=twsrc%5Etfw">Tweets Liked by @vladimirpihol</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/vladimirpihol/likes?ref_src=twsrc%5Etfw"></a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   </body>
 </html>
 `;

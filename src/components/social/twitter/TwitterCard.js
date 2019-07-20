@@ -6,6 +6,7 @@ import {
   withStyles,
   Text,
 } from 'react-native-ui-kitten';
+import { TwitterIcon } from '../../../assets/icons';
 
 const TwitterCard = ({
   onPress,
@@ -15,18 +16,29 @@ const TwitterCard = ({
     style={themedStyle.container}
     onPress={onPress}
   >
-    <Text style={themedStyle.title} category="h1">Tweets liked by pihol</Text>
+    {TwitterIcon(themedStyle.icon)}
+    <Text style={themedStyle.title} category="h1">Ми в твіттері</Text>
   </TouchableOpacity>
 );
 
 export default withStyles(TwitterCard, () => ({
   container: {
-    padding: 20,
+    paddingVertical: 40,
+    paddingRight: 40,
+    paddingLeft: 25,
     backgroundColor: '#1DA1F2',
     borderRadius: 20,
     overflow: 'hidden',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   title: {
     color: 'white',
+  },
+  icon: {
+    width: 50,
+    height: 50,
+    tintColor: 'white',
+    marginRight: 10,
   },
 }));

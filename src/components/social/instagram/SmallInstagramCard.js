@@ -6,60 +6,53 @@ import {
   withStyles,
   Text,
 } from 'react-native-ui-kitten';
-// import LinearGradient from 'react-native-linear-gradient';
+
+import LinearGradient from 'react-native-linear-gradient';
 import { InstagramIcon } from '../../../assets/icons';
 
-const MiniInstagramCard = ({
+const SmallInstagramCard = ({
   onPress,
   themedStyle,
 }) => (
+
+  <LinearGradient
+    style={themedStyle.box}
+    start={{ x: 0, y: 0 }}
+    end={{ x: 0, y: 1 }}
+    colors={['#8838A9', '#E5364F']}
+  >
   <TouchableOpacity
     style={themedStyle.container}
     onPress={onPress}
   >
     {InstagramIcon(themedStyle.icon)}
 
-    <Text style={themedStyle.title} category="h3">#воднік</Text>
+    <Text style={themedStyle.title} category="h6">#воднік</Text>
   </TouchableOpacity>
+  </LinearGradient>
 );
 
-export default withStyles(MiniInstagramCard, () => ({
+export default withStyles(SmallInstagramCard, () => ({
   box: {
-    padding: 20,
+    borderRadius: 20,
     overflow: 'hidden',
   },
   container: {
-    padding: 20,
+    paddingVertical: 20,
     borderRadius: 20,
     overflow: 'hidden',
-    backgroundColor: '#D42A76',
+    // backgroundColor: '#D42A76',
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    aspectRatio: 1,
   },
   title: {
     color: 'white',
   },
   icon: {
-    width: 50,
-    height: 50,
+    width: 24,
+    height: 24,
     tintColor: 'white',
-    marginRight: 10,
+    marginRight: 5,
   },
 }));
-
-// <LinearGradient
-//   style={themedStyle.box}
-//   start={{ x: 0.2, y: 1 }}
-//   end={{ x: 0.4, y: 0 }}
-//   colors={['#fdf497', '#fdf497', '#fd5949', '#d6249f', '#285AEB']}
-// >
-//   <TouchableOpacity
-//     style={themedStyle.container}
-//     onPress={onPress}
-//   >
-//     {InstagramIcon(themedStyle.icon)}
-//
-//     <Text style={themedStyle.title} category="h1">Інстаграм #воднік</Text>
-//   </TouchableOpacity>
-// </LinearGradient>

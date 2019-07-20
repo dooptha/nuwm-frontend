@@ -8,7 +8,7 @@ import {
 } from 'react-native-ui-kitten';
 import { TwitterIcon } from '../../../assets/icons';
 
-const TwitterCard = ({
+const SquareTwitterCard = ({
   onPress,
   themedStyle,
 }) => (
@@ -17,27 +17,27 @@ const TwitterCard = ({
     onPress={onPress}
   >
     {TwitterIcon(themedStyle.icon)}
-    <Text style={themedStyle.title} category="h6">#dooptha</Text>
+    <Text style={themedStyle.title} category="h3">Ми в твіттері</Text>
   </TouchableOpacity>
 );
 
-export default withStyles(TwitterCard, () => ({
+export default withStyles(SquareTwitterCard, () => ({
   container: {
-    paddingVertical: 20,
+    padding: 20,
     backgroundColor: '#1DA1F2',
     borderRadius: 20,
     overflow: 'hidden',
-    flexDirection: 'row',
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'center',
+    aspectRatio: 1,
   },
   title: {
     color: 'white',
   },
   icon: {
-    width: 24,
-    height: 24,
+    width: 50,
+    height: 50,
     tintColor: 'white',
-    marginRight: 5,
+    marginRight: 10,
   },
 }));

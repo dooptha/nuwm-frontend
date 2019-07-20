@@ -104,6 +104,6 @@ export default withStyles(ConversationsContainer, (theme) => ({
   },
   twitterContainer: {
     flex: 1,
-    marginBottom: 50,
+    marginBottom: 100,
   },
 }));

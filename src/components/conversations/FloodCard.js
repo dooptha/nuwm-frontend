@@ -17,37 +17,37 @@ const FloodCard = ({
   navigateToChat,
   onlineCount,
 }) => (
-  <View style={themedStyle.floodContainer}>
-    <View style={themedStyle.offset} />
-    <View style={themedStyle.avatarContainer}>
-      <Avatar
-        style={themedStyle.avatar}
-        source={FloodImage.imageSource}
-        shape="rounded"
-      />
-      <View style={themedStyle.textContainer}>
-        <View style={themedStyle.onlineContainer}>
-          <Text style={themedStyle.onlineText}>{onlineCount}</Text>
-          {PeopleIcon(themedStyle.onlineIcon)}
+  <TouchableOpacity onPress={navigateToChat}>
+    <View style={themedStyle.floodContainer}>
+      <View style={themedStyle.offset} />
+      <View style={themedStyle.avatarContainer}>
+        <Avatar
+          style={themedStyle.avatar}
+          source={FloodImage.imageSource}
+          shape="rounded"
+        />
+        <View style={themedStyle.textContainer}>
+          <View style={themedStyle.onlineContainer}>
+            <Text style={themedStyle.onlineText}>{onlineCount}</Text>
+            {PeopleIcon(themedStyle.onlineIcon)}
+          </View>
+          <Text category="h3">{I18n.t('flood.title')}</Text>
+          <Text
+            category="p1"
+            style={themedStyle.floodDescription}
+          >
+            {I18n.t('flood.description')}
+          </Text>
         </View>
-        <Text category="h3">{I18n.t('flood.title')}</Text>
-        <Text
-          category="p1"
-          style={themedStyle.floodDescription}
-        >
-          {I18n.t('flood.description')}
-        </Text>
+      </View>
+
+      <View
+        style={themedStyle.arrowContainer}
+      >
+        {ArrowForwardOutline(themedStyle.arrow)}
       </View>
     </View>
-
-    <View
-      style={themedStyle.arrowContainer}
-    >
-      <TouchableOpacity onPress={navigateToChat}>
-        {ArrowForwardOutline(themedStyle.arrow)}
-      </TouchableOpacity>
-    </View>
-  </View>
+  </TouchableOpacity>
 );
 
 export default withStyles(FloodCard, (theme) => ({

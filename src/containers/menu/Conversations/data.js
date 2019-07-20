@@ -1,11 +1,17 @@
-export const routes = [
-  {
+export default {
+  chat: {
     routeName: 'Conversation',
     params: {
       conversation: {
         id: '0',
-        title: 'Flood'
-      }
-    }
-  }
-]
+        title: 'Flood',
+      },
+    },
+  },
+  twitter: {
+    routeName: 'Twitter',
+  },
+  instagram: {
+    routeName: 'Instagram',
+  },
+};

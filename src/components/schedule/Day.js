@@ -28,7 +28,7 @@ class Day extends Component {
   render() {
     const { day, themedStyle } = this.props;
     const body = day.subjects.length > 0 ? this.renderAllSubjects() : null;
-    const date = moment(day.date).format('D MMMM');
+    const date = moment(day.date, 'DD.MM.YYYY').format('D MMMM');
 
     return (
       <View>

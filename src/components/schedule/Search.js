@@ -12,7 +12,7 @@ import FormInput from './common/Form/Input';
 import DatePickerMultiple from './common/DatePickerMultiple';
 import FormItem from './common/FormItem';
 
-class Search extends Component {
+export class Search extends Component {
   constructor(props) {
     super(props);
     this.localize = (t) => I18n.t(`timetable.search.${t}`);
@@ -35,6 +35,8 @@ class Search extends Component {
 
   findSubjects() {
     const searchData = this.getDate();
+
+    console.log(searchData);
 
     let isEnoughData = true;
 
@@ -68,25 +70,25 @@ class Search extends Component {
     return (
       <View style={themedStyle.searchContainer}>
         <ScrollView style={themedStyle.inputsContainer}>
-          <FormItem label="Дата">
+          <FormItem id="date" label="Дата">
             <DatePickerMultiple ref={(node) => { this.dateNode = node; }} />
           </FormItem>
 
-          <FormItem label={this.localize('Lecturer')}>
+          <FormItem id="lecturer" label={this.localize('Lecturer')}>
             <FormInput
               placeholder={this.localize('LecturerExample')}
               ref={(node) => { this.lecturerNode = node; }}
             />
           </FormItem>
 
-          <FormItem label={this.localize('Group')}>
+          <FormItem id="group" label={this.localize('Group')}>
             <FormInput
               placeholder={this.localize('GroupExample')}
               ref={(node) => { this.groupNode = node; }}
             />
           </FormItem>
 
-          <FormItem row label={this.localize('PracticsOnly')}>
+          <FormItem id="practics-only" row label={this.localize('PracticsOnly')}>
             <Toggle
               checked={practicsOnly}
               onChange={(v) => this.setState({ practicsOnly: v })}

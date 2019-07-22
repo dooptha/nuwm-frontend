@@ -3,10 +3,10 @@ import { View } from 'react-native';
 import { Tab, TabView, withStyles } from 'react-native-ui-kitten';
 import I18n from '../../utils/i18n';
 import Search from './Search';
-import Api from '../../api/schedule';
+import { getScheduleOnWeek } from '../../api/schedule';
 import ScheduleList from './ScheduleList';
 
-class Schedule extends Component {
+export class Schedule extends Component {
   state = {
     schedule: [],
     selectedIndex: 0,
@@ -23,7 +23,7 @@ class Schedule extends Component {
   }
 
   requestSchedule() {
-    Api.getScheduleOnWeek().then((data) => {
+    getScheduleOnWeek().then((data) => {
       this.setState({ refreshing: false, schedule: data });
     });
   }

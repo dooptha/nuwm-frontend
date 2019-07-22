@@ -30,6 +30,7 @@ class DatePickerWrapper extends Component {
 
 
   getCurrentLocale() {
+    if (!this.context) return 'ua';
     const [{ properties }] = this.context;
 
     switch (properties.language) {

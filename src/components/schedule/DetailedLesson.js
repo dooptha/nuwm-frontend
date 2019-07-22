@@ -35,7 +35,7 @@ class DetailedLesson extends Component {
 
   render() {
     const { navigation, themedStyle } = this.props;
-    const lesson = navigation.getParam('subject', 'NO-ID');
+    const lesson = navigation.state.params.subjectl;
     const {
       classroom,
       lecturer,

@@ -7,6 +7,7 @@ import {
   Text,
 } from 'react-native-ui-kitten';
 import { InstagramIcon } from '../../../assets/icons';
+import config from '../../../utils/config';
 
 const InstagramCard = ({
   onPress,
@@ -18,7 +19,10 @@ const InstagramCard = ({
   >
     {InstagramIcon(themedStyle.icon)}
 
-    <Text style={themedStyle.title} category="h1">Інстаграм #воднік</Text>
+    <Text style={themedStyle.title} category="h1">
+      #
+      {config.INSTAGRAM_HASHTAG}
+    </Text>
   </TouchableOpacity>
 );
 

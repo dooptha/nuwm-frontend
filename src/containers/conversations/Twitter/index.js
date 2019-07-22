@@ -4,7 +4,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import { WebView } from 'react-native-webview';
-import html from './data';
+import config from '../../../utils/config';
 
 const style = StyleSheet.create({
   loader: {
@@ -18,12 +18,16 @@ const style = StyleSheet.create({
   },
 });
 
-export default () => (
-  <WebView
-    originWhitelist={['*']}
-    allowsBackForwardNavigationGestures
-    startInLoadingState
-    renderLoading={() => <ActivityIndicator size="large" style = {style.loader} />}
-    source={{ uri: 'https://twitter.com/search?q=%23воднік&src=typd' }}
-  />
-);
+export default () => {
+  const renderIndicator = () => <ActivityIndicator size="large" style={style.loader} />;
+  const uri = `https://twitter.com/hashtag/${config.TWITTER_HASHTAG}?f=tweets&vertical=default&src=unkn`;
+
+  return (
+    <WebView
+      source={{ uri }}
+      renderLoading={renderIndicator}
+      allowsBackForwardNavigationGestures
+      startInLoadingState
+    />
+  );
+};

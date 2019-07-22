@@ -7,6 +7,7 @@ import {
   Text,
 } from 'react-native-ui-kitten';
 import { TwitterIcon } from '../../../assets/icons';
+import config from '../../../utils/config';
 
 const SquareTwitterCard = ({
   onPress,
@@ -17,7 +18,10 @@ const SquareTwitterCard = ({
     onPress={onPress}
   >
     {TwitterIcon(themedStyle.icon)}
-    <Text style={themedStyle.title} category="h3">Ми в твіттері</Text>
+    <Text style={themedStyle.title} category="h3">
+      #
+      {config.TWITTER_HASHTAG}
+    </Text>
   </TouchableOpacity>
 );
 

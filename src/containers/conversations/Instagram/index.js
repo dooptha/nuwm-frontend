@@ -4,6 +4,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import { WebView } from 'react-native-webview';
+import config from '../../../utils/config';
 
 const style = StyleSheet.create({
   loader: {
@@ -17,11 +18,16 @@ const style = StyleSheet.create({
   },
 });
 
-export default () => (
-  <WebView
-    allowsBackForwardNavigationGestures
-    source={{ uri: 'https://www.instagram.com/explore/tags/воднік/?hl=uk' }}
-    startInLoadingState
-    renderLoading={() => <ActivityIndicator size="large" style = {style.loader} />}
-  />
-);
+export default () => {
+  const renderIndicator = () => <ActivityIndicator size="large" style={style.loader} />;
+  const uri = `https://www.instagram.com/explore/tags/${config.INSTAGRAM_HASHTAG}/?hl=uk`;
+
+  return (
+    <WebView
+      source={{ uri }}
+      renderLoading={renderIndicator}
+      allowsBackForwardNavigationGestures
+      startInLoadingState
+    />
+  );
+};

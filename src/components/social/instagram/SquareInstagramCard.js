@@ -8,6 +8,7 @@ import {
 } from 'react-native-ui-kitten';
 // import LinearGradient from 'react-native-linear-gradient';
 import { InstagramIcon } from '../../../assets/icons';
+import config from '../../../utils/config';
 
 const SquareInstagramCard = ({
   onPress,
@@ -19,7 +20,10 @@ const SquareInstagramCard = ({
   >
     {InstagramIcon(themedStyle.icon)}
 
-    <Text style={themedStyle.title} category="h3">#воднік</Text>
+    <Text style={themedStyle.title} category="h3">
+      #
+      {config.INSTAGRAM_HASHTAG}
+    </Text>
   </TouchableOpacity>
 );
 

@@ -9,6 +9,7 @@ import {
 
 import LinearGradient from 'react-native-linear-gradient';
 import { InstagramIcon } from '../../../assets/icons';
+import config from '../../../utils/config';
 
 const SmallInstagramCard = ({
   onPress,
@@ -21,14 +22,17 @@ const SmallInstagramCard = ({
     end={{ x: 0, y: 1 }}
     colors={['#8838A9', '#E5364F']}
   >
-  <TouchableOpacity
-    style={themedStyle.container}
-    onPress={onPress}
-  >
-    {InstagramIcon(themedStyle.icon)}
+    <TouchableOpacity
+      style={themedStyle.container}
+      onPress={onPress}
+    >
+      {InstagramIcon(themedStyle.icon)}
 
-    <Text style={themedStyle.title} category="h6">#воднік</Text>
-  </TouchableOpacity>
+      <Text style={themedStyle.title} category="h6">
+        #
+        {config.INSTAGRAM_HASHTAG}
+      </Text>
+    </TouchableOpacity>
   </LinearGradient>
 );
 

@@ -5,7 +5,6 @@ import android.app.Application;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.BV.LinearGradient.LinearGradientPackage;
-import com.surajit.rnrg.RNRadialGradientPackage;
 import com.reactnativecommunity.webview.RNCWebViewPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.reactcommunity.rnlocalize.RNLocalizePackage;
@@ -34,6 +33,8 @@ public class MainApplication extends Application implements ReactApplication {
       packages.add(new RNGestureHandlerPackage());
       packages.add(new RNScreensPackage());
       packages.add(new AsyncStoragePackage());
+      packages.add(new RNCWebViewPackage());
+      packages.add(new LinearGradientPackage());
       return packages;
     }
 

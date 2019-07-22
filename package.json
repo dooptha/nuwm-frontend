@@ -7,7 +7,8 @@
     "test": "jest",
     "style": "eslint .",
     "ios": "react-native run-ios --simulator='iPhone 7'",
-    "android": "react-native run-android --deviceId=08e9b953"
+    "android": "react-native run-android --deviceId=08e9b953",
+    "postinstall": "npx jetify"
   },
   "dependencies": {
     "@eva-design/eva": "^1.0.1",

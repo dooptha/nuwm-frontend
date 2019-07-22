@@ -35,7 +35,7 @@ const ConversationsContainer = ({ navigation, themedStyle }) => {
 
   return (
     <ScrollView style={themedStyle.container}>
-      <View style={[themedStyle.pollContainer, themedStyle.box]}>
+      <View style={themedStyle.box}>
         <Poll
           style={themedStyle.poll}
           voted={false}
@@ -77,8 +77,6 @@ export default withStyles(ConversationsContainer, (theme) => ({
     borderRadius: 20,
     overflow: 'hidden',
     marginBottom: 20,
-  },
-  pollContainer: {
   },
   poll: {
     container: {

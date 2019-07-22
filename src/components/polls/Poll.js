@@ -19,20 +19,23 @@ const Poll = ({
     return null;
   }
 
+  // Workaround using that component as a list item
+  const styles = style[2] || style || {};
+
   const { question, options } = poll;
 
   return (
-    <View style={[themedStyle.container, style && style.container]}>
+    <View style={[themedStyle.container, styles.container]}>
       <Text
         category="h3"
-        style={[themedStyle.question, style && style.question]}
+        style={[themedStyle.question, styles.question]}
       >
         {question}
       </Text>
       {
         options.map((option, index) => (
           <Option
-            style={style && style.option}
+            style={styles.option}
             key={option.name}
             index={index}
             option={option}

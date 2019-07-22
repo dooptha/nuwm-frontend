@@ -16,7 +16,7 @@ import {
   SmallInstagramCard,
   SmallTwitterCard,
 } from '../../../components/social';
-import { getLastPoll } from '../../../api/poll';
+import { getLastPoll, vote } from '../../../api/poll';
 
 class ConversationsContainer extends Component {
   componentDidMount() {
@@ -24,7 +24,8 @@ class ConversationsContainer extends Component {
   }
 
   onVote(index) {
-    console.log('vote', index);
+    const [{ poll }, dispatch] = this.context;
+    vote(dispatch, poll.current, index);
   }
 
   loadData() {
@@ -60,7 +61,7 @@ class ConversationsContainer extends Component {
         <View style={themedStyle.box}>
           <Poll
             style={themedStyle.poll}
-            voted={false}
+            voted={poll.current.voted}
             poll={poll.current}
             onVote={(i) => this.onVote(i)}
           />
@@ -112,6 +113,9 @@ export default withStyles(ConversationsContainer, (theme) => ({
     option: {
       text: {
         color: 'white',
+      },
+      progressBar: {
+        backgroundColor: 'white',
       },
     },
   },

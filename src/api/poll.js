@@ -85,7 +85,7 @@ export function getLastPoll(dispatch) {
           type: 'loadCurrentPollSuccess',
           poll,
         });
-      }, 2000);
+      }, 1000);
     })
     .catch(() => dispatch({ type: 'loadCurrentPollFailure' }));
 }
@@ -100,7 +100,46 @@ export function getPolls(dispatch) {
           type: 'loadPollsSuccess',
           polls,
         });
-      }, 2000);
+      }, 1000);
     })
     .catch(() => dispatch({ type: 'loadPollssFailure' }));
+}
+
+async function voteRequest(p, i) {
+  return {
+    id: 0,
+    voted: true,
+    total: 110,
+    question: 'могут ли расеяне есть камни?',
+    options: [
+      {
+        name: 'Да',
+        value: 90,
+      },
+      {
+        name: 'Нет',
+        value: 10,
+      }],
+  }
+}
+
+export function vote(dispatch, p, index) {
+  dispatch({
+    type: 'vote',
+  });
+
+  voteRequest(p, index)
+    .then((poll) => {
+      setTimeout(() => {
+        dispatch({
+          type: 'voteSuccess',
+          poll,
+        });
+      }, 1000);
+    })
+    .catch(() => {
+      dispatch({
+        type: 'voteFailure',
+      });
+    });
 }

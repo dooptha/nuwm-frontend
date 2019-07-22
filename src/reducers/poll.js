@@ -38,6 +38,25 @@ const pollReducer = (state, action) => {
         isLoading: false,
       };
 
+    case 'vote':
+      return {
+        ...state,
+        isVoting: true,
+      };
+
+    case 'voteSuccess':
+      return {
+        ...state,
+        current: action.poll,
+        isVoting: false,
+      };
+
+    case 'voteFailure':
+      return {
+        ...state,
+        isVoting: false,
+      };
+
     default:
       return state;
   }

@@ -39,7 +39,8 @@
     "Language": "Язык",
     "DetailedLesson": "Детали",
     "ScheduleList": "Schedule",
-    "User": "Пользователь"
+    "User": "Пользователь",
+    "PollHistory": "Історія голосувань",
   },
   "datePicker": {
     "Confirm": "Подтвердить",

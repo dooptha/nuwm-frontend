@@ -41,6 +41,7 @@
     "ScheduleList": "Schedule",
     "User": "Пользователь",
     "PollHistory": "Історія голосувань",
+    "TimetableSettings": "Розклад",
   },
   "datePicker": {
     "Confirm": "Подтвердить",

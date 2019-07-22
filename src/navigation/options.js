@@ -106,6 +106,29 @@ const UserSettingsNavigationParams = {
   },
 };
 
+const TimetableSettingsNavigationParams = {
+  header: ({ navigation }) => {
+    const { routeName } = getCurrentRouteState(navigation);
+
+    return (
+      <StateContext.Consumer>
+        {
+          (context) => (
+            <TopNavigationBar
+              border
+              title={I18n.t(`routes.${routeName}`)}
+              backIcon={ArrowIosBackFill}
+              submitIcon={CheckmarkOutlineIcon}
+              onBackPress={() => navigation.goBack(KEY_NAVIGATION_BACK)}
+              onSubmitPress={context[0].app.actions.submitTimetableForm}
+            />
+          )
+        }
+      </StateContext.Consumer>
+    );
+  },
+};
+
 export const MenuNavigationOptions = {
   ...MenuTopNavigationParams,
 };
@@ -120,4 +143,8 @@ export const ConversationNavigationOptions = {
 
 export const UserSettingsNavigationOptions = {
   ...UserSettingsNavigationParams,
+};
+
+export const TimetableSettingsNavigationOptions = {
+  ...TimetableSettingsNavigationParams,
 };

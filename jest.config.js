@@ -1,6 +1,6 @@
 module.exports = {
   preset: 'react-native',
-  collectCoverage: true,
+  collectCoverage: false,
   moduleFileExtensions: ['js', 'jsx', 'json'],
   bail: 1,
   moduleDirectories: ['node_modules'],
@@ -9,5 +9,4 @@ module.exports = {
   },
   setupFilesAfterEnv: ['<rootDir>/tests/setup.js'],
   transformIgnorePatterns: ['node_modules/(?!(jest-)?react-native)'],
-  coveragePathIgnorePatterns: ['/node_modules/', '/tests'],
 };

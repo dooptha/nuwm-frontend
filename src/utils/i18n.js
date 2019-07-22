@@ -10,6 +10,8 @@ if (Array.isArray(locales)) {
   I18n.locale = locales[0].languageTag;
 }
 
+I18n.defaultLocale = 'en';
+
 // Use default locale for fallbacks
 I18n.fallbacks = false;
 

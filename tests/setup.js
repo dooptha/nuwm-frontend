@@ -2,6 +2,7 @@ import 'react-native';
 import 'jest-enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Enzyme from 'enzyme';
+import MockAsyncStorage from 'mock-async-storage';
 
 const { JSDOM } = require('jsdom');
 
@@ -22,6 +23,10 @@ global.navigator = {
 };
 
 copyProps(window, global);
+
+const mockImpl = new MockAsyncStorage();
+jest.mock('@react-native-community/async-storage', () => mockImpl);
+jest.mock('react-native-localize');
 
 Enzyme.configure({ adapter: new Adapter() });
 console.error = (message) => message;

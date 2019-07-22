@@ -7,6 +7,7 @@ module.exports = {
     "es6": true,
     "mocha": true
   },
+  "plugins": ["jest"],
   "rules": {
     // "valid-jsdoc": ["error", {
     //   "requireReturn": true,
@@ -26,6 +27,9 @@ module.exports = {
     "react/prop-types": [0],
     "arrow-parens": [2, "always"],
     "class-methods-use-this": [0]
+  },
+  "env": {
+    "jest/globals": true
   },
   "overrides": [
       {

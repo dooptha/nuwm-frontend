@@ -1,7 +1,7 @@
 module.exports = {
   preset: 'react-native',
   collectCoverage: true,
-  moduleFileExtensions: ['js', 'jsx'],
+  moduleFileExtensions: ['js', 'jsx', 'json'],
   bail: 1,
   moduleDirectories: ['node_modules'],
   transform: {

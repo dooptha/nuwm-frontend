@@ -4,7 +4,7 @@ const apiEndpoint = __DEV__ ? 'localhost:3000' : 'production_api';
 export default {
   API_ENDPOINT: apiEndpoint,
   USE_DEFAULT_PROPERTIES: false,
-  INITIAL_ROUTE_NAME: 'Settings',
+  INITIAL_ROUTE_NAME: 'Settings', // Timetable Conversations Settings
   INSTAGRAM_HASHTAG: 'нувгп',
   TWITTER_HASHTAG: 'нувгп',
 };

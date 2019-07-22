@@ -12,9 +12,9 @@ export async function fetchLastPoll() {
       },
       {
         name: 'Нет',
-        value: 10
-      }]
-  }
+        value: 10,
+      }],
+  };
 }
 
 export async function fetchPolls() {
@@ -26,8 +26,8 @@ export async function fetchPolls() {
         name: 'Да',
       },
       {
-        name: 'Нет'
-      }]
+        name: 'Нет',
+      }],
   },
   {
     id: 1,
@@ -37,8 +37,8 @@ export async function fetchPolls() {
         name: 'Да',
       },
       {
-        name: 'Нет'
-      }]
+        name: 'Нет',
+      }],
   },
   {
     id: 2,
@@ -48,8 +48,8 @@ export async function fetchPolls() {
         name: 'Да',
       },
       {
-        name: 'Нет'
-      }]
+        name: 'Нет',
+      }],
   },
   {
     id: 3,
@@ -59,8 +59,8 @@ export async function fetchPolls() {
         name: 'Да',
       },
       {
-        name: 'Нет'
-      }]
+        name: 'Нет',
+      }],
   },
   {
     id: 4,
@@ -70,29 +70,37 @@ export async function fetchPolls() {
         name: 'Да',
       },
       {
-        name: 'Нет'
-      }]
-  }]
+        name: 'Нет',
+      }],
+  }];
 }
 
 export function getLastPoll(dispatch) {
+  dispatch({ type: 'loadCurrentPoll' });
+
   fetchLastPoll()
     .then((poll) => {
-      dispatch({
-        type: 'updateCurrentPoll',
-        poll,
-      });
+      setTimeout(() => {
+        dispatch({
+          type: 'loadCurrentPollSuccess',
+          poll,
+        });
+      }, 2000);
     })
-    .catch((e) => console.error(e));
+    .catch(() => dispatch({ type: 'loadCurrentPollFailure' }));
 }
 
 export function getPolls(dispatch) {
+  dispatch({ type: 'loadPolls' });
+
   fetchPolls()
     .then((polls) => {
-      dispatch({
-        type: 'updatePolls',
-        polls,
-      });
+      setTimeout(() => {
+        dispatch({
+          type: 'loadPollsSuccess',
+          polls,
+        });
+      }, 2000);
     })
-    .catch((e) => console.error(e));
+    .catch(() => dispatch({ type: 'loadPollssFailure' }));
 }

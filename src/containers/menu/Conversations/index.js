@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   View,
   ScrollView,
+  RefreshControl,
 } from 'react-native';
 import {
   withStyles,
 } from 'react-native-ui-kitten';
 import routes from './data';
-import { useGlobalState } from '../../../utils/context';
+import { StateContext } from '../../../utils/context';
 // import I18n from '../../../utils/i18n';
 import { FloodCard } from '../../../components/conversations';
 import Poll from '../../../components/polls/Poll';
@@ -15,54 +16,77 @@ import {
   SmallInstagramCard,
   SmallTwitterCard,
 } from '../../../components/social';
+import { getLastPoll } from '../../../api/poll';
 
-const ConversationsContainer = ({ navigation, themedStyle }) => {
-  const [{ onlineCount, poll }] = useGlobalState();
+class ConversationsContainer extends Component {
+  componentDidMount() {
+    this.loadData();
+  }
 
-  const navigateTo = (routeKey) => {
+  onVote(index) {
+    console.log('vote', index);
+  }
+
+  loadData() {
+    const [, dispatch] = this.context;
+    getLastPoll(dispatch);
+  }
+
+  navigateTo(routeKey) {
     const { routeName, params } = routes[routeKey];
+    const { navigation } = this.props;
 
     navigation.navigate({
       key: 'ConversationsContainer',
       routeName,
       params,
     });
-  };
+  }
 
-  const onVote = (index) => {
-    console.log('vote', index);
-  };
+  render() {
+    const { themedStyle } = this.props;
+    const [{ poll, onlineCount }] = this.context;
 
-  return (
-    <ScrollView style={themedStyle.container}>
-      <View style={themedStyle.box}>
-        <Poll
-          style={themedStyle.poll}
-          voted={false}
-          poll={poll.current}
-          onVote={(i) => onVote(i)}
-        />
-      </View>
-      <View style={themedStyle.floodShadowBox}>
+    return (
+      <ScrollView
+        style={themedStyle.container}
+        refreshControl={(
+          <RefreshControl
+            refreshing={poll.isLoading}
+            onRefresh={() => this.loadData()}
+          />
+        )}
+      >
         <View style={themedStyle.box}>
-          <FloodCard
-            onlineCount={onlineCount}
-            navigateToChat={() => navigateTo('chat')}
+          <Poll
+            style={themedStyle.poll}
+            voted={false}
+            poll={poll.current}
+            onVote={(i) => this.onVote(i)}
           />
         </View>
-      </View>
-      <View style={themedStyle.socialContainer}>
-        <View style={themedStyle.instagramContainer}>
-          <SmallInstagramCard onPress={() => navigateTo('instagram')} />
+        <View style={themedStyle.floodShadowBox}>
+          <View style={themedStyle.box}>
+            <FloodCard
+              onlineCount={onlineCount}
+              navigateToChat={() => this.navigateTo('chat')}
+            />
+          </View>
         </View>
-        <View style={themedStyle.twitterContainer}>
-          <SmallTwitterCard onPress={() => navigateTo('twitter')} />
+        <View style={themedStyle.socialContainer}>
+          <View style={themedStyle.instagramContainer}>
+            <SmallInstagramCard onPress={() => this.navigateTo('instagram')} />
+          </View>
+          <View style={themedStyle.twitterContainer}>
+            <SmallTwitterCard onPress={() => this.navigateTo('twitter')} />
+          </View>
         </View>
-      </View>
-    </ScrollView>
-  );
-};
+      </ScrollView>
+    );
+  }
+}
 
+ConversationsContainer.contextType = StateContext;
 
 export default withStyles(ConversationsContainer, (theme) => ({
   container: {

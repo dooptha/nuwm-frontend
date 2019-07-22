@@ -13,7 +13,7 @@ export const getScheduleOnWeek = () => {
     .then((res) => res.data.schedule)
     .catch((err) => {
       console.log(err);
-      return err;
+      return [];
     });
 };
 

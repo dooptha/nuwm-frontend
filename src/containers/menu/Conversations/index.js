@@ -81,7 +81,17 @@ export default withStyles(ConversationsContainer, (theme) => ({
   pollContainer: {
   },
   poll: {
-    backgroundColor: theme['color-warning-400'],
+    container: {
+      backgroundColor: theme['color-warning-400'],
+    },
+    question: {
+      color: 'white',
+    },
+    option: {
+      text: {
+        color: 'white',
+      },
+    },
   },
   floodShadowBox: {
     shadowColor: '#000',

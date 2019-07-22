@@ -7,6 +7,7 @@ import {
 } from 'react-native-ui-kitten';
 
 const Option = ({
+  style,
   voted,
   option,
   themedStyle,
@@ -29,7 +30,7 @@ const Option = ({
 
     <Text
       category="s1"
-      style={themedStyle.textStyle}
+      style={style && style.text}
     >
       {option.name}
     </Text>
@@ -49,8 +50,5 @@ export default withStyles(Option, (theme) => ({
   },
   radio: {
     color: theme['color-warning-400'],
-  },
-  textStyle: {
-    color: 'white',
   },
 }));

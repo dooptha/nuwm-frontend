@@ -22,16 +22,17 @@ const Poll = ({
   const { question, options } = poll;
 
   return (
-    <View style={[themedStyle.container, style]}>
+    <View style={[themedStyle.container, style && style.container]}>
       <Text
         category="h3"
-        style={themedStyle.question}
+        style={[themedStyle.question, style && style.question]}
       >
         {question}
       </Text>
       {
         options.map((option, index) => (
           <Option
+            style={style && style.option}
             key={option.name}
             index={index}
             option={option}
@@ -54,6 +55,5 @@ export default withStyles(Poll, (theme) => ({
   },
   question: {
     marginBottom: 10,
-    color: 'white',
   },
 }));

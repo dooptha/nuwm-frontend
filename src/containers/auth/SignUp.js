@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import {
+  View,
+  ActivityIndicator,
+} from 'react-native';
 import {
   Input,
   Text,
@@ -8,8 +11,8 @@ import {
 } from 'react-native-ui-kitten';
 import { AvoidKeyboard } from '../../components/common';
 import { StateContext } from '../../utils/context';
-import { storeObject } from '../../utils/storage';
 import I18n from '../../utils/i18n';
+import { signUp } from '../../api/user';
 
 class SignUp extends Component {
   constructor(props) {
@@ -38,21 +41,17 @@ class SignUp extends Component {
   submitForm() {
     const [, dispatch] = this.context;
     const { name, group } = this.state;
-    const user = { name, group };
-    dispatch({
-      type: 'updateUser',
-      user,
-    });
-
-    // Should store user after successful validation on server
-    storeObject('user', user);
-
-    // Should navigate to app after successful validation on server
     const { navigation } = this.props;
-    navigation.navigate('App');
+
+    signUp(dispatch, navigation, { name, group });
+  }
+
+  renderIndicator(shouldRender) {
+    return shouldRender ? <ActivityIndicator /> : null;
   }
 
   render() {
+    const [{ user }] = this.context;
     const { name, group } = this.state;
     const { themedStyle } = this.props;
 
@@ -87,13 +86,19 @@ class SignUp extends Component {
           ref={(input) => this.setInputRef(input, 'group')}
         />
         <View style={themedStyle.buttonContainer}>
-          <Button
-            style={themedStyle.button}
-            disabled={!this.canSubmitForm()}
-            onPress={() => this.submitForm()}
-          >
-            {I18n.t('SignUp.submit')}
-          </Button>
+          <View style={{ flex: 1 }} />
+          <View style={{ flex: 2 }}>
+            <Button
+              disabled={!this.canSubmitForm() || user.isLoading}
+              onPress={() => this.submitForm()}
+            >
+              {I18n.t('SignUp.submit')}
+            </Button>
+          </View>
+
+          <View style={themedStyle.indicator}>
+            {this.renderIndicator(user.isLoading)}
+          </View>
         </View>
       </AvoidKeyboard>
     );
@@ -120,5 +125,11 @@ export default withStyles(SignUp, (theme) => ({
   },
   buttonContainer: {
     paddingTop: 20,
+    flexDirection: 'row',
+  },
+  indicator: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 }));

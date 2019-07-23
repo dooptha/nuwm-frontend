@@ -37,6 +37,7 @@
     "Cancel": "Отменить"
   },
   "timetable": {
+    "no-lesson": "Нету пар, можно идти в батлу",
     "tabs": {
       "Search": "Поиск",
       "Today": "Сегодня",
@@ -56,6 +57,21 @@
       "To": "По",
       "OnlyDay": "День",
       "Range": "Промежуток"
+    },
+    "datepicker":{
+      "OK": "Готово",
+      "Start": "Начало",
+      "End": "Конец",
+      "Choose Date": "Выберите дату"
+    },
+    "lesson": {
+      "name": "Предмет",
+      "classroom": "Аудитория",
+      "lecturer": "Припеподаватель",
+      "subgroup": "Группа",
+      "streams_type": "Подгруппа",
+      "time": "Время",
+      "type": "Тип"
     }
   },
   "flood": {

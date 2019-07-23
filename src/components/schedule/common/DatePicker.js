@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'react-native-ui-kitten';
+import I18n from '../../../utils/i18n';
 import DatePicker from '../../../libs/react-native-date-ranges';
 import { StateContext } from '../../../utils/context';
 
@@ -15,6 +16,7 @@ export class DatePickerWrapper extends Component {
     super(props);
 
     const { mode } = this.props;
+    this.localize = (t) => I18n.t(`timetable.datepicker.${t}`);
 
     this.placeholders = {
       range: '...        ->         ...',
@@ -91,10 +93,10 @@ export class DatePickerWrapper extends Component {
 
       // locales
         local={this.getCurrentLocale()}
-        markText="Выберите Дату"
-        ButtonText="Готово"
-        startDateLabel="Старт"
-        endDateLabel="Конец"
+        markText={this.localize('Choose Date')}
+        ButtonText={this.localize('OK')}
+        startDateLabel={this.localize('Start')}
+        endDateLabel={this.localize('End')}
 
         outFormat="DD MMMM"
         returnFormat="DD.MM.YYYY"

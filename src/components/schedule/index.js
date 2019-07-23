@@ -9,7 +9,7 @@ import ScheduleList from './ScheduleList';
 export class Schedule extends Component {
   state = {
     schedule: [],
-    selectedIndex: 0,
+    selectedIndex: 1,
     refreshing: false,
   };
 

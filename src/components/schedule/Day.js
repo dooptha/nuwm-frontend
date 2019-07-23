@@ -29,11 +29,13 @@ class Day extends Component {
     const { day, themedStyle } = this.props;
     const body = day.subjects.length > 0 ? this.renderAllSubjects() : null;
     const date = moment(day.date, 'DD.MM.YYYY').format('D MMMM');
+    const week = moment(day.date, 'DD.MM.YYYY').format('dddd');
+    const UppercaseWeek = week.charAt(0).toUpperCase() + week.slice(1);
 
     return (
       <View>
         <View style={themedStyle.titleWrapper}>
-          <Text style={themedStyle.title}>{ day.dayName }</Text>
+          <Text style={themedStyle.title}>{ UppercaseWeek }</Text>
           <Text style={themedStyle.subtitle}>{ date }</Text>
         </View>
         <View style={themedStyle.body}>

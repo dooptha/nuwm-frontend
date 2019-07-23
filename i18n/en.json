@@ -37,6 +37,7 @@
     "Cancel": "Cancel"
   },
   "timetable": {
+    "no-lesson": "No lesson, you can go play",
     "tabs": {
       "Search": "Search",
       "Today": "Today",
@@ -56,6 +57,21 @@
       "To": "To",
       "OnlyDay": "Day",
       "Range": "Range"
+    },
+    "datepicker":{
+      "OK": "Ok",
+      "Start": "Start",
+      "End": "End",
+      "Choose Date": "Choose Date"
+    },
+    "lesson": {
+      "name": "Subject",
+      "classroom": "Classroom",
+      "lecturer": "Lecturer",
+      "subgroup": "Subgroup",
+      "streams_type": "Stream Type",
+      "time": "Time",
+      "type": "Type"
     }
   },
   "flood": {

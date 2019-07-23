@@ -37,6 +37,7 @@
     "Cancel": "Відмінити"
   },
   "timetable": {
+    "no-lesson": "Нема пар, можна в батлу",
     "tabs": {
       "Search": "Пошук",
       "Today": "Сьогодні",
@@ -56,6 +57,21 @@
       "To": "До",
       "OnlyDay": "День",
       "Range": "Проміжок"
+    },
+    "datepicker":{
+      "OK": "Готово",
+      "Start": "Початок",
+      "End": "Кінець",
+      "Choose Date": "Виберіть дату"
+    },
+    "lesson": {
+      "name": "Предмет",
+      "classroom": "Аудиторія",
+      "lecturer": "Викладач",
+      "subgroup": "Группа",
+      "streams_type": "Підгруппа",
+      "time": "Час",
+      "type": "Тип"
     }
   },
   "flood": {

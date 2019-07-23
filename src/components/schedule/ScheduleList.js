@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { View, ScrollView, RefreshControl } from 'react-native';
 import { withStyles, Text } from 'react-native-ui-kitten';
 import Day from './Day';
+import I18n from '../../utils/i18n';
 
 class ScheduleList extends Component {
   static defaultProps = {
@@ -24,7 +25,7 @@ class ScheduleList extends Component {
     return (
       <View style={themedStyle.messageWrapper}>
         <Text style={themedStyle.messageText}>
-          Нема пар, можна в батлу
+          { I18n.t('timetable.no-lesson') }
         </Text>
       </View>
     );

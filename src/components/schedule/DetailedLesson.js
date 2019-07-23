@@ -3,20 +3,18 @@ import { View } from 'react-native';
 import {
   Text, withStyles,
 } from 'react-native-ui-kitten';
+import I18n from '../../utils/i18n';
 
 class DetailedLesson extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+  localize(t) { return I18n.t(`timetable.lesson.${t}`); }
 
-  drawLine(data) {
+  drawRow(data) {
     const { themedStyle } = this.props;
     const { title, info } = data;
 
     if (info) {
       return (
-        <View style={themedStyle.list}>
+        <View key={info} style={themedStyle.list}>
           <Text
             style={themedStyle.title}
             appearance="hint"
@@ -35,7 +33,7 @@ class DetailedLesson extends Component {
 
   render() {
     const { navigation, themedStyle } = this.props;
-    const lesson = navigation.state.params.subjectl;
+    const lesson = navigation.state.params.subject;
     const {
       classroom,
       lecturer,
@@ -47,15 +45,15 @@ class DetailedLesson extends Component {
       name,
     } = lesson;
 
+    const quarry = {
+      name, classroom, lecturer, subgroup, streams_type, time, type,
+    };
+
     return (
       <View style={themedStyle.detailsWrapper}>
-        { this.drawLine({ title: 'Предмет', info: name }) }
-        { this.drawLine({ title: 'Аудиторія', info: classroom }) }
-        { this.drawLine({ title: 'Викладач', info: lecturer }) }
-        { this.drawLine({ title: 'Группа', info: subgroup }) }
-        { this.drawLine({ title: 'Пігруппа', info: streams_type }) }
-        { this.drawLine({ title: 'Час', info: time }) }
-        { this.drawLine({ title: 'Тип', info: type }) }
+        {
+          Object.keys(quarry).map((key) => this.drawRow({ title: this.localize(key), info: quarry[key] }))
+        }
       </View>
     );
   }

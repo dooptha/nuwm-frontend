@@ -14,29 +14,35 @@ const Poll = ({
   themedStyle,
   onVote,
   style,
+  votingFor,
 }) => {
   if (!poll || !poll.options) {
     return null;
   }
 
+  // Workaround using that component as a list item
+  const styles = style[2] || style || {};
+
   const { question, options } = poll;
 
   return (
-    <View style={[themedStyle.container, style]}>
+    <View style={[themedStyle.container, styles.container]}>
       <Text
         category="h3"
-        style={themedStyle.question}
+        style={[themedStyle.question, styles.question]}
       >
         {question}
       </Text>
       {
         options.map((option, index) => (
           <Option
+            style={styles.option}
             key={option.name}
             index={index}
             option={option}
             voted={voted}
             onVote={(i) => onVote(i)}
+            votingFor={votingFor}
           />
         ))
       }
@@ -54,6 +60,5 @@ export default withStyles(Poll, (theme) => ({
   },
   question: {
     marginBottom: 10,
-    color: 'white',
   },
 }));

@@ -1,15 +1,60 @@
 const pollReducer = (state, action) => {
   switch (action.type) {
-    case 'updateCurrentPoll':
+    case 'loadCurrentPoll':
+      return {
+        ...state,
+        isLoading: true,
+      };
+
+    case 'loadCurrentPollSuccess':
       return {
         ...state,
         current: action.poll,
+        isLoading: false,
       };
 
-    case 'updatePolls':
+    case 'loadCurrentPollFailure':
+      return {
+        ...state,
+        isLoading: false,
+      };
+
+    case 'loadPolls':
+      return {
+        ...state,
+        isLoading: true,
+      };
+
+    case 'loadPollsSuccess':
       return {
         ...state,
         items: action.polls,
+        isLoading: false,
+      };
+
+    case 'loadPollsFailure':
+      return {
+        ...state,
+        isLoading: false,
+      };
+
+    case 'vote':
+      return {
+        ...state,
+        votingFor: action.index,
+      };
+
+    case 'voteSuccess':
+      return {
+        ...state,
+        current: action.poll,
+        votingFor: undefined,
+      };
+
+    case 'voteFailure':
+      return {
+        ...state,
+        votingFor: undefined,
       };
 
     default:

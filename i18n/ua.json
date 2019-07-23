@@ -22,13 +22,13 @@
       "logOut": "Вийти"
     },
     "timetable": {
-      "title": "Timetable"
+      "title": "Розклад"
     },
     "questions": {
-      "title": "Ask guestion",
+      "title": "Задати запитання",
     },
     "polls": {
-      "title": "Polls history",
+      "title": "Історія голосування",
     }
   },
   "routes": {
@@ -41,7 +41,9 @@
     "ScheduleList": "Розклад",
     "User": "Користувач",
     "Twitter": "Твіттер",
-    "Instagram": "Інстаграм"
+    "Instagram": "Інстаграм",
+    "PollHistory": "Історія голосувань",
+    "TimetableSettings": "Розклад",
   },
   "datePicker": {
     "Confirm": "Підтвердити",

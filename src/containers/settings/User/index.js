@@ -5,9 +5,9 @@ import {
   Button,
   withStyles,
 } from 'react-native-ui-kitten';
-import { StateContext } from '../../utils/context';
-import { removeKey, storeObject } from '../../utils/storage';
-import I18n from '../../utils/i18n';
+import { StateContext } from '../../../utils/context';
+import { removeKey, storeObject } from '../../../utils/storage';
+import I18n from '../../../utils/i18n';
 
 class UserContainer extends Component {
   constructor(props) {
@@ -17,7 +17,6 @@ class UserContainer extends Component {
 
     this.state = {
       name: user.name,
-      group: user.group,
     };
   }
 
@@ -37,8 +36,8 @@ class UserContainer extends Component {
 
   onFormSubmit() {
     const [, dispatch] = this.context;
-    const { name, group } = this.state;
-    const user = { name, group };
+    const { name } = this.state;
+    const user = { name };
 
     dispatch({
       type: 'updateUser',
@@ -69,8 +68,10 @@ class UserContainer extends Component {
   }
 
   render() {
-    const { name, group } = this.state;
+    const [{ user }] = this.context;
+    const { name } = this.state;
     const { themedStyle } = this.props;
+
     return (
       <View style={themedStyle.container}>
         <Input
@@ -83,11 +84,10 @@ class UserContainer extends Component {
         />
         <Input
           style={themedStyle.input}
-          label={I18n.t('settings.user.group')}
-          name="group"
-          value={group}
-          onChangeText={(text) => this.onInputChange({ group: text })}
-          autoCapitalize="characters"
+          label="access-token"
+          name="accessToken"
+          value={user.current.accessToken}
+          disabled
         />
         <Button
           style={themedStyle.submitButton}

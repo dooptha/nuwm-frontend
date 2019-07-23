@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import {
+  View,
+  RefreshControl,
+} from 'react-native';
 import {
   List,
   withStyles,
@@ -11,31 +14,41 @@ import { getPolls } from '../../../api/poll';
 
 class PollHistory extends Component {
   componentDidMount() {
+    this.loadData();
+  }
+
+  loadData() {
     const [, dispatch] = this.context;
     getPolls(dispatch);
   }
 
   renderListItem(info) {
     const { themedStyle } = this.props;
+
     return (
       <Poll
-      style={themedStyle.poll}
-        voted
+        style={themedStyle.poll}
         poll={info.item}
+        voted
       />
     );
   }
 
   render() {
     const { themedStyle } = this.props;
-    const [context] = this.context;
-    const { poll } = context;
+    const [{ poll }] = this.context;
 
     return (
       <View style={themedStyle.container}>
         <List
           data={poll.items}
           renderItem={(i) => this.renderListItem(i)}
+          refreshControl={(
+            <RefreshControl
+              refreshing={poll.isLoading}
+              onRefresh={() => this.loadData()}
+            />
+          )}
         />
       </View>
     );
@@ -51,8 +64,10 @@ export default withStyles(PollHistory, (theme) => ({
     paddingHorizontal: 15,
   },
   poll: {
-    marginVertical: 5,
-    borderRadius: 20,
-    overflow: 'hidden',
+    container: {
+      marginVertical: 5,
+      borderRadius: 20,
+      overflow: 'hidden',
+    },
   },
 }));

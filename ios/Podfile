@@ -40,6 +40,8 @@ target 'NuwmApp' do
 
   pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
 
+  pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
+
   target 'NuwmAppTests' do
     inherit! :search_paths
     # Pods for testing

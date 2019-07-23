@@ -16,6 +16,7 @@ import {
   ThemesContainer,
   UserContainer,
   PollHistory,
+  TimetableSettings,
 } from '../containers/settings';
 import {
   Conversation,
@@ -27,6 +28,7 @@ import {
   ConversationNavigationOptions,
   SheduleNavigationOptions,
   UserSettingsNavigationOptions,
+  TimetableSettingsNavigationOptions,
 } from './options';
 import Schedule from '../components/schedule';
 import DetailedLesson from '../components/schedule/DetailedLesson';
@@ -63,6 +65,10 @@ const SettingsNavigationMap = {
   PollHistory: {
     screen: PollHistory,
     navigationOptions: MenuNavigationOptions,
+  },
+  TimetableSettings: {
+    screen: TimetableSettings,
+    navigationOptions: TimetableSettingsNavigationOptions,
   },
 };
 

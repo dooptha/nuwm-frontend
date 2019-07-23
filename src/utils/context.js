@@ -38,6 +38,7 @@ export const GlobalState = ({ children }) => {
     poll: {
       current: {},
       items: [],
+      isLoading: false,
     },
     socket,
     // Should move onlineCount to conversations reducer

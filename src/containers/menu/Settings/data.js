@@ -28,7 +28,7 @@ export default [
   },
   {
     title: 'settings.timetable.title',
-    route: 'Language',
+    route: 'TimetableSettings',
     icon: TimetableFancyIcon('#02DB8B'),
     type: 'Default',
   },

@@ -58,6 +58,7 @@ class LanguagesContainer extends Component {
         <List
           data={this.data}
           renderItem={this.renderListItem}
+          scrollEnabled={false}
         />
       </View>
     );

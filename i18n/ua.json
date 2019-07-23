@@ -25,7 +25,7 @@
       "title": "Розклад"
     },
     "questions": {
-      "title": "Задати запитання"
+      "title": "Зв'яжіться з нами",
     },
     "polls": {
       "title": "Історія голосування"
@@ -42,8 +42,9 @@
     "User": "Користувач",
     "Twitter": "Твіттер",
     "Instagram": "Інстаграм",
-    "PollHistory": "Історія голосувань",
-    "TimetableSettings": "Розклад"
+    "PollHistory": "Історія голосування",
+    "TimetableSettings": "Розклад",
+    "ContactUs": "Зв'яжіться з нами"
   },
   "datePicker": {
     "Confirm": "Підтвердити",
@@ -97,5 +98,23 @@
     "name": "Ім'я",
     "group": "Група",
     "submit": "Почати"
-  }
+  },
+  "contactUs": {
+    "title": "Dooptha",
+    "alert": "Відвідати обраний ресурс",
+    "open": "Так",
+    "cancel": "Ні",
+    "discord": {
+      "title": "Discord",
+      "description": "Приєднуйся до спільноти",
+    },
+    "github": {
+      "title": "Github",
+      "description": "Вихідний код застосунку",
+    },
+    "mail": {
+      "title": "Пошта",
+      "description": "Побажання та запитання",
+    }
+  },
 }

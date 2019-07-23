@@ -17,6 +17,7 @@ import {
   UserContainer,
   PollHistory,
   TimetableSettings,
+  ContactUs,
 } from '../containers/settings';
 import {
   Conversation,
@@ -69,6 +70,10 @@ const SettingsNavigationMap = {
   TimetableSettings: {
     screen: TimetableSettings,
     navigationOptions: TimetableSettingsNavigationOptions,
+  },
+  ContactUs: {
+    screen: ContactUs,
+    navigationOptions: MenuNavigationOptions,
   },
 };
 

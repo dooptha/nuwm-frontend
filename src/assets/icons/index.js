@@ -139,3 +139,27 @@ export const InstagramIcon = (style) => {
 
   return Icon(source, style);
 };
+
+export const DiscordIcon = (style) => {
+  const source = {
+    imageSource: require('./discord.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const GithubIcon = (style) => {
+  const source = {
+    imageSource: require('./github.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const EmailIcon = (style) => {
+  const source = {
+    imageSource: require('./eva/email.png'),
+  };
+
+  return Icon(source, style);
+};

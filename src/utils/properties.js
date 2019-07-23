@@ -3,6 +3,7 @@ import { getKey } from './storage';
 export const DEFAULT_PROPERTIES = {
   language: 'ua',
   theme: 'NUWM Dark',
+  group: 'ПМ-41',
 };
 
 export const getProperties = async (useDefaults) => {

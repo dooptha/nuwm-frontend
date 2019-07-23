@@ -1,10 +1,10 @@
 import io from 'socket.io-client';
 import config from '../utils/config';
 
-export const socket = io(config.API_ENDPOINT);
+export const socket = io(config.SOCKET_IO_ENDPOINT);
 
 export const socketEvents = ({ dispatch }) => {
-  socket.on('message:received', ({ message }) => (
+  socket.on('message:received', message => (
     dispatch({
       type: 'receiveMessage',
       message,

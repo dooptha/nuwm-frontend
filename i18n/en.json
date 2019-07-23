@@ -8,7 +8,7 @@
     "themes": {
         "title": "Theme",
         "anotherUserMessage": "Somebody once told me",
-        "currentUserMessage": "the world is gonna roll me",
+        "currentUserMessage": "the world is gonna roll me"
       },
     "languages": {
       "title": "Language",
@@ -25,10 +25,10 @@
       "title": "Timetable"
     },
     "questions": {
-      "title": "Ask guestion",
+      "title": "Ask guestion"
     },
     "polls": {
-      "title": "Polls history",
+      "title": "Polls history"
     }
   },
   "routes": {
@@ -41,13 +41,14 @@
     "ScheduleList": "Schedule",
     "User": "User",
     "PollHistory": "Історія голосувань",
-    "TimetableSettings": "Розклад",
+    "TimetableSettings": "Розклад"
   },
   "datePicker": {
     "Confirm": "Confirm",
     "Cancel": "Cancel"
   },
   "timetable": {
+    "no-lesson": "No lesson, you can go play",
     "tabs": {
       "Search": "Search",
       "Today": "Today",
@@ -67,6 +68,21 @@
       "To": "To",
       "OnlyDay": "Day",
       "Range": "Range"
+    },
+    "datepicker":{
+      "OK": "Ok",
+      "Start": "Start",
+      "End": "End",
+      "Choose Date": "Choose Date"
+    },
+    "lesson": {
+      "name": "Subject",
+      "classroom": "Classroom",
+      "lecturer": "Lecturer",
+      "subgroup": "Subgroup",
+      "streams_type": "Stream Type",
+      "time": "Time",
+      "type": "Type"
     }
   },
   "flood": {

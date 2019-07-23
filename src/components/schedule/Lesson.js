@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { ListItem } from 'react-native-ui-kitten';
 import { View } from 'react-native';
 import NavigationService from '../../navigation/NavigationService';
 
-export default class extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+export default class Lesson extends Component {
+  static defaultProps = {
+    subject: {
+      classroom: '-',
+      time: '-',
+      name: '-',
+    },
   }
 
   onPress() {
@@ -17,15 +21,17 @@ export default class extends Component {
 
   render() {
     const {
-      classroom,
-      /* lecturer,
-      subgroup,
-      streams_type,
-      lessonNum, */
-      time,
-      /* type, */
-      name,
-    } = this.props.subject;
+      subject: {
+        classroom,
+        /* lecturer,
+        subgroup,
+        streams_type,
+        lessonNum, */
+        time,
+        /* type, */
+        name,
+      },
+    } = this.props;
 
     return (
       <View>
@@ -38,3 +44,11 @@ export default class extends Component {
     );
   }
 }
+
+Lesson.propTypes = {
+  subject: PropTypes.shape({
+    classroom: PropTypes.string,
+    time: PropTypes.string,
+    name: PropTypes.string,
+  }),
+};

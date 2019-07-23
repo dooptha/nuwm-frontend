@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from 'react-native-ui-kitten';
+import I18n from '../../../utils/i18n';
 import DatePicker from '../../../libs/react-native-date-ranges';
 import { StateContext } from '../../../utils/context';
 
-class Name extends Component {
+export class DatePickerWrapper extends Component {
   static contextType = StateContext;
+
+  static defaultProps = {
+    mode: 'single',
+  }
 
   constructor(props) {
     super(props);
+
+    const { mode } = this.props;
+    this.localize = (t) => I18n.t(`timetable.datepicker.${t}`);
 
     this.placeholders = {
       range: '...        ->         ...',
@@ -15,15 +24,17 @@ class Name extends Component {
     };
 
     this.state = {
-      mode: this.props.mode || 'range',
+      mode: mode || 'range',
       startDate: null,
       endDate: null,
     };
   }
 
+
   getCurrentLocale() {
+    if (!this.context) return 'ua';
     const [{ app }] = this.context;
-    
+
     switch (app.properties.language) {
       case 'ua': return 'uk';
       case 'ru': return 'ru';
@@ -49,7 +60,6 @@ class Name extends Component {
 
   switchPicker() {
     const { mode } = this.state;
-    console.log(this.getDate());
 
     this.datePickerNode.setState({ selected: '', showContent: false });
     this.setState({
@@ -60,8 +70,7 @@ class Name extends Component {
   }
 
   render() {
-    const { themedStyle } = this.props;
-    const { mode } = this.state;
+    const { props: { themedStyle }, state: { mode } } = this;
 
     const placeholder = mode === 'range'
       ? this.placeholders.range : this.placeholders.single;
@@ -84,10 +93,10 @@ class Name extends Component {
 
       // locales
         local={this.getCurrentLocale()}
-        markText="Выберите Дату"
-        ButtonText="Готово"
-        startDateLabel="Старт"
-        endDateLabel="Конец"
+        markText={this.localize('Choose Date')}
+        ButtonText={this.localize('OK')}
+        startDateLabel={this.localize('Start')}
+        endDateLabel={this.localize('End')}
 
         outFormat="DD MMMM"
         returnFormat="DD.MM.YYYY"
@@ -103,7 +112,7 @@ class Name extends Component {
   }
 }
 
-export default withStyles(Name, (theme) => ({
+export default withStyles(DatePickerWrapper, (theme) => ({
   main: {
     backgroundColor: theme['background-basic-color-1'],
   },
@@ -125,3 +134,7 @@ export default withStyles(Name, (theme) => ({
     marginLeft: -5,
   },
 }));
+
+DatePickerWrapper.propTypes = {
+  mode: PropTypes.oneOf(['single', 'range']),
+};

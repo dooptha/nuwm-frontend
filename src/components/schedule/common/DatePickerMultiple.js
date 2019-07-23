@@ -30,7 +30,7 @@ class CustomDatePicker extends Component {
   }
 }
 
-export default withStyles(CustomDatePicker, (theme) => ({
+export default withStyles(CustomDatePicker, () => ({
   datePicker: {
     position: 'absolute',
     paddingLeft: '0%',

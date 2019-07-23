@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
+import PropTypes from 'prop-types';
 import { withStyles, Text } from 'react-native-ui-kitten';
 import moment from 'moment';
 import Lesson from './Lesson';
 
 class Day extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+  static defaultProps = {
+    day: {
+      subject: [],
+      date: 'none',
+      dayName: 'none',
+    },
   }
 
   renderAllSubjects() {
@@ -15,7 +19,7 @@ class Day extends Component {
 
     return day.subjects.map((subject) => (
       <Lesson
-        key={subject.day}
+        key={day.date + subject.time}
         subject={subject}
       />
     ));
@@ -24,12 +28,14 @@ class Day extends Component {
   render() {
     const { day, themedStyle } = this.props;
     const body = day.subjects.length > 0 ? this.renderAllSubjects() : null;
-    const date = moment(day.date).format('D MMMM');
+    const date = moment(day.date, 'DD.MM.YYYY').format('D MMMM');
+    const week = moment(day.date, 'DD.MM.YYYY').format('dddd');
+    const UppercaseWeek = week.charAt(0).toUpperCase() + week.slice(1);
 
     return (
       <View>
         <View style={themedStyle.titleWrapper}>
-          <Text style={themedStyle.title}>{ day.dayName }</Text>
+          <Text style={themedStyle.title}>{ UppercaseWeek }</Text>
           <Text style={themedStyle.subtitle}>{ date }</Text>
         </View>
         <View style={themedStyle.body}>
@@ -59,3 +65,11 @@ export default withStyles(Day, (theme) => ({
     marginLeft: 15,
   },
 }));
+
+Day.propTypes = {
+  day: PropTypes.shape({
+    subjects: PropTypes.array,
+    date: PropTypes.string,
+    dayName: PropTypes.string,
+  }),
+};

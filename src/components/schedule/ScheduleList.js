@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { View, ScrollView, RefreshControl } from 'react-native';
 import { withStyles, Text } from 'react-native-ui-kitten';
 import Day from './Day';
+import I18n from '../../utils/i18n';
 
 class ScheduleList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+  static defaultProps = {
+    refreshing: false,
+    onRefresh: () => {},
+    schedule: [],
+    navigation: {
+      state: {
+        params: {
+          schedule: [],
+        },
+      },
+    },
   }
 
   renderNoContentMessage() {
@@ -15,7 +25,7 @@ class ScheduleList extends Component {
     return (
       <View style={themedStyle.messageWrapper}>
         <Text style={themedStyle.messageText}>
-          Нема пар, можна в батлу
+          { I18n.t('timetable.no-lesson') }
         </Text>
       </View>
     );
@@ -51,13 +61,14 @@ class ScheduleList extends Component {
   }
 
   render() {
-    console.log(this.props);
+    const { props, props: { navigation } } = this;
 
-    if (this.props.schedule) {
+    // schedule could be passed by props or by navigation
+    if (props.schedule.length > 0) {
       const { refreshing, onRefresh, schedule } = this.props;
       return this.renderList({ refreshing, onRefresh, schedule });
     }
-    const { refreshing, onRefresh, schedule } = this.props.navigation.state.params;
+    const { refreshing, onRefresh, schedule } = navigation.state.params;
     return this.renderList({ refreshing, onRefresh, schedule });
   }
 }
@@ -76,3 +87,16 @@ export default withStyles(ScheduleList, (theme) => ({
     alignItems: 'center',
   },
 }));
+
+ScheduleList.propTypes = {
+  refreshing: PropTypes.bool,
+  onRefresh: PropTypes.func,
+  schedule: PropTypes.array,
+  navigation: PropTypes.shape({
+    state: PropTypes.shape({
+      params: PropTypes.shape({
+        schedule: PropTypes.array,
+      }),
+    }),
+  }),
+};

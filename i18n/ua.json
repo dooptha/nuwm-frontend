@@ -25,7 +25,7 @@
       "title": "Розклад"
     },
     "questions": {
-      "title": "Зв'яжіться з нами",
+      "title": "Зв'яжіться з нами"
     },
     "polls": {
       "title": "Історія голосування"
@@ -106,15 +106,15 @@
     "cancel": "Ні",
     "discord": {
       "title": "Discord",
-      "description": "Приєднуйся до спільноти",
+      "description": "Приєднуйся до спільноти"
     },
     "github": {
       "title": "Github",
-      "description": "Вихідний код застосунку",
+      "description": "Вихідний код застосунку"
     },
     "mail": {
       "title": "Пошта",
-      "description": "Побажання та запитання",
+      "description": "Побажання та запитання"
     }
-  },
+  }
 }

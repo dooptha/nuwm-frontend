@@ -36,6 +36,9 @@ module.exports = {
         "files": ["*.test.js", "tests/setup.js"],
         "rules": {
           "no-console": "off",
+          "one-var": "off",
+          "one-var-declaration-per-line": "off",
+          "import/no-named-as-default-member": "off"
         }
       }
     ],

@@ -7,7 +7,6 @@ import schedule from './data';
 import Lesson from '../../src/components/schedule/Lesson';
 import NavigationService from '../../src/navigation/NavigationService';
 
-
 describe('<Lesson> ', () => {
   it('should navigate to DetailedLesson after been pressed', () => {
     const navigate = jest.fn();

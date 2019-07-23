@@ -11,9 +11,6 @@ import Day from '../../src/components/schedule/Day';
 
 describe('ScheduleList ', () => {
   it('should render one <Day />', () => {
-    jest.mock('react-native-ui-kitten', { withStyles: () => {} });
-    jest.mock('react-native-ui-kitten/theme/style/styleConsumer.component.js', {});
-
     const wrapper = mount(
       <ApplicationProvider mapping={mapping} theme={themes['Eva Light']}>
         <ScheduleList schedule={schedule} />

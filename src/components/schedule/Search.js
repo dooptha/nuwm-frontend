@@ -12,7 +12,7 @@ import FormInput from './common/Form/Input';
 import DatePickerMultiple from './common/DatePickerMultiple';
 import FormItem from './common/FormItem';
 
-export class Search extends Component {
+class Search extends Component {
   constructor(props) {
     super(props);
     this.localize = (t) => I18n.t(`timetable.search.${t}`);
@@ -35,8 +35,6 @@ export class Search extends Component {
 
   findSubjects() {
     const searchData = this.getDate();
-
-    console.log(searchData);
 
     let isEnoughData = true;
 
@@ -70,11 +68,11 @@ export class Search extends Component {
     return (
       <View style={themedStyle.searchContainer}>
         <ScrollView style={themedStyle.inputsContainer}>
-          <FormItem id="date" label="Дата">
+          <FormItem className="date" label="Дата">
             <DatePickerMultiple ref={(node) => { this.dateNode = node; }} />
           </FormItem>
 
-          <FormItem id="lecturer" label={this.localize('Lecturer')}>
+          <FormItem className="lecturer" label={this.localize('Lecturer')}>
             <FormInput
               placeholder={this.localize('LecturerExample')}
               ref={(node) => { this.lecturerNode = node; }}
@@ -96,7 +94,7 @@ export class Search extends Component {
           </FormItem>
 
         </ScrollView>
-        <Button style={themedStyle.button} onPress={() => this.findSubjects()}>
+        <Button id="search-button" style={themedStyle.button} onPress={() => this.findSubjects()}>
           {this.localize('Search')}
         </Button>
       </View>

@@ -4,7 +4,7 @@ import { withStyles } from 'react-native-ui-kitten';
 import DatePicker from '../../../libs/react-native-date-ranges';
 import { StateContext } from '../../../utils/context';
 
-class DatePickerWrapper extends Component {
+export class DatePickerWrapper extends Component {
   static contextType = StateContext;
 
   static defaultProps = {

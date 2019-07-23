@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles, Input } from 'react-native-ui-kitten';
 
-class FormInput extends Component {
+export class FormInput extends Component {
   state = {
     value: '',
     status: 'primary',

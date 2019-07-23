@@ -21,7 +21,7 @@ describe('Schedule', () => {
     const requestSchedule = jest.fn();
     Schedule.prototype.requestSchedule = requestSchedule;
 
-    const wrapper = shallow(<Schedule themedStyle={{}} />);
+    shallow(<Schedule themedStyle={{}} />);
 
     expect(requestSchedule).toHaveBeenCalled();
   });

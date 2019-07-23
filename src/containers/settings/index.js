@@ -3,3 +3,4 @@ export ThemesContainer from './Themes';
 export UserContainer from './User';
 export PollHistory from './PollHistory';
 export TimetableSettings from './Timetable';
+export ContactUs from './ContactUs';

@@ -72,6 +72,7 @@ class ThemesContainer extends Component {
         <List
           data={themes}
           renderItem={(i) => this.renderListItem(i)}
+          scrollEnabled={false}
         />
       </View>
     );

@@ -43,7 +43,7 @@ export default [
   },
   {
     title: 'settings.questions.title',
-    route: 'Language',
+    route: 'ContactUs',
     icon: MessageFancyIcon('#FFA002'),
     type: 'Default',
   },

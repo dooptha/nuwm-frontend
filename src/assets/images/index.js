@@ -7,3 +7,7 @@ export const FloodImage = {
 export const DefaultUserImage = {
   imageSource: require('./source/flood.png'),
 }
+
+export const DoopthaImage = {
+  imageSource: require('./source/dooptha.png'),
+}

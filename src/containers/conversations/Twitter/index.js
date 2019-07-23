@@ -4,7 +4,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import { WebView } from 'react-native-webview';
-import config from '../../../utils/config';
+import config from '../../../../config';
 
 const style = StyleSheet.create({
   loader: {

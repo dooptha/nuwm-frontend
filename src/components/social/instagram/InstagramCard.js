@@ -7,7 +7,7 @@ import {
   Text,
 } from 'react-native-ui-kitten';
 import { InstagramIcon } from '../../../assets/icons';
-import config from '../../../utils/config';
+import config from '../../../../config';
 
 const InstagramCard = ({
   onPress,

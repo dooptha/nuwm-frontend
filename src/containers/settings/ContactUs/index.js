@@ -3,6 +3,7 @@ import {
   View,
   Linking,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import {
   withStyles,
@@ -21,18 +22,37 @@ const ContactUs = ({ themedStyle }) => {
     Linking.openURL(url);
   };
 
+  const confirmExit = (title, url) => {
+    Alert.alert(
+      I18n.t(title),
+      I18n.t('contactUs.alert'),
+      [
+        {
+          text: I18n.t('contactUs.open'),
+          onPress: () => openURL(url),
+        },
+        {
+          text: I18n.t('contactUs.cancel'),
+          style: 'cancel',
+        },
+      ],
+    );
+  };
+
   const renderItem = ({ item }) => (
     <ListItem
       title={I18n.t(item.title)}
       description={I18n.t(item.description)}
-      onPress={() => openURL(item.url)}
+      onPress={() => confirmExit(item.title, item.url)}
       icon={item.icon}
     />
   );
 
   return (
     <View style={themedStyle.container}>
-      <TouchableOpacity onPress={() => openURL(config.WEBSITE_URL)}>
+      <TouchableOpacity
+        onPress={() => confirmExit('contactUs.title', config.WEBSITE_URL)}
+      >
         <View style={themedStyle.avatarContainer}>
           <Avatar
             style={themedStyle.avatar}

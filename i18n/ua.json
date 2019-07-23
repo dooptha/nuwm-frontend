@@ -42,7 +42,7 @@
     "User": "Користувач",
     "Twitter": "Твіттер",
     "Instagram": "Інстаграм",
-    "PollHistory": "Історія голосувань",
+    "PollHistory": "Історія голосування",
     "TimetableSettings": "Розклад",
     "ContactUs": "Зв'яжіться з нами"
   },
@@ -85,17 +85,20 @@
   },
   "contactUs": {
     "title": "Dooptha",
+    "alert": "Відвідати обраний ресурс",
+    "open": "Так",
+    "cancel": "Ні",
     "discord": {
       "title": "Discord",
-      "description": "Connect to the community",
+      "description": "Приєднуйся до спільноти",
     },
     "github": {
       "title": "Github",
-      "description": "Repository",
+      "description": "Вихідний код застосунку",
     },
     "mail": {
-      "title": "Mail us",
-      "description": "Send email with your questions",
+      "title": "Пошта",
+      "description": "Побажання та запитання",
     }
   },
 }

@@ -57,12 +57,6 @@ export default ({ user, onItemSelect }) => (
         >
           {user.name}
         </Text>
-        <Text
-          category="p1"
-          style={style.group}
-        >
-          {user.group}
-        </Text>
       </View>
     </View>
     {ArrowForwardOutline(style.arrow)}

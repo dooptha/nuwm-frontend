@@ -1,5 +1,8 @@
 import React from 'react';
-import { View } from 'react-native';
+import {
+  View,
+  ActivityIndicator,
+} from 'react-native';
 import {
   withStyles,
   Radio,
@@ -13,26 +16,39 @@ const Option = ({
   themedStyle,
   onVote,
   index,
-  isVoting,
+  votingFor,
 }) => {
   const styles = style || {};
   const value = option.value || 0;
+
+  const renderRadioBox = () => (
+    voted
+      ? (
+        <Text style={styles.text}>
+          {value}
+          %
+        </Text>
+      ) : (
+        <Radio
+          style={themedStyle.radio}
+          onChange={() => onVote(index)}
+        />
+      )
+  );
+
+  const renderLoader = () => (
+    votingFor === index
+      ? <ActivityIndicator color="000000" />
+      : null
+  );
+
   return (
     <View style={themedStyle.container}>
       <View style={themedStyle.radioContainer}>
         {
-          voted
-            ? (
-              <Text style={styles.text}>
-                {value}
-                %
-              </Text>
-            ) : (
-              <Radio
-                style={themedStyle.radio}
-                onChange={() => onVote(index)}
-              />
-            )
+          votingFor !== undefined
+            ? renderLoader()
+            : renderRadioBox()
         }
       </View>
 

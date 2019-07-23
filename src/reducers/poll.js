@@ -41,20 +41,20 @@ const pollReducer = (state, action) => {
     case 'vote':
       return {
         ...state,
-        isVoting: true,
+        votingFor: action.index,
       };
 
     case 'voteSuccess':
       return {
         ...state,
         current: action.poll,
-        isVoting: false,
+        votingFor: undefined,
       };
 
     case 'voteFailure':
       return {
         ...state,
-        isVoting: false,
+        votingFor: undefined,
       };
 
     default:

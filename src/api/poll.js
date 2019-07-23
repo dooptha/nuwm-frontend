@@ -120,12 +120,13 @@ async function voteRequest(p, i) {
         name: 'Нет',
         value: 10,
       }],
-  }
+  };
 }
 
 export function vote(dispatch, p, index) {
   dispatch({
     type: 'vote',
+    index,
   });
 
   voteRequest(p, index)
@@ -135,7 +136,7 @@ export function vote(dispatch, p, index) {
           type: 'voteSuccess',
           poll,
         });
-      }, 1000);
+      }, 2000);
     })
     .catch(() => {
       dispatch({

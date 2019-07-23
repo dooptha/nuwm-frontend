@@ -14,6 +14,7 @@ const Poll = ({
   themedStyle,
   onVote,
   style,
+  votingFor,
 }) => {
   if (!poll || !poll.options) {
     return null;
@@ -41,6 +42,7 @@ const Poll = ({
             option={option}
             voted={voted}
             onVote={(i) => onVote(i)}
+            votingFor={votingFor}
           />
         ))
       }

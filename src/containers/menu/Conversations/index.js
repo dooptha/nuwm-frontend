@@ -64,6 +64,7 @@ class ConversationsContainer extends Component {
             voted={poll.current.voted}
             poll={poll.current}
             onVote={(i) => this.onVote(i)}
+            votingFor={poll.votingFor}
           />
         </View>
         <View style={themedStyle.floodShadowBox}>

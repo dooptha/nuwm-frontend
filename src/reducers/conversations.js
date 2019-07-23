@@ -10,7 +10,7 @@ const conversationsReducer = (state, action) => {
         messages,
       };
     case 'receiveMessage':
-      console.log(action.message);
+      console.log("Message received:", action.message);
       messages.push(action.message);
       return {...state};
 

@@ -1,6 +1,7 @@
 # nuwm-frontend
 This is React Native Android/IOS application designed for students by students of NATIONAL UNIVERSITY OF WATER AND ENVIRONMENTAL ENGINEERING.
 
+[![Build Status](https://travis-ci.com/dooptha/nuwm-frontend.svg?branch=develop)](https://travis-ci.com/dooptha/nuwm-frontend)
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
 

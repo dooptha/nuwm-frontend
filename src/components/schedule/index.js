@@ -24,7 +24,6 @@ export class Schedule extends Component {
 
   requestSchedule() {
     getScheduleOnWeek().then((data) => {
-      console.log(data);
       this.setState({ refreshing: false, schedule: data });
     });
   }

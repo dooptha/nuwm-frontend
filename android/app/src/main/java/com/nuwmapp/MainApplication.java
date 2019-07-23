@@ -36,6 +36,7 @@ public class MainApplication extends Application implements ReactApplication {
       packages.add(new AsyncStoragePackage());
       packages.add(new RNCWebViewPackage());
       packages.add(new LinearGradientPackage());
+      packages.add(new RNDeviceInfo());
       return packages;
     }
 

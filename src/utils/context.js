@@ -11,7 +11,7 @@ import { setLocale } from './i18n';
 import { socket, initSockets } from '../api/socket';
 import { DefaultUserImage } from '../assets/images';
 import { getObject } from './storage';
-import config from './config';
+import config from '../../config';
 import mainReducer from '../reducers';
 
 export const StateContext = createContext();

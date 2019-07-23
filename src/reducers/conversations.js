@@ -1,5 +1,5 @@
 const conversationsReducer = (state, action) => {
-  const { messages } = state;
+  const {messages} = state;
 
   switch (action.type) {
     case 'sendMessage':
@@ -9,6 +9,10 @@ const conversationsReducer = (state, action) => {
         ...state,
         messages,
       };
+    case 'receiveMessage':
+      console.log(action.message);
+      messages.push(action.message);
+      return {...state};
 
     default:
       return state;

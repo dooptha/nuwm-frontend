@@ -14,7 +14,7 @@ import {
 } from 'react-native-ui-kitten';
 import { DoopthaImage } from '../../../assets/images';
 import data from './data';
-import config from '../../../utils/config';
+import config from '../../../../config';
 import I18n from '../../../utils/i18n';
 
 const ContactUs = ({ themedStyle }) => {

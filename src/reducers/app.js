@@ -38,6 +38,12 @@ const appReducer = (state, action) => {
         socket: action.socket,
       };
 
+    case 'updateOnlineCounter':
+      return {
+        ...state,
+        onlineCounter: action.counter,
+      };
+
     default:
       return state;
   }

@@ -46,7 +46,7 @@ class ConversationsContainer extends Component {
 
   render() {
     const { themedStyle } = this.props;
-    const [{ poll, onlineCount }] = this.context;
+    const [{ poll, app }] = this.context;
 
     return (
       <ScrollView
@@ -70,7 +70,7 @@ class ConversationsContainer extends Component {
         <View style={themedStyle.floodShadowBox}>
           <View style={themedStyle.box}>
             <FloodCard
-              onlineCount={onlineCount}
+              onlineCount={app.onlineCounter}
               navigateToChat={() => this.navigateTo('chat')}
             />
           </View>

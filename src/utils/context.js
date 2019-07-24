@@ -27,15 +27,14 @@ export const GlobalState = ({ children }) => {
       },
       properties: DEFAULT_PROPERTIES,
       socket: undefined,
+      onlineCounter: 1,
     },
     conversations: {
       messages: [],
     },
     user: {
       current: {
-        image: DefaultUserImage.imageSource,
         name: '',
-        email: 'not authorized',
       },
     },
     poll: {
@@ -43,8 +42,6 @@ export const GlobalState = ({ children }) => {
       items: [],
       isLoading: false,
     },
-    // Should move onlineCount to conversations reducer
-    onlineCount: 1,
   });
 
   return (

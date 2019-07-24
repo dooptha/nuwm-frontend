@@ -7,6 +7,12 @@ export const socketEvents = ({ dispatch, socket }) => {
       type: 'receiveMessage',
       message,
     })));
+
+  socket.on('online:update', (counter) => (
+    dispatch({
+      type: 'updateOnlineCounter',
+      counter,
+    })));
 };
 
 export const initSockets = ({ dispatch, token }) => {

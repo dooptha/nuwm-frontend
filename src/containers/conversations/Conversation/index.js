@@ -7,7 +7,6 @@ import {
   PaperPlaneIconFill,
 } from '../../../assets/icons';
 import { StateContext } from '../../../utils/context';
-import { socket } from '../../../api/socket';
 
 class Conversation extends Component {
   constructor(props) {
@@ -35,16 +34,19 @@ class Conversation extends Component {
     const message = {
       body: newMessage,
       date: '13:00',
-      sender: true,
+      isSender: true,
     };
 
-    const [, dispatch] = this.context;
+    const [{ app, user }, dispatch] = this.context;
     dispatch({
       type: 'sendMessage',
       message,
     });
 
-    socket.emit('message:send', { message });
+    app.socket.emit('message:send', {
+      body: newMessage,
+      sender: user.current.name,
+    });
 
     this.setState({ newMessage: '' });
 

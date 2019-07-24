@@ -7,11 +7,11 @@ import RightMessage from './RightMessage';
 import LeftMessage from './LeftMessage';
 
 const MessageComponent = ({ message, themedStyle }) => {
-  const alignmentStyle = { justifyContent: message.sender ? 'flex-end' : 'flex-start' };
+  const alignmentStyle = { justifyContent: message.isSender ? 'flex-end' : 'flex-start' };
 
   return (
     <View style={[themedStyle.messageContainer, alignmentStyle]}>
-      {message.sender
+      {message.isSender
         ? <RightMessage message={message} />
         : <LeftMessage message={message} />
       }

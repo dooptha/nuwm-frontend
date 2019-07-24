@@ -9,7 +9,7 @@ import {
 } from 'react-native-ui-kitten';
 
 const MessageComponent = ({ message, themedStyle }) => {
-  const alignmentStyle = { justifyContent: message.sender ? 'flex-end' : 'flex-start' };
+  const alignmentStyle = { justifyContent: message.isSender ? 'flex-end' : 'flex-start' };
 
   return (
     <View style={[themedStyle.messageContainer, alignmentStyle]}>

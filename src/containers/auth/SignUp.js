@@ -39,11 +39,15 @@ class SignUp extends Component {
   }
 
   submitForm() {
-    const [, dispatch] = this.context;
+    const [{ app }, dispatch] = this.context;
     const { name, group } = this.state;
     const { navigation } = this.props;
 
-    signUp(dispatch, navigation, { name, group });
+    signUp(dispatch, navigation, {
+      deviceId: app.deviceId,
+      name,
+      group,
+    });
   }
 
   renderIndicator(shouldRender) {

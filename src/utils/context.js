@@ -3,16 +3,18 @@ import React, {
   useContext,
   useReducer,
 } from 'react';
+import DeviceInfo from 'react-native-device-info';
 import {
   getProperties,
   DEFAULT_PROPERTIES,
 } from './properties';
 import { setLocale } from './i18n';
-import { socket, initSockets } from '../api/socket';
+import { initSockets } from '../api/socket';
 import { DefaultUserImage } from '../assets/images';
 import { getObject } from './storage';
 import config from '../../config';
 import mainReducer from '../reducers';
+import { setAuthHeaders } from '../api';
 
 export const StateContext = createContext();
 
@@ -24,6 +26,7 @@ export const GlobalState = ({ children }) => {
         submitUserForm: () => {},
       },
       properties: DEFAULT_PROPERTIES,
+      socket: undefined,
     },
     conversations: {
       messages: [],
@@ -40,7 +43,6 @@ export const GlobalState = ({ children }) => {
       items: [],
       isLoading: false,
     },
-    socket,
     // Should move onlineCount to conversations reducer
     onlineCount: 1,
   });
@@ -53,16 +55,25 @@ export const GlobalState = ({ children }) => {
 };
 
 export const loadInitialData = async (dispatch) => {
-  const [properties, user] = await Promise.all([getProperties(config.USE_DEFAULT_PROPERTIES), getObject('user')]);
+  const [properties, user, deviceId] = await Promise.all([getProperties(config.USE_DEFAULT_PROPERTIES), getObject('user'), DeviceInfo.getUniqueID()]);
 
   setLocale(properties.language);
   dispatch({ type: 'loadProperties', properties });
 
   if (user) {
     dispatch({ type: 'updateUser', user });
+
+    // Set auth headers for api requests
+    setAuthHeaders(user.accessToken, deviceId);
+
+    const socket = initSockets({ dispatch, token: user.accessToken });
+    dispatch({
+      type: 'updateSocket',
+      socket,
+    });
   }
 
-  initSockets({ dispatch });
+  dispatch({ type: 'updateDeviceId', deviceId });
 
   return user;
 };

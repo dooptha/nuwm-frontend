@@ -16,7 +16,8 @@ const MessageComponent = ({ message, themedStyle }) => {
       <View style={[themedStyle.triangle, themedStyle.triangleLeft]} />
       <View style={themedStyle.cloudContainer} key={1}>
         <View style={[themedStyle.cloud, themedStyle.cloudRight]}>
-          <Text>{message.body}</Text>
+          <Text style={themedStyle.sender} category="c1">{message.sender}</Text>
+          <Text category="p1">{message.body}</Text>
         </View>
       </View>
       <Text
@@ -48,9 +49,6 @@ export default withStyles(MessageComponent, (theme) => ({
     alignItems: 'center',
   },
   cloud: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
     padding: 16,
     borderRadius: 16,
     maxWidth: Dimensions.get('window').width - 120,
@@ -63,5 +61,9 @@ export default withStyles(MessageComponent, (theme) => ({
   messageContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  sender: {
+    textAlign: 'left',
+    color: theme['text-disabled-color'],
   },
 }));

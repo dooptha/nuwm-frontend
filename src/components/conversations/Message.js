@@ -8,12 +8,13 @@ import LeftMessage from './LeftMessage';
 
 const MessageComponent = ({ message, themedStyle }) => {
   const alignmentStyle = { justifyContent: message.isSender ? 'flex-end' : 'flex-start' };
-
+  const rawDate = new Date(message.date);
+  const date = rawDate.toLocaleTimeString();
   return (
     <View style={[themedStyle.messageContainer, alignmentStyle]}>
       {message.isSender
-        ? <RightMessage message={message} />
-        : <LeftMessage message={message} />
+        ? <RightMessage message={{ ...message, date }} />
+        : <LeftMessage message={{ ...message, date }} />
       }
     </View>
   );

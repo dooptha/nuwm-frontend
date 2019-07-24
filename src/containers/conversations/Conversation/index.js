@@ -7,6 +7,7 @@ import {
   PaperPlaneIconFill,
 } from '../../../assets/icons';
 import { StateContext } from '../../../utils/context';
+import I18n from '../../../utils/i18n';
 
 class Conversation extends Component {
   constructor(props) {
@@ -33,7 +34,7 @@ class Conversation extends Component {
 
     const message = {
       body: newMessage,
-      date: '13:00',
+      date: new Date(),
       isSender: true,
     };
 
@@ -62,14 +63,15 @@ class Conversation extends Component {
 
   renderSendMessageButton() {
     const { themedStyle } = this.props;
+    const { newMessage } = this.state;
 
     return (
       <Button
         style={themedStyle.addMessageButton}
-        appearance="ghost"
-        size="large"
+        size="small"
         icon={PaperPlaneIconFill}
         onPress={this.sendMessage}
+        disabled={newMessage === ''}
       />
     );
   }
@@ -86,14 +88,15 @@ class Conversation extends Component {
         offset={this.keyboardOffset}
       >
         <Chat
-          contentContainerStyle={themedStyle.chatContainer}
+          style={themedStyle.chatContainer}
           data={conversations.messages}
         />
         <View style={themedStyle.inputContainer}>
           <Input
             style={themedStyle.messageInput}
+            size="small"
             value={newMessage}
-            placeholder="Message..."
+            placeholder={I18n.t('conversations.messagePlaceholder')}
             onChangeText={this.onNewMessageChange}
           />
           {this.renderSendMessageButton()}
@@ -111,23 +114,27 @@ export default withStyles(Conversation, (theme) => ({
   },
   chatContainer: {
     paddingHorizontal: 16,
-    paddingVertical: 12,
+    backgroundColor: theme['background-basic-color-3'],
   },
   inputContainer: {
-    padding: 16,
+    padding: 5,
+    paddingTop: 10,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: theme['background-basic-color-2'],
   },
   addMessageButton: {
-    width: 26,
-    height: 26,
-    borderRadius: 26,
+    alignItems: 'center',
+    width: 24,
+    height: 24,
+    borderRadius: 24,
+    marginBottom: 2,
   },
   messageInput: {
     flex: 1,
-    marginHorizontal: 8,
+    marginRight: 5,
     backgroundColor: theme['background-basic-color-1'],
+    borderRadius: 24,
   },
 }));

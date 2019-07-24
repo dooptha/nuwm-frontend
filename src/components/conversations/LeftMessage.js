@@ -42,7 +42,7 @@ export default withStyles(MessageComponent, (theme) => ({
   },
   triangleLeft: {
     transform: [{ rotate: '-90deg' }],
-    borderBottomColor: theme['background-basic-color-3'],
+    borderBottomColor: theme['background-basic-color-1'],
   },
   cloudContainer: {
     flexDirection: 'row',
@@ -50,12 +50,13 @@ export default withStyles(MessageComponent, (theme) => ({
   },
   cloud: {
     padding: 16,
+    paddingTop: 8,
     borderRadius: 16,
     maxWidth: Dimensions.get('window').width - 120,
   },
   cloudRight: {
     right: 3,
-    backgroundColor: theme['background-basic-color-3'],
+    backgroundColor: theme['background-basic-color-1'],
     marginRight: 16,
   },
   messageContainer: {

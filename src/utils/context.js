@@ -10,7 +10,6 @@ import {
 } from './properties';
 import { setLocale } from './i18n';
 import { initSockets } from '../api/socket';
-import { DefaultUserImage } from '../assets/images';
 import { getObject } from './storage';
 import config from '../../config';
 import mainReducer from '../reducers';

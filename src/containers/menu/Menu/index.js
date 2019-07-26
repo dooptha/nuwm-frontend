@@ -4,14 +4,14 @@ import {
   BottomNavigation,
   BottomNavigationTab,
 } from 'react-native-ui-kitten';
-import { SafeAreaView } from '../../navigation';
+import { SafeAreaView } from '../../../navigation';
 import {
   GridIconOutline,
   LayoutIconOutline,
   MessageCircleIcon,
-} from '../../assets/icons';
-import I18n from '../../utils/i18n';
-import { StateContext } from '../../utils/context';
+} from '../../../assets/icons';
+import I18n from '../../../utils/i18n';
+import { StateContext } from '../../../utils/context';
 
 class MenuContainer extends Component {
   constructor(props) {
@@ -41,14 +41,17 @@ class MenuContainer extends Component {
           onSelect={this.onTabSelect}
         >
           <BottomNavigationTab
+            titleStyle={themedStyle.text}
             title={I18n.t('tabs.timetable')}
             icon={LayoutIconOutline}
           />
           <BottomNavigationTab
+            titleStyle={themedStyle.text}
             title={I18n.t('tabs.chat')}
             icon={MessageCircleIcon}
           />
           <BottomNavigationTab
+            titleStyle={themedStyle.text}
             title={I18n.t('tabs.settings')}
             icon={GridIconOutline}
           />
@@ -63,5 +66,8 @@ MenuContainer.contextType = StateContext;
 export default withStyles(MenuContainer, (theme) => ({
   safeAreaContainer: {
     backgroundColor: theme['background-basic-color-1'],
+  },
+  text: {
+    fontFamily: 'Roboto',
   },
 }));

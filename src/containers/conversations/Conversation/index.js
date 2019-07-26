@@ -94,6 +94,7 @@ class Conversation extends Component {
         <View style={themedStyle.inputContainer}>
           <Input
             style={themedStyle.messageInput}
+            textStyle={themedStyle.text}
             size="small"
             value={newMessage}
             placeholder={I18n.t('conversations.messagePlaceholder')}
@@ -136,5 +137,8 @@ export default withStyles(Conversation, (theme) => ({
     marginRight: 5,
     backgroundColor: theme['background-basic-color-1'],
     borderRadius: 24,
+  },
+  text: {
+    fontFamily: 'Roboto',
   },
 }));

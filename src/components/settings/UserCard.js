@@ -23,8 +23,6 @@ const style = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
   },
-  name: {
-  },
   group: {
     color: 'grey',
   },
@@ -35,6 +33,9 @@ const style = StyleSheet.create({
     tintColor: 'grey',
     height: 24,
     width: 24,
+  },
+  text: {
+    fontFamily: 'Roboto',
   },
 });
 
@@ -53,7 +54,7 @@ export default ({ user, onItemSelect }) => (
       <View style={style.userInfo}>
         <Text
           category="s1"
-          style={style.name}
+          style={style.text}
         >
           {user.name}
         </Text>

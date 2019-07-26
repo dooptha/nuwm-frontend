@@ -13,6 +13,9 @@ const defaultStyle = StyleSheet.create({
     height: 24,
     tintColor: 'grey',
   },
+  text: {
+    fontFamily: 'Roboto',
+  },
 });
 
 export default ({
@@ -29,6 +32,8 @@ export default ({
   return (
     <ListItem
       style={style}
+      titleStyle={defaultStyle.text}
+      descriptionStyle={defaultStyle.text}
       title={title}
       onPress={() => onPress(index)}
       icon={renderIcon}

@@ -15,7 +15,7 @@ import { ArrowForwardOutline, PeopleIcon } from '../../assets/icons';
 const FloodCard = ({
   themedStyle,
   navigateToChat,
-  onlineCount,
+  onlineCounter,
 }) => (
   <TouchableOpacity onPress={navigateToChat}>
     <View style={themedStyle.floodContainer}>
@@ -28,13 +28,18 @@ const FloodCard = ({
         />
         <View style={themedStyle.textContainer}>
           <View style={themedStyle.onlineContainer}>
-            <Text style={themedStyle.onlineText}>{onlineCount}</Text>
+            <Text style={themedStyle.onlineText}>{onlineCounter}</Text>
             {PeopleIcon(themedStyle.onlineIcon)}
           </View>
-          <Text category="h3">{I18n.t('flood.title')}</Text>
           <Text
+            style={themedStyle.text}
+            category="h3"
+          >
+            {I18n.t('flood.title')}
+          </Text>
+          <Text
+            style={[themedStyle.floodDescription, themedStyle.text]}
             category="p1"
-            style={themedStyle.floodDescription}
           >
             {I18n.t('flood.description')}
           </Text>
@@ -108,5 +113,8 @@ export default withStyles(FloodCard, (theme) => ({
     width: 20,
     height: 20,
     tintColor: theme['text-disabled-color'],
+  },
+  text: {
+    fontFamily: 'Roboto',
   },
 }));

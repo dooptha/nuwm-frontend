@@ -43,6 +43,7 @@ export default withStyles(SquareInstagramCard, () => ({
   },
   title: {
     color: 'white',
+    fontFamily: 'Roboto',
   },
   icon: {
     width: 50,

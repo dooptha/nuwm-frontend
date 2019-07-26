@@ -76,6 +76,8 @@ class UserContainer extends Component {
       <View style={themedStyle.container}>
         <Input
           style={themedStyle.input}
+          labelStyle={themedStyle.text}
+          textStyle={themedStyle.text}
           label={I18n.t('settings.user.name')}
           name="name"
           value={name}
@@ -93,6 +95,7 @@ class UserContainer extends Component {
           style={themedStyle.submitButton}
           status="danger"
           onPress={() => this.logOut()}
+          textStyle={themedStyle.text}
         >
           {I18n.t('settings.user.logOut')}
         </Button>
@@ -117,5 +120,8 @@ export default withStyles(UserContainer, (theme) => ({
   },
   input: {
     paddingTop: 10,
+  },
+  text: {
+    fontFamily: 'Roboto',
   },
 }));

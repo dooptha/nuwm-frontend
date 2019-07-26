@@ -44,8 +44,7 @@ class TopNavigationBar extends Component {
         <TopNavigation
           alignment="center"
           title={title}
-          // titleStyle={textStyle.subtitle}
-          // subtitleStyle={textStyle.caption1}
+          titleStyle={themedStyle.title}
           leftControl={leftControlElement}
           rightControls={rightControlElement}
         />
@@ -62,5 +61,8 @@ export default withStyles(TopNavigationBar, (theme) => ({
     backgroundColor: theme['background-basic-color-1'],
     borderBottomWidth: 2,
     borderBottomColor: theme['background-basic-color-2'],
+  },
+  title: {
+    fontFamily: 'Roboto',
   },
 }));

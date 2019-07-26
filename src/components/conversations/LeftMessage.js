@@ -16,11 +16,22 @@ const MessageComponent = ({ message, themedStyle }) => {
       <View style={[themedStyle.triangle, themedStyle.triangleLeft]} />
       <View style={themedStyle.cloudContainer} key={1}>
         <View style={[themedStyle.cloud, themedStyle.cloudRight]}>
-          <Text style={themedStyle.sender} category="c1">{message.sender}</Text>
-          <Text category="p1">{message.body}</Text>
+          <Text
+            style={[themedStyle.sender, themedStyle.text]}
+            category="c1"
+          >
+            {message.sender}
+          </Text>
+          <Text
+            style={themedStyle.text}
+            category="p1"
+          >
+            {message.body}
+          </Text>
         </View>
       </View>
       <Text
+        style={themedStyle.text}
         key={0}
         appearance="hint"
         category="c1"
@@ -66,5 +77,8 @@ export default withStyles(MessageComponent, (theme) => ({
   sender: {
     textAlign: 'left',
     color: theme['text-disabled-color'],
+  },
+  text: {
+    fontFamily: 'Roboto',
   },
 }));

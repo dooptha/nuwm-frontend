@@ -39,6 +39,7 @@ export default withStyles(InstagramCard, () => ({
   },
   title: {
     color: 'white',
+    fontFamily: 'Roboto',
   },
   icon: {
     width: 50,

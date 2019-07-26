@@ -42,11 +42,7 @@ export function signUp(dispatch, navigation, data) {
       // Should navigate to app after successful validation on server
       navigation.navigate('App');
     })
-    .catch((e) => {
-      console.log('login error', e);
-
-      dispatch({ type: 'signUpFailure' });
-    });
+    .catch(() => dispatch({ type: 'signUpFailure' }));
 }
 
 export const logOut = () => {};

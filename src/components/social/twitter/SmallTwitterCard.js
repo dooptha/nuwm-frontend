@@ -14,6 +14,7 @@ const TwitterCard = ({
   themedStyle,
 }) => (
   <TouchableOpacity
+    activeOpacity={0.8}
     style={themedStyle.container}
     onPress={onPress}
   >

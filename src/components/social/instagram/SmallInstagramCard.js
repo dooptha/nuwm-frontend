@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   TouchableOpacity,
+  View,
 } from 'react-native';
 import {
   withStyles,
@@ -15,25 +16,26 @@ const SmallInstagramCard = ({
   onPress,
   themedStyle,
 }) => (
-
-  <LinearGradient
-    style={themedStyle.box}
-    start={{ x: 0, y: 0 }}
-    end={{ x: 0, y: 1 }}
-    colors={['#8838A9', '#E5364F']}
+  <TouchableOpacity
+    activeOpacity={0.8}
+    onPress={onPress}
   >
-    <TouchableOpacity
-      style={themedStyle.container}
-      onPress={onPress}
+    <LinearGradient
+      style={themedStyle.box}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 0, y: 1 }}
+      colors={['#8838A9', '#E5364F']}
     >
-      {InstagramIcon(themedStyle.icon)}
+      <View style={themedStyle.container}>
+        {InstagramIcon(themedStyle.icon)}
 
-      <Text style={themedStyle.title} category="h6">
-        #
-        {config.INSTAGRAM_HASHTAG}
-      </Text>
-    </TouchableOpacity>
-  </LinearGradient>
+        <Text style={themedStyle.title} category="h6">
+          #
+          {config.INSTAGRAM_HASHTAG}
+        </Text>
+      </View>
+    </LinearGradient>
+  </TouchableOpacity>
 );
 
 export default withStyles(SmallInstagramCard, () => ({

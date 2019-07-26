@@ -9,11 +9,12 @@ import {
 } from 'react-native-ui-kitten';
 
 const MessageComponent = ({ message, themedStyle }) => {
-  const alignmentStyle = { justifyContent: message.sender ? 'flex-end' : 'flex-start' };
+  const alignmentStyle = { justifyContent: message.isSender ? 'flex-end' : 'flex-start' };
 
   return (
     <View style={[themedStyle.messageContainer, alignmentStyle]}>
       <Text
+        style={themedStyle.text}
         key={0}
         appearance="hint"
         category="c1"
@@ -22,7 +23,7 @@ const MessageComponent = ({ message, themedStyle }) => {
       </Text>
       <View style={themedStyle.cloudContainer} key={1}>
         <View style={[themedStyle.cloud, themedStyle.cloudRight]}>
-          <Text>{message.body}</Text>
+          <Text style={themedStyle.text}>{message.body}</Text>
         </View>
         <View style={[themedStyle.triangle, themedStyle.triangleRight]} />
       </View>
@@ -61,5 +62,8 @@ export default withStyles(MessageComponent, (theme) => ({
   messageContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  text: {
+    fontFamily: 'Roboto',
   },
 }));

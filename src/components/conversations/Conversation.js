@@ -45,8 +45,11 @@ class Conversation extends Component {
   }
 
   render() {
+    const { style } = this.props;
+
     return (
       <List
+        style={style}
         ref={this.listRef}
         onContentSizeChange={() => this.onListContentSizeChange()}
         data={this.data}

@@ -59,6 +59,8 @@ class TimetableSettings extends Component {
       <View style={themedStyle.container}>
         <Input
           style={themedStyle.input}
+          labelStyle={themedStyle.text}
+          textStyle={themedStyle.text}
           label={I18n.t('settings.user.group')}
           name="group"
           value={group}
@@ -85,5 +87,8 @@ export default withStyles(TimetableSettings, (theme) => ({
   },
   input: {
     paddingTop: 10,
+  },
+  text: {
+    fontFamily: 'Roboto',
   },
 }));

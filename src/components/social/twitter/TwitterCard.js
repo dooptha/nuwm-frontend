@@ -38,6 +38,7 @@ export default withStyles(TwitterCard, () => ({
   },
   title: {
     color: 'white',
+    fontFamily: 'Roboto',
   },
   icon: {
     width: 50,

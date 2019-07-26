@@ -7,13 +7,14 @@ import RightMessage from './RightMessage';
 import LeftMessage from './LeftMessage';
 
 const MessageComponent = ({ message, themedStyle }) => {
-  const alignmentStyle = { justifyContent: message.sender ? 'flex-end' : 'flex-start' };
-
+  const alignmentStyle = { justifyContent: message.isSender ? 'flex-end' : 'flex-start' };
+  const rawDate = new Date(message.date);
+  const date = rawDate.toLocaleTimeString();
   return (
     <View style={[themedStyle.messageContainer, alignmentStyle]}>
-      {message.sender
-        ? <RightMessage message={message} />
-        : <LeftMessage message={message} />
+      {message.isSender
+        ? <RightMessage message={{ ...message, date }} />
+        : <LeftMessage message={{ ...message, date }} />
       }
     </View>
   );

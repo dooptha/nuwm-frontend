@@ -14,7 +14,7 @@ const appReducer = (state, action) => {
     case 'loadProperties':
       return {
         ...state,
-        ...{ properties: action.properties },
+        properties: action.properties,
       };
 
     case 'setAction':
@@ -24,6 +24,24 @@ const appReducer = (state, action) => {
       return {
         ...state,
         actions: changes,
+      };
+
+    case 'updateDeviceId':
+      return {
+        ...state,
+        deviceId: action.deviceId,
+      };
+
+    case 'updateSocket':
+      return {
+        ...state,
+        socket: action.socket,
+      };
+
+    case 'updateOnlineCounter':
+      return {
+        ...state,
+        onlineCounter: action.counter,
       };
 
     default:

@@ -24,7 +24,7 @@ const Option = ({
   const renderRadioBox = () => (
     voted
       ? (
-        <Text style={styles.text}>
+        <Text style={[styles.text, themedStyle.text]}>
           {value}
           %
         </Text>
@@ -55,7 +55,7 @@ const Option = ({
       <View style={themedStyle.textContainer}>
         <Text
           category="s1"
-          style={styles.text}
+          style={[styles.text, themedStyle.text]}
         >
           {option.name}
         </Text>
@@ -90,6 +90,7 @@ export default withStyles(Option, (theme) => ({
     height: 24,
     marginRight: 10,
     alignItems: 'flex-end',
+    justifyContent: 'center',
   },
   radio: {
     color: theme['color-warning-400'],
@@ -110,5 +111,8 @@ export default withStyles(Option, (theme) => ({
     borderRadius: 5,
     overflow: 'hidden',
     backgroundColor: theme['text-basic-color'],
+  },
+  text: {
+    fontFamily: 'Roboto',
   },
 }));

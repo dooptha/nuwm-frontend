@@ -60,5 +60,6 @@ export default withStyles(Poll, (theme) => ({
   },
   question: {
     marginBottom: 10,
+    fontFamily: 'Roboto',
   },
 }));

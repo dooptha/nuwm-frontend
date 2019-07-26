@@ -37,6 +37,7 @@ export default withStyles(SquareTwitterCard, () => ({
   },
   title: {
     color: 'white',
+    fontFamily: 'Roboto',
   },
   icon: {
     width: 50,

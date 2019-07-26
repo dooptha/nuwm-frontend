@@ -8,11 +8,15 @@ class SplashScreen extends Component {
     const currentUser = await loadInitialData(dispatch);
     const { navigation } = this.props;
 
-    if (currentUser && currentUser.name !== '') {
-      navigation.navigate('App');
-    } else {
-      navigation.navigate('SignUp');
-    }
+
+    // Force to load app for testing purposes
+    navigation.navigate('App');
+
+    // if (currentUser && currentUser.name !== '') {
+    //   navigation.navigate('App');
+    // } else {
+    //   navigation.navigate('SignUp');
+    // }
   }
 
   render() {

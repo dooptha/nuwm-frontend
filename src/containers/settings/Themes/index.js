@@ -22,13 +22,13 @@ class ThemesContainer extends Component {
     this.messages = [
       {
         body: I18n.t('settings.themes.anotherUserMessage'),
-        date: '13:00',
-        sender: false,
+        date: new Date(),
+        isSender: false,
       },
       {
         body: I18n.t('settings.themes.currentUserMessage'),
-        date: '13:02',
-        sender: true,
+        date: new Date(),
+        isSender: true,
       }];
   }
 

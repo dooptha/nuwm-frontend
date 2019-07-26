@@ -2,7 +2,7 @@ import { getKey } from './storage';
 
 export const DEFAULT_PROPERTIES = {
   language: 'ua',
-  theme: 'NUWM Dark',
+  theme: 'Eva Light',
   group: 'ПМ-41',
 };
 

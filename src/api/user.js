@@ -1,43 +1,48 @@
-// import axios from 'axios';
-// import config from '../utils/config';
-import DeviceInfo from 'react-native-device-info';
+import { api, setAuthHeaders } from '.';
+import { initSockets } from './socket';
 import { storeObject, storeKey } from '../utils/storage';
 
-export async function signUpUser(user) {
-  return {
-    accessToken: `token ${user.deviceId} ${user.name}`,
-    id: 'id',
-    name: user.name,
-  };
-}
-
-export async function signUp(dispatch, navigation, u) {
+export function signUp(dispatch, navigation, data) {
   dispatch({ type: 'signUp' });
 
-  signUpUser({ name: u.name, deviceId: DeviceInfo.getUniqueID() })
-    .then((user) => {
-      setTimeout(() => {
-        dispatch({
-          type: 'signUpSuccess',
-          user,
-        });
+  api.post('/login', { name: data.name, deviceId: data.deviceId })
+    .then((response) => {
+      const { token } = response.data;
+      const user = {
+        name: data.name,
+        accessToken: token,
+      };
 
-        // Should store user after successful validation on server
-        storeObject('user', user);
+      // Should store user after successful validation on server
+      dispatch({
+        type: 'signUpSuccess',
+        user,
+      });
 
-        // Should save group aftter succesful sign up
+      storeObject('user', user);
 
-        storeKey('group', u.group);
+      // Should save group aftter succesful sign up
+      dispatch({
+        type: 'setProperty',
+        key: 'group',
+        value: data.group,
+      });
 
-        dispatch({
-          type: 'setProperty',
-          key: 'group',
-          value: u.group,
-        });
+      storeKey('group', data.group);
 
-        // Should navigate to app after successful validation on server
-        navigation.navigate('App');
-      }, 2000);
+      // Set auth headers for future requests
+      setAuthHeaders(token, data.deviceId);
+
+      const socket = initSockets({ dispatch, token });
+      dispatch({
+        type: 'updateSocket',
+        socket,
+      });
+
+      // Should navigate to app after successful validation on server
+      navigation.navigate('App');
     })
     .catch(() => dispatch({ type: 'signUpFailure' }));
 }
+
+export const logOut = () => {};

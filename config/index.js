@@ -1,6 +1,7 @@
-// eslint-disable-next-line
-const apiEndpoint = __DEV__ ? 'localhost:3000' : 'production_api';
-const socketIoEndpoint = __DEV__ ? 'http://10.0.2.2:3000/flood' : 'production_api';
+/* eslint-disable */
+const apiEndpoint = __DEV__ ? 'http://localhost:3000' : 'production_api';
+const socketIoEndpoint = __DEV__ ? 'http://localhost:3000/flood' : 'production_api';
+/* eslint-enable */
 
 export default {
   API_ENDPOINT: apiEndpoint,

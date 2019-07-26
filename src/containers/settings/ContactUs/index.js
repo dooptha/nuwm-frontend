@@ -41,6 +41,8 @@ const ContactUs = ({ themedStyle }) => {
 
   const renderItem = ({ item }) => (
     <ListItem
+      titleStyle={themedStyle.text}
+      descriptionStyle={themedStyle.text}
       title={I18n.t(item.title)}
       description={I18n.t(item.description)}
       onPress={() => confirmExit(item.title, item.url)}
@@ -59,7 +61,12 @@ const ContactUs = ({ themedStyle }) => {
             source={DoopthaImage.imageSource}
             shape="square"
           />
-          <Text category="h2">{I18n.t('contactUs.title')}</Text>
+          <Text
+            style={themedStyle.text}
+            category="h2"
+          >
+            {I18n.t('contactUs.title')}
+          </Text>
         </View>
       </TouchableOpacity>
       <List
@@ -69,7 +76,7 @@ const ContactUs = ({ themedStyle }) => {
         scrollEnabled={false}
       />
       <Text
-        style={themedStyle.version}
+        style={[themedStyle.version, themedStyle.text]}
         category="s1"
       >
         NUWMApp v1.0.0
@@ -96,8 +103,12 @@ export default withStyles(ContactUs, (theme) => ({
   avatar: {
     width: 150,
     height: 150,
+    tintColor: theme['text-basic-color'],
   },
   list: {
     backgroundColor: theme['background-basic-color-1'],
+  },
+  text: {
+    fontFamily: 'Roboto',
   },
 }));

@@ -39,11 +39,15 @@ class SignUp extends Component {
   }
 
   submitForm() {
-    const [, dispatch] = this.context;
+    const [{ app }, dispatch] = this.context;
     const { name, group } = this.state;
     const { navigation } = this.props;
 
-    signUp(dispatch, navigation, { name, group });
+    signUp(dispatch, navigation, {
+      deviceId: app.deviceId,
+      name,
+      group,
+    });
   }
 
   renderIndicator(shouldRender) {
@@ -62,13 +66,15 @@ class SignUp extends Component {
         offset={() => 0}
       >
         <Text
-          style={themedStyle.title}
+          style={[themedStyle.title, themedStyle.text]}
           category="h6"
         >
           {I18n.t('SignUp.title')}
         </Text>
         <Input
           style={themedStyle.input}
+          labelStyle={themedStyle.text}
+          textStyle={themedStyle.text}
           label={I18n.t('SignUp.name')}
           name="name"
           returnKeyType="next"
@@ -78,6 +84,8 @@ class SignUp extends Component {
         />
         <Input
           style={themedStyle.input}
+          labelStyle={themedStyle.text}
+          textStyle={themedStyle.text}
           label={I18n.t('SignUp.group')}
           name="group"
           returnKeyType="done"
@@ -89,6 +97,7 @@ class SignUp extends Component {
           <View style={{ flex: 1 }} />
           <View style={{ flex: 2 }}>
             <Button
+              textStyle={themedStyle.text}
               disabled={!this.canSubmitForm() || user.isLoading}
               onPress={() => this.submitForm()}
             >
@@ -131,5 +140,8 @@ export default withStyles(SignUp, (theme) => ({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  text: {
+    fontFamily: 'Roboto',
   },
 }));

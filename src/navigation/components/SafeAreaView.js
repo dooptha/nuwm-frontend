@@ -1,25 +1,11 @@
-import React, { Component } from 'react';
-import { Platform } from 'react-native';
+import React from 'react';
 import { SafeAreaView as SafeAreaViewReactNavigation } from 'react-navigation';
 
-class SafeAreaView extends Component {
-  constructor(props) {
-    super(props);
-
-    // Additional heigh of buttom navigation bar
-    this.statusBarHeight = Platform.select({
-      ios: 0,
-      android: 0,
-    });
-  }
-
-  componentDidMount() {
-    SafeAreaViewReactNavigation.setStatusBarHeight(this.statusBarHeight);
-  }
-
-  render() {
-    return <SafeAreaViewReactNavigation {...this.props} />;
-  }
-}
+const SafeAreaView = (props) => (
+  <SafeAreaViewReactNavigation
+    forceInset={{ top: 'always' }}
+    {...props}
+  />
+);
 
 export default SafeAreaView;

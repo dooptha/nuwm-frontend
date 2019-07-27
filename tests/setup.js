@@ -26,7 +26,6 @@ copyProps(window, global);
 
 const mockImpl = new MockAsyncStorage();
 jest.mock('@react-native-community/async-storage', () => mockImpl);
-jest.mock('react-native-localize');
 
 Enzyme.configure({ adapter: new Adapter() });
 console.error = (message) => message;

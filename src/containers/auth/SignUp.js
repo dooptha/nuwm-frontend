@@ -14,7 +14,7 @@ import { StateContext } from '../../utils/context';
 import I18n from '../../utils/i18n';
 import { signUp } from '../../api/user';
 
-class SignUp extends Component {
+export class SignUp extends Component {
   constructor(props) {
     super(props);
 

@@ -75,7 +75,7 @@ export async function fetchPolls() {
   }];
 }
 
-export function getLastPoll(dispatch) {
+function getLastPoll(dispatch) {
   dispatch({ type: 'loadCurrentPoll' });
 
   fetchLastPoll()
@@ -90,7 +90,7 @@ export function getLastPoll(dispatch) {
     .catch(() => dispatch({ type: 'loadCurrentPollFailure' }));
 }
 
-export function getPolls(dispatch) {
+function getPolls(dispatch) {
   dispatch({ type: 'loadPolls' });
 
   fetchPolls()
@@ -123,7 +123,7 @@ async function voteRequest(p, i) {
   };
 }
 
-export function vote(dispatch, p, index) {
+function vote(dispatch, p, index) {
   dispatch({
     type: 'vote',
     index,
@@ -144,3 +144,9 @@ export function vote(dispatch, p, index) {
       });
     });
 }
+
+export default {
+  getLastPoll,
+  getPolls,
+  vote,
+};

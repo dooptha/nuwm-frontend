@@ -10,7 +10,7 @@ import {
 import { StateContext } from '../../../utils/context';
 // import I18n from '../../../utils/i18n';
 import Poll from '../../../components/polls/Poll';
-import { getPolls } from '../../../api/poll';
+import api from '../../../api/poll';
 
 class PollHistory extends Component {
   componentDidMount() {
@@ -19,7 +19,7 @@ class PollHistory extends Component {
 
   loadData() {
     const [, dispatch] = this.context;
-    getPolls(dispatch);
+    api.getPolls(dispatch);
   }
 
   renderListItem(info) {

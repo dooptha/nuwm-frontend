@@ -16,7 +16,7 @@ import {
   SmallInstagramCard,
   SmallTwitterCard,
 } from '../../../components/social';
-import { getLastPoll, vote } from '../../../api/poll';
+import api from '../../../api/poll';
 
 class ConversationsContainer extends Component {
   componentDidMount() {
@@ -25,12 +25,12 @@ class ConversationsContainer extends Component {
 
   onVote(index) {
     const [{ poll }, dispatch] = this.context;
-    vote(dispatch, poll.current, index);
+    api.vote(dispatch, poll.current, index);
   }
 
   loadData() {
     const [, dispatch] = this.context;
-    getLastPoll(dispatch);
+    api.getLastPoll(dispatch);
   }
 
   navigateTo(routeKey) {

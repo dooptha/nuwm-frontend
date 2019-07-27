@@ -13,6 +13,7 @@ import {
 import { StateContext } from '../../../utils/context';
 import I18n from '../../../utils/i18n';
 import api from '../../../api/user';
+import socket from '../../../api/socket';
 
 class Conversation extends Component {
   constructor(props) {
@@ -68,13 +69,13 @@ class Conversation extends Component {
       isSender: true,
     };
 
-    const [{ app, user }, dispatch] = this.context;
+    const [{ user }, dispatch] = this.context;
     dispatch({
       type: 'sendMessage',
       message,
     });
 
-    app.socket.emit('message:send', {
+    socket.emit('message:send', {
       body: newMessage,
       sender: user.current.name,
     });

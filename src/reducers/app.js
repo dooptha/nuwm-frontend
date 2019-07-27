@@ -32,12 +32,6 @@ const appReducer = (state, action) => {
         deviceId: action.deviceId,
       };
 
-    case 'updateSocket':
-      return {
-        ...state,
-        socket: action.socket,
-      };
-
     case 'updateOnlineCounter':
       return {
         ...state,

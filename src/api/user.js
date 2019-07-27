@@ -4,12 +4,13 @@ import { storeObject, storeKey } from '../utils/storage';
 
 function signUp(dispatch, navigation, data) {
   dispatch({ type: 'signUp' });
+  const { name, deviceId, group } = data;
 
-  api.post('/login', { name: data.name, deviceId: data.deviceId })
+  api.post('/login', { name, deviceId })
     .then((response) => {
       const { token } = response.data;
       const user = {
-        name: data.name,
+        name,
         accessToken: token,
       };
 
@@ -25,19 +26,15 @@ function signUp(dispatch, navigation, data) {
       dispatch({
         type: 'setProperty',
         key: 'group',
-        value: data.group,
+        value: group,
       });
 
-      storeKey('group', data.group);
+      storeKey('group', group);
 
       // Set auth headers for future requests
-      setAuthHeaders(token, data.deviceId);
+      setAuthHeaders(token, deviceId);
 
-      const socket = initSockets({ dispatch, token });
-      dispatch({
-        type: 'updateSocket',
-        socket,
-      });
+      initSockets({ dispatch, token });
 
       // Should navigate to app after successful validation on server
       navigation.navigate('App');

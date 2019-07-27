@@ -36,6 +36,7 @@ import DetailedLesson from '../components/schedule/DetailedLesson';
 import ScheduleList from '../components/schedule/ScheduleList';
 import SplashScreen from '../containers/SplashScreen';
 import SignUpScreen from '../containers/auth/SignUp';
+import NewPoll from '../containers/admin/NewPoll';
 
 import config from '../../config';
 
@@ -73,6 +74,10 @@ const SettingsNavigationMap = {
   },
   ContactUs: {
     screen: ContactUs,
+    navigationOptions: MenuNavigationOptions,
+  },
+  Admin: {
+    screen: NewPoll,
     navigationOptions: MenuNavigationOptions,
   },
 };

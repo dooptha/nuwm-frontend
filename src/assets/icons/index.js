@@ -2,6 +2,7 @@
 import {
   Icon,
   FancyIcon,
+  CircleIcon,
 } from './icon.component';
 
 export const Flip2OutlineIcon = (style) => {
@@ -124,6 +125,14 @@ export const TVFancyIcon = (color) => {
   return FancyIcon(source, color);
 }
 
+export const LockFancyIcon = (color) => {
+  const source = {
+    imageSource: require('./eva/lock.png'),
+  };
+
+  return FancyIcon(source, color);
+}
+
 export const TwitterIcon = (style) => {
   const source = {
     imageSource: require('./eva/twitter.png'),
@@ -163,3 +172,19 @@ export const EmailIcon = (style) => {
 
   return Icon(source, style);
 };
+
+export const CirclePlusIcon = (color) => {
+  const source = {
+    imageSource: require('./eva/plus.png'),
+  };
+
+  return CircleIcon(source, color);
+}
+
+export const CircleMinusIcon = (color) => {
+  const source = {
+    imageSource: require('./eva/minus.png'),
+  };
+
+  return CircleIcon(source, color);
+}

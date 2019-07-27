@@ -12,7 +12,7 @@ import UserCard from '../../../components/settings/UserCard';
 import I18n from '../../../utils/i18n';
 
 const SettingsContainer = ({ navigation, themedStyle }) => {
-  const [{ user }] = useGlobalState();
+  const [{ user, app }] = useGlobalState();
 
   const navigateTo = (routeName, params) => navigation.navigate({
     key: 'SettingsContainer',
@@ -29,8 +29,19 @@ const SettingsContainer = ({ navigation, themedStyle }) => {
             onItemSelect={() => navigateTo(item.route, { currentUser: user.current })}
           />
         );
+
       case 'Empty':
         return (<Text style={themedStyle.empty}>{'\n'}</Text>);
+
+      case 'Admin':
+        return app.isAdmin ? (
+          <ListItem
+            title={I18n.t(item.title)}
+            icon={item.icon}
+            onPress={() => navigateTo(item.route)}
+          />
+        ) : null;
+
       default:
         return (
           <ListItem

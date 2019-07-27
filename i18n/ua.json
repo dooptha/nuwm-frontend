@@ -29,6 +29,9 @@
     },
     "polls": {
       "title": "Історія голосування"
+    },
+    "admin": {
+      "title": "Адміністрування"
     }
   },
   "routes": {
@@ -44,7 +47,8 @@
     "Instagram": "Інстаграм",
     "PollHistory": "Історія голосування",
     "TimetableSettings": "Розклад",
-    "ContactUs": "Зв'яжіться з нами"
+    "ContactUs": "Зв'яжіться з нами",
+    "Admin": "Адміністрування"
   },
   "datePicker": {
     "Confirm": "Підтвердити",

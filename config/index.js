@@ -7,7 +7,7 @@ export default {
   API_ENDPOINT: apiEndpoint,
   SOCKET_IO_ENDPOINT: socketIoEndpoint,
   USE_DEFAULT_PROPERTIES: false,
-  INITIAL_ROUTE_NAME: 'Timetable', /* [Timetable, Conversations, Settings] */
+  INITIAL_ROUTE_NAME: 'Settings', /* [Timetable, Conversations, Settings] */
   INSTAGRAM_HASHTAG: 'нувгп',
   TWITTER_HASHTAG: 'нувгп',
   CONTACT_EMAIL: 'pelykh_ak15@nuwm.edu.ua',

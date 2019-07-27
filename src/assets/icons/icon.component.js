@@ -22,11 +22,19 @@ export const Icon = (source, style) => (
   />
 );
 
-const fancyIconStyle = StyleSheet.create({
-  container: {
+const style = StyleSheet.create({
+  fancyContainer: {
     width: 30,
     height: 30,
     borderRadius: 5,
+    overflow: 'hidden',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  circleContainer: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
     overflow: 'hidden',
     justifyContent: 'center',
     alignItems: 'center',
@@ -38,8 +46,14 @@ const fancyIconStyle = StyleSheet.create({
   },
 });
 
+export const CircleIcon = (source, color = 'red') => (
+  <View style={{ ...style.circleContainer, ...{ backgroundColor: color } }}>
+    {Icon(source, style.icon)}
+  </View>
+);
+
 export const FancyIcon = (source, color = 'red') => (
-  <View style={{ ...fancyIconStyle.container, ...{ backgroundColor: color } }}>
-    {Icon(source, fancyIconStyle.icon)}
+  <View style={{ ...style.fancyContainer, ...{ backgroundColor: color } }}>
+    {Icon(source, style.icon)}
   </View>
 );

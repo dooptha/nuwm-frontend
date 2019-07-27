@@ -85,13 +85,6 @@ class Conversation extends Component {
     return true;
   }
 
-  keyboardOffset(height) {
-    return Platform.select({
-      ios: height,
-      android: 0,
-    });
-  }
-
   renderSendMessageButton() {
     const { themedStyle } = this.props;
     const { newMessage } = this.state;
@@ -114,9 +107,9 @@ class Conversation extends Component {
 
     return (
       <AvoidKeyboard
-        style={themedStyle.container}
+        style={{ flex: 1 }}
         autoDismiss={false}
-        offset={this.keyboardOffset}
+        offset={() => 0}
       >
         <Chat
           style={themedStyle.chatContainer}

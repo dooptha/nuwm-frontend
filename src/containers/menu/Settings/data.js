@@ -4,6 +4,7 @@ import {
   TimetableFancyIcon,
   MessageFancyIcon,
   TVFancyIcon,
+  LockFancyIcon,
 } from '../../../assets/icons';
 
 export default [
@@ -46,5 +47,12 @@ export default [
     route: 'ContactUs',
     icon: MessageFancyIcon('#FFA002'),
     type: 'Default',
+  },
+
+  {
+    title: 'settings.admin.title',
+    route: 'Admin',
+    icon: LockFancyIcon('#8A2BE2'),
+    type: 'Admin',
   },
 ];

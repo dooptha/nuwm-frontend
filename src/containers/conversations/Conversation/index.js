@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { View, Platform } from 'react-native';
+import {
+  View,
+  Platform,
+  Alert,
+} from 'react-native';
 import { withStyles, Input, Button } from 'react-native-ui-kitten';
 import { Conversation as Chat } from '../../../components/conversations';
 import { AvoidKeyboard } from '../../../components/common';
@@ -8,6 +12,7 @@ import {
 } from '../../../assets/icons';
 import { StateContext } from '../../../utils/context';
 import I18n from '../../../utils/i18n';
+import api from '../../../api/user';
 
 class Conversation extends Component {
   constructor(props) {
@@ -25,6 +30,31 @@ class Conversation extends Component {
     this.setState({
       newMessage,
     });
+  }
+
+  onMessagePress(message) {
+    const [{ app }] = this.context;
+
+    if (app.isAdmin) {
+      Alert.alert(
+        I18n.t('admin.deleteMessage'),
+        message.body,
+        [
+          {
+            text: I18n.t('admin.yes'),
+            onPress: () => this.deleteMessage(message),
+          },
+          {
+            text: I18n.t('admin.no'),
+            style: 'cancel',
+          },
+        ],
+      );
+    }
+  }
+
+  deleteMessage(message) {
+    api.deleteMessage(message);
   }
 
   sendMessage() {
@@ -90,6 +120,7 @@ class Conversation extends Component {
         <Chat
           style={themedStyle.chatContainer}
           data={conversations.messages}
+          onMessagePress={(m) => this.onMessagePress(m)}
         />
         <View style={themedStyle.inputContainer}>
           <Input

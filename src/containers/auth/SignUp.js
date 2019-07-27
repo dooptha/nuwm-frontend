@@ -12,7 +12,7 @@ import {
 import { AvoidKeyboard } from '../../components/common';
 import { StateContext } from '../../utils/context';
 import I18n from '../../utils/i18n';
-import { signUp } from '../../api/user';
+import api from '../../api/user';
 
 export class SignUp extends Component {
   constructor(props) {
@@ -43,7 +43,7 @@ export class SignUp extends Component {
     const { name, group } = this.state;
     const { navigation } = this.props;
 
-    signUp(dispatch, navigation, {
+    api.signUp(dispatch, navigation, {
       deviceId: app.deviceId,
       name,
       group,

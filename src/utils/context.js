@@ -27,6 +27,7 @@ export const GlobalState = ({ children }) => {
       properties: DEFAULT_PROPERTIES,
       socket: undefined,
       onlineCounter: 1,
+      isAdmin: true,
     },
     conversations: {
       messages: [],

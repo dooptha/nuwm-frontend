@@ -7,6 +7,11 @@ export const socketEvents = ({ dispatch, socket }) => {
       type: 'receiveMessage',
       message,
     })));
+  socket.on('message:remove', (messageId) => (
+    dispatch({
+      type: 'removeMessage',
+      messageId,
+    })));
 
   socket.on('online:update', (counter) => (
     dispatch({

@@ -2,7 +2,7 @@ import { api, setAuthHeaders } from '.';
 import { initSockets } from './socket';
 import { storeObject, storeKey } from '../utils/storage';
 
-export function signUp(dispatch, navigation, data) {
+function signUp(dispatch, navigation, data) {
   dispatch({ type: 'signUp' });
 
   api.post('/login', { name: data.name, deviceId: data.deviceId })
@@ -45,4 +45,13 @@ export function signUp(dispatch, navigation, data) {
     .catch(() => dispatch({ type: 'signUpFailure' }));
 }
 
-export const logOut = () => {};
+function deleteMessage(message) {
+  api.post('/delete_message', { message })
+    .then(() => {})
+    .catch(() => {});
+}
+
+export default {
+  signUp,
+  deleteMessage,
+};

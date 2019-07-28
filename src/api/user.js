@@ -2,14 +2,15 @@ import { api, setAuthHeaders } from '.';
 import { initSockets } from './socket';
 import { storeObject, storeKey } from '../utils/storage';
 
-export function signUp(dispatch, navigation, data) {
+function signUp(dispatch, navigation, data) {
   dispatch({ type: 'signUp' });
+  const { name, deviceId, group } = data;
 
-  api.post('/login', { name: data.name, deviceId: data.deviceId })
+  api.post('/login', { name, deviceId })
     .then((response) => {
       const { token } = response.data;
       const user = {
-        name: data.name,
+        name,
         accessToken: token,
       };
 
@@ -25,19 +26,15 @@ export function signUp(dispatch, navigation, data) {
       dispatch({
         type: 'setProperty',
         key: 'group',
-        value: data.group,
+        value: group,
       });
 
-      storeKey('group', data.group);
+      storeKey('group', group);
 
       // Set auth headers for future requests
-      setAuthHeaders(token, data.deviceId);
+      setAuthHeaders(token, deviceId);
 
-      const socket = initSockets({ dispatch, token });
-      dispatch({
-        type: 'updateSocket',
-        socket,
-      });
+      initSockets({ dispatch, token });
 
       // Should navigate to app after successful validation on server
       navigation.navigate('App');
@@ -45,4 +42,13 @@ export function signUp(dispatch, navigation, data) {
     .catch(() => dispatch({ type: 'signUpFailure' }));
 }
 
-export const logOut = () => {};
+function deleteMessage(message) {
+  api.post('/delete_message', { message })
+    .then(() => {})
+    .catch(() => {});
+}
+
+export default {
+  signUp,
+  deleteMessage,
+};

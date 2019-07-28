@@ -53,6 +53,7 @@ const ContactUs = ({ themedStyle }) => {
   return (
     <View style={themedStyle.container}>
       <TouchableOpacity
+        activeOpacity={0.6}
         onPress={() => confirmExit('contactUs.title', config.WEBSITE_URL)}
       >
         <View style={themedStyle.avatarContainer}>

@@ -1,5 +1,5 @@
 const conversationsReducer = (state, action) => {
-  const {messages} = state;
+  const { messages } = state;
 
   switch (action.type) {
     case 'sendMessage':
@@ -10,9 +10,18 @@ const conversationsReducer = (state, action) => {
         messages,
       };
     case 'receiveMessage':
-      console.log("Message received:", action.message);
       messages.push(action.message);
-      return {...state};
+
+      return {
+        ...state,
+        messages,
+      };
+
+    case 'removeMessage':
+      return {
+        ...state,
+        ...messages.filter((message) => message.id === action.messageId),
+      };
 
     default:
       return state;

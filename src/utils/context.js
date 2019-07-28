@@ -25,8 +25,8 @@ export const GlobalState = ({ children }) => {
         submitUserForm: () => {},
       },
       properties: DEFAULT_PROPERTIES,
-      socket: undefined,
       onlineCounter: 1,
+      isAdmin: true,
     },
     conversations: {
       messages: [],
@@ -62,11 +62,7 @@ export const loadInitialData = async (dispatch) => {
     // Set auth headers for api requests
     setAuthHeaders(user.accessToken, deviceId);
 
-    const socket = initSockets({ dispatch, token: user.accessToken });
-    dispatch({
-      type: 'updateSocket',
-      socket,
-    });
+    initSockets({ dispatch, token: user.accessToken });
   }
 
   dispatch({ type: 'updateDeviceId', deviceId });

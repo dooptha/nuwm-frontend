@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   List,
-  ListItem,
 } from 'react-native-ui-kitten';
 import Message from './Message';
 
@@ -12,13 +11,6 @@ class Conversation extends Component {
     this.data = props.data;
     this.listRef = React.createRef();
     this.scrollToLastMessageTimeout = null;
-
-    this.renderItem = (info) => (
-      <ListItem
-        title={info.item.body}
-        onPress={(i) => props.onItemSelect(i)}
-      />
-    );
   }
 
   componentWillUnmount() {
@@ -35,11 +27,14 @@ class Conversation extends Component {
     this.listRef.current.scrollToEnd({ animated: true });
   }
 
-  renderMessage(info) {
+  renderListItem(info) {
+    const { onMessagePress } = this.props;
+
     return (
       <Message
         index={info.index}
         message={info.item}
+        onPress={(m) => onMessagePress(m)}
       />
     );
   }
@@ -53,7 +48,7 @@ class Conversation extends Component {
         ref={this.listRef}
         onContentSizeChange={() => this.onListContentSizeChange()}
         data={this.data}
-        renderItem={(info) => this.renderMessage(info)}
+        renderItem={(info) => this.renderListItem(info)}
       />
     );
   }

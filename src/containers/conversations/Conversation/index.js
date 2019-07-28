@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { View, Platform } from 'react-native';
+import {
+  View,
+  Alert,
+  Platform,
+} from 'react-native';
 import { withStyles, Input, Button } from 'react-native-ui-kitten';
 import { Conversation as Chat } from '../../../components/conversations';
 import { AvoidKeyboard } from '../../../components/common';
@@ -8,6 +12,8 @@ import {
 } from '../../../assets/icons';
 import { StateContext } from '../../../utils/context';
 import I18n from '../../../utils/i18n';
+import api from '../../../api/user';
+import socket from '../../../api/socket';
 
 class Conversation extends Component {
   constructor(props) {
@@ -27,6 +33,31 @@ class Conversation extends Component {
     });
   }
 
+  onMessagePress(message) {
+    const [{ app }] = this.context;
+
+    if (app.isAdmin) {
+      Alert.alert(
+        I18n.t('admin.deleteMessage'),
+        message.body,
+        [
+          {
+            text: I18n.t('admin.yes'),
+            onPress: () => this.deleteMessage(message),
+          },
+          {
+            text: I18n.t('admin.no'),
+            style: 'cancel',
+          },
+        ],
+      );
+    }
+  }
+
+  deleteMessage(message) {
+    api.deleteMessage(message);
+  }
+
   sendMessage() {
     const { newMessage } = this.state;
 
@@ -38,13 +69,13 @@ class Conversation extends Component {
       isSender: true,
     };
 
-    const [{ app, user }, dispatch] = this.context;
+    const [{ user }, dispatch] = this.context;
     dispatch({
       type: 'sendMessage',
       message,
     });
 
-    app.socket.emit('message:send', {
+    socket.emit('message:send', {
       body: newMessage,
       sender: user.current.name,
     });
@@ -83,13 +114,14 @@ class Conversation extends Component {
 
     return (
       <AvoidKeyboard
-        style={themedStyle.container}
+        style={{ flex: 1 }}
         autoDismiss={false}
         offset={this.keyboardOffset}
       >
         <Chat
           style={themedStyle.chatContainer}
           data={conversations.messages}
+          onMessagePress={(m) => this.onMessagePress(m)}
         />
         <View style={themedStyle.inputContainer}>
           <Input

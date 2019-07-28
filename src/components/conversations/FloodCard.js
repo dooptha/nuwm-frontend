@@ -17,7 +17,10 @@ const FloodCard = ({
   navigateToChat,
   onlineCounter,
 }) => (
-  <TouchableOpacity onPress={navigateToChat}>
+  <TouchableOpacity
+    activeOpacity={0.8}
+    onPress={navigateToChat}
+  >
     <View style={themedStyle.floodContainer}>
       <View style={themedStyle.offset} />
       <View style={themedStyle.avatarContainer}>

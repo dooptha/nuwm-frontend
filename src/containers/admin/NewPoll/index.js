@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Platform,
+  Alert,
 } from 'react-native';
 import {
   Input,
@@ -48,6 +49,23 @@ export class NewPoll extends Component {
     }
 
     this.viewRef.current.scrollToEnd({ animated: true });
+  }
+
+  onCancelButtonPress() {
+    Alert.alert(
+      I18n.t('admin.poll.close.title'),
+      I18n.t('admin.poll.close.description'),
+      [
+        {
+          text: I18n.t('admin.poll.close.confirm'),
+          onPress: () => this.closeLastPoll(),
+        },
+        {
+          text: I18n.t('admin.poll.close.cancel'),
+          style: 'cancel',
+        },
+      ],
+    );
   }
 
   setInputRef(input, id) {
@@ -109,6 +127,10 @@ export class NewPoll extends Component {
   }
 
   submitForm() {
+  }
+
+  closeLastPoll() {
+
   }
 
   keyboardOffset(height) {
@@ -187,7 +209,7 @@ export class NewPoll extends Component {
                ) : null
             }
           </View>
-          <View style={themedStyle.buttonContainer}>
+          <View style={themedStyle.submitButtonContainer}>
             <Button
               status="success"
               appearance="ghost"
@@ -195,6 +217,15 @@ export class NewPoll extends Component {
               onPress={() => this.submitForm()}
             >
               {I18n.t('admin.poll.submit')}
+            </Button>
+          </View>
+          <View style={themedStyle.deleteButtonContainer}>
+            <Button
+              status="danger"
+              appearance="ghost"
+              onPress={() => this.onCancelButtonPress()}
+            >
+              {I18n.t('admin.poll.close.title')}
             </Button>
           </View>
         </ScrollView>
@@ -248,9 +279,14 @@ export default withStyles(NewPoll, (theme) => ({
     marginLeft: 20,
     color: '#02DB8B',
   },
-  buttonContainer: {
+  submitButtonContainer: {
     marginTop: 50,
-    marginBottom: 200,
+    paddingVertical: 5,
+    backgroundColor: theme['background-basic-color-1'],
+  },
+  deleteButtonContainer: {
+    marginTop: 50,
+    marginBottom: 50,
     paddingVertical: 5,
     backgroundColor: theme['background-basic-color-1'],
   },

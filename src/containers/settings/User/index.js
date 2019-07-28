@@ -89,7 +89,6 @@ class UserContainer extends Component {
           label="access-token"
           name="accessToken"
           value={user.current.accessToken}
-          disabled
         />
         <Button
           style={themedStyle.submitButton}

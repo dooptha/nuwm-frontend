@@ -9,6 +9,5 @@ export const api = axios.create({
 });
 
 export const setAuthHeaders = (authToken, deviceId) => {
-  api.defaults.headers.common['Auth-Token'] = authToken;
-  api.defaults.headers.common['Device-Token'] = deviceId;
+  api.defaults.headers.common['x-access-token'] = authToken;
 };

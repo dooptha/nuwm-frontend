@@ -48,7 +48,7 @@
     "PollHistory": "Історія голосування",
     "TimetableSettings": "Розклад",
     "ContactUs": "Зв'яжіться з нами",
-    "Admin": "Адміністрування"
+    "Admin": "Нове голосування"
   },
   "datePicker": {
     "Confirm": "Підтвердити",
@@ -127,6 +127,18 @@
   "admin": {
     "yes": "Так",
     "no": "Ні",
-    "deleteMessage": "Видалити повідомлення"
+    "deleteMessage": "Видалити повідомлення",
+    "poll": {
+      "question": {
+        "title": "Запитання",
+        "placeholder": "Поставити запитання"
+      },
+      "options": {
+        "title": "Варіанти відповіді",
+        "placeholder": "Варіант",
+        "add": "Додати інший варіант"
+      },
+      "submit": "Створити"
+    }
   }
 }

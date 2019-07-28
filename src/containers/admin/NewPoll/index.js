@@ -24,18 +24,50 @@ export class NewPoll extends Component {
     this.inputs = {};
     this.state = {
       question: '',
-      options: ['', ''],
+      options: [
+        {
+          id: Math.random() ,
+          value: '',
+        },
+        {
+          id: Math.random() ,
+          value: '',
+        }
+      ],
     };
+
+    this.shouldFocusLastInput = false;
+  }
+
+  onSubmitEditing(i) {
+    console.log('submit', i);
+    if (this.inputs[i]) {
+      this.focusTheField(i);
+    } else {
+      this.addOption();
+      this.shouldFocusLastInput = true;
+    }
   }
 
   setInputRef(input, id) {
     this.inputs[id] = input;
+
+    const { options } = this.state;
+
+    console.log('set ref', id, options.length, this.shouldFocusLastInput)
+    if ((id + 1) === options.length && this.shouldFocusLastInput) {
+      this.focusTheField(id);
+      this.shouldFocusLastInput = false;
+    }
   }
 
   setOption(newValue, i) {
     const { options } = this.state;
     const newOptions = [...options];
-    newOptions[i] = newValue;
+    newOptions[i] = {
+      id: newOptions[i].id,
+      value: newValue,
+    };
 
     this.setState({ options: newOptions });
   }
@@ -49,20 +81,32 @@ export class NewPoll extends Component {
   }
 
   addOption() {
-    const { options } = this.state;
-    const newOptions = [...options];
-    newOptions.push('');
+    if (this.canAddNewOption()) {
+      const { options } = this.state;
+      const newOptions = [...options];
+      newOptions.push({
+        id: Math.random(),
+        value: '',
+      });
 
-    this.setState({ options: newOptions });
+      this.setState({ options: newOptions });
+    }
   }
 
   focusTheField(id) {
-    this.inputs[id].focus();
+    if (this.inputs[id]) {
+      this.inputs[id].focus();
+    }
   }
 
   canSubmitForm() {
     const { question, options } = this.state;
     return question !== '' && options.length > 1 && options.length <= 5 && !options.includes('');
+  }
+
+  canAddNewOption() {
+    const { options } = this.state;
+    return options.length < 5;
   }
 
   submitForm() {
@@ -92,14 +136,14 @@ export class NewPoll extends Component {
       >
         <ScrollView style={themedStyle.container}>
           <View style={themedStyle.questionContainer}>
-            <Text categoty="h6">Question</Text>
+            <Text categoty="h6">{I18n.t('admin.poll.question.title')}</Text>
             <Input
               style={themedStyle.questionInput}
-              placeholder="Ask question"
+              placeholder={I18n.t('admin.poll.question.placeholder')}
               returnKeyType="next"
               value={question}
               onChangeText={(text) => this.setState({ question: text })}
-              // onSubmitEditing={() => this.focusTheField('group')}
+              onSubmitEditing={() => this.onSubmitEditing(0)}
             />
           </View>
           <View style={themedStyle.optionsContainer}>
@@ -107,33 +151,37 @@ export class NewPoll extends Component {
               style={themedStyle.optionsTitle}
               categoty="h6"
             >
-              Options
+              {I18n.t('admin.poll.options.title')}
             </Text>
             {
               options.map((option, i) => (
-                <View style={themedStyle.optionContainer}>
+                <View
+                  key={option.id}
+                  style={themedStyle.optionContainer}
+                >
                   <TouchableOpacity onPress={() => this.removeOption(i)}>
                     {CircleMinusIcon('#FF3566')}
                   </TouchableOpacity>
                   <Input
                     style={themedStyle.optionInput}
-                    placeholder="option"
-                    returnKeyType="done"
-                    value={option}
+                    placeholder={I18n.t('admin.poll.options.placeholder')}
+                    returnKeyType="next"
+                    value={option.value}
                     onChangeText={(text) => this.setOption(text, i)}
-                    // ref={(input) => this.setInputRef(input, 'group')}
+                    ref={(input) => this.setInputRef(input, i)}
+                    onSubmitEditing={() => this.onSubmitEditing(i + 1)}
                   />
                 </View>
               ))
             }
             {
-               options.length < 5 ? (
+               this.canAddNewOption() ? (
                  <TouchableOpacity
                    style={themedStyle.AddOptionContainer}
                    onPress={() => this.addOption()}
                  >
                    {CirclePlusIcon('#02DB8B')}
-                   <Text style={themedStyle.AddOptionText}>Add new option</Text>
+                   <Text style={themedStyle.AddOptionText}>{I18n.t('admin.poll.options.add')}</Text>
                  </TouchableOpacity>
                ) : null
             }
@@ -145,7 +193,7 @@ export class NewPoll extends Component {
               disabled={!this.canSubmitForm()}
               onPress={() => this.submitForm()}
             >
-              Create
+              {I18n.t('admin.poll.submit')}
             </Button>
           </View>
         </ScrollView>

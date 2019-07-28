@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   View,
-  Platform,
   Alert,
 } from 'react-native';
 import { withStyles, Input, Button } from 'react-native-ui-kitten';

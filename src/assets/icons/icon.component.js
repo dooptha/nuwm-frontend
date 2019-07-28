@@ -32,12 +32,17 @@ const style = StyleSheet.create({
     alignItems: 'center',
   },
   circleContainer: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
+    width: 24,
+    height: 24,
+    borderRadius: 12,
     overflow: 'hidden',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  circleIcon: {
+    width: 20,
+    height: 20,
+    tintColor: 'white',
   },
   icon: {
     width: 24,
@@ -48,7 +53,7 @@ const style = StyleSheet.create({
 
 export const CircleIcon = (source, color = 'red') => (
   <View style={{ ...style.circleContainer, ...{ backgroundColor: color } }}>
-    {Icon(source, style.icon)}
+    {Icon(source, style.circleIcon)}
   </View>
 );
 

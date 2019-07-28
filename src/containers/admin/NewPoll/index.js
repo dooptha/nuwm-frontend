@@ -26,35 +26,34 @@ export class NewPoll extends Component {
       question: '',
       options: [
         {
-          id: Math.random() ,
+          id: Math.random(),
           value: '',
         },
         {
-          id: Math.random() ,
+          id: Math.random(),
           value: '',
-        }
+        },
       ],
     };
-
+    this.viewRef = React.createRef();
     this.shouldFocusLastInput = false;
   }
 
   onSubmitEditing(i) {
-    console.log('submit', i);
     if (this.inputs[i]) {
       this.focusTheField(i);
     } else {
       this.addOption();
       this.shouldFocusLastInput = true;
     }
+
+    this.viewRef.current.scrollToEnd({ animated: true });
   }
 
   setInputRef(input, id) {
     this.inputs[id] = input;
-
     const { options } = this.state;
 
-    console.log('set ref', id, options.length, this.shouldFocusLastInput)
     if ((id + 1) === options.length && this.shouldFocusLastInput) {
       this.focusTheField(id);
       this.shouldFocusLastInput = false;
@@ -129,12 +128,14 @@ export class NewPoll extends Component {
 
     return (
       <AvoidKeyboard
-        style={themedStyle.container}
+        style={{ flex: 1 }}
         autoDismiss={false}
         offset={() => 0}
-        keyboardOffset={this.keyboardOffset}
       >
-        <ScrollView style={themedStyle.container}>
+        <ScrollView
+          ref={this.viewRef}
+          style={themedStyle.container}
+        >
           <View style={themedStyle.questionContainer}>
             <Text categoty="h6">{I18n.t('admin.poll.question.title')}</Text>
             <Input
@@ -208,6 +209,7 @@ export default withStyles(NewPoll, (theme) => ({
   container: {
     flex: 1,
     backgroundColor: theme['background-basic-color-3'],
+    fontFamily: 'Roboto',
   },
   questionContainer: {
     backgroundColor: theme['background-basic-color-1'],
@@ -247,7 +249,8 @@ export default withStyles(NewPoll, (theme) => ({
     color: '#02DB8B',
   },
   buttonContainer: {
-    marginVertical: 50,
+    marginTop: 50,
+    marginBottom: 200,
     paddingVertical: 5,
     backgroundColor: theme['background-basic-color-1'],
   },

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   View,
   Alert,
+  Platform,
 } from 'react-native';
 import { withStyles, Input, Button } from 'react-native-ui-kitten';
 import { Conversation as Chat } from '../../../components/conversations';
@@ -84,6 +85,13 @@ class Conversation extends Component {
     return true;
   }
 
+  keyboardOffset(height) {
+    return Platform.select({
+      ios: height,
+      android: 0,
+    });
+  }
+
   renderSendMessageButton() {
     const { themedStyle } = this.props;
     const { newMessage } = this.state;
@@ -108,7 +116,7 @@ class Conversation extends Component {
       <AvoidKeyboard
         style={{ flex: 1 }}
         autoDismiss={false}
-        offset={() => 0}
+        offset={this.keyboardOffset}
       >
         <Chat
           style={themedStyle.chatContainer}

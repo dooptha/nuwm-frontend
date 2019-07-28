@@ -55,4 +55,7 @@ export default [
     icon: LockFancyIcon('#8A2BE2'),
     type: 'Admin',
   },
+  {
+    type: 'End',
+  },
 ];

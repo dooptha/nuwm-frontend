@@ -31,7 +31,10 @@ const SettingsContainer = ({ navigation, themedStyle }) => {
         );
 
       case 'Empty':
-        return (<Text style={themedStyle.empty}>{'\n'}</Text>);
+        return (<View style={themedStyle.empty}><Text>{'\n'}</Text></View>);
+
+      case 'End':
+        return (<View style={themedStyle.end}><Text>{'\n'}</Text></View>);
 
       case 'Admin':
         return app.isAdmin ? (
@@ -54,21 +57,27 @@ const SettingsContainer = ({ navigation, themedStyle }) => {
   };
 
   return (
-    <View style={themedStyle.container}>
-      <List
-        data={data}
-        renderItem={renderItem}
-      />
-    </View>
+    <List
+      style={themedStyle.container}
+      data={data}
+      renderItem={renderItem}
+    />
   );
 };
 
 export default withStyles(SettingsContainer, (theme) => ({
   container: {
-    backgroundColor: theme['background-basic-color-3'],
+    backgroundColor: theme['background-basic-color-2'],
     flex: 1,
   },
   empty: {
-
+    borderTopWidth: 1,
+    borderTopColor: theme['background-basic-color-3'],
+    borderBottomWidth: 1,
+    borderBottomColor: theme['background-basic-color-3'],
+  },
+  end: {
+    borderTopWidth: 1,
+    borderTopColor: theme['background-basic-color-3'],
   },
 }));

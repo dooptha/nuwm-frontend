@@ -3,7 +3,7 @@ import { SafeAreaView as SafeAreaViewReactNavigation } from 'react-navigation';
 
 const SafeAreaView = (props) => (
   <SafeAreaViewReactNavigation
-    forceInset={{ top: 'always' }}
+    forceInset={{ top: 'never', bottom: 'always' }}
     {...props}
   />
 );

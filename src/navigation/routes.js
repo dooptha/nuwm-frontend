@@ -128,6 +128,7 @@ const MenuNavigator = createBottomTabNavigator({
 }, {
   tabBarComponent: MenuContainer,
   initialRouteName: config.INITIAL_ROUTE_NAME,
+  lazy: true,
 });
 
 const AppNavigator = createStackNavigator({

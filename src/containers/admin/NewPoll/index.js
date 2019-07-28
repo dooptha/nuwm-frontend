@@ -239,13 +239,15 @@ NewPoll.contextType = StateContext;
 export default withStyles(NewPoll, (theme) => ({
   container: {
     flex: 1,
-    backgroundColor: theme['background-basic-color-3'],
+    backgroundColor: theme['background-basic-color-2'],
     fontFamily: 'Roboto',
   },
   questionContainer: {
     backgroundColor: theme['background-basic-color-1'],
     paddingVertical: 10,
     paddingHorizontal: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: theme['background-basic-color-3'],
   },
   questionInput: {
     marginTop: 10,
@@ -255,6 +257,10 @@ export default withStyles(NewPoll, (theme) => ({
     paddingVertical: 10,
     paddingHorizontal: 10,
     marginTop: 50,
+    borderTopWidth: 1,
+    borderTopColor: theme['background-basic-color-3'],
+    borderBottomWidth: 1,
+    borderBottomColor: theme['background-basic-color-3'],
   },
   optionsTitle: {
     marginBottom: 10,
@@ -283,11 +289,19 @@ export default withStyles(NewPoll, (theme) => ({
     marginTop: 50,
     paddingVertical: 5,
     backgroundColor: theme['background-basic-color-1'],
+    borderTopWidth: 1,
+    borderTopColor: theme['background-basic-color-3'],
+    borderBottomWidth: 1,
+    borderBottomColor: theme['background-basic-color-3'],
   },
   deleteButtonContainer: {
     marginTop: 50,
     marginBottom: 50,
     paddingVertical: 5,
     backgroundColor: theme['background-basic-color-1'],
+    borderTopWidth: 1,
+    borderTopColor: theme['background-basic-color-3'],
+    borderBottomWidth: 1,
+    borderBottomColor: theme['background-basic-color-3'],
   },
 }));

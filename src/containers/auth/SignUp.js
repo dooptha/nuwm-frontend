@@ -9,7 +9,7 @@ import {
   Button,
   withStyles,
 } from 'react-native-ui-kitten';
-import { AvoidKeyboard } from '../../components/common';
+import { AvoidKeyboard, InlineError } from '../../components/common';
 import { StateContext } from '../../utils/context';
 import I18n from '../../utils/i18n';
 import api from '../../api/user';
@@ -109,6 +109,7 @@ export class SignUp extends Component {
             {this.renderIndicator(user.isLoading)}
           </View>
         </View>
+        <InlineError error={user.error} />
       </AvoidKeyboard>
     );
   }
@@ -135,6 +136,7 @@ export default withStyles(SignUp, (theme) => ({
   buttonContainer: {
     paddingTop: 20,
     flexDirection: 'row',
+    marginBottom: 20,
   },
   indicator: {
     flex: 1,

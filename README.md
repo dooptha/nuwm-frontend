@@ -1,9 +1,12 @@
 # nuwm-frontend
-This is React Native Android/IOS application designed for students by students of NATIONAL UNIVERSITY OF WATER AND ENVIRONMENTAL ENGINEERING.
+This is open source React Native application designed for students by students of the [NATIONAL UNIVERSITY OF WATER AND ENVIRONMENTAL ENGINEERING](http://en.nuwm.edu.ua/).
 
 [![Build Status](https://travis-ci.com/dooptha/nuwm-frontend.svg?branch=develop)](https://travis-ci.com/dooptha/nuwm-frontend)
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
+## Dependencies
+ * Node.js _(v11.14.0)_ and NPM _(v6.7.0)_
+ * XCode _(v10.3)_
 
 ### Build
 
@@ -25,7 +28,7 @@ Press `⌘ + D` / `Ctrl + D` on iOS simulator and `⌘ + M` / `Ctrl + M` on Andr
 --
 
 ###### Android
-After RN version `>=0.60`, there is automatic `:8081` port forwarding for Metro Project Bundler, 
+After RN version `>=0.60`, there is automatic `:8081` port forwarding for Metro Project Bundler,
 but for our backend you should forward additional port by default it's `:3000`
 
 ```console

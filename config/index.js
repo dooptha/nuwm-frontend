@@ -6,7 +6,7 @@ let overrideConfig;
 if (__DEV__)
   try {
     overrideConfig = require('./override.js');
-    let config = Object.assign(devConfig, overrideConfig.production);
+    let config = Object.assign(devConfig, overrideConfig.default);
     console.info("Found config/override.js file default config will be modified");
     console.info("Config:", config);
     module.exports = config;

@@ -38,6 +38,12 @@ const appReducer = (state, action) => {
         onlineCounter: action.counter,
       };
 
+    case 'updateRole':
+      return {
+        ...state,
+        isAdmin: action.isAdmin,
+      };
+
     default:
       return state;
   }

@@ -1,11 +1,13 @@
 const userReducer = (state, action) => {
   switch (action.type) {
     case 'signUp':
+    case 'updateCurrentUser':
       return {
         ...state,
         isLoading: true,
         error: null,
       };
+    case 'updateUser':
     case 'signUpSuccess':
       return {
         ...state,
@@ -14,16 +16,17 @@ const userReducer = (state, action) => {
       };
 
     case 'signUpFailure':
+    case 'updateCurrentUserFailure':
       return {
         ...state,
         isLoading: false,
         error: action.error,
       };
 
-
-    case 'updateUser':
+    case 'updateCurrentUserSuccess':
       return {
         ...state,
+        isLoading: false,
         current: { ...state.current, ...action.user },
       };
 

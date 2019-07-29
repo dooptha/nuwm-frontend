@@ -20,6 +20,10 @@ const SettingsContainer = ({ navigation, themedStyle }) => {
     params,
   });
 
+  const routes = data.filter((route) => (
+    (route.type === 'Admin' && app.isAdmin) || route.type !== 'Admin'
+  ));
+
   const renderItem = ({ item }) => {
     switch (item.type) {
       case 'User':
@@ -36,15 +40,6 @@ const SettingsContainer = ({ navigation, themedStyle }) => {
       case 'End':
         return (<View style={themedStyle.end}><Text>{'\n'}</Text></View>);
 
-      case 'Admin':
-        return app.isAdmin ? (
-          <ListItem
-            title={I18n.t(item.title)}
-            icon={item.icon}
-            onPress={() => navigateTo(item.route)}
-          />
-        ) : null;
-
       default:
         return (
           <ListItem
@@ -59,7 +54,7 @@ const SettingsContainer = ({ navigation, themedStyle }) => {
   return (
     <List
       style={themedStyle.container}
-      data={data}
+      data={routes}
       renderItem={renderItem}
     />
   );

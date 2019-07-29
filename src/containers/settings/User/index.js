@@ -8,6 +8,7 @@ import {
 import { StateContext } from '../../../utils/context';
 import { removeKey, storeObject } from '../../../utils/storage';
 import I18n from '../../../utils/i18n';
+import api from '../../../api/user';
 
 class UserContainer extends Component {
   constructor(props) {
@@ -37,18 +38,9 @@ class UserContainer extends Component {
   onFormSubmit() {
     const [, dispatch] = this.context;
     const { name } = this.state;
-    const user = { name };
-
-    dispatch({
-      type: 'updateUser',
-      user,
-    });
-
-    storeObject('user', user);
-
     const { navigation } = this.props;
 
-    navigation.goBack();
+    api.updateCurrentUser(dispatch, navigation, { name });
   }
 
   logOut() {

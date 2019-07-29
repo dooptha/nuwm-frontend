@@ -14,6 +14,7 @@ import { getObject } from './storage';
 import config from '../../config';
 import mainReducer from '../reducers';
 import { setAuthHeaders } from '../api';
+import api from '../api/user';
 
 export const StateContext = createContext();
 
@@ -26,7 +27,7 @@ export const GlobalState = ({ children }) => {
       },
       properties: DEFAULT_PROPERTIES,
       onlineCounter: 1,
-      isAdmin: true,
+      isAdmin: false,
     },
     conversations: {
       messages: [],
@@ -62,6 +63,10 @@ export const loadInitialData = async (dispatch) => {
     // Set auth headers for api requests
     setAuthHeaders(user.accessToken, deviceId);
 
+    // Then get role from server
+    api.authorize(dispatch);
+
+    // Then initialize sockets
     initSockets({ dispatch, token: user.accessToken });
   }
 

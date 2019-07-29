@@ -10,13 +10,13 @@ class SplashScreen extends Component {
 
 
     // Force to load app for testing purposes
-    navigation.navigate('App');
+    // navigation.navigate('App');
 
-    // if (currentUser && currentUser.name !== '') {
-    //   navigation.navigate('App');
-    // } else {
-    //   navigation.navigate('SignUp');
-    // }
+    if (currentUser && currentUser.name !== '') {
+      navigation.navigate('App');
+    } else {
+      navigation.navigate('SignUp');
+    }
   }
 
   render() {

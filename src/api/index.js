@@ -3,8 +3,9 @@ import config from '../../config';
 
 export const api = axios.create({
   baseURL: config.API_ENDPOINT,
+  timeout: 1000,
   headers: {
-    "Content-Type": 'application/json'
+    'Content-Type': 'application/json',
   },
 });
 

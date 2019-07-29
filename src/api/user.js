@@ -6,9 +6,10 @@ function signUp(dispatch, navigation, data) {
   dispatch({ type: 'signUp' });
   const { name, deviceId, group } = data;
 
-  api.post('/login', { name, deviceId })
+  api.post('/login', { username: name, deviceId })
     .then((response) => {
       const { token } = response.data;
+
       const user = {
         name,
         accessToken: token,
@@ -39,7 +40,9 @@ function signUp(dispatch, navigation, data) {
       // Should navigate to app after successful validation on server
       navigation.navigate('App');
     })
-    .catch(() => dispatch({ type: 'signUpFailure' }));
+    .catch((error) => {
+      dispatch({ type: 'signUpFailure', error });
+    });
 }
 
 function deleteMessage(message) {

@@ -4,6 +4,7 @@ const userReducer = (state, action) => {
       return {
         ...state,
         isLoading: true,
+        error: null,
       };
     case 'signUpSuccess':
       return {
@@ -16,6 +17,7 @@ const userReducer = (state, action) => {
       return {
         ...state,
         isLoading: false,
+        error: action.error,
       };
 
 

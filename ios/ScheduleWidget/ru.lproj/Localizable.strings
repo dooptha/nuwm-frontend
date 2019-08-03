@@ -1,13 +1,9 @@
 /* 
-  InfoPlist.strings
+  Localizable.strings
   NuwmApp
 
   Created by Roman Sereda on 8/3/19.
   Copyright © 2019 Facebook. All rights reserved.
 */
-
-"CFBundleDisplayName" = "Расписание";
-
-"CFBundleName" = "Раписание";
 
 "NoLesson" = "Сегодня нету пар";

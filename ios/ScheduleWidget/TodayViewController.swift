@@ -18,19 +18,23 @@ struct Subject {
   var subtitle: String
 }
 
+extension String {
+  var localized: String {
+    return NSLocalizedString(self, tableName: nil, bundle: Bundle.main, value: "", comment: "")
+  }
+}
+
 class TodayViewController: UITableViewController, NCWidgetProviding {
   
   var data: Array<Subject> = Array()
         
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    self.data.append(Subject(title: "title1", desc: "desc1", subtitle: "sub1"))
   }
   
   func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
     
-    let url = "http://calc.nuwm.edu.ua:3002/api/sched?group=%D0%9F%D0%9C-41&sdate=05.09.2018&edate=05.09.2018&type=days";
+    let url = "http://calc.nuwm.edu.ua:3002/api/sched?group=%D0%9F%D0%9C-41&sdate=03.09.2018&edate=03.09.2018&type=days";
     
     
     Alamofire.request(url, method: .get).response{ response in
@@ -39,28 +43,28 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
       
       let schedule = json["response"]["schedule"]
       
-      print("Days: \(schedule.count)")
-      
-      print(schedule)
-      
       self.data = Array()
       
       for (index,day):(String, JSON) in schedule {
         
         let subjects = day["subjects"]
         
-        print("Subjects: \(subjects.count)")
-        
         for (index,subject):(String, JSON) in subjects {
-          
-          print("Lecturer: \(subject["time"])")
           
           self.data.append(Subject(title: subject["time"].string ?? "-", desc: subject["subject"].string ?? "-", subtitle: subject["classroom"].string ?? "-"))
         }
       }
       
-      self.tableView.reloadData()
-      print("handler")
+      if(self.data.count > 0){
+        self.tableView.reloadData()
+      }else{
+        let noDataLabel: UILabel  = UILabel(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: self.tableView.bounds.size.height))
+        noDataLabel.text = "NoLesson".localized
+        noDataLabel.textColor = UIColor.black
+        noDataLabel.textAlignment = .center
+        self.tableView.backgroundView  = noDataLabel
+        self.tableView.separatorStyle  = .none
+      }
       
       completionHandler(NCUpdateResult.newData)
     }
@@ -74,9 +78,9 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     
     let cell = tableView.dequeueReusableCell(withIdentifier: "ScheduleItem", for: indexPath) as! ScheduleTableViewCell
     
-    let item = data[indexPath.row]
+    self.tableView.backgroundView = nil;
     
-    print("update")
+    let item = data[indexPath.row]
     
     cell.itemTitle.text = item.title as? String
     cell.itemDesc.text = item.desc as? String

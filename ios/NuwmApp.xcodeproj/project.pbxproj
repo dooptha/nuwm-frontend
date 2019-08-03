@@ -39,6 +39,7 @@
 		F928926322F5D1BB00764E14 /* ScheduleWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F928925722F5D1BB00764E14 /* ScheduleWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F928926D22F5D5CA00764E14 /* ScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F928926C22F5D5CA00764E14 /* ScheduleTableViewCell.swift */; };
 		F928927022F5F09C00764E14 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F928927222F5F09C00764E14 /* InfoPlist.strings */; };
+		F928927D22F6005500764E14 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F928927F22F6005500764E14 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,6 +135,9 @@
 		F928927622F5F21200764E14 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		F928927722F5F21200764E14 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		F928927822F5F21200764E14 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F928927E22F6005500764E14 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F928928022F6005900764E14 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F928928122F6005A00764E14 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FADD3470028A41A1CDBDDC6A /* Pods-ScheduleWidget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScheduleWidget.debug.xcconfig"; path = "Target Support Files/Pods-ScheduleWidget/Pods-ScheduleWidget.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -289,6 +293,7 @@
 				F928926022F5D1BB00764E14 /* Info.plist */,
 				F928926C22F5D5CA00764E14 /* ScheduleTableViewCell.swift */,
 				F928927222F5F09C00764E14 /* InfoPlist.strings */,
+				F928927F22F6005500764E14 /* Localizable.strings */,
 			);
 			path = ScheduleWidget;
 			sourceTree = "<group>";
@@ -522,6 +527,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F928925F22F5D1BB00764E14 /* MainInterface.storyboard in Resources */,
+				F928927D22F6005500764E14 /* Localizable.strings in Resources */,
 				F928927022F5F09C00764E14 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -801,6 +807,16 @@
 				F928927822F5F21200764E14 /* uk */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		F928927F22F6005500764E14 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F928927E22F6005500764E14 /* en */,
+				F928928022F6005900764E14 /* ru */,
+				F928928122F6005A00764E14 /* uk */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

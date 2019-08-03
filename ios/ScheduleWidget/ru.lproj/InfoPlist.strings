@@ -6,6 +6,6 @@
   Copyright © 2019 Facebook. All rights reserved.
 */
 
-"CFBundleDisplayName" = "Schedule";
+"CFBundleDisplayName" = "Расписание";
 
-"CFBundleName" = "Schedule";
+"CFBundleName" = "Раписание";

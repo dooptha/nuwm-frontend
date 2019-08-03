@@ -12,7 +12,7 @@ import NotificationCenter
 import Alamofire
 import SwiftyJSON
 
-struct Subject {
+struct Subject: Equatable {
   var title: String
   var desc: String
   var subtitle: String
@@ -34,8 +34,9 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
   
   func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
     
-    let url = "http://calc.nuwm.edu.ua:3002/api/sched?group=%D0%9F%D0%9C-41&sdate=03.09.2018&edate=03.09.2018&type=days";
+    let url = "http://calc.nuwm.edu.ua:3002/api/sched?group=%D0%9F%D0%9C-41&sdate=05.09.2018&edate=05.09.2018&type=days";
     
+    self.tableView.contentInset = UIEdgeInsets(top: 5,left: 0,bottom: 0,right: 0)
     
     Alamofire.request(url, method: .get).response{ response in
       
@@ -43,7 +44,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
       
       let schedule = json["response"]["schedule"]
       
-      self.data = Array()
+      var newData: Array<Subject> = Array()
       
       for (index,day):(String, JSON) in schedule {
         
@@ -51,14 +52,25 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         
         for (index,subject):(String, JSON) in subjects {
           
-          self.data.append(Subject(title: subject["time"].string ?? "-", desc: subject["subject"].string ?? "-", subtitle: subject["classroom"].string ?? "-"))
+          newData.append(Subject(title: subject["time"].string ?? "-", desc: subject["subject"].string ?? "-", subtitle: subject["classroom"].string ?? "-"))
         }
       }
       
-      if(self.data.count > 0){
+      if(newData != self.data){
+        
+        self.data = newData;
+        
         self.tableView.reloadData()
-      }else{
+        completionHandler(NCUpdateResult.noData)
+      } else {
+        
+        completionHandler(NCUpdateResult.newData)
+      }
+      
+      if(self.data.count == 0){
+        
         let noDataLabel: UILabel  = UILabel(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: self.tableView.bounds.size.height))
+        
         noDataLabel.text = "NoLesson".localized
         noDataLabel.textColor = UIColor.darkGray
         noDataLabel.textAlignment = .center
@@ -67,9 +79,9 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         self.tableView.separatorStyle  = .none
         
         self.tableView.reloadData()
+      }else{
+        self.tableView.backgroundView = nil;
       }
-      
-      completionHandler(NCUpdateResult.newData)
     }
   }
   
@@ -80,8 +92,6 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     let cell = tableView.dequeueReusableCell(withIdentifier: "ScheduleItem", for: indexPath) as! ScheduleTableViewCell
-    
-    self.tableView.backgroundView = nil;
     
     let item = data[indexPath.row]
     
@@ -98,7 +108,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     if #available(iOSApplicationExtension 10.0, *) {
       extensionContext?.widgetLargestAvailableDisplayMode = .expanded
     }
-    self.preferredContentSize.height = 200
+    self.preferredContentSize.height = 100
   }
   
   func widgetMarginInsets(forProposedMarginInsets defaultMarginInsets: UIEdgeInsets) -> (UIEdgeInsets) {

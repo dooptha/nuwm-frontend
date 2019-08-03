@@ -15,6 +15,7 @@ import SwiftyJSON
 struct Subject {
   var title: String
   var desc: String
+  var subtitle: String
 }
 
 class TodayViewController: UITableViewController, NCWidgetProviding {
@@ -24,12 +25,12 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.data.append(Subject(title: "title1", desc: "desc1"))
+    self.data.append(Subject(title: "title1", desc: "desc1", subtitle: "sub1"))
   }
   
   func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
     
-    let url = "http://calc.nuwm.edu.ua:3002/api/sched?group=%D0%9F%D0%9C-41&sdate=05.09.2018&edate=12.09.2018&type=days";
+    let url = "http://calc.nuwm.edu.ua:3002/api/sched?group=%D0%9F%D0%9C-41&sdate=05.09.2018&edate=05.09.2018&type=days";
     
     
     Alamofire.request(url, method: .get).response{ response in
@@ -54,7 +55,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
           
           print("Lecturer: \(subject["time"])")
           
-          self.data.append(Subject(title: subject["time"].string ?? "-", desc: subject["subject"].string ?? "-"))
+          self.data.append(Subject(title: subject["time"].string ?? "-", desc: subject["subject"].string ?? "-", subtitle: subject["classroom"].string ?? "-"))
         }
       }
       
@@ -79,6 +80,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     
     cell.itemTitle.text = item.title as? String
     cell.itemDesc.text = item.desc as? String
+    cell.itemSubtitle.text = item.subtitle as? String
     
     return cell
   }

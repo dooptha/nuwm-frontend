@@ -6,8 +6,5 @@
   Copyright © 2019 Facebook. All rights reserved.
 */
 
-"CFBundleDisplayName" = "Розклад";
-
-"CFBundleName" = "Розклад";
-
-"NoLesson" = "Сьогодні немає пар";
+"CFBundleDisplayName"   = "Розклад";
+"CFBundleName"          = "Розклад";

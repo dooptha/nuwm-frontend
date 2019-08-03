@@ -6,8 +6,5 @@
   Copyright © 2019 Facebook. All rights reserved.
 */
 
-"CFBundleDisplayName" = "Schedule";
-
-"CFBundleName" = "Schedule";
-
-"NoLesson" = "No Lesson Today";
+"CFBundleDisplayName"   = "Schedule";
+"CFBundleName"          = "Schedule";

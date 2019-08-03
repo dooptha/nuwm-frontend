@@ -25,6 +25,7 @@
 		5664E98D89824E9199FFB9F2 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EB6850A377F41AEB23F8CE9 /* Roboto-Black.ttf */; };
 		5EC5F60E090640F08B76761B /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00F4A8ADB6794F0C9F68A580 /* Roboto-Regular.ttf */; };
 		6DA63E10547E274D73D12D5B /* libPods-NuwmAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CD6A87FB7FCC536088A96BE /* libPods-NuwmAppTests.a */; };
+		789EAEA62EB1375F45BCDF24 /* libPods-ScheduleWidget.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA6F64B720097F4FA0DF568 /* libPods-ScheduleWidget.a */; };
 		833DAF11C9208E0FA43175D5 /* libPods-NuwmApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F3CEC994837039CE2FE306B0 /* libPods-NuwmApp.a */; };
 		920FA74A66904E44BA587CD5 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1D8D815D1B1D48DCB8202BA6 /* Roboto-Bold.ttf */; };
 		AE64CE7F48214E95D2D3889C /* libPods-NuwmApp-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C1DA2A39BBAE72483B85DCA1 /* libPods-NuwmApp-tvOSTests.a */; };
@@ -36,6 +37,7 @@
 		F928925C22F5D1BB00764E14 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F928925B22F5D1BB00764E14 /* TodayViewController.swift */; };
 		F928925F22F5D1BB00764E14 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F928925D22F5D1BB00764E14 /* MainInterface.storyboard */; };
 		F928926322F5D1BB00764E14 /* ScheduleWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F928925722F5D1BB00764E14 /* ScheduleWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F928926D22F5D5CA00764E14 /* ScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F928926C22F5D5CA00764E14 /* ScheduleTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,10 +96,12 @@
 		1D8D815D1B1D48DCB8202BA6 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Bold.ttf"; path = "../src/assets/fonts/Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* NuwmApp-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NuwmApp-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* NuwmApp-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "NuwmApp-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EA6F64B720097F4FA0DF568 /* libPods-ScheduleWidget.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ScheduleWidget.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D434F2C96674CC9B25AA0AB /* Roboto-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Thin.ttf"; path = "../src/assets/fonts/Roboto-Thin.ttf"; sourceTree = "<group>"; };
 		4F08AF75BC3CA1EFEFC3EF47 /* Pods-NuwmAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NuwmAppTests.debug.xcconfig"; path = "Target Support Files/Pods-NuwmAppTests/Pods-NuwmAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		55738C7E76C04534B9503EE2 /* Roboto-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-MediumItalic.ttf"; path = "../src/assets/fonts/Roboto-MediumItalic.ttf"; sourceTree = "<group>"; };
 		599B704CA3BF43709555ACE6 /* Roboto-RegularItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-RegularItalic.ttf"; path = "../src/assets/fonts/Roboto-RegularItalic.ttf"; sourceTree = "<group>"; };
+		5EE956F13254264FCE7432C7 /* Pods-ScheduleWidget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScheduleWidget.release.xcconfig"; path = "Target Support Files/Pods-ScheduleWidget/Pods-ScheduleWidget.release.xcconfig"; sourceTree = "<group>"; };
 		62D657209BE44BDF8895B7B7 /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-BlackItalic.ttf"; path = "../src/assets/fonts/Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
 		6EB6850A377F41AEB23F8CE9 /* Roboto-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Black.ttf"; path = "../src/assets/fonts/Roboto-Black.ttf"; sourceTree = "<group>"; };
 		70A3BF7EBF8E4D7BAE1EC2C3 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Medium.ttf"; path = "../src/assets/fonts/Roboto-Medium.ttf"; sourceTree = "<group>"; };
@@ -121,6 +125,8 @@
 		F928925B22F5D1BB00764E14 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		F928925E22F5D1BB00764E14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		F928926022F5D1BB00764E14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F928926C22F5D5CA00764E14 /* ScheduleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewCell.swift; sourceTree = "<group>"; };
+		FADD3470028A41A1CDBDDC6A /* Pods-ScheduleWidget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScheduleWidget.debug.xcconfig"; path = "Target Support Files/Pods-ScheduleWidget/Pods-ScheduleWidget.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +167,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F928925922F5D1BB00764E14 /* NotificationCenter.framework in Frameworks */,
+				789EAEA62EB1375F45BCDF24 /* libPods-ScheduleWidget.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,6 +215,7 @@
 				C1DA2A39BBAE72483B85DCA1 /* libPods-NuwmApp-tvOSTests.a */,
 				0CD6A87FB7FCC536088A96BE /* libPods-NuwmAppTests.a */,
 				F928925822F5D1BB00764E14 /* NotificationCenter.framework */,
+				2EA6F64B720097F4FA0DF568 /* libPods-ScheduleWidget.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -223,6 +231,8 @@
 				C4FD8287454E163919BD33D6 /* Pods-NuwmApp-tvOSTests.release.xcconfig */,
 				4F08AF75BC3CA1EFEFC3EF47 /* Pods-NuwmAppTests.debug.xcconfig */,
 				063DCFBE774A05AA6D5EB774 /* Pods-NuwmAppTests.release.xcconfig */,
+				FADD3470028A41A1CDBDDC6A /* Pods-ScheduleWidget.debug.xcconfig */,
+				5EE956F13254264FCE7432C7 /* Pods-ScheduleWidget.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -269,6 +279,7 @@
 				F928925B22F5D1BB00764E14 /* TodayViewController.swift */,
 				F928925D22F5D1BB00764E14 /* MainInterface.storyboard */,
 				F928926022F5D1BB00764E14 /* Info.plist */,
+				F928926C22F5D5CA00764E14 /* ScheduleTableViewCell.swift */,
 			);
 			path = ScheduleWidget;
 			sourceTree = "<group>";
@@ -379,6 +390,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F928926622F5D1BB00764E14 /* Build configuration list for PBXNativeTarget "ScheduleWidget" */;
 			buildPhases = (
+				FF72DB5C91164A0EC83DC967 /* [CP] Check Pods Manifest.lock */,
 				F928925322F5D1BB00764E14 /* Sources */,
 				F928925422F5D1BB00764E14 /* Frameworks */,
 				F928925522F5D1BB00764E14 /* Resources */,
@@ -659,6 +671,28 @@
 			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		FF72DB5C91164A0EC83DC967 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ScheduleWidget-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -700,6 +734,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F928926D22F5D5CA00764E14 /* ScheduleTableViewCell.swift in Sources */,
 				F928925C22F5D1BB00764E14 /* TodayViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1052,6 +1087,7 @@
 		};
 		F928926422F5D1BB00764E14 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FADD3470028A41A1CDBDDC6A /* Pods-ScheduleWidget.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1081,6 +1117,7 @@
 		};
 		F928926522F5D1BB00764E14 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5EE956F13254264FCE7432C7 /* Pods-ScheduleWidget.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;

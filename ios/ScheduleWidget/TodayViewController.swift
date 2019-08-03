@@ -6,13 +6,16 @@
 //  Copyright © 2019 Facebook. All rights reserved.
 //
 
+import UIKit
+import NotificationCenter
+
+import Alamofire
+import SwiftyJSON
+
 struct Subject {
   var title: String
   var desc: String
 }
-
-import UIKit
-import NotificationCenter
 
 class TodayViewController: UITableViewController, NCWidgetProviding {
   
@@ -22,12 +25,44 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     super.viewDidLoad()
     
     self.data.append(Subject(title: "title1", desc: "desc1"))
-    self.data.append(Subject(title: "title2", desc: "desc2"))
   }
   
   func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
     
-    completionHandler(NCUpdateResult.newData)
+    let url = "http://calc.nuwm.edu.ua:3002/api/sched?group=%D0%9F%D0%9C-41&sdate=05.09.2018&edate=12.09.2018&type=days";
+    
+    
+    Alamofire.request(url, method: .get).response{ response in
+      
+      let json = JSON(response.data!)
+      
+      let schedule = json["response"]["schedule"]
+      
+      print("Days: \(schedule.count)")
+      
+      print(schedule)
+      
+      self.data = Array()
+      
+      for (index,day):(String, JSON) in schedule {
+        
+        let subjects = day["subjects"]
+        
+        print("Subjects: \(subjects.count)")
+        
+        for (index,subject):(String, JSON) in subjects {
+          
+          print("Lecturer: \(subject["time"])")
+          
+          self.data.append(Subject(title: subject["time"].string ?? "-", desc: subject["subject"].string ?? "-"))
+        }
+      }
+      
+      self.tableView.reloadData()
+      print("handler")
+      
+      completionHandler(NCUpdateResult.newData)
+    }
   }
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -39,6 +74,8 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     let cell = tableView.dequeueReusableCell(withIdentifier: "ScheduleItem", for: indexPath) as! ScheduleTableViewCell
     
     let item = data[indexPath.row]
+    
+    print("update")
     
     cell.itemTitle.text = item.title as? String
     cell.itemDesc.text = item.desc as? String
@@ -70,6 +107,5 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
       preferredContentSize = maxSize
     }
   }
-  
     
 }

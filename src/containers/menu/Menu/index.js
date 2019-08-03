@@ -34,7 +34,10 @@ class MenuContainer extends Component {
     const { themedStyle, navigation } = this.props;
 
     return (
-      <SafeAreaView style={themedStyle.safeAreaContainer}>
+      <SafeAreaView
+        forceInset={{ top: 'never', bottom: 'always' }}
+        style={themedStyle.safeAreaContainer}
+      >
         <BottomNavigation
           appearance="noIndicator"
           selectedIndex={navigation.state.index}

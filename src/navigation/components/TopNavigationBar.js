@@ -40,7 +40,10 @@ class TopNavigationBar extends Component {
     const rightControlElement = submitIcon ? this.renderSubmitButton(submitIcon) : null;
 
     return (
-      <SafeAreaView style={border ? themedStyle.safeAreaWithBorder : themedStyle.safeArea}>
+      <SafeAreaView
+        style={border ? themedStyle.safeAreaWithBorder : themedStyle.safeArea}
+        forceInset={{ top: 'always', bottom: 'never' }}
+      >
         <TopNavigation
           alignment="center"
           title={title}

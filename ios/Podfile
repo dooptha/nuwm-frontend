@@ -28,11 +28,8 @@ target 'NuwmApp' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-
-
-
-
-
+  pod 'Alamofire', '~> 4.8.0'
+  pod 'SwiftyJSON', '~> 4.0'
 
 
   target 'NuwmAppTests' do
@@ -51,4 +48,15 @@ target 'NuwmApp-tvOS' do
     # Pods for testing
   end
 
+end
+
+# for some package issue, Alamofire doesn't  have specefied swift version,
+# so we manually set it to not break 'pod install'
+
+pre_install do |installer|
+    installer.analysis_result.specifications.each do |s|
+        if s.name == 'Alamofire'
+            s.swift_version = '5'
+        end
+    end
 end

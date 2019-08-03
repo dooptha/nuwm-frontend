@@ -60,10 +60,13 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
       }else{
         let noDataLabel: UILabel  = UILabel(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: self.tableView.bounds.size.height))
         noDataLabel.text = "NoLesson".localized
-        noDataLabel.textColor = UIColor.black
+        noDataLabel.textColor = UIColor.darkGray
         noDataLabel.textAlignment = .center
+        
         self.tableView.backgroundView  = noDataLabel
         self.tableView.separatorStyle  = .none
+        
+        self.tableView.reloadData()
       }
       
       completionHandler(NCUpdateResult.newData)

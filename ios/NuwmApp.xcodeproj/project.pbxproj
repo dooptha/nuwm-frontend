@@ -38,6 +38,7 @@
 		F928925F22F5D1BB00764E14 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F928925D22F5D1BB00764E14 /* MainInterface.storyboard */; };
 		F928926322F5D1BB00764E14 /* ScheduleWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F928925722F5D1BB00764E14 /* ScheduleWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F928926D22F5D5CA00764E14 /* ScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F928926C22F5D5CA00764E14 /* ScheduleTableViewCell.swift */; };
+		F928927022F5F09C00764E14 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F928927222F5F09C00764E14 /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +127,13 @@
 		F928925E22F5D1BB00764E14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		F928926022F5D1BB00764E14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F928926C22F5D5CA00764E14 /* ScheduleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewCell.swift; sourceTree = "<group>"; };
+		F928927122F5F09C00764E14 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F928927322F5F1FF00764E14 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		F928927422F5F1FF00764E14 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MainInterface.strings; sourceTree = "<group>"; };
+		F928927522F5F1FF00764E14 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F928927622F5F21200764E14 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		F928927722F5F21200764E14 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/MainInterface.strings; sourceTree = "<group>"; };
+		F928927822F5F21200764E14 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FADD3470028A41A1CDBDDC6A /* Pods-ScheduleWidget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScheduleWidget.debug.xcconfig"; path = "Target Support Files/Pods-ScheduleWidget/Pods-ScheduleWidget.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -280,6 +288,7 @@
 				F928925D22F5D1BB00764E14 /* MainInterface.storyboard */,
 				F928926022F5D1BB00764E14 /* Info.plist */,
 				F928926C22F5D5CA00764E14 /* ScheduleTableViewCell.swift */,
+				F928927222F5F09C00764E14 /* InfoPlist.strings */,
 			);
 			path = ScheduleWidget;
 			sourceTree = "<group>";
@@ -447,6 +456,8 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
+				uk,
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
@@ -511,6 +522,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F928925F22F5D1BB00764E14 /* MainInterface.storyboard in Resources */,
+				F928927022F5F09C00764E14 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -764,6 +776,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				13B07FB21A68108700A75B9A /* Base */,
+				F928927322F5F1FF00764E14 /* ru */,
+				F928927622F5F21200764E14 /* uk */,
 			);
 			name = LaunchScreen.xib;
 			path = NuwmApp;
@@ -773,8 +787,20 @@
 			isa = PBXVariantGroup;
 			children = (
 				F928925E22F5D1BB00764E14 /* Base */,
+				F928927422F5F1FF00764E14 /* ru */,
+				F928927722F5F21200764E14 /* uk */,
 			);
 			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+		F928927222F5F09C00764E14 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F928927122F5F09C00764E14 /* en */,
+				F928927522F5F1FF00764E14 /* ru */,
+				F928927822F5F21200764E14 /* uk */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -990,6 +1016,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1043,6 +1070,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;

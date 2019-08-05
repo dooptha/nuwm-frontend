@@ -6,13 +6,14 @@ import {
 import {
   withStyles,
 } from 'react-native-ui-kitten';
+import moment from 'moment';
 import RightMessage from './RightMessage';
 import LeftMessage from './LeftMessage';
 
 const MessageComponent = ({ message, themedStyle, onPress }) => {
   const alignmentStyle = { justifyContent: message.isSender ? 'flex-end' : 'flex-start' };
-  const rawDate = new Date(message.date);
-  const date = rawDate.toLocaleTimeString();
+  const date = moment(message.date).format('HH:mm');
+
   return (
     <TouchableWithoutFeedback
       onPress={() => onPress(message)}

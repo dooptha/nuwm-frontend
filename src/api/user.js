@@ -4,18 +4,15 @@ import { storeObject, storeKey } from '../utils/storage';
 
 function logIn(dispatch, navigation, data) {
   dispatch({ type: 'logIn' });
-
   const { username, deviceId, group } = data;
 
-  api.post('/login', { username, deviceId })
+  return api.post('/login', { username, deviceId })
     .then((response) => {
       const { user } = response.data;
+      const { token } = user;
 
       // Should store user after successful validation on server
-      dispatch({
-        type: 'logInSuccess',
-        user,
-      });
+      dispatch({ type: 'logInSuccess', user });
       storeObject('user', user);
 
       // Should save group on first login if presented
@@ -25,10 +22,9 @@ function logIn(dispatch, navigation, data) {
           key: 'group',
           value: group,
         });
+
         storeKey('group', group);
       }
-
-      const { token } = user;
 
       if (token) {
         setAuthHeaders(token);
@@ -48,7 +44,7 @@ function logIn(dispatch, navigation, data) {
 function updateCurrentUser(dispatch, navigation, { username }) {
   dispatch({ type: 'updateCurrentUser' });
 
-  api.post('/users', { username })
+  return api.post('/users', { username })
     .then((response) => {
       const { user } = response.data;
 
@@ -56,8 +52,8 @@ function updateCurrentUser(dispatch, navigation, { username }) {
         type: 'updateCurrentUserSuccess',
         user,
       });
-      storeObject('user', user);
 
+      storeObject('user', user);
       navigation.goBack();
     })
     .catch((error) => {
@@ -66,7 +62,7 @@ function updateCurrentUser(dispatch, navigation, { username }) {
 }
 
 function deleteMessage(message) {
-  api.post('/delete_message', { message })
+  return api.post('/delete_message', { message })
     .then(() => {})
     .catch(() => {});
 }

@@ -1,21 +1,22 @@
 const userReducer = (state, action) => {
   switch (action.type) {
-    case 'signUp':
+    case 'logIn':
     case 'updateCurrentUser':
       return {
         ...state,
         isLoading: true,
         error: null,
       };
+
     case 'updateUser':
-    case 'signUpSuccess':
+    case 'logInSuccess':
       return {
         ...state,
         ...{ current: action.user },
         isLoading: false,
       };
 
-    case 'signUpFailure':
+    case 'logInFailure':
     case 'updateCurrentUserFailure':
       return {
         ...state,

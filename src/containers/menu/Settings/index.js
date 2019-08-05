@@ -12,7 +12,8 @@ import UserCard from '../../../components/settings/UserCard';
 import I18n from '../../../utils/i18n';
 
 const SettingsContainer = ({ navigation, themedStyle }) => {
-  const [{ user, app }] = useGlobalState();
+  const [{ user }] = useGlobalState();
+  const { role } = user.current;
 
   const navigateTo = (routeName, params) => navigation.navigate({
     key: 'SettingsContainer',
@@ -21,7 +22,7 @@ const SettingsContainer = ({ navigation, themedStyle }) => {
   });
 
   const routes = data.filter((route) => (
-    (route.type === 'Admin' && app.isAdmin) || route.type !== 'Admin'
+    (route.type === 'Admin' && (role === 'admin' || role === 'moderator')) || route.type !== 'Admin'
   ));
 
   const renderItem = ({ item }) => {

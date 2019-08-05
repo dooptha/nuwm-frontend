@@ -34,9 +34,10 @@ class Conversation extends Component {
   }
 
   onMessagePress(message) {
-    const [{ app }] = this.context;
+    const [{ user }] = this.context;
+    const { role } = user.current;
 
-    if (app.isAdmin) {
+    if (role === 'admin' || role === 'moderator') {
       Alert.alert(
         I18n.t('admin.deleteMessage'),
         message.body,
@@ -77,7 +78,7 @@ class Conversation extends Component {
 
     socket.emit('message:send', {
       body: newMessage,
-      sender: user.current.name,
+      sender: user.current.username,
     });
 
     this.setState({ newMessage: '' });

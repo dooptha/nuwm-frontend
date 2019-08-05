@@ -18,7 +18,7 @@ class UserContainer extends Component {
     const user = props.navigation.getParam('currentUser');
 
     this.state = {
-      name: user.name,
+      username: user.username,
     };
   }
 
@@ -38,10 +38,10 @@ class UserContainer extends Component {
 
   onFormSubmit() {
     const [, dispatch] = this.context;
-    const { name } = this.state;
+    const { username } = this.state;
     const { navigation } = this.props;
 
-    api.updateCurrentUser(dispatch, navigation, { name });
+    api.updateCurrentUser(dispatch, navigation, { username });
   }
 
   logOut() {
@@ -64,7 +64,7 @@ class UserContainer extends Component {
   }
 
   render() {
-    const { name } = this.state;
+    const { username } = this.state;
     const { themedStyle } = this.props;
 
     return (
@@ -74,9 +74,9 @@ class UserContainer extends Component {
           labelStyle={themedStyle.text}
           textStyle={themedStyle.text}
           label={I18n.t('settings.user.name')}
-          name="name"
-          value={name}
-          onChangeText={(text) => this.onInputChange({ name: text })}
+          name="username"
+          value={username}
+          onChangeText={(text) => this.onInputChange({ username: text })}
           autoCompleteType="name"
         />
         <Button

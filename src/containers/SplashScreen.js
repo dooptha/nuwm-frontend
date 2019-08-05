@@ -12,7 +12,7 @@ class SplashScreen extends Component {
     // Force to load app for testing purposes
     // navigation.navigate('App');
 
-    if (currentUser && currentUser.name !== '') {
+    if (currentUser && currentUser.username !== '') {
       navigation.navigate('App');
     } else {
       navigation.navigate('SignUp');

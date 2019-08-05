@@ -20,7 +20,7 @@ export class SignUp extends Component {
 
     this.inputs = {};
     this.state = {
-      name: '',
+      username: '',
       group: '',
     };
   }
@@ -34,18 +34,18 @@ export class SignUp extends Component {
   }
 
   canSubmitForm() {
-    const { name, group } = this.state;
-    return name !== '' && group !== '';
+    const { username, group } = this.state;
+    return username !== '' && group !== '';
   }
 
   submitForm() {
     const [{ app }, dispatch] = this.context;
-    const { name, group } = this.state;
+    const { username, group } = this.state;
     const { navigation } = this.props;
 
-    api.signUp(dispatch, navigation, {
+    api.logIn(dispatch, navigation, {
       deviceId: app.deviceId,
-      name,
+      username,
       group,
     });
   }
@@ -56,7 +56,7 @@ export class SignUp extends Component {
 
   render() {
     const [{ user }] = this.context;
-    const { name, group } = this.state;
+    const { username, group } = this.state;
     const { themedStyle } = this.props;
 
     return (
@@ -76,10 +76,10 @@ export class SignUp extends Component {
           labelStyle={themedStyle.text}
           textStyle={themedStyle.text}
           label={I18n.t('SignUp.name')}
-          name="name"
+          name="username"
           returnKeyType="next"
-          value={name}
-          onChangeText={(text) => this.setState({ name: text })}
+          value={username}
+          onChangeText={(text) => this.setState({ username: text })}
           onSubmitEditing={() => this.focusTheField('group')}
         />
         <Input

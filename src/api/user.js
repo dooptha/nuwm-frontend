@@ -2,82 +2,65 @@ import { api, setAuthHeaders } from '.';
 import { initSockets } from './socket';
 import { storeObject, storeKey } from '../utils/storage';
 
-function authorize(dispatch) {
-  api.get('/users/access')
-    .then(() => dispatch({ type: 'updateRole', isAdmin: true }))
-    .catch(() => dispatch({ type: 'updateRole', isAdmin: false }));
-}
+function logIn(dispatch, navigation, data) {
+  dispatch({ type: 'logIn' });
 
-function signUp(dispatch, navigation, data) {
-  dispatch({ type: 'signUp' });
-  const { name, deviceId, group } = data;
+  const { username, deviceId, group } = data;
 
-  api.post('/login', { username: name, deviceId })
+  api.post('/login', { username, deviceId })
     .then((response) => {
-      const { token } = response.data;
-
-      const user = {
-        name,
-        accessToken: token,
-      };
+      const { user } = response.data;
 
       // Should store user after successful validation on server
       dispatch({
-        type: 'signUpSuccess',
+        type: 'logInSuccess',
         user,
       });
-
       storeObject('user', user);
 
-      // Should save group aftter succesful sign up
-      dispatch({
-        type: 'setProperty',
-        key: 'group',
-        value: group,
-      });
+      // Should save group on first login if presented
+      if (group) {
+        dispatch({
+          type: 'setProperty',
+          key: 'group',
+          value: group,
+        });
+        storeKey('group', group);
+      }
 
-      storeKey('group', group);
+      const { token } = user;
 
-      // Set auth headers for future requests
-      setAuthHeaders(token);
+      if (token) {
+        setAuthHeaders(token);
+        initSockets({ dispatch, token });
+      }
 
-      // Then get role from server
-      authorize(dispatch);
-
-      // Then initialize sockets
-      initSockets({ dispatch, token });
-
-      // Should navigate to app after successful validation on server
-      navigation.navigate('App');
+      // Should navigate to app after successful validation on server if needed
+      if (navigation) {
+        navigation.navigate('App');
+      }
     })
     .catch((error) => {
-      dispatch({ type: 'signUpFailure', error });
+      dispatch({ type: 'logInFailure', error });
     });
 }
 
-function updateCurrentUser(dispatch, navigation, data) {
+function updateCurrentUser(dispatch, navigation, { username }) {
   dispatch({ type: 'updateCurrentUser' });
-  const { name } = data;
 
-  api.post('/users', { username: name })
+  api.post('/users', { username })
     .then((response) => {
-      const user = {
-        name: response.data.user.username,
-      };
-
-      console.log('succesful', user);
+      const { user } = response.data;
 
       dispatch({
         type: 'updateCurrentUserSuccess',
         user,
       });
-
       storeObject('user', user);
 
       navigation.goBack();
     })
     .catch((error) => {
-      console.log('failure', error);
       dispatch({ type: 'updateCurrentUserFailure', error });
     });
 }
@@ -89,8 +72,7 @@ function deleteMessage(message) {
 }
 
 export default {
-  signUp,
+  logIn,
   deleteMessage,
-  authorize,
   updateCurrentUser,
 };

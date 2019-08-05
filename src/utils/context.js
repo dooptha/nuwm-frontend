@@ -61,7 +61,7 @@ export const loadInitialData = async (dispatch) => {
     dispatch({ type: 'updateUser', user });
 
     // Set auth headers for api requests
-    setAuthHeaders(user.accessToken, deviceId);
+    setAuthHeaders(user.accessToken);
 
     // Then get role from server
     api.authorize(dispatch);

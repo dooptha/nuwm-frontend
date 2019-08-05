@@ -39,7 +39,7 @@ function signUp(dispatch, navigation, data) {
       storeKey('group', group);
 
       // Set auth headers for future requests
-      setAuthHeaders(token, deviceId);
+      setAuthHeaders(token);
 
       // Then get role from server
       authorize(dispatch);

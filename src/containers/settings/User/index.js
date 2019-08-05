@@ -6,8 +6,9 @@ import {
   withStyles,
 } from 'react-native-ui-kitten';
 import { StateContext } from '../../../utils/context';
-import { removeKey, storeObject } from '../../../utils/storage';
+import { removeKey } from '../../../utils/storage';
 import I18n from '../../../utils/i18n';
+import { setAuthHeaders } from '../../../api';
 import api from '../../../api/user';
 
 class UserContainer extends Component {
@@ -54,13 +55,15 @@ class UserContainer extends Component {
     // Clear data from storage
     removeKey('user');
 
+    // Remove token from axios header
+    setAuthHeaders('');
+
     const { navigation } = this.props;
 
     navigation.navigate('SignUp');
   }
 
   render() {
-    const [{ user }] = this.context;
     const { name } = this.state;
     const { themedStyle } = this.props;
 
@@ -75,12 +78,6 @@ class UserContainer extends Component {
           value={name}
           onChangeText={(text) => this.onInputChange({ name: text })}
           autoCompleteType="name"
-        />
-        <Input
-          style={themedStyle.input}
-          label="access-token"
-          name="accessToken"
-          value={user.current.accessToken}
         />
         <Button
           style={themedStyle.submitButton}

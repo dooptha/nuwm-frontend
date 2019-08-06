@@ -21,10 +21,8 @@ describe('<SignUp> ', () => {
     );
 
     signUp = wrapper.find(SignUp).last();
-    signUp.setState({ name: 'Name', group: 'Group' });
-
+    signUp.setState({ username: 'Name', group: 'Group' });
     wrapper.update();
-
     button = wrapper.find(Button).last();
 
     expect(button.props().disabled).toBe(undefined);

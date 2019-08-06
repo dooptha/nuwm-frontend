@@ -6,8 +6,9 @@ import {
   withStyles,
 } from 'react-native-ui-kitten';
 import { StateContext } from '../../../utils/context';
-import { removeKey, storeObject } from '../../../utils/storage';
+import { removeKey } from '../../../utils/storage';
 import I18n from '../../../utils/i18n';
+import { setAuthHeaders } from '../../../api';
 import api from '../../../api/user';
 
 class UserContainer extends Component {
@@ -17,7 +18,7 @@ class UserContainer extends Component {
     const user = props.navigation.getParam('currentUser');
 
     this.state = {
-      name: user.name,
+      username: user.username,
     };
   }
 
@@ -37,10 +38,10 @@ class UserContainer extends Component {
 
   onFormSubmit() {
     const [, dispatch] = this.context;
-    const { name } = this.state;
+    const { username } = this.state;
     const { navigation } = this.props;
 
-    api.updateCurrentUser(dispatch, navigation, { name });
+    api.updateCurrentUser(dispatch, navigation, { username });
   }
 
   logOut() {
@@ -54,14 +55,16 @@ class UserContainer extends Component {
     // Clear data from storage
     removeKey('user');
 
+    // Remove token from axios header
+    setAuthHeaders('');
+
     const { navigation } = this.props;
 
     navigation.navigate('SignUp');
   }
 
   render() {
-    const [{ user }] = this.context;
-    const { name } = this.state;
+    const { username } = this.state;
     const { themedStyle } = this.props;
 
     return (
@@ -71,16 +74,10 @@ class UserContainer extends Component {
           labelStyle={themedStyle.text}
           textStyle={themedStyle.text}
           label={I18n.t('settings.user.name')}
-          name="name"
-          value={name}
-          onChangeText={(text) => this.onInputChange({ name: text })}
+          name="username"
+          value={username}
+          onChangeText={(text) => this.onInputChange({ username: text })}
           autoCompleteType="name"
-        />
-        <Input
-          style={themedStyle.input}
-          label="access-token"
-          name="accessToken"
-          value={user.current.accessToken}
         />
         <Button
           style={themedStyle.submitButton}

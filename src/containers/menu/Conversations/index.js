@@ -24,8 +24,8 @@ class ConversationsContainer extends Component {
   }
 
   onVote(index) {
-    const [{ poll }, dispatch] = this.context;
-    api.vote(dispatch, poll.current, index);
+    const [, dispatch] = this.context;
+    api.vote(dispatch, index);
   }
 
   loadData() {
@@ -61,7 +61,6 @@ class ConversationsContainer extends Component {
         <View style={themedStyle.box}>
           <Poll
             style={themedStyle.poll}
-            voted={poll.current.voted}
             poll={poll.current}
             onVote={(i) => this.onVote(i)}
             votingFor={poll.votingFor}

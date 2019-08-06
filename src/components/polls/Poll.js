@@ -9,7 +9,6 @@ import {
 import Option from './Option';
 
 const Poll = ({
-  voted,
   poll,
   themedStyle,
   onVote,
@@ -37,10 +36,10 @@ const Poll = ({
         options.map((option, index) => (
           <Option
             style={styles.option}
-            key={option.name}
+            key={option.id}
             index={index}
             option={option}
-            voted={voted}
+            poll={poll}
             onVote={(i) => onVote(i)}
             votingFor={votingFor}
           />

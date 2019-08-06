@@ -27,14 +27,14 @@ export const GlobalState = ({ children }) => {
       },
       properties: DEFAULT_PROPERTIES,
       onlineCounter: 1,
-      isAdmin: false,
     },
     conversations: {
       messages: [],
     },
     user: {
       current: {
-        name: '',
+        username: '',
+        role: '',
       },
     },
     poll: {
@@ -52,7 +52,12 @@ export const GlobalState = ({ children }) => {
 };
 
 export const loadInitialData = async (dispatch) => {
-  const [properties, user, deviceId] = await Promise.all([getProperties(config.USE_DEFAULT_PROPERTIES), getObject('user'), DeviceInfo.getUniqueID()]);
+  // Do async initial loadings
+  const [properties, user, deviceId] = await Promise.all([
+    getProperties(config.USE_DEFAULT_PROPERTIES),
+    getObject('user'),
+    DeviceInfo.getUniqueID(),
+  ]);
 
   setLocale(properties.language);
   dispatch({ type: 'loadProperties', properties });
@@ -61,13 +66,18 @@ export const loadInitialData = async (dispatch) => {
     dispatch({ type: 'updateUser', user });
 
     // Set auth headers for api requests
-    setAuthHeaders(user.accessToken, deviceId);
+    setAuthHeaders(user.token);
 
-    // Then get role from server
-    api.authorize(dispatch);
+    const { username } = user;
+
+    // Fetch current user
+    api.logIn(dispatch, null, {
+      username,
+      deviceId,
+    });
 
     // Then initialize sockets
-    initSockets({ dispatch, token: user.accessToken });
+    initSockets({ dispatch, token: user.token });
   }
 
   dispatch({ type: 'updateDeviceId', deviceId });

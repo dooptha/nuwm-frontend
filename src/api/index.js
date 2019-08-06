@@ -3,12 +3,12 @@ import config from '../../config';
 
 export const api = axios.create({
   baseURL: config.API_ENDPOINT,
-  timeout: 1000,
+  timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-export const setAuthHeaders = (authToken, deviceId) => {
-  api.defaults.headers.common['x-access-token'] = authToken;
+export const setAuthHeaders = (token) => {
+  api.defaults.headers.common['x-access-token'] = token;
 };

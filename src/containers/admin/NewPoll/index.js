@@ -17,6 +17,7 @@ import { AvoidKeyboard } from '../../../components/common';
 import { StateContext } from '../../../utils/context';
 import I18n from '../../../utils/i18n';
 import { CirclePlusIcon, CircleMinusIcon } from '../../../assets/icons';
+import api from '../../../api/poll';
 
 export class NewPoll extends Component {
   constructor(props) {
@@ -118,7 +119,10 @@ export class NewPoll extends Component {
 
   canSubmitForm() {
     const { question, options } = this.state;
-    return question !== '' && options.length > 1 && options.length <= 5 && !options.includes('');
+    return question !== ''
+      && options.length > 1
+      && options.length <= 5
+      && !options.find((o) => o.value === '');
   }
 
   canAddNewOption() {
@@ -127,10 +131,17 @@ export class NewPoll extends Component {
   }
 
   submitForm() {
+    const [, dispatch] = this.context;
+    const { question, options } = this.state;
+    const { navigation } = this.props;
+
+    api.createPoll(dispatch, {
+      question,
+      options,
+    }).then(() => navigation.goBack());
   }
 
   closeLastPoll() {
-
   }
 
   keyboardOffset(height) {

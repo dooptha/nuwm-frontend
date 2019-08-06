@@ -1,11 +1,13 @@
 const pollReducer = (state, action) => {
   switch (action.type) {
+    case 'createPoll':
     case 'loadCurrentPoll':
       return {
         ...state,
         isLoading: true,
       };
 
+    case 'createPollSuccess':
     case 'loadCurrentPollSuccess':
       return {
         ...state,
@@ -13,6 +15,7 @@ const pollReducer = (state, action) => {
         isLoading: false,
       };
 
+    case 'createPollFailure':
     case 'loadCurrentPollFailure':
       return {
         ...state,

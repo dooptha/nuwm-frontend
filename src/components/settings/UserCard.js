@@ -56,7 +56,7 @@ export default ({ user, onItemSelect }) => (
           category="s1"
           style={style.text}
         >
-          {user.name}
+          {user.username}
         </Text>
       </View>
     </View>

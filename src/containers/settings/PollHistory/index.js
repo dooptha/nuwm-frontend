@@ -29,7 +29,6 @@ class PollHistory extends Component {
       <Poll
         style={themedStyle.poll}
         poll={info.item}
-        voted
       />
     );
   }

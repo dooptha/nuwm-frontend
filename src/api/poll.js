@@ -1,152 +1,80 @@
-// import axios from 'axios';
-// import config from '../utils/config';
-
-export async function fetchLastPoll() {
-  return {
-    id: 0,
-    question: 'могут ли расеяне есть камни?',
-    options: [
-      {
-        name: 'Да',
-        value: 100,
-      },
-      {
-        name: 'Нет',
-        value: 10,
-      }],
-  };
-}
-
-export async function fetchPolls() {
-  return [{
-    id: 0,
-    question: 'могут ли расеяне есть камни?',
-    options: [
-      {
-        name: 'Да',
-      },
-      {
-        name: 'Нет',
-      }],
-  },
-  {
-    id: 1,
-    question: 'могут ли расеяне есть камни?',
-    options: [
-      {
-        name: 'Да',
-      },
-      {
-        name: 'Нет',
-      }],
-  },
-  {
-    id: 2,
-    question: 'могут ли расеяне есть камни?',
-    options: [
-      {
-        name: 'Да',
-      },
-      {
-        name: 'Нет',
-      }],
-  },
-  {
-    id: 3,
-    question: 'могут ли расеяне есть камни?',
-    options: [
-      {
-        name: 'Да',
-      },
-      {
-        name: 'Нет',
-      }],
-  },
-  {
-    id: 4,
-    question: 'могут ли расеяне есть камни?',
-    options: [
-      {
-        name: 'Да',
-      },
-      {
-        name: 'Нет',
-      }],
-  }];
-}
+import { api } from '.';
 
 function getLastPoll(dispatch) {
   dispatch({ type: 'loadCurrentPoll' });
 
-  fetchLastPoll()
-    .then((poll) => {
-      setTimeout(() => {
-        dispatch({
-          type: 'loadCurrentPollSuccess',
-          poll,
-        });
-      }, 1000);
+  return api.get('/polls/active')
+    .then((response) => {
+      const { poll } = response.data;
+
+      dispatch({ type: 'loadCurrentPollSuccess', poll });
     })
-    .catch(() => dispatch({ type: 'loadCurrentPollFailure' }));
+    .catch((e) => {
+      dispatch({ type: 'loadCurrentPollFailure' });
+      throw e;
+    });
+}
+
+function createPoll(dispatch, data) {
+  dispatch({ type: 'createPoll' });
+
+  return api.post('/polls', data)
+    .then((response) => {
+      const { poll } = response.data;
+
+      dispatch({
+        type: 'createPollSuccess',
+        poll,
+      });
+    })
+    .catch((e) => {
+      dispatch({ type: 'createPollFailure' });
+      throw e;
+    });
 }
 
 function getPolls(dispatch) {
   dispatch({ type: 'loadPolls' });
 
-  fetchPolls()
-    .then((polls) => {
-      setTimeout(() => {
-        dispatch({
-          type: 'loadPollsSuccess',
-          polls,
-        });
-      }, 1000);
+  return api.get('/polls')
+    .then((response) => {
+      const { polls } = response.data;
+
+      dispatch({
+        type: 'loadPollsSuccess',
+        polls,
+      });
     })
-    .catch(() => dispatch({ type: 'loadPollssFailure' }));
+    .catch((e) => {
+      dispatch({ type: 'loadPollssFailure' });
+      throw e;
+    });
 }
 
-async function voteRequest(p, i) {
-  return {
-    id: 0,
-    voted: true,
-    total: 110,
-    question: 'могут ли расеяне есть камни?',
-    options: [
-      {
-        name: 'Да',
-        value: 90,
-      },
-      {
-        name: 'Нет',
-        value: 10,
-      }],
-  };
-}
+function vote(dispatch, index) {
+  dispatch({ type: 'vote', index });
 
-function vote(dispatch, p, index) {
-  dispatch({
-    type: 'vote',
-    index,
-  });
+  return api.post(`/polls/${index}`)
+    .then((response) => {
+      const { poll } = response.data;
 
-  voteRequest(p, index)
-    .then((poll) => {
-      setTimeout(() => {
-        dispatch({
-          type: 'voteSuccess',
-          poll,
-        });
-      }, 2000);
+      dispatch({
+        type: 'voteSuccess',
+        poll,
+      });
     })
-    .catch(() => {
+    .catch((e) => {
       dispatch({
         type: 'voteFailure',
       });
+
+      throw e;
     });
 }
 
 export default {
   getLastPoll,
+  createPoll,
   getPolls,
   vote,
 };

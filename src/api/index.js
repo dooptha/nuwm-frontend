@@ -9,6 +9,6 @@ export const api = axios.create({
   },
 });
 
-export const setAuthHeaders = (authToken) => {
-  api.defaults.headers.common['x-access-token'] = authToken;
+export const setAuthHeaders = (token) => {
+  api.defaults.headers.common['x-access-token'] = token;
 };

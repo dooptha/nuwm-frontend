@@ -11,7 +11,7 @@ import {
 
 const Option = ({
   style,
-  voted,
+  poll,
   option,
   themedStyle,
   onVote,
@@ -19,20 +19,20 @@ const Option = ({
   votingFor,
 }) => {
   const styles = style || {};
-  const value = option.value || 0;
+  const value = option.votes || 0;
 
   const renderRadioBox = () => (
-    voted
+    poll.active
       ? (
+        <Radio
+          style={themedStyle.radio}
+          onChange={() => onVote(option.id)}
+        />
+      ) : (
         <Text style={[styles.text, themedStyle.text]}>
           {value}
           %
         </Text>
-      ) : (
-        <Radio
-          style={themedStyle.radio}
-          onChange={() => onVote(index)}
-        />
       )
   );
 
@@ -57,11 +57,11 @@ const Option = ({
           category="s1"
           style={[styles.text, themedStyle.text]}
         >
-          {option.name}
+          {option.value}
         </Text>
         <View style={themedStyle.progressBarContainer}>
           {
-            voted
+            !poll.active
               ? (
                 <View style={themedStyle.progressBarBox}>
                   <View style={[

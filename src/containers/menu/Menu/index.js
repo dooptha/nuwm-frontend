@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import {
+  View,
+} from 'react-native';
+import {
   withStyles,
   BottomNavigation,
   BottomNavigationTab,
+  Text,
 } from 'react-native-ui-kitten';
 import { SafeAreaView } from '../../../navigation';
 import {
@@ -30,6 +34,25 @@ class MenuContainer extends Component {
     });
   }
 
+  renderMessageIconWithCounter(style) {
+    const { themedStyle } = this.props;
+    const [{ conversations }] = this.context;
+    const { unreadCounter } = conversations;
+
+    return (
+      <View>
+        {MessageCircleIcon(style)}
+        {
+          unreadCounter > 0 ? (
+            <View style={themedStyle.badgeContainer}>
+              <Text style={themedStyle.badgeTitle}>{unreadCounter}</Text>
+            </View>
+          ) : null
+        }
+      </View>
+    );
+  }
+
   render() {
     const { themedStyle, navigation } = this.props;
 
@@ -51,7 +74,7 @@ class MenuContainer extends Component {
           <BottomNavigationTab
             titleStyle={themedStyle.text}
             title={I18n.t('tabs.chat')}
-            icon={MessageCircleIcon}
+            icon={(style) => this.renderMessageIconWithCounter(style)}
           />
           <BottomNavigationTab
             titleStyle={themedStyle.text}
@@ -72,5 +95,18 @@ export default withStyles(MenuContainer, (theme) => ({
   },
   text: {
     fontFamily: 'Roboto',
+  },
+  badgeContainer: {
+    position: 'absolute',
+    right: -10,
+    top: 0,
+    backgroundColor: '#FF3566',
+    borderRadius: 10,
+    width: 20,
+    height: 20,
+    alignItems: 'center',
+  },
+  badgeTitle: {
+    color: 'white',
   },
 }));

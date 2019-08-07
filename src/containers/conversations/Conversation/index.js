@@ -27,6 +27,12 @@ class Conversation extends Component {
     this.sendMessage = this.sendMessage.bind(this);
   }
 
+  componentDidMount() {
+    const [, dispatch] = this.context;
+
+    dispatch({ type: 'readMessages' });
+  }
+
   onNewMessageChange(newMessage) {
     this.setState({
       newMessage,

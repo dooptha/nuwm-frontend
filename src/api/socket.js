@@ -1,14 +1,19 @@
 import io from 'socket.io-client';
+import Sound from 'react-native-sound';
 import config from '../../config';
 
+const newMessageSound = new Sound('new_message.mp3', Sound.MAIN_BUNDLE);
 let socket;
 
 export const socketEvents = ({ dispatch }) => {
-  socket.on('message:received', (message) => (
+  socket.on('message:received', (message) => {
+    newMessageSound.play();
+
     dispatch({
       type: 'receiveMessage',
       message,
-    })));
+    });
+  });
   socket.on('message:remove', (messageId) => (
     dispatch({
       type: 'removeMessage',

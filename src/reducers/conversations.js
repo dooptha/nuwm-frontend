@@ -15,12 +15,19 @@ const conversationsReducer = (state, action) => {
       return {
         ...state,
         messages,
+        unreadCounter: state.unreadCounter + 1,
       };
 
     case 'removeMessage':
       return {
         ...state,
         ...messages.filter((message) => message.id === action.messageId),
+      };
+
+    case 'readMessages':
+      return {
+        ...state,
+        unreadCounter: 0,
       };
 
     default:

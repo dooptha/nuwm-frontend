@@ -16,6 +16,7 @@ const FloodCard = ({
   themedStyle,
   navigateToChat,
   onlineCounter,
+  unreadCounter,
 }) => (
   <TouchableOpacity
     activeOpacity={0.8}
@@ -34,12 +35,21 @@ const FloodCard = ({
             <Text style={themedStyle.onlineText}>{onlineCounter}</Text>
             {PeopleIcon(themedStyle.onlineIcon)}
           </View>
-          <Text
-            style={themedStyle.text}
-            category="h3"
-          >
-            {I18n.t('flood.title')}
-          </Text>
+          <View style={themedStyle.titleContainer}>
+            <Text
+              style={themedStyle.text}
+              category="h3"
+            >
+              {I18n.t('flood.title')}
+            </Text>
+            {
+              unreadCounter > 0 ? (
+                <View style={themedStyle.badgeContainer}>
+                  <Text style={themedStyle.badgeTitle}>{unreadCounter}</Text>
+                </View>
+              ) : null
+            }
+          </View>
           <Text
             style={[themedStyle.floodDescription, themedStyle.text]}
             category="p1"
@@ -119,5 +129,20 @@ export default withStyles(FloodCard, (theme) => ({
   },
   text: {
     fontFamily: 'Roboto',
+  },
+  titleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  badgeContainer: {
+    backgroundColor: '#FF3566',
+    borderRadius: 10,
+    width: 20,
+    height: 20,
+    alignItems: 'center',
+    marginLeft: 5,
+  },
+  badgeTitle: {
+    color: 'white',
   },
 }));

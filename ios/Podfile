@@ -37,6 +37,8 @@ target 'NuwmApp' do
 
   pod 'ReactNativeExceptionHandler', :path => '../node_modules/react-native-exception-handler'
 
+  pod 'RNSound', :path => '../node_modules/react-native-sound'
+
   target 'NuwmAppTests' do
     inherit! :search_paths
     # Pods for testing

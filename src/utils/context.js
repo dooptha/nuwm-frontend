@@ -30,6 +30,7 @@ export const GlobalState = ({ children }) => {
     },
     conversations: {
       messages: [],
+      unreadCounter: 1,
     },
     user: {
       current: {

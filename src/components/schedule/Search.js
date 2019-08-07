@@ -56,7 +56,7 @@ class Search extends Component {
 
     if (isEnoughData) {
       Api.getSchedule(searchData).then((data) => {
-        NavigationService.navigate('ScheduleList', { schedule: data, refreshing: false, onRefresh: () => {} });
+        NavigationService.navigate('ScheduleList', { schedule: data });
       });
     }
   }

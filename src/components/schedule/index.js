@@ -37,6 +37,7 @@ export class Schedule extends Component {
     return (
       <ScheduleList
         refreshing={refreshing}
+        allowRefresh
         onRefresh={() => this.onRefresh()}
         schedule={schedule}
       />

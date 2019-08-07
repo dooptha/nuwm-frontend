@@ -1,22 +1,32 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { View, ScrollView, RefreshControl } from 'react-native';
 import { withStyles, Text } from 'react-native-ui-kitten';
+import PropTypes from 'prop-types';
+
 import Day from './Day';
 import I18n from '../../utils/i18n';
 
+/**
+  * This class responsible for rendering schedule list and it's logic
+  * when there is no subjects or when refreshing list
+*/
 class ScheduleList extends Component {
-  static defaultProps = {
+  static propTypes = {
+    /** array of days with subjects */
+    schedule: PropTypes.array,
+    /** if RefreshControl feature is enabled */
+    allowRefresh: PropTypes.bool,
+    /** callback for RefreshControl */
+    onRefresh: PropTypes.func,
+    /** if RefreshControl is active */
     refreshing: false,
-    onRefresh: () => {},
+  }
+
+  static defaultProps = {
     schedule: [],
-    navigation: {
-      state: {
-        params: {
-          schedule: [],
-        },
-      },
-    },
+    allowRefresh: false,
+    onRefresh: () => console.warn('Unpredictable callback from Schedule List'),
+    refreshing: false,
   }
 
   renderNoContentMessage() {
@@ -31,45 +41,41 @@ class ScheduleList extends Component {
     );
   }
 
-  renderSchedule(refreshing, schedule) {
-    const message = refreshing ? null : this.renderNoContentMessage();
-
+  renderSchedule(schedule) {
     return schedule.length > 0
       ? schedule.map((day) => (
         <Day key={day.date} day={day} />
-      )) : message;
-  }
-
-  renderList(props) {
-    const {
-      refreshing, onRefresh, schedule,
-    } = props;
-    const { themedStyle } = this.props;
-    return (
-      <ScrollView
-        style={themedStyle.listWrapper}
-        refreshControl={(
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={() => onRefresh()}
-          />
-        )}
-      >
-        { this.renderSchedule(refreshing, schedule) }
-      </ScrollView>
-    );
+      )) : this.renderNoContentMessage();
   }
 
   render() {
-    const { props, props: { navigation } } = this;
+    const { navigation, themedStyle } = this.props;
 
-    // schedule could be passed by props or by navigation
-    if (props.schedule.length > 0) {
-      const { refreshing, onRefresh, schedule } = this.props;
-      return this.renderList({ refreshing, onRefresh, schedule });
-    }
-    const { refreshing, onRefresh, schedule } = navigation.state.params;
-    return this.renderList({ refreshing, onRefresh, schedule });
+    // schedule could be received by props or by navigation params
+    const props = navigation ? navigation.state.params : this.props;
+
+    const {
+      allowRefresh, refreshing, onRefresh, schedule,
+    } = props;
+
+    const refreshControl = allowRefresh ? (
+      <RefreshControl
+        refreshing={refreshing}
+        onRefresh={() => onRefresh()}
+      />
+    ) : null;
+
+    // dont render anything while refreshing data
+    const body = refreshing ? null : this.renderSchedule(schedule);
+
+    return (
+      <ScrollView
+        style={themedStyle.listWrapper}
+        refreshControl={refreshControl}
+      >
+        { body }
+      </ScrollView>
+    );
   }
 }
 
@@ -87,16 +93,3 @@ export default withStyles(ScheduleList, (theme) => ({
     alignItems: 'center',
   },
 }));
-
-ScheduleList.propTypes = {
-  refreshing: PropTypes.bool,
-  onRefresh: PropTypes.func,
-  schedule: PropTypes.array,
-  navigation: PropTypes.shape({
-    state: PropTypes.shape({
-      params: PropTypes.shape({
-        schedule: PropTypes.array,
-      }),
-    }),
-  }),
-};

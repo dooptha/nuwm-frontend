@@ -20,7 +20,10 @@ function logIn(dispatch, navigation, data) {
         },
       });
 
-      storeObject('user', user);
+      storeObject('user', {
+        ...user,
+        ...{ token },
+      });
 
       // Should save group on first login if presented
       if (group) {

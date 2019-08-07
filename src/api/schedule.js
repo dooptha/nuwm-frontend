@@ -1,7 +1,5 @@
-import axios from 'axios';
 import moment from 'moment';
-
-this.api = 'http://localhost:3000/timetable';
+import { api } from '.';
 
 export const getScheduleOnWeek = () => {
   const group = 'ПМ-41';
@@ -9,10 +7,10 @@ export const getScheduleOnWeek = () => {
   const startDate = now.format('DD.MM.YYYY');
   const endDate = now.add(7, 'days').format('DD.MM.YYYY');
 
-  return axios.get(this.api, { params: { group, startDate, endDate } })
+  return api.get('/timetable', { params: { group, startDate, endDate } })
     .then((res) => res.data.schedule)
-    .catch((err) => {
-      console.log(err);
+    .catch((e) => {
+      console.log(e.response.data);
       return [];
     });
 };
@@ -22,14 +20,14 @@ export const getSchedule = (data) => {
     group, name, startDate, endDate, practicsOnly,
   } = data;
 
-  return axios.get(this.api, {
+  return api.get('/timetable', {
     params: {
       group, name, startDate, endDate, practicsOnly,
     },
   })
     .then((res) => res.data.schedule)
-    .catch((err) => {
-      console.log(err);
+    .catch((e) => {
+      console.log(e.response.data);
       return [];
     });
 };

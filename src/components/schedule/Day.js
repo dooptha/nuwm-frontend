@@ -17,7 +17,7 @@ class Day extends Component {
   renderAllSubjects() {
     const { day } = this.props;
 
-    return day.subjects.map((subject) => (
+    return day.subjects.slice(0).reverse().map((subject) => (
       <Lesson
         key={day.date + subject.time}
         subject={subject}
@@ -35,7 +35,7 @@ class Day extends Component {
     return (
       <View>
         <View style={themedStyle.titleWrapper}>
-          <Text style={themedStyle.title}>{ UppercaseWeek }</Text>
+          <Text style={themedStyle.title}>{ `${UppercaseWeek}, ` }</Text>
           <Text style={themedStyle.subtitle}>{ date }</Text>
         </View>
         <View style={themedStyle.body}>
@@ -49,20 +49,22 @@ class Day extends Component {
 export default withStyles(Day, (theme) => ({
   titleWrapper: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    paddingTop: 5,
-    paddingBottom: 5,
+    marginTop: 10,
+    marginBottom: 5,
+    paddingRight: 30,
+    height: 25,
   },
   title: {
-    paddingLeft: '5%',
+    paddingLeft: '0%',
+    color: theme['color-basic-600'],
   },
   subtitle: {
-    paddingRight: '4%',
-    color: theme['text-hint-color'],
+    color: theme['color-basic-600'],
   },
   body: {
-    marginLeft: 15,
+    width: '90%',
   },
 }));
 

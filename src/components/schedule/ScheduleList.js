@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, ScrollView, RefreshControl } from 'react-native';
 import { withStyles, Text } from 'react-native-ui-kitten';
 import PropTypes from 'prop-types';
+import Timeline from './Timeline';
 
 import Day from './Day';
 import I18n from '../../utils/i18n';
@@ -14,6 +15,8 @@ class ScheduleList extends Component {
   static propTypes = {
     /** array of days with subjects */
     schedule: PropTypes.array,
+    /** if Timeline is enabled */
+    allowTimeline: PropTypes.bool,
     /** if RefreshControl feature is enabled */
     allowRefresh: PropTypes.bool,
     /** callback for RefreshControl */
@@ -24,6 +27,7 @@ class ScheduleList extends Component {
 
   static defaultProps = {
     schedule: [],
+    allowTimeline: false,
     allowRefresh: false,
     onRefresh: () => console.warn('Unpredictable callback from Schedule List'),
     refreshing: false,
@@ -41,11 +45,20 @@ class ScheduleList extends Component {
     );
   }
 
-  renderSchedule(schedule) {
+  renderSchedule(schedule, allowTimeline) {
+    const { themedStyle } = this.props;
+
+    const body = schedule.slice(0).reverse().map((day) => (
+      <Day key={day.date} day={day} allowTimeline />
+    ));
+
+    return body;
+  }
+
+  renderBody(schedule, allowTimeline) {
     return schedule.length > 0
-      ? schedule.map((day) => (
-        <Day key={day.date} day={day} />
-      )) : this.renderNoContentMessage();
+      ? this.renderSchedule(schedule, allowTimeline)
+      : this.renderNoContentMessage();
   }
 
   render() {
@@ -55,7 +68,7 @@ class ScheduleList extends Component {
     const props = navigation ? navigation.state.params : this.props;
 
     const {
-      allowRefresh, refreshing, onRefresh, schedule,
+      allowRefresh, allowTimeline, refreshing, onRefresh, schedule,
     } = props;
 
     const refreshControl = allowRefresh ? (
@@ -66,22 +79,29 @@ class ScheduleList extends Component {
     ) : null;
 
     // dont render anything while refreshing data
-    const body = refreshing ? null : this.renderSchedule(schedule);
+    const body = refreshing ? null : this.renderBody(schedule, allowTimeline);
 
     return (
-      <ScrollView
-        style={themedStyle.listWrapper}
-        refreshControl={refreshControl}
-      >
-        { body }
-      </ScrollView>
+      <View style={themedStyle.row}>
+        <ScrollView
+          contentContainerStyle={themedStyle.listWrapper}
+          refreshControl={refreshControl}
+        >
+          <Timeline length={2} schedule={schedule} />
+          <View style={themedStyle.body}>
+            { body }
+          </View>
+        </ScrollView>
+      </View>
     );
   }
 }
 
 export default withStyles(ScheduleList, (theme) => ({
   listWrapper: {
-    backgroundColor: theme['background-basic-color-2'],
+    backgroundColor: theme['background-basic-color-1'],
+    height: '100%',
+    flexDirection: 'row',
   },
   messageText: {
     color: theme['text-basic-color'],
@@ -91,5 +111,12 @@ export default withStyles(ScheduleList, (theme) => ({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  body: {
+    width: '90%',
+  },
+  row: {
+    borderTopColor: theme['color-basic-400'],
+    borderTopWidth: 1,
   },
 }));

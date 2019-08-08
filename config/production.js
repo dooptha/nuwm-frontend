@@ -4,10 +4,10 @@ export default {
   INITIAL_ROUTE_NAME: 'Settings', /* [Timetable, Conversations, Settings] */
   INSTAGRAM_HASHTAG: 'нувгп',
   TWITTER_HASHTAG: 'нувгп',
-  CONTACT_EMAIL: 'pelykh_ak15@nuwm.edu.ua',
+  CONTACT_EMAIL: 'dooptha@gmail.com',
   WEBSITE_URL: 'https://dooptha.com',
   GITHUB_URL: 'https://github.com/dooptha',
-  DISCORD_URL: 'https://discord.gg/NEqGFEa',
+  DISCORD_URL: 'https://discord.gg/Fcb922G',
   USE_DEFAULT_PROPERTIES: false,
 
   // Exception handlers params

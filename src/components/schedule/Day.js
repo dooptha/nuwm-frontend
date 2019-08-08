@@ -9,7 +9,6 @@ class Day extends Component {
   static defaultProps = {
     day: {
       subject: [],
-      date: 'none',
       dayName: 'none',
     },
   }
@@ -17,9 +16,9 @@ class Day extends Component {
   renderAllSubjects() {
     const { day } = this.props;
 
-    return day.subjects.slice(0).reverse().map((subject) => (
+    return day.subjects.map((subject, index) => (
       <Lesson
-        key={day.date + subject.time}
+        key={index + subject.time}
         subject={subject}
       />
     ));
@@ -28,8 +27,8 @@ class Day extends Component {
   render() {
     const { day, themedStyle } = this.props;
     const body = day.subjects.length > 0 ? this.renderAllSubjects() : null;
-    const date = moment(day.date, 'DD.MM.YYYY').format('D MMMM');
-    const week = moment(day.date, 'DD.MM.YYYY').format('dddd');
+    const date = day.date.format('D MMMM');
+    const week = day.date.format('dddd');
     const UppercaseWeek = week.charAt(0).toUpperCase() + week.slice(1);
 
     return (
@@ -71,7 +70,6 @@ export default withStyles(Day, (theme) => ({
 Day.propTypes = {
   day: PropTypes.shape({
     subjects: PropTypes.array,
-    date: PropTypes.string,
     dayName: PropTypes.string,
   }),
 };

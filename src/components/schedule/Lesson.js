@@ -79,7 +79,7 @@ export default withStyles(Lesson, (theme) => ({
     width: 15,
     height: 15,
     marginRight: 8,
-    color: theme['color-basic-700'],
+    // color: theme['color-basic-700'],
   },
   title: {
     fontWeight: 'bold',
@@ -99,7 +99,7 @@ export default withStyles(Lesson, (theme) => ({
     color: theme['color-basic-700'],
   },
   subdesc: {
-    paddingleft: 20,
+    paddingLeft: 20,
     paddingTop: 5,
     color: theme['color-basic-600'],
   },

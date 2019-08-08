@@ -22,7 +22,7 @@ class ScheduleList extends Component {
     /** callback for RefreshControl */
     onRefresh: PropTypes.func,
     /** if RefreshControl is active */
-    refreshing: false,
+    refreshing: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -48,7 +48,7 @@ class ScheduleList extends Component {
   renderSchedule(schedule, allowTimeline) {
     const { themedStyle } = this.props;
 
-    const body = schedule.slice(0).reverse().map((day) => (
+    const body = schedule.map((day) => (
       <Day key={day.date} day={day} allowTimeline />
     ));
 
@@ -87,7 +87,7 @@ class ScheduleList extends Component {
           contentContainerStyle={themedStyle.listWrapper}
           refreshControl={refreshControl}
         >
-          <Timeline length={2} schedule={schedule} />
+          <Timeline schedule={schedule} />
           <View style={themedStyle.body}>
             { body }
           </View>

@@ -15,6 +15,11 @@ function getLastPoll(dispatch) {
     });
 }
 
+function closeLastPoll(dispatch) {
+  return api.post('/polls/active/close')
+    .then(() => dispatch({ type: 'closeLastPollSuccess' }));
+}
+
 function createPoll(dispatch, data) {
   dispatch({ type: 'createPoll' });
 
@@ -74,6 +79,7 @@ function vote(dispatch, index) {
 
 export default {
   getLastPoll,
+  closeLastPoll,
   createPoll,
   getPolls,
   vote,

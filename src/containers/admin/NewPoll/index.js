@@ -142,6 +142,11 @@ export class NewPoll extends Component {
   }
 
   closeLastPoll() {
+    const [, dispatch] = this.context;
+    const { navigation } = this.props;
+
+    api.closeLastPoll(dispatch)
+      .then(() => navigation.goBack());
   }
 
   keyboardOffset(height) {

@@ -21,8 +21,12 @@ const Option = ({
   const styles = style || {};
   const value = option.votes || 0;
 
+  const canVote = () => (
+    poll.active && !poll.voted
+  );
+
   const renderRadioBox = () => (
-    poll.active
+    canVote()
       ? (
         <Radio
           style={themedStyle.radio}
@@ -61,7 +65,7 @@ const Option = ({
         </Text>
         <View style={themedStyle.progressBarContainer}>
           {
-            !poll.active
+            !canVote()
               ? (
                 <View style={themedStyle.progressBarBox}>
                   <View style={[

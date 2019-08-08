@@ -50,7 +50,10 @@ const pollReducer = (state, action) => {
     case 'voteSuccess':
       return {
         ...state,
-        current: action.poll,
+        current: {
+          ...action.poll,
+          voted: true,
+        },
         votingFor: undefined,
       };
 
@@ -58,6 +61,12 @@ const pollReducer = (state, action) => {
       return {
         ...state,
         votingFor: undefined,
+      };
+
+    case 'closeLastPollSuccess':
+      return {
+        ...state,
+        current: undefined,
       };
 
     default:

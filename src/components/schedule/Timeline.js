@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { View, ScrollView, RefreshControl } from 'react-native';
+import {
+  View, Animated, ScrollView, RefreshControl,
+} from 'react-native';
 import { withStyles, Text } from 'react-native-ui-kitten';
 import moment from 'moment';
 
@@ -17,6 +19,21 @@ class Timeline extends Component {
 
     this.subjectHeight = 130;
     this.dateHeight = 40;
+  }
+
+  state = {
+    animation: new Animated.Value(0),
+  }
+
+  componentDidMount() {
+    this.state.animation.setValue(0);
+    Animated.timing(
+      this.state.animation,
+      {
+        toValue: 1,
+        duration: 2000,
+      },
+    ).start();
   }
 
   splitSchedule(schedule) {
@@ -127,9 +144,10 @@ class Timeline extends Component {
 
   render() {
     const { themedStyle, schedule } = this.props;
+    const { animation } = this.state;
 
     // TODO: replace this with new Date()
-    this.currentDate = moment('2018-09-06 10:00:00');
+    this.currentDate = moment('2018-09-05 10:00:00');
 
     this.barHeight = this.lineTopSize;
 
@@ -138,14 +156,18 @@ class Timeline extends Component {
     const circles = this.renderCircles();
 
     return (
-      <View style={[themedStyle.timeline, { marginTop: -this.lineTopSize }]}>
-        <View style={themedStyle.lineWrapper}>
+      <View style={[themedStyle.timeline, {
+        marginTop: -this.lineTopSize,
+
+      }]}
+      >
+        <Animated.View style={[themedStyle.lineWrapper, { transform: [{ scaleY: animation }] }]}>
           <View style={[themedStyle.line, themedStyle.unactiveLine, {
             height: this.barHeight,
           }]}
           />
           { this.drawLine()}
-        </View>
+        </Animated.View>
         <View style={{ alignItems: 'center' }}>
           { circles }
         </View>

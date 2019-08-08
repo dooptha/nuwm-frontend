@@ -7,12 +7,22 @@ const pollReducer = (state, action) => {
         isLoading: true,
       };
 
+    case 'socketPollCreated':
     case 'createPollSuccess':
     case 'loadCurrentPollSuccess':
       return {
         ...state,
         current: action.poll,
         isLoading: false,
+      };
+
+    case 'socketPollUpdated':
+      return {
+        ...state,
+        current: {
+          ...action.poll,
+          voted: state.current.voted,
+        },
       };
 
     case 'createPollFailure':

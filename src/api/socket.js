@@ -14,17 +14,34 @@ export const socketEvents = ({ dispatch }) => {
       message,
     });
   });
+
   socket.on('message:remove', (messageId) => (
     dispatch({
       type: 'removeMessage',
       messageId,
-    })));
+    })
+  ));
 
   socket.on('online:update', (counter) => (
     dispatch({
       type: 'updateOnlineCounter',
       counter,
-    })));
+    })
+  ));
+
+  socket.on('poll:updated', (poll) => {
+    dispatch({
+      type: 'socketPollUpdated',
+      poll,
+    });
+  });
+
+  socket.on('poll:created', (poll) => {
+    dispatch({
+      type: 'socketPollCreated',
+      poll,
+    });
+  });
 };
 
 export const initSockets = ({ dispatch, token }) => {

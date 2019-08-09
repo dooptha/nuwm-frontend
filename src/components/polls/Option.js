@@ -20,6 +20,7 @@ const Option = ({
 }) => {
   const styles = style || {};
   const value = option.votes || 0;
+  const percentageValue = value / poll.votes * 100;
 
   const canVote = () => (
     poll.active && !poll.voted
@@ -35,7 +36,6 @@ const Option = ({
       ) : (
         <Text style={[styles.text, themedStyle.text]}>
           {value}
-          %
         </Text>
       )
   );
@@ -71,9 +71,9 @@ const Option = ({
                   <View style={[
                     themedStyle.progressBar,
                     styles.progressBar,
-                    { flex: value }]}
+                    { flex: percentageValue }]}
                   />
-                  <View style={[{ flex: (100 - value) }]} />
+                  <View style={[{ flex: (100 - percentageValue) }]} />
                 </View>
               ) : null
           }

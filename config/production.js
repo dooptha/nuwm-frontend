@@ -1,4 +1,5 @@
 export default {
+  VERSION: '1.0.0',
   API_ENDPOINT: 'production_api',
   SOCKET_IO_ENDPOINT: 'production_api',
   INITIAL_ROUTE_NAME: 'Settings', /* [Timetable, Conversations, Settings] */

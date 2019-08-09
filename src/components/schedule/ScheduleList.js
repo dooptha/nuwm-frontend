@@ -81,13 +81,15 @@ class ScheduleList extends Component {
     // dont render anything while refreshing data
     const body = refreshing ? null : this.renderBody(schedule, allowTimeline);
 
+    const timeline = schedule && schedule.length > 0 ? <Timeline schedule={schedule} /> : null;
+
     return (
       <View style={themedStyle.row}>
         <ScrollView
           contentContainerStyle={themedStyle.listWrapper}
           refreshControl={refreshControl}
         >
-          <Timeline schedule={schedule} />
+          { timeline }
           <View style={themedStyle.body}>
             { body }
           </View>

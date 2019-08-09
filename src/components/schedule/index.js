@@ -65,7 +65,7 @@ export class Schedule extends Component {
 
   state = {
     schedule: [],
-    selectedIndex: 1,
+    selectedIndex: 3,
     refreshing: false,
   };
 
@@ -110,6 +110,7 @@ export class Schedule extends Component {
         allowRefresh
         onRefresh={() => this.onRefresh()}
         schedule={schedule}
+
       />
     );
   }

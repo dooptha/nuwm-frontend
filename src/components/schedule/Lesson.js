@@ -87,7 +87,6 @@ export default withStyles(Lesson, (theme) => ({
     width: 15,
     height: 15,
     marginRight: 8,
-    // color: theme['color-basic-700'],
   },
   title: {
     fontWeight: 'bold',

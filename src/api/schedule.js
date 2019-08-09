@@ -24,9 +24,7 @@ export const getScheduleOnWeek = () => {
     .catch((err) => ({ error: errorParser(err) }));
 };
 
-export const getSchedule = (data) => api.get('/timetable', {
-  params: data,
-})
+export const getSchedule = (data) => api.get('/timetable', { params: data })
   .then((res) => res.data.schedule)
   .catch((err) => ({ error: errorParser(err) }));
 

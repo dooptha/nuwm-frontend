@@ -10,6 +10,7 @@ class CircleWrapper extends Component {
   }
 
   setActive() {
+    console.log('called');
     this.setState({ active: true });
   }
 

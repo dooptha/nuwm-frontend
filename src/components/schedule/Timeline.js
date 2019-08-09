@@ -1,10 +1,22 @@
 import React, { Component } from 'react';
 import { View, Animated, Dimensions } from 'react-native';
-import { withStyles, Text } from 'react-native-ui-kitten';
+import { withStyles } from 'react-native-ui-kitten';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import Circle from './Circle';
 
+/**
+  * This class responsible for visualing and animating timeline.
+  * Timeline is based on height of components(subjects, dates).
+  * If you change margin/padding/height of this components, dont forget to
+  * change their height in this class constructor too
+*/
 class Timeline extends Component {
+  static propTypes = {
+    /** array of days with subjects */
+    schedule: PropTypes.array,
+  }
+
   static defaultProps = {
     schedule: [],
   }
@@ -19,24 +31,22 @@ class Timeline extends Component {
     // TODO: replace this with new Date()
     this.currentDate = moment('2018-09-06 10:00:00');
 
-    console.log('Screen height ', Dimensions.get('window').height);
-
     this.screenHeight = Dimensions.get('window').height;
-
-    // line
-    this.refreshPadding = 300;
 
     // circle
     this.circlesMargin = 30;
     this.circleSize = 10;
 
+    // <Lesson /> height
     this.subjectHeight = 130;
+    // <Day>'s titleWrapper height
     this.dateHeight = 40;
 
+    // bar
     this.progressBarHeight = 0;
     this.barHeight = 0;
-
     this.startPosition = 0;
+    this.refreshPadding = 300;
 
     this.intervals = [];
     this.moments = [];
@@ -48,11 +58,16 @@ class Timeline extends Component {
     this.animateBar();
   }
 
-  componentWillUpdate() {
+  shouldComponentUpdate() {
     this.resetAnimation();
+
+    return true;
   }
 
   componentDidUpdate() {
+    // render method is no called when we switch tabs, so we use DidUpdate to
+    // detect it
+    console.log('Did Update');
     this.animateBar();
   }
 
@@ -63,7 +78,8 @@ class Timeline extends Component {
       animation,
       {
         toValue: this.progressBarHeight,
-        duration: 2000,
+        duration: this.progressBarHeight / this.barHeight * 3000,
+        // for Android systems only, it may not work without it
         perspective: 1000,
       },
     ).start();
@@ -93,6 +109,7 @@ class Timeline extends Component {
       for (let i = 1; i < this.moments.length - 1; i += 1) {
         if (this.moments[i].node && !this.moments[i].node.state.active) {
           if (this.moments[i].height < height) {
+            console.log('setActive');
             this.moments[i].node.setActive();
           }
         }
@@ -100,9 +117,10 @@ class Timeline extends Component {
     });
   }
 
+  /**
+   * here we parse our schedule and divide it into intervals
+   */
   splitSchedule(schedule) {
-    const { themedStyle } = this.props;
-
     this.intervals = [];
     this.moments = [];
 
@@ -160,9 +178,8 @@ class Timeline extends Component {
     }
   }
 
-  drawLine() {
-    const { themedStyle } = this.props;
-    const { animation } = this.state;
+  renderProgressBar() {
+    const { props: { themedStyle }, state: { animation } } = this;
 
     let height = 0;
 
@@ -177,8 +194,6 @@ class Timeline extends Component {
           const timeDiff = end.moment.diff(start.moment);
           const timePassed = this.currentDate.diff(start.moment);
 
-          console.log(heightDiff, timeDiff, timePassed);
-
           const time = timePassed > timeDiff ? timeDiff : timePassed;
 
           height = Math.round((time / (timeDiff / heightDiff)) + start.height);
@@ -186,17 +201,12 @@ class Timeline extends Component {
       }
     }
 
-    console.log(this.intervals);
-
     const styles = [themedStyle.line, themedStyle.activeLine, {
       height: animation,
     }];
 
     this.progressBarHeight = height;
-
     this.startPosition = height > this.refreshPadding ? this.refreshPadding : 0;
-
-    console.log('Progress bar height = ', this.progressBarHeight);
 
     return (
       <Animated.View style={styles} />
@@ -227,13 +237,11 @@ class Timeline extends Component {
   render() {
     const { themedStyle, schedule } = this.props;
 
-    console.log(schedule);
+    const { animation } = this.state;
 
     this.splitSchedule(schedule);
 
     const circles = this.renderCircles();
-
-    console.log('Bar height = ', this.barHeight);
 
     return (
       <View style={[themedStyle.timeline, {
@@ -245,7 +253,7 @@ class Timeline extends Component {
             height: this.barHeight,
           }]}
           />
-          { this.drawLine()}
+          { this.renderProgressBar()}
         </View>
         <View style={{ alignItems: 'center' }}>
           { circles }

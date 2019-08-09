@@ -33,13 +33,13 @@ class ScheduleList extends Component {
     refreshing: false,
   }
 
-  renderNoContentMessage() {
+  renderMessage(message) {
     const { themedStyle } = this.props;
 
     return (
       <View style={themedStyle.messageWrapper}>
         <Text style={themedStyle.messageText}>
-          { I18n.t('timetable.no-lesson') }
+          { message }
         </Text>
       </View>
     );
@@ -53,10 +53,9 @@ class ScheduleList extends Component {
     return body;
   }
 
-  renderBody(schedule) {
+  renderBody(schedule, mes) {
     return schedule.length > 0
-      ? this.renderSchedule(schedule)
-      : this.renderNoContentMessage();
+      ? this.renderSchedule(schedule) : this.renderMessage(mes);
   }
 
   render() {
@@ -77,9 +76,10 @@ class ScheduleList extends Component {
     ) : null;
 
     // dont render anything while refreshing data
-    const body = refreshing ? null : this.renderBody(schedule);
+    const body = refreshing ? null : this.renderBody(schedule, props.message);
 
-    const timeline = schedule && schedule.length > 0 ? <Timeline schedule={schedule} /> : null;
+    const timeline = schedule && schedule.length > 0 && !refreshing
+      ? <Timeline schedule={schedule} /> : null;
 
     return (
       <View style={themedStyle.row}>
@@ -100,14 +100,17 @@ class ScheduleList extends Component {
 export default withStyles(ScheduleList, (theme) => ({
   listWrapper: {
     backgroundColor: theme['background-basic-color-1'],
-    height: '100%',
     flexDirection: 'row',
+    minHeight: '100%',
   },
   messageText: {
+    paddingLeft: '10%',
+    paddingRight: '10%',
+    marginTop: '40%',
+    textAlign: 'center',
     color: theme['text-basic-color'],
   },
   messageWrapper: {
-    marginTop: '40%',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
@@ -115,6 +118,7 @@ export default withStyles(ScheduleList, (theme) => ({
   body: {
     width: '100%',
     paddingRight: '5%',
+    paddingBottom: 30,
   },
   row: {
     borderTopColor: theme['color-basic-400'],

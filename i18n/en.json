@@ -49,6 +49,8 @@
   },
   "timetable": {
     "no-lesson": "No lesson, you can go play",
+    "error-no-server": "Cant connect to server :-( \nCheck your network connection",
+    "error-try-later": "Something went wrong :-( \nTry again later",
     "tabs": {
       "Search": "Search",
       "Today": "Today",

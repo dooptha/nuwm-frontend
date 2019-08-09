@@ -27,7 +27,6 @@ class Lesson extends Component {
 
   onPress() {
     const { subject } = this.props;
-    console.log('called');
     NavigationService.navigate('DetailedLesson', { subject });
   }
 

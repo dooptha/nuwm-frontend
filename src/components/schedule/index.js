@@ -7,55 +7,6 @@ import Search from './Search';
 import { getScheduleOnWeek } from '../../api/schedule';
 import ScheduleList from './ScheduleList';
 
-const mdata = [{
-  date: '05.09.2018',
-  dayName: 'Середа',
-  day: 2,
-  dayOfYear: 248,
-  subjects: [{
-    classroom: '441',
-    group: 'ПМ-41, ІНФ-41',
-    lecturer: 'Герус Володимир Андрійович',
-    lesson: 2,
-    name: 'Комп`ютерні мережі та їх адміністрування',
-    time: '09:40-11:00',
-    type: 'Лекція',
-  },
-  {
-    classroom: '441',
-    group: 'ПМ-41, ІНФ-41',
-    lecturer: 'Герус Володимир Андрійович',
-    lesson: 3,
-    name: 'Комп`ютерні мережі та їх адміністрування',
-    time: '11:00-12:20',
-    type: 'Лекція',
-  }],
-},
-{
-  date: '06.09.2018',
-  dayName: 'Середа',
-  day: 2,
-  dayOfYear: 248,
-  subjects: [{
-    classroom: '441',
-    group: 'ПМ-41, ІНФ-41',
-    lecturer: 'Герус Володимир Андрійович',
-    lesson: 2,
-    name: 'Комп`ютерні мережі та їх адміністрування',
-    time: '09:40-11:00',
-    type: 'Лекція',
-  },
-  {
-    classroom: '441',
-    group: 'ПМ-41, ІНФ-41',
-    lecturer: 'Герус Володимир Андрійович',
-    lesson: 3,
-    name: 'Комп`ютерні мережі та їх адміністрування',
-    time: '11:00-12:20',
-    type: 'Лекція',
-  }],
-}];
-
 export class Schedule extends Component {
   constructor(props) {
     super(props);
@@ -67,6 +18,7 @@ export class Schedule extends Component {
     schedule: [],
     selectedIndex: 3,
     refreshing: false,
+    error: false,
   };
 
   componentDidMount() {
@@ -81,10 +33,17 @@ export class Schedule extends Component {
   parseDates(data) {
     data.forEach((day) => {
       const dateString = day.date;
-      day.date = moment(dateString, 'DD.MM.YYYY');
+      if (!moment.isMoment(day.date)) {
+        day.date = moment(dateString, 'DD.MM.YYYY');
+      }
 
       day.subjects.forEach((subject) => {
-        subject.momentTime = moment(`${dateString} ${subject.time.split('-')[0]}`, 'DD.MM.YYYY HH:mm');
+        if (!moment.isMoment(subject.momentTime)) {
+          subject.momentTime = moment(
+            `${dateString} ${subject.time.split('-')[0]}`,
+            'DD.MM.YYYY HH:mm',
+          );
+        }
       });
     });
 
@@ -92,9 +51,13 @@ export class Schedule extends Component {
   }
 
   requestSchedule() {
-    getScheduleOnWeek().then((data) => {
-      this.setState({ refreshing: false, schedule: this.parseDates(mdata) });
-    });
+    getScheduleOnWeek().then((res) => {
+      if (res.error || res.length === 0) {
+        this.setState({ refreshing: false, schedule: [], error: res.error });
+      } else {
+        this.setState({ refreshing: false, schedule: this.parseDates(res) });
+      }
+    }).catch((err) => console.log(err));
   }
 
   changeTab(index) {
@@ -102,7 +65,8 @@ export class Schedule extends Component {
   }
 
   renderSchedule(schedule, allowTimeline = false) {
-    const { refreshing } = this.state;
+    const { refreshing, error } = this.state;
+
     return (
       <ScheduleList
         refreshing={refreshing}
@@ -110,7 +74,7 @@ export class Schedule extends Component {
         allowRefresh
         onRefresh={() => this.onRefresh()}
         schedule={schedule}
-
+        message={error}
       />
     );
   }

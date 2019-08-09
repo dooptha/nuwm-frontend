@@ -6,10 +6,22 @@ import { Alert } from 'react-native';
 import I18n from './i18n';
 import config from '../../config';
 
-const jsGlobalHandler = (e, isFatal) => {
+export const handleRequestError = (error) => {
+  Alert.alert(
+    I18n.t('errors.responseTitle'),
+    `${error.response.data.error}
+
+    ${I18n.t('errors.responseDescription')}`,
+    [{
+      text: I18n.t('errors.ok'),
+    }],
+  );
+};
+
+const handleNonRequestError = (error, isFatal) => {
   Alert.alert(
     I18n.t('errors.title'),
-    `Error ${(isFatal) ? 'Fatal:' : ''} ${e.name} ${e.message}
+    `Error ${(isFatal) ? 'Fatal:' : ''} ${error.name} ${error.message}
 
     ${I18n.t('errors.description')}`,
     [{
@@ -18,6 +30,10 @@ const jsGlobalHandler = (e, isFatal) => {
   );
 
   // Send error to devs
+};
+
+const jsGlobalHandler = (error, isFatal) => {
+  handleNonRequestError(error, isFatal);
 };
 
 // eslint-disable-next-line

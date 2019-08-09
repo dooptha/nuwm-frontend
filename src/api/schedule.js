@@ -8,11 +8,8 @@ export const getScheduleOnWeek = () => {
   const endDate = now.add(7, 'days').format('DD.MM.YYYY');
 
   return api.get('/timetable', { params: { group, startDate, endDate } })
-    .then((res) => res.data.schedule)
-    .catch((e) => {
-      console.log(e.response.data);
-      return [];
-    });
+    .then((response) => response.data.schedule)
+    .catch(() => []);
 };
 
 export const getSchedule = (data) => {
@@ -25,11 +22,8 @@ export const getSchedule = (data) => {
       group, name, startDate, endDate, practicsOnly,
     },
   })
-    .then((res) => res.data.schedule)
-    .catch((e) => {
-      console.log(e.response.data);
-      return [];
-    });
+    .then((response) => response.data.schedule)
+    .catch(() => []);
 };
 
 module.exports = {

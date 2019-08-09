@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import { withStyles, Text } from 'react-native-ui-kitten';
+import { withStyles } from 'react-native-ui-kitten';
 
 class CircleWrapper extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { active: false };
-  }
+  state = { active: false };
 
   setActive() {
-    console.log('called');
     this.setState({ active: true });
   }
 

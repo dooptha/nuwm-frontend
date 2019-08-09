@@ -45,19 +45,17 @@ class ScheduleList extends Component {
     );
   }
 
-  renderSchedule(schedule, allowTimeline) {
-    const { themedStyle } = this.props;
-
+  renderSchedule(schedule) {
     const body = schedule.map((day) => (
-      <Day key={day.date} day={day} allowTimeline />
+      <Day key={day.date} day={day} />
     ));
 
     return body;
   }
 
-  renderBody(schedule, allowTimeline) {
+  renderBody(schedule) {
     return schedule.length > 0
-      ? this.renderSchedule(schedule, allowTimeline)
+      ? this.renderSchedule(schedule)
       : this.renderNoContentMessage();
   }
 
@@ -68,7 +66,7 @@ class ScheduleList extends Component {
     const props = navigation ? navigation.state.params : this.props;
 
     const {
-      allowRefresh, allowTimeline, refreshing, onRefresh, schedule,
+      allowRefresh, refreshing, onRefresh, schedule,
     } = props;
 
     const refreshControl = allowRefresh ? (
@@ -79,7 +77,7 @@ class ScheduleList extends Component {
     ) : null;
 
     // dont render anything while refreshing data
-    const body = refreshing ? null : this.renderBody(schedule, allowTimeline);
+    const body = refreshing ? null : this.renderBody(schedule);
 
     const timeline = schedule && schedule.length > 0 ? <Timeline schedule={schedule} /> : null;
 
@@ -115,7 +113,8 @@ export default withStyles(ScheduleList, (theme) => ({
     alignItems: 'center',
   },
   body: {
-    width: '90%',
+    width: '100%',
+    paddingRight: '5%',
   },
   row: {
     borderTopColor: theme['color-basic-400'],

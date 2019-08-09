@@ -2,10 +2,19 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import { withStyles, Text } from 'react-native-ui-kitten';
-import moment from 'moment';
 import Lesson from './Lesson';
 
+/**
+  * Displays information for one day: date and it's lessons
+*/
 class Day extends Component {
+  static propTypes = {
+    day: PropTypes.shape({
+      subjects: PropTypes.array,
+      dayName: PropTypes.string,
+    }),
+  }
+
   static defaultProps = {
     day: {
       subject: [],
@@ -13,12 +22,19 @@ class Day extends Component {
     },
   }
 
+  getDateLabel(moment) {
+    const date = moment.format('D MMMM');
+    const week = moment.format('dddd');
+
+    return `${week.charAt(0).toUpperCase() + week.slice(1)}, ${date}`;
+  }
+
   renderAllSubjects() {
     const { day } = this.props;
 
-    return day.subjects.map((subject, index) => (
+    return day.subjects.map((subject) => (
       <Lesson
-        key={index + subject.time}
+        key={subject.time + day.dayOfYear}
         subject={subject}
       />
     ));
@@ -27,15 +43,13 @@ class Day extends Component {
   render() {
     const { day, themedStyle } = this.props;
     const body = day.subjects.length > 0 ? this.renderAllSubjects() : null;
-    const date = day.date.format('D MMMM');
-    const week = day.date.format('dddd');
-    const UppercaseWeek = week.charAt(0).toUpperCase() + week.slice(1);
+
+    const date = this.getDateLabel(day.date);
 
     return (
       <View>
         <View style={themedStyle.titleWrapper}>
-          <Text style={themedStyle.title}>{ `${UppercaseWeek}, ` }</Text>
-          <Text style={themedStyle.subtitle}>{ date }</Text>
+          <Text style={themedStyle.title}>{ date }</Text>
         </View>
         <View style={themedStyle.body}>
           { body }
@@ -59,17 +73,7 @@ export default withStyles(Day, (theme) => ({
     paddingLeft: '0%',
     color: theme['color-basic-600'],
   },
-  subtitle: {
-    color: theme['color-basic-600'],
-  },
   body: {
     width: '90%',
   },
 }));
-
-Day.propTypes = {
-  day: PropTypes.shape({
-    subjects: PropTypes.array,
-    dayName: PropTypes.string,
-  }),
-};

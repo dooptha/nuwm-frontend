@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import {
-  Text, withStyles,
-} from 'react-native-ui-kitten';
+import { Text, withStyles } from 'react-native-ui-kitten';
 import I18n from '../../utils/i18n';
 
+/**
+  * Displays full information about one lessons
+*/
 class DetailedLesson extends Component {
   localize(t) { return I18n.t(`timetable.lesson.${t}`); }
 
-  drawRow(data) {
+  renderRow(data) {
     const { themedStyle } = this.props;
     const { title, info } = data;
 
@@ -31,6 +32,13 @@ class DetailedLesson extends Component {
     return null;
   }
 
+  renderBody(quarry) {
+    return Object.keys(quarry).map((key) => this.renderRow({
+      title: this.localize(key),
+      info: quarry[key],
+    }));
+  }
+
   render() {
     const { navigation, themedStyle } = this.props;
     const lesson = navigation.state.params.subject;
@@ -45,15 +53,14 @@ class DetailedLesson extends Component {
       name,
     } = lesson;
 
+    // in which order information will be displayed
     const quarry = {
       name, classroom, lecturer, subgroup, streams_type, time, type,
     };
 
     return (
       <View style={themedStyle.detailsWrapper}>
-        {
-          Object.keys(quarry).map((key) => this.drawRow({ title: this.localize(key), info: quarry[key] }))
-        }
+        { this.renderBody(quarry) }
       </View>
     );
   }

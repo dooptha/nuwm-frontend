@@ -67,7 +67,6 @@ class Timeline extends Component {
   componentDidUpdate() {
     // render method is no called when we switch tabs, so we use DidUpdate to
     // detect it
-    console.log('Did Update');
     this.animateBar();
   }
 
@@ -109,7 +108,6 @@ class Timeline extends Component {
       for (let i = 1; i < this.moments.length - 1; i += 1) {
         if (this.moments[i].node && !this.moments[i].node.state.active) {
           if (this.moments[i].height < height) {
-            console.log('setActive');
             this.moments[i].node.setActive();
           }
         }
@@ -237,8 +235,6 @@ class Timeline extends Component {
   render() {
     const { themedStyle, schedule } = this.props;
 
-    const { animation } = this.state;
-
     this.splitSchedule(schedule);
 
     const circles = this.renderCircles();
@@ -267,7 +263,7 @@ export default withStyles(Timeline, (theme) => ({
   timeline: {
     height: '100%',
     marginLeft: '5%',
-    marginRight: '2.5%',
+    marginRight: '4%',
     alignItems: 'center',
   },
   circle: {

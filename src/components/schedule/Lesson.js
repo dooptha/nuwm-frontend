@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ListItem, withStyles } from 'react-native-ui-kitten';
-import { View, Text } from 'react-native';
+import { withStyles } from 'react-native-ui-kitten';
+import { View, Text, TouchableOpacity } from 'react-native';
 import NavigationService from '../../navigation/NavigationService';
 import { ClockOutlineIcon } from '../../assets/icons';
 
+/**
+  * Displays short information about one lessons
+*/
 class Lesson extends Component {
+  static propTypes = {
+    subject: PropTypes.shape({
+      classroom: PropTypes.string,
+      time: PropTypes.string,
+      name: PropTypes.string,
+    }),
+  }
+
   static defaultProps = {
     subject: {
       classroom: '-',
@@ -16,8 +27,8 @@ class Lesson extends Component {
 
   onPress() {
     const { subject } = this.props;
-    NavigationService.navigate('DetailedLesson',
-      { subject });
+    console.log('called');
+    NavigationService.navigate('DetailedLesson', { subject });
   }
 
   render() {
@@ -25,10 +36,6 @@ class Lesson extends Component {
       themedStyle,
       subject: {
         classroom,
-        lecturer,
-        subgroup,
-        streams_type,
-        lessonNum,
         time,
         type,
         name,
@@ -36,7 +43,7 @@ class Lesson extends Component {
     } = this.props;
 
     return (
-      <View style={themedStyle.column}>
+      <TouchableOpacity style={themedStyle.column} onPress={() => this.onPress()}>
         <View style={themedStyle.row}>
           <View style={themedStyle.subRow}>
             { ClockOutlineIcon(themedStyle.icon) }
@@ -46,11 +53,13 @@ class Lesson extends Component {
         </View>
         <Text style={themedStyle.desc}>{ name }</Text>
         <Text style={themedStyle.subdesc}>{ type }</Text>
-      </View>
+      </TouchableOpacity>
     );
   }
 }
 
+// if you are changing height(margin/padding/height), dont forget to change
+// them in <Timeline> constructor too
 export default withStyles(Lesson, (theme) => ({
   column: {
     backgroundColor: 'white',
@@ -104,11 +113,3 @@ export default withStyles(Lesson, (theme) => ({
     color: theme['color-basic-600'],
   },
 }));
-
-Lesson.propTypes = {
-  subject: PropTypes.shape({
-    classroom: PropTypes.string,
-    time: PropTypes.string,
-    name: PropTypes.string,
-  }),
-};

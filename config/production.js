@@ -1,3 +1,4 @@
+/* eslint-disable */
 export default {
   VERSION: '1.0.0',
   API_ENDPOINT: 'production_api',
@@ -15,4 +16,9 @@ export default {
   USE_CUSTOM_JS_EXCEPTION_HANDLER_IN_DEV: false,
   NATIVE_EXCEPTION_HANDLER_FORCE_APP_QUIT: false,
   NATIVE_EXCEPTION_HANDLER_EXECUTE_DEFAULT: false,
+
+  // Rollback params
+  ROLLBACK_APP_TOKEN: '1fb60ff4e452430f9b79b7634025450a', // Should move it to .env file
+  ROLLBACK_ENABLED: true,
+  ROLLBACK_USE_SOURCE_MAP: false,
 };

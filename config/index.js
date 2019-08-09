@@ -1,9 +1,10 @@
+/* eslint-disable */
 import prodConfig from './production';
 import devConfig from './development';
 
 let overrideConfig;
 
-if (__DEV__)
+if (__DEV__) {
   try {
     overrideConfig = require('./override.js');
     let config = Object.assign(devConfig, overrideConfig.default);
@@ -14,5 +15,6 @@ if (__DEV__)
     console.info("Config:", devConfig);
     module.exports = devConfig;
   }
-else
+} else {
   module.exports = prodConfig;
+}

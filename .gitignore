@@ -60,3 +60,6 @@ buck-out/
 
 # Project config override
 config/override.js
+
+# Environment variables
+.env

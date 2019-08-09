@@ -106,7 +106,7 @@ export default withStyles(Lesson, (theme) => ({
     color: theme['color-basic-700'],
   },
   subdesc: {
-    paddingLeft: 20,
+    paddingLeft: 8,
     paddingTop: 5,
     color: theme['color-basic-600'],
   },

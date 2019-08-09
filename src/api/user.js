@@ -1,6 +1,7 @@
 import { api, setAuthHeaders } from '.';
 import { initSockets } from './socket';
 import { storeObject, storeKey } from '../utils/storage';
+import { handleRequestError, Rollbar } from '../utils/errors';
 
 function logIn(dispatch, navigation, data) {
   const { username, deviceId, group } = data;
@@ -45,6 +46,17 @@ function logIn(dispatch, navigation, data) {
       if (navigation) {
         navigation.navigate('App');
       }
+
+      // Configure Rollback user
+      Rollbar.configure({
+        payload: {
+          person: {
+            id: user.id,
+            username: user.username,
+            email: user.role,
+          },
+        },
+      });
     })
     .catch((error) => {
       dispatch({ type: 'logInFailure', error });
@@ -69,9 +81,9 @@ function updateCurrentUser(dispatch, navigation, { username }) {
 
       navigation.goBack();
     })
-    .catch((e) => {
-      dispatch({ type: 'updateCurrentUserFailure', e });
-      throw e;
+    .catch((error) => {
+      dispatch({ type: 'updateCurrentUserFailure', error });
+      handleRequestError(error);
     });
 }
 

@@ -103,6 +103,10 @@ PODS:
     - RNSound/Core (= 0.11.0)
   - RNSound/Core (0.11.0):
     - React
+  - Rollbar (1.5.2)
+  - RollbarReactNative (0.5.0):
+    - React
+    - Rollbar (~> 1.5.0)
   - SwiftyJSON (4.3.0)
   - yoga (0.60.0.React)
 
@@ -138,6 +142,7 @@ DEPENDENCIES:
   - RNLocalize (from `/Users/romansereda/Documents/Projects/nuwm-frontend/node_modules/react-native-localize`)
   - RNScreens (from `/Users/romansereda/Documents/Projects/nuwm-frontend/node_modules/react-native-screens`)
   - RNSound (from `../node_modules/react-native-sound`)
+  - RollbarReactNative (from `../node_modules/rollbar-react-native`)
   - SwiftyJSON (~> 4.0)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -145,6 +150,7 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - boost-for-react-native
+    - Rollbar
     - SwiftyJSON
 
 EXTERNAL SOURCES:
@@ -208,6 +214,8 @@ EXTERNAL SOURCES:
     :path: "/Users/romansereda/Documents/Projects/nuwm-frontend/node_modules/react-native-screens"
   RNSound:
     :path: "../node_modules/react-native-sound"
+  RollbarReactNative:
+    :path: "../node_modules/rollbar-react-native"
   yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -244,9 +252,11 @@ SPEC CHECKSUMS:
   RNLocalize: a91e036a6abc46e656a989456701182e0e228c7a
   RNScreens: 720a9e6968beb73e8196239801e887d8401f86ed
   RNSound: c980916b596cc15c8dcd2f6ecd3b13c4881dbe20
+  Rollbar: 5060e3fc9fa28ae75e70c61e95b1b31b2b22710c
+  RollbarReactNative: 90812f66d5ecbfd7cdccbb2f0b666c0888b7ee47
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   yoga: 616fde658be980aa60a2158835170f3f9c2d04b4
 
-PODFILE CHECKSUM: 4a895fbea0c381684536a42e5368dd9481418ab7
+PODFILE CHECKSUM: d90f3847584b77f76ca7b869bc06b1621e3cfbfe
 
 COCOAPODS: 1.7.5

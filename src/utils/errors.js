@@ -2,14 +2,48 @@ import {
   setJSExceptionHandler,
   setNativeExceptionHandler,
 } from 'react-native-exception-handler';
-import { Alert } from 'react-native';
+import {
+  Alert,
+  Platform,
+} from 'react-native';
+import {
+  Client,
+  Configuration,
+} from 'rollbar-react-native';
 import I18n from './i18n';
 import config from '../../config';
 
-const jsGlobalHandler = (e, isFatal) => {
+export const Rollbar = new Client(new Configuration(config.ROLLBACK_APP_TOKEN, {
+  captureUncaught: true,
+  captureUnhandledRejections: true,
+  enabled: config.ROLLBACK_ENABLED,
+  payload: {
+    client: {
+      JavaScript: {
+        code_version: `${Platform.OS} config.VERSION`,
+        environment: 'production',
+        source_map_enabled: config.ROLLBACK_USE_SOURCE_MAP,
+      },
+    },
+  },
+}));
+
+export const handleRequestError = (error) => {
+  Alert.alert(
+    I18n.t('errors.responseTitle'),
+    `${error.response.data.error}
+
+    ${I18n.t('errors.responseDescription')}`,
+    [{
+      text: I18n.t('errors.ok'),
+    }],
+  );
+};
+
+const handleNonRequestError = (error, isFatal) => {
   Alert.alert(
     I18n.t('errors.title'),
-    `Error ${(isFatal) ? 'Fatal:' : ''} ${e.name} ${e.message}
+    `Error ${(isFatal) ? 'Fatal:' : ''} ${error.name} ${error.message}
 
     ${I18n.t('errors.description')}`,
     [{
@@ -18,14 +52,19 @@ const jsGlobalHandler = (e, isFatal) => {
   );
 
   // Send error to devs
+  Rollbar.error(error);
+};
+
+const jsGlobalHandler = (error, isFatal) => {
+  handleNonRequestError(error, isFatal);
 };
 
 // eslint-disable-next-line
 const nativeGlobalHandler = (exceptionString) => {
-  // Send error to devs
+  Rollbar.error(exceptionString);
 };
 
-const setupExceptionHandlers = () => {
+export const setupExceptionHandlers = () => {
   setJSExceptionHandler(jsGlobalHandler, config.USE_CUSTOM_JS_EXCEPTION_HANDLER_IN_DEV);
 
   // eslint-disable-next-line
@@ -38,5 +77,3 @@ const setupExceptionHandlers = () => {
     );
   }
 };
-
-export default setupExceptionHandlers;

@@ -20,9 +20,14 @@ const Option = ({
 }) => {
   const styles = style || {};
   const value = option.votes || 0;
+  const percentageValue = value / poll.votes * 100;
+
+  const canVote = () => (
+    poll.active && !poll.voted
+  );
 
   const renderRadioBox = () => (
-    poll.active
+    canVote()
       ? (
         <Radio
           style={themedStyle.radio}
@@ -31,7 +36,6 @@ const Option = ({
       ) : (
         <Text style={[styles.text, themedStyle.text]}>
           {value}
-          %
         </Text>
       )
   );
@@ -61,15 +65,15 @@ const Option = ({
         </Text>
         <View style={themedStyle.progressBarContainer}>
           {
-            !poll.active
+            !canVote()
               ? (
                 <View style={themedStyle.progressBarBox}>
                   <View style={[
                     themedStyle.progressBar,
                     styles.progressBar,
-                    { flex: value }]}
+                    { flex: percentageValue }]}
                   />
-                  <View style={[{ flex: (100 - value) }]} />
+                  <View style={[{ flex: (100 - percentageValue) }]} />
                 </View>
               ) : null
           }

@@ -7,12 +7,22 @@ const pollReducer = (state, action) => {
         isLoading: true,
       };
 
+    case 'socketPollCreated':
     case 'createPollSuccess':
     case 'loadCurrentPollSuccess':
       return {
         ...state,
         current: action.poll,
         isLoading: false,
+      };
+
+    case 'socketPollUpdated':
+      return {
+        ...state,
+        current: {
+          ...action.poll,
+          voted: state.current.voted,
+        },
       };
 
     case 'createPollFailure':
@@ -50,7 +60,10 @@ const pollReducer = (state, action) => {
     case 'voteSuccess':
       return {
         ...state,
-        current: action.poll,
+        current: {
+          ...action.poll,
+          voted: true,
+        },
         votingFor: undefined,
       };
 
@@ -58,6 +71,12 @@ const pollReducer = (state, action) => {
       return {
         ...state,
         votingFor: undefined,
+      };
+
+    case 'closeLastPollSuccess':
+      return {
+        ...state,
+        current: undefined,
       };
 
     default:

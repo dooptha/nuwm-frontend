@@ -20,13 +20,23 @@ export const getScheduleOnWeek = () => {
   const endDate = now.add(7, 'days').format('DD.MM.YYYY');
 
   return api.get('/timetable/test', { params: { group, startDate, endDate } })
-    .then((res) => res.data.schedule)
+    .then((response) => response.data.schedule)
     .catch((err) => ({ error: errorParser(err) }));
 };
 
-export const getSchedule = (data) => api.get('/timetable', { params: data })
-  .then((res) => res.data.schedule)
-  .catch((err) => ({ error: errorParser(err) }));
+export const getSchedule = (data) => {
+  const {
+    group, name, startDate, endDate, practicsOnly,
+  } = data;
+
+  return api.get('/timetable', {
+    params: {
+      group, name, startDate, endDate, practicsOnly,
+    },
+  })
+    .then((response) => response.data.schedule)
+    .catch((err) => ({ error: errorParser(err) }));
+};
 
 module.exports = {
   getScheduleOnWeek,

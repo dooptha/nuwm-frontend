@@ -1,4 +1,5 @@
 import { api } from '.';
+import { handleRequestError } from '../utils/errors';
 
 function getLastPoll(dispatch) {
   dispatch({ type: 'loadCurrentPoll' });
@@ -9,10 +10,13 @@ function getLastPoll(dispatch) {
 
       dispatch({ type: 'loadCurrentPollSuccess', poll });
     })
-    .catch((e) => {
-      dispatch({ type: 'loadCurrentPollFailure' });
-      throw e;
-    });
+    .catch(() => dispatch({ type: 'loadCurrentPollFailure' }));
+}
+
+function closeLastPoll(dispatch) {
+  return api.post('/polls/active/close')
+    .then(() => dispatch({ type: 'closeLastPollSuccess' }))
+    .catch((error) => handleRequestError(error));
 }
 
 function createPoll(dispatch, data) {
@@ -27,9 +31,9 @@ function createPoll(dispatch, data) {
         poll,
       });
     })
-    .catch((e) => {
+    .catch((error) => {
       dispatch({ type: 'createPollFailure' });
-      throw e;
+      handleRequestError(error);
     });
 }
 
@@ -45,10 +49,7 @@ function getPolls(dispatch) {
         polls,
       });
     })
-    .catch((e) => {
-      dispatch({ type: 'loadPollssFailure' });
-      throw e;
-    });
+    .catch(() => dispatch({ type: 'loadPollsFailure' }));
 }
 
 function vote(dispatch, index) {
@@ -63,17 +64,18 @@ function vote(dispatch, index) {
         poll,
       });
     })
-    .catch((e) => {
+    .catch((error) => {
       dispatch({
         type: 'voteFailure',
       });
 
-      throw e;
+      handleRequestError(error);
     });
 }
 
 export default {
   getLastPoll,
+  closeLastPoll,
   createPoll,
   getPolls,
   vote,

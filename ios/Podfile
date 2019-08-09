@@ -39,6 +39,8 @@ target 'NuwmApp' do
 
   pod 'RNSound', :path => '../node_modules/react-native-sound'
 
+  pod 'RollbarReactNative', :path => '../node_modules/rollbar-react-native'
+
   target 'NuwmAppTests' do
     inherit! :search_paths
     # Pods for testing

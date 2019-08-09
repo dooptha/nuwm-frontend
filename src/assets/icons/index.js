@@ -5,6 +5,14 @@ import {
   CircleIcon,
 } from './icon.component';
 
+export const ClockOutlineIcon = (style) => {
+  const source = {
+    imageSource: require('./eva/clock-outline.png'),
+  };
+
+  return Icon(source, style);
+};
+
 export const Flip2OutlineIcon = (style) => {
   const source = {
     imageSource: require('./eva/flip-2-outline.png'),

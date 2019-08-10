@@ -79,14 +79,6 @@ class UserContainer extends Component {
           onChangeText={(text) => this.onInputChange({ username: text })}
           autoCompleteType="name"
         />
-        <Button
-          style={themedStyle.submitButton}
-          status="danger"
-          onPress={() => this.logOut()}
-          textStyle={themedStyle.text}
-        >
-          {I18n.t('settings.user.logOut')}
-        </Button>
       </View>
     );
   }

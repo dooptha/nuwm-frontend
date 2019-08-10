@@ -24,7 +24,7 @@ class CircleWrapper extends Component {
 
 export default withStyles(CircleWrapper, (theme) => ({
   unactive: {
-    backgroundColor: theme['text-disabled-color'],
+    backgroundColor: theme['border-basic-color-5'],
   },
   active: {
     backgroundColor: theme['background-primary-color-1'],

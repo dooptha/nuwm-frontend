@@ -107,7 +107,7 @@ class Conversation extends Component {
       <Button
         style={themedStyle.addMessageButton}
         size="small"
-        icon={PaperPlaneIconFill}
+        icon={() => PaperPlaneIconFill(themedStyle.addMessageButtonIcon)}
         onPress={this.sendMessage}
         disabled={newMessage === ''}
       />
@@ -163,6 +163,8 @@ export default withStyles(Conversation, (theme) => ({
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: theme['background-basic-color-2'],
+  },
+  addMessageButtonIcon: {
   },
   addMessageButton: {
     alignItems: 'center',

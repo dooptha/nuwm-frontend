@@ -286,6 +286,6 @@ export default withStyles(Timeline, (theme) => ({
     borderColor: theme['background-primary-color-1'],
   },
   unactiveLine: {
-    borderColor: theme['text-disabled-color'],
+    borderColor: theme['border-basic-color-5'],
   },
 }));

@@ -75,10 +75,11 @@ export default withStyles(Day, (theme) => ({
     color: theme['text-basic-color'],
   },
   body: {
+    borderRightColor: theme['text-hint-color'],
+    borderRightWidth: 0.5,
     backgroundColor: theme['background-basic-color-1'],
     borderRadius: 3,
     paddingLeft: 10,
-    paddingRight: 10,
-    width: '90%',
+    width: '93%',
   },
 }));

@@ -67,17 +67,18 @@ class Lesson extends Component {
 // them in <Timeline> constructor too
 export default withStyles(Lesson, (theme) => ({
   column: {
+    paddingRight: 15,
     flexDirection: 'column',
     justifyContent: 'flex-start',
     width: '100%',
     paddingTop: 20,
     paddingBottom: 20,
     height: 130,
-    borderTopColor: theme['border-basic-color-5'],
+    borderTopColor: theme['text-hint-color'],
     borderTopWidth: 0.5,
   },
   line: {
-    borderBottomColor: theme['border-basic-color-5'],
+    borderBottomColor: theme['text-hint-color'],
     borderBottomWidth: 0.5,
   },
   row: {

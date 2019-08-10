@@ -103,7 +103,7 @@ export default withStyles(FloodCard, (theme) => ({
   arrow: {
     width: 40,
     height: 40,
-    tintColor: 'grey',
+    tintColor: theme['text-basic-color'],
   },
   onlineContainer: {
     flexDirection: 'row',

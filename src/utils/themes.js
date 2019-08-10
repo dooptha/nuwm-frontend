@@ -20,7 +20,6 @@ const nuwmDark = {
   'color-primary-800': '#3e2494',
   'color-primary-900': '#29157a',
 
-  'color-basic-100': 'white',
   'color-basic-200': '#eefafc',
   'color-basic-300': '#e8f5fa',
   'color-basic-400': '#d6e6f2',

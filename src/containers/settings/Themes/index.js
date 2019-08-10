@@ -23,6 +23,7 @@ class ThemesContainer extends Component {
       {
         body: I18n.t('settings.themes.anotherUserMessage'),
         date: new Date(),
+        sender: I18n.t('settings.themes.sender'),
         isSender: false,
       },
       {

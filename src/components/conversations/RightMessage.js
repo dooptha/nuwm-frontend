@@ -51,7 +51,7 @@ export default withStyles(MessageComponent, (theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 16,
-    borderRadius: 16,
+    borderRadius: 20,
     maxWidth: Dimensions.get('window').width - 120,
   },
   cloudRight: {

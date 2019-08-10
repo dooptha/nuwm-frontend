@@ -283,9 +283,9 @@ export default withStyles(Timeline, (theme) => ({
   },
   activeLine: {
     position: 'absolute',
-    borderColor: theme['color-info-400'],
+    borderColor: theme['background-primary-color-1'],
   },
   unactiveLine: {
-    borderColor: theme['color-basic-500'],
+    borderColor: theme['text-disabled-color'],
   },
 }));

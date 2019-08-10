@@ -32,10 +32,11 @@ class Day extends Component {
   renderAllSubjects() {
     const { day } = this.props;
 
-    return day.subjects.map((subject) => (
+    return day.subjects.map((subject, index) => (
       <Lesson
         key={subject.time + day.dayOfYear}
         subject={subject}
+        isLastItem={day.subjects.length - 1 === index}
       />
     ));
   }
@@ -70,10 +71,14 @@ export default withStyles(Day, (theme) => ({
     height: 25,
   },
   title: {
-    paddingLeft: '0%',
-    color: theme['color-basic-600'],
+    paddingLeft: 8,
+    color: theme['text-basic-color'],
   },
   body: {
+    backgroundColor: theme['background-basic-color-1'],
+    borderRadius: 3,
+    paddingLeft: 10,
+    paddingRight: 10,
     width: '90%',
   },
 }));

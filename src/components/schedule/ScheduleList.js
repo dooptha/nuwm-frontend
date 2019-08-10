@@ -99,7 +99,6 @@ class ScheduleList extends Component {
 
 export default withStyles(ScheduleList, (theme) => ({
   listWrapper: {
-    backgroundColor: theme['background-basic-color-1'],
     flexDirection: 'row',
     minHeight: '100%',
   },
@@ -121,7 +120,7 @@ export default withStyles(ScheduleList, (theme) => ({
     paddingBottom: 30,
   },
   row: {
-    borderTopColor: theme['color-basic-400'],
+    borderTopColor: theme['border-basic-color-4'],
     borderTopWidth: 1,
   },
 }));

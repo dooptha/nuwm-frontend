@@ -9,6 +9,8 @@ import { GlobalState, useGlobalState } from './src/utils/context';
 import NavigationService from './src/navigation/NavigationService';
 import { setupExceptionHandlers } from './src/utils/errors';
 
+import SwitchThemeButton from './src/components/common/SwitchThemeButton';
+
 YellowBox.ignoreWarnings([
   'Unrecognized WebSocket connection option(s) `agent`, `perMessageDeflate`, `pfx`, `key`, `passphrase`, `cert`, `ca`, `ciphers`, `rejectUnauthorized`. Did you mean to put these under `headers`?',
 ]);
@@ -30,6 +32,7 @@ const App = () => {
           (navigatorRef) => NavigationService.setTopLevelNavigator(navigatorRef)
         }
       />
+      <SwitchThemeButton />
     </ApplicationProvider>
   );
 };

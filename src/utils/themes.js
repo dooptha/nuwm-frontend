@@ -40,6 +40,9 @@ const nuwmDark = {
   'border-basic-color-5': '$color-basic-1100',
 
   'text-disabled-color': '$color-basic-600',
+
+
+  'text-basic-color': null,
 };
 
 export const themes = {

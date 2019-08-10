@@ -33,6 +33,7 @@ class Lesson extends Component {
   render() {
     const {
       themedStyle,
+      isLastItem,
       subject: {
         classroom,
         time,
@@ -41,8 +42,13 @@ class Lesson extends Component {
       },
     } = this.props;
 
+    console.log(isLastItem);
+
+    const wrapperStyles = [themedStyle.column,
+      isLastItem ? themedStyle.line : {}];
+
     return (
-      <TouchableOpacity style={themedStyle.column} onPress={() => this.onPress()}>
+      <TouchableOpacity style={wrapperStyles} onPress={() => this.onPress()}>
         <View style={themedStyle.row}>
           <View style={themedStyle.subRow}>
             { ClockOutlineIcon(themedStyle.icon) }
@@ -61,17 +67,18 @@ class Lesson extends Component {
 // them in <Timeline> constructor too
 export default withStyles(Lesson, (theme) => ({
   column: {
-    backgroundColor: 'white',
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    borderBottomColor: theme['color-basic-400'],
-    borderTopColor: theme['color-basic-400'],
     width: '100%',
-    borderBottomWidth: 0.5,
-    borderTopWidth: 0.5,
     paddingTop: 20,
     paddingBottom: 20,
     height: 130,
+    borderTopColor: theme['border-basic-color-5'],
+    borderTopWidth: 0.5,
+  },
+  line: {
+    borderBottomColor: theme['border-basic-color-5'],
+    borderBottomWidth: 0.5,
   },
   row: {
     flexDirection: 'row',
@@ -87,15 +94,16 @@ export default withStyles(Lesson, (theme) => ({
     width: 15,
     height: 15,
     marginRight: 8,
+    tintColor: theme['text-basic-color'],
   },
   title: {
     fontWeight: 'bold',
-    color: theme['color-basic-700'],
+    color: theme['text-basic-color'],
   },
   button: {
     paddingTop: 7,
     paddingBottom: 7,
-    backgroundColor: theme['color-info-400'],
+    backgroundColor: theme['background-primary-color-1'],
     color: 'white',
     borderRadius: 15,
     width: 70,
@@ -103,11 +111,11 @@ export default withStyles(Lesson, (theme) => ({
     textAlign: 'center',
   },
   desc: {
-    color: theme['color-basic-700'],
+    color: theme['background-alternative-color-4'],
   },
   subdesc: {
-    paddingLeft: 8,
+    paddingLeft: 0,
     paddingTop: 5,
-    color: theme['color-basic-600'],
+    color: theme['text-hint-color'],
   },
 }));

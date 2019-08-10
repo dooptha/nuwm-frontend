@@ -3,7 +3,7 @@ export default {
   VERSION: '1.0.0',
   API_ENDPOINT: 'production_api',
   SOCKET_IO_ENDPOINT: 'production_api',
-  INITIAL_ROUTE_NAME: 'Settings', /* [Timetable, Conversations, Settings] */
+  INITIAL_ROUTE_NAME: 'Timetable', /* [Timetable, Conversations, Settings] */
   INSTAGRAM_HASHTAG: 'нувгп',
   TWITTER_HASHTAG: 'нувгп',
   CONTACT_EMAIL: 'dooptha@gmail.com',

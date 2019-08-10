@@ -3,6 +3,10 @@ import {
   light,
 } from '@eva-design/eva';
 
+// #213F51
+// #3E515F
+// #59656F
+
 const nuwmDark = {
   ...dark,
 
@@ -22,24 +26,12 @@ const nuwmDark = {
   'color-basic-400': '#d6e6f2',
   'color-basic-500': '#c7dbeb',
   'color-basic-600': '#a9c0db',
-  'color-basic-700': '#213F51', // background 1
-  'color-basic-800': '#E3E5E1', // background 2
-  'color-basic-900': '#3E515F', // pressed list element
-  'color-basic-1000': '#244555',
+  'color-basic-700': '#213F51',
+  'color-basic-800': '#285F78', // background 1 top bar flood card
+  'color-basic-900': '#E3E6E4',
+  'color-basic-1000': '#59656F',
   'color-basic-1100': '#121a2b',
 
-  'background-basic-color-1': '$color-basic-700', // <- 800 by default
-  'background-basic-color-2': '$color-basic-800', // <- 900 by default
-  'background-basic-color-3': '$color-basic-900', // <- etc
-  'background-basic-color-4': '$color-basic-100',
-
-  'border-basic-color-1': '$color-basic-700',
-  'border-basic-color-2': '$color-basic-800',
-  'border-basic-color-3': '$color-basic-900',
-  'border-basic-color-4': '$color-basic-1000',
-  'border-basic-color-5': '$color-basic-1100',
-
-  'text-disabled-color': '$color-basic-600',
 };
 
 export const themes = {

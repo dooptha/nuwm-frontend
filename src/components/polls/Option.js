@@ -19,8 +19,9 @@ const Option = ({
   votingFor,
 }) => {
   const styles = style || {};
-  const value = option.votes || 0;
-  const percentageValue = value / poll.votes * 100;
+  const votes = option.votes || 0;
+  const allVotes = poll.votes || 1;
+  const percentageValue = votes / allVotes * 100;
 
   const canVote = () => (
     poll.active && !poll.voted
@@ -35,7 +36,7 @@ const Option = ({
         />
       ) : (
         <Text style={[styles.text, themedStyle.text]}>
-          {value}
+          {votes}
         </Text>
       )
   );

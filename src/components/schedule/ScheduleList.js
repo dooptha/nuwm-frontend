@@ -7,6 +7,8 @@ import Timeline from './Timeline';
 import Day from './Day';
 import I18n from '../../utils/i18n';
 
+import InlineError from '../common/InlineError';
+
 /**
   * This class responsible for rendering schedule list and it's logic
   * when there is no subjects or when refreshing list

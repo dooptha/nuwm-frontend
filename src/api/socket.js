@@ -1,5 +1,6 @@
 import io from 'socket.io-client';
 import Sound from 'react-native-sound';
+import NavigationService from '../navigation/NavigationService';
 import config from '../../config';
 
 const newMessageSound = new Sound('new_message.mp3', Sound.MAIN_BUNDLE);
@@ -7,11 +8,17 @@ let socket;
 
 export const socketEvents = ({ dispatch }) => {
   socket.on('message:received', (message) => {
-    newMessageSound.play();
+    const currentRoute = NavigationService.getCurrentRoute();
+    const isInConversation = currentRoute.routeName === 'Conversation';
+
+    if (!isInConversation) {
+      newMessageSound.play();
+    }
 
     dispatch({
       type: 'receiveMessage',
       message,
+      isInConversation,
     });
   });
 

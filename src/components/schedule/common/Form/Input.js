@@ -30,10 +30,12 @@ export class FormInput extends Component {
       state: { value, status },
     } = this;
 
+    const inputStatus = status === 'primary' ? null : status;
+
     return (
       <Input
         value={value}
-        status={status}
+        status={inputStatus}
         style={[themedStyle.input, style]}
         placeholder={placeholder || null}
         onChangeText={(v) => this.onChange(v)}

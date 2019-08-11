@@ -6,8 +6,8 @@ import {
 const nuwmDark = {
   ...dark,
 
-  'color-primary-500': '#5499b7', // tabs
-  'color-primary-600': '#00779D', // tabs pressed
+  'color-primary-500': '#5499b7',
+  'color-primary-600': '#00779D',
 
   'color-basic-100': '#e3f2f5',
   'color-basic-200': '#eefafc',
@@ -28,6 +28,7 @@ const nuwmDark = {
   'background-basic-color-3': '$color-basic-900',
   'background-basic-color-4': '$color-basic-100',
 
+  // icons in conversations
   'text-disabled-color': '$color-basic-800',
   'background-primary-color-1': '$color-primary-500',
 

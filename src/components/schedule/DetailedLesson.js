@@ -68,24 +68,24 @@ class DetailedLesson extends Component {
 
 export default withStyles(DetailedLesson, (theme) => ({
   detailsWrapper: {
-    paddingTop: 25,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 10,
     height: '100%',
-    backgroundColor: theme['background-basic-color-2'],
+    backgroundColor: theme['background-basic-color-1'],
   },
   list: {
     marginTop: 5,
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'stretch',
+    alignItems: 'center',
     width: '100%',
-    borderBottomColor: theme['background-basic-color-1'],
+    borderBottomColor: theme['text-hint-color'],
     borderBottomWidth: 1,
   },
   title: {
     width: '30%',
     paddingTop: 10,
     paddingBottom: 10,
-    paddingLeft: 25,
   },
   info: {
     width: '70%',

@@ -42,8 +42,6 @@ class Lesson extends Component {
       },
     } = this.props;
 
-    console.log(isLastItem);
-
     const wrapperStyles = [themedStyle.column,
       isLastItem ? themedStyle.line : {}];
 

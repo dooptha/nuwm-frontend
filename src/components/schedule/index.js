@@ -6,6 +6,7 @@ import I18n from '../../utils/i18n';
 import Search from './Search';
 import { getScheduleOnWeek } from '../../api/schedule';
 import ScheduleList from './ScheduleList';
+import { storeKey, getKey, removeKey } from '../../utils/storage';
 
 export class Schedule extends Component {
   constructor(props) {
@@ -50,14 +51,22 @@ export class Schedule extends Component {
     return data;
   }
 
+  manageData(res) {
+    if (res.error || res.length === 0) {
+      getKey('timetable').then((schedule) => {
+        const data = schedule ? this.parseDates(JSON.parse(schedule)) : [];
+        this.setState({ refreshing: false, schedule: data, error: res.error });
+      });
+    } else {
+      storeKey('timetable', JSON.stringify(res));
+      this.setState({ refreshing: false, schedule: this.parseDates(res) });
+    }
+  }
+
   requestSchedule() {
-    getScheduleOnWeek().then((res) => {
-      if (res.error || res.length === 0) {
-        this.setState({ refreshing: false, schedule: [], error: res.error });
-      } else {
-        this.setState({ refreshing: false, schedule: this.parseDates(res) });
-      }
-    }).catch((err) => console.log(err));
+    getScheduleOnWeek()
+      .then((res) => this.manageData(res))
+      .catch((err) => console.log({ err }));
   }
 
   changeTab(index) {

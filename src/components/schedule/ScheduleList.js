@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import Timeline from './Timeline';
 
 import Day from './Day';
-import I18n from '../../utils/i18n';
 
 /**
   * This class responsible for rendering schedule list and it's logic

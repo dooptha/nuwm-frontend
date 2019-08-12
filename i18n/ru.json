@@ -1,101 +1,160 @@
 {
-  "tabs": {
-    "timetable": "Расписание",
-    "chat": "Чат",
-    "settings": "Настройки"
-  },
-  "settings": {
-    "themes": {
-        "title": "Тема",
-        "anotherUserMessage": "Когда то мне сказали",
-        "currentUserMessage": "что мир меня роздавит"
-      },
-    "languages": {
-      "title": "Язык",
-      "ua": "Ukrainian",
-      "ru": "Russian",
-      "en": "English"
-    },
-    "user": {
-      "name": "Имя",
-      "group": "Група",
-      "logOut": "Війті"
-    },
-    "timetable": {
-      "title": "Timetable"
-    },
-    "questions": {
-      "title": "Ask guestion"
-    },
-    "polls": {
-      "title": "Polls history"
-    }
-  },
-  "routes": {
-    "Timetable": "Расписание",
-    "Conversations": "Чат",
-    "Settings": "Настройки",
-    "Themes": "Тема",
-    "Language": "Язык",
-    "DetailedLesson": "Детали",
-    "ScheduleList": "Schedule",
-    "User": "Пользователь",
-    "PollHistory": "Історія голосувань",
-    "TimetableSettings": "Розклад"
-  },
-  "datePicker": {
-    "Confirm": "Подтвердить",
-    "Cancel": "Отменить"
-  },
-  "timetable": {
-    "no-lesson": "Нету пар, можно идти в батлу",
-    "error-no-server": "Невозможно связаться с сервером :-( \nПроверьте ваше интернет соединение",
-    "error-try-later": "Что-то пошло не так :-( \nПопробуйте позже",
-    "tabs": {
-      "Search": "Поиск",
-      "Today": "Сегодня",
-      "Tomorrow": "Завтра",
-      "Week": "Неделя"
-    },
-    "search":{
-      "Type": "Тип",
-      "Date": "Дата",
-      "Lecturer": "Преподаватель",
-      "Group": "Группа",
-      "PracticsOnly": "Только Практика",
-      "Search": "Поиск",
-      "GroupExample": " Пример: ПМ-41",
-      "LecturerExample": "Пример: Мічута Ольга Романівна",
-      "From": "С",
-      "To": "По",
-      "OnlyDay": "День",
-      "Range": "Промежуток"
-    },
-    "datepicker":{
-      "OK": "Готово",
-      "Start": "Начало",
-      "End": "Конец",
-      "Choose Date": "Выберите дату"
-    },
-    "lesson": {
-      "name": "Предмет",
-      "classroom": "Аудитория",
-      "lecturer": "Припеподаватель",
-      "subgroup": "Группа",
-      "streams_type": "Подгруппа",
-      "time": "Время",
-      "type": "Тип"
-    }
-  },
-  "flood": {
-    "title": "Флуд",
-    "description": "Описание",
-    "online": "oнлайн"
-  },
-  "SignUp": {
-    "title": "Before we start",
-    "name": "Name",
-    "group": "Group",
-    "submit": "Sign up"
-  }
+	"SignUp": {
+		"group": "Група",
+		"name": "Имя",
+		"submit": "Продолжить",
+		"title": "Перед тем как начать"
+	},
+	"admin": {
+		"deleteMessage": "Удалить сообщение",
+		"no": "Нет",
+		"poll": {
+			"close": {
+				"cancel": "Нет",
+				"confirm": "Да",
+				"description": "Это действие нельзя отменить",
+				"title": "Завершить последнее голосование"
+			},
+			"options": {
+				"add": "Добавить другой вариант",
+				"placeholder": "Вариант",
+				"title": "Варианты ответов"
+			},
+			"question": {
+				"placeholder": "Поставте вопрос",
+				"title": "Вопрос"
+			},
+			"submit": "Создать"
+		},
+		"yes": "Да"
+	},
+	"contactUs": {
+		"alert": "Перейти на выбранный ресурс",
+		"cancel": "Нет",
+		"discord": {
+			"description": "Присоединяйся к сообществу",
+			"title": "Discord"
+		},
+		"github": {
+			"description": "Код приложения",
+			"title": "Github"
+		},
+		"mail": {
+			"description": "Пожелания и вопросы",
+			"title": "Почта"
+		},
+		"open": "Да",
+		"title": "Dooptha"
+	},
+	"conversations": {
+		"messagePlaceholder": "Сообщение..."
+	},
+	"datePicker": {
+		"Cancel": "Отменить",
+		"Confirm": "Подтвердить"
+	},
+	"errors": {
+		"description": "Информация про ошибку была отослана разработчикам! Пожалуйста, перезапустите предложение!",
+		"ok": "Хорошо",
+		"responseDescription": "Что-то случилось во время запроса",
+		"responseTitle": "Осуществился",
+		"title": "Что-то случилось не так как хотелось"
+	},
+	"flood": {
+		"description": "Место для общение с другими студентами, только последнее 50 сообщений сохраняются в истории",
+		"online": "oнлайн",
+		"title": "Флуд"
+	},
+	"routes": {
+		"Admin": "Новое голосование",
+		"ContactUs": "Контакты",
+		"Conversations": "Чат",
+		"DetailedLesson": "Детали",
+		"Instagram": "Инстаграм",
+		"Language": "Язык",
+		"PollHistory": "История голосований",
+		"ScheduleList": "Расписание",
+		"Settings": "Настройки",
+		"Themes": "Тема",
+		"Timetable": "Расписание",
+		"TimetableSettings": "Розклад",
+		"Twitter": "",
+		"User": "Пользователь"
+	},
+	"settings": {
+		"admin": {
+			"title": "Администрирование"
+		},
+		"languages": {
+			"en": "Английский",
+			"ru": "Русский",
+			"title": "Язык",
+			"ua": " Украинский"
+		},
+		"polls": {
+			"title": "История голосований"
+		},
+		"questions": {
+			"title": "Свяжитесь с нами"
+		},
+		"themes": {
+			"anotherUserMessage": "Когда то мне сказали",
+			"currentUserMessage": "что мир меня раздавит",
+			"sender": "Влад Проценко",
+			"title": "Тема"
+		},
+		"timetable": {
+			"title": "Timetable"
+		},
+		"user": {
+			"group": "Група",
+			"logOut": "Війті",
+			"name": "Имя"
+		}
+	},
+	"tabs": {
+		"chat": "Чат",
+		"settings": "Настройки",
+		"timetable": "Расписание"
+	},
+	"timetable": {
+		"datepicker": {
+			"Choose Date": "Выберите дату",
+			"End": "Конец",
+			"OK": "Готово",
+			"Start": "Начало"
+		},
+		"error-no-server": "Невозможно связаться с сервером :-( \nПроверьте ваше интернет соединение",
+		"error-try-later": "Что-то пошло не так :-( \nПопробуйте позже",
+		"lesson": {
+			"classroom": "Аудитория",
+			"lecturer": "Преподаватель",
+			"name": "Предмет",
+			"streams_type": "Подгруппа",
+			"subgroup": "Группа",
+			"time": "Время",
+			"type": "Тип"
+		},
+		"no-lesson": "Нету пар, можно идти в батлу",
+		"search": {
+			"Date": "Дата",
+			"From": "С",
+			"Group": "Группа",
+			"GroupExample": " Пример: ПМ-41",
+			"Lecturer": "Преподаватель",
+			"LecturerExample": "Пример: Мічута Ольга Романівна",
+			"OnlyDay": "День",
+			"PracticsOnly": "Только Практика",
+			"Range": "Промежуток",
+			"Search": "Поиск",
+			"To": "По",
+			"Type": "Тип"
+		},
+		"tabs": {
+			"Search": "Поиск",
+			"Today": "Сегодня",
+			"Tomorrow": "Завтра",
+			"Week": "Неделя"
+		}
+	}
 }

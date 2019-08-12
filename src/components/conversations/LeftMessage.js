@@ -10,8 +10,9 @@ import {
 import { getSenderColor } from '../../utils/colors';
 
 const MessageComponent = ({ message, themedStyle }) => {
-  const alignmentStyle = { justifyContent: message.isSender ? 'flex-end' : 'flex-start' };
-  const textColor = { color: getSenderColor(message.sender, themedStyle.text.color, 0.7) };
+  const alignmentStyle = { justifyContent: 'flex-start' };
+  console.log(themedStyle.textThemeColor)
+  const textColor = { color: getSenderColor(message.sender.username, themedStyle.textTheme.color, 0.7) };
 
   return (
     <View style={[themedStyle.messageContainer, alignmentStyle]}>
@@ -22,7 +23,7 @@ const MessageComponent = ({ message, themedStyle }) => {
             style={[themedStyle.sender, themedStyle.text, textColor]}
             category="c1"
           >
-            {message.sender}
+            {message.sender.username}
           </Text>
           <Text
             style={themedStyle.text}
@@ -82,6 +83,8 @@ export default withStyles(MessageComponent, (theme) => ({
   },
   text: {
     fontFamily: 'Roboto',
+  },
+  textTheme: {
     color: theme['text-basic-color'],
   },
 }));

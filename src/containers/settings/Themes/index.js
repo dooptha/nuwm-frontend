@@ -23,12 +23,15 @@ class ThemesContainer extends Component {
       {
         body: I18n.t('settings.themes.anotherUserMessage'),
         date: new Date(),
-        sender: I18n.t('settings.themes.sender'),
-        isSender: false,
+        sender: {
+          username: I18n.t('settings.themes.sender'),
+          id: 'otherUserId',
+        },
       },
       {
         body: I18n.t('settings.themes.currentUserMessage'),
         date: new Date(),
+        sender: {},
         isSender: true,
       }];
   }
@@ -65,11 +68,12 @@ class ThemesContainer extends Component {
   render() {
     const { themedStyle } = this.props;
     const { themes } = this.state;
+    const [{ user }] = this.context;
 
     return (
       <View style={themedStyle.container}>
-        <Message message={this.messages[0]} />
-        <Message message={this.messages[1]} />
+        <Message message={this.messages[0]} current={user.current} />
+        <Message message={this.messages[1]} current={user.current} />
         <List
           data={themes}
           renderItem={(i) => this.renderListItem(i)}

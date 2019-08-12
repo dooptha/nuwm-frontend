@@ -10,8 +10,15 @@ import moment from 'moment';
 import RightMessage from './RightMessage';
 import LeftMessage from './LeftMessage';
 
-const MessageComponent = ({ message, themedStyle, onPress }) => {
-  const alignmentStyle = { justifyContent: message.isSender ? 'flex-end' : 'flex-start' };
+const MessageComponent = ({
+  message,
+  themedStyle,
+  onPress,
+  current,
+}) => {
+  if (!message.sender) return null;
+  const isSender = message.sender.id === current._id || message.isSender;
+  const alignmentStyle = { justifyContent: isSender ? 'flex-end' : 'flex-start' };
   const date = moment(message.date).format('HH:mm');
 
   return (
@@ -21,7 +28,7 @@ const MessageComponent = ({ message, themedStyle, onPress }) => {
       <View
         style={[themedStyle.messageContainer, alignmentStyle]}
       >
-        {message.isSender
+        { isSender
           ? <RightMessage message={{ ...message, date }} />
           : <LeftMessage message={{ ...message, date }} />
         }

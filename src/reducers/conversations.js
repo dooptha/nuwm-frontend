@@ -30,6 +30,12 @@ const conversationsReducer = (state, action) => {
         unreadCounter: 0,
       };
 
+    case 'loadMessages':
+      return {
+        ...state,
+        messages: action.messages,
+      };
+
     default:
       return state;
   }

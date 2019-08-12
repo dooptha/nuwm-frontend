@@ -23,6 +23,7 @@ export function getColorFromString(str) {
 }
 
 export function blendColors(colorA, colorB, amount) {
+  if (!colorA || !colorB) return undefined;
   const [rA, gA, bA] = colorA.match(/\w\w/g).map((c) => parseInt(c, 16));
   const [rB, gB, bB] = colorB.match(/\w\w/g).map((c) => parseInt(c, 16));
   const r = Math.round(rA + (rB - rA) * amount).toString(16).padStart(2, '0');

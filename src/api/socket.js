@@ -29,12 +29,19 @@ export const socketEvents = ({ dispatch }) => {
     })
   ));
 
-  socket.on('online:update', (counter) => (
+  socket.on('counter:update', (counter) => {
     dispatch({
       type: 'updateOnlineCounter',
       counter,
-    })
-  ));
+    });
+  });
+
+  socket.on('messages:history', (messages) => {
+    dispatch({
+      type: 'loadMessages',
+      messages,
+    });
+  });
 
   socket.on('poll:updated', (poll) => {
     dispatch({

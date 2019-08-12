@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.rollbar.RollbarReactNativePackage;
 import com.rollbar.RollbarReactNative;
 import com.zmxv.RNSound.RNSoundPackage;
 import com.masteratul.exceptionhandler.ReactNativeExceptionHandlerPackage;
@@ -40,6 +41,9 @@ public class MainApplication extends Application implements ReactApplication {
       packages.add(new RNCWebViewPackage());
       packages.add(new LinearGradientPackage());
       packages.add(new RNDeviceInfo());
+      packages.add(new RNSoundPackage());
+      packages.add(new RollbarReactNativePackage());
+      packages.add(new ReactNativeExceptionHandlerPackage());
       return packages;
     }
 
@@ -58,5 +62,6 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
+    RollbarReactNative.init(this, "1fb60ff4e452430f9b79b7634025450a", "production");
   }
 }

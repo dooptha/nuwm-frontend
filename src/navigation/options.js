@@ -22,7 +22,7 @@ const MenuTopNavigationParams = {
         title={I18n.t(`routes.${routeName}`)}
         backIcon={isRootRoute(index) && ArrowIosBackFill}
         rightControls={[]}
-        onBackPress={() => navigation.goBack()}
+        onBackPress={() => navigation.goBack(null)}
       />
     );
   },
@@ -37,7 +37,7 @@ const SheduleTopNavigationParams = {
       <TopNavigationBar
         title={I18n.t(`routes.${routeName}`)}
         backIcon={isRootRoute(index) && ArrowIosBackFill}
-        onBackPress={() => navigation.goBack()}
+        onBackPress={() => navigation.goBack(null)}
       />
     );
   },
@@ -55,7 +55,7 @@ const ConversationTopNavigationParams = {
         border
         title={title}
         backIcon={isRootRoute(index) && ArrowIosBackFill}
-        onBackPress={() => navigation.goBack()}
+        onBackPress={() => navigation.goBack(null)}
       />
     );
   },
@@ -71,7 +71,7 @@ const UserSettingsNavigationParams = {
         title={I18n.t(`routes.${routeName}`)}
         backIcon={ArrowIosBackFill}
         submitIcon={CheckmarkOutlineIcon}
-        onBackPress={() => navigation.goBack()}
+        onBackPress={() => navigation.goBack(null)}
         onSubmitPress="submitUserForm"
       />
     );
@@ -88,7 +88,7 @@ const TimetableSettingsNavigationParams = {
         title={I18n.t(`routes.${routeName}`)}
         backIcon={ArrowIosBackFill}
         submitIcon={CheckmarkOutlineIcon}
-        onBackPress={() => navigation.goBack()}
+        onBackPress={() => navigation.goBack(null)}
         onSubmitPress="submitTimetableForm"
       />
     );

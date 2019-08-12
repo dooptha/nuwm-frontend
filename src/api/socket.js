@@ -7,11 +7,27 @@ const newMessageSound = new Sound('new_message.mp3', Sound.MAIN_BUNDLE);
 let socket;
 
 export const socketEvents = ({ dispatch }) => {
+  socket.on('connect', () => {
+    dispatch({ type: 'connect' });
+  });
+
+  socket.on('connect_error', () => {
+    dispatch({ type: 'disconnect' });
+  });
+
+  socket.on('disconnect', (reason) => {
+    if (reason === 'io server disconnect') {
+      socket.connect();
+    }
+
+    dispatch({ type: 'disconnect' });
+  });
+
   socket.on('message:received', (message) => {
     const currentRoute = NavigationService.getCurrentRoute();
     const isInConversation = currentRoute.routeName === 'Conversation';
 
-    if (!isInConversation) {
+    if (!isInConversation && newMessageSound) {
       newMessageSound.play();
     }
 

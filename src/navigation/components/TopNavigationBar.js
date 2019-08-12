@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
+import { ActivityIndicator } from 'react-native';
 import {
   withStyles,
   TopNavigation,
   TopNavigationAction,
 } from 'react-native-ui-kitten';
 import SafeAreaView from './SafeAreaView';
+import { StateContext } from '../../utils/context';
+import I18n from '../../utils/i18n';
 
 class TopNavigationBar extends Component {
   renderBackButton(source) {
     const { onBackPress } = this.props;
+
     return (
       <TopNavigationAction
         icon={source}
@@ -18,13 +22,44 @@ class TopNavigationBar extends Component {
   }
 
   renderSubmitButton(source) {
+    const [{ app }] = this.context;
     const { onSubmitPress } = this.props;
-    return (
-      <TopNavigationAction
-        icon={source}
-        onPress={onSubmitPress}
-      />
-    );
+    const onPress = app.actions[onSubmitPress];
+
+    if (onPress) {
+      return (
+        <TopNavigationAction
+          icon={source}
+          onPress={onPress}
+        />
+      );
+    }
+
+    return null;
+  }
+
+  renderDisconnectedLoader() {
+    return <ActivityIndicator />;
+  }
+
+  renderRightControls() {
+    const {
+      submitIcon,
+      onSubmitPress,
+    } = this.props;
+
+    const [{ app }] = this.context;
+    const controls = [];
+
+    if (!app.connected) {
+      controls.push(this.renderDisconnectedLoader());
+    }
+
+    if (submitIcon && onSubmitPress) {
+      controls.push(this.renderSubmitButton(submitIcon));
+    }
+
+    return controls;
   }
 
   render() {
@@ -33,11 +68,10 @@ class TopNavigationBar extends Component {
       title,
       backIcon,
       border,
-      submitIcon,
     } = this.props;
 
+    const [{ app }] = this.context;
     const leftControlElement = backIcon ? this.renderBackButton(backIcon) : null;
-    const rightControlElement = submitIcon ? this.renderSubmitButton(submitIcon) : null;
 
     return (
       <SafeAreaView
@@ -46,15 +80,17 @@ class TopNavigationBar extends Component {
       >
         <TopNavigation
           alignment="center"
-          title={title}
+          title={app.connected ? title : I18n.t('routes.disconnected')}
           titleStyle={themedStyle.title}
           leftControl={leftControlElement}
-          rightControls={rightControlElement}
+          rightControls={this.renderRightControls()}
         />
       </SafeAreaView>
     );
   }
 }
+
+TopNavigationBar.contextType = StateContext;
 
 export default withStyles(TopNavigationBar, (theme) => ({
   safeArea: {

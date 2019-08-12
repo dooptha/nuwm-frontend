@@ -11,8 +11,9 @@ import { getSenderColor } from '../../utils/colors';
 
 const MessageComponent = ({ message, themedStyle }) => {
   const alignmentStyle = { justifyContent: 'flex-start' };
-  console.log(themedStyle.textThemeColor)
-  const textColor = { color: getSenderColor(message.sender.username, themedStyle.textTheme.color, 0.7) };
+  const textColor = {
+    color: getSenderColor(message.sender.username, themedStyle.textTheme.color, 0.7),
+  };
 
   return (
     <View style={[themedStyle.messageContainer, alignmentStyle]}>

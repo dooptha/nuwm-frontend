@@ -17,6 +17,7 @@ const MessageComponent = ({
   current,
 }) => {
   if (!message.sender) return null;
+
   const isSender = message.sender.id === current._id || message.isSender;
   const alignmentStyle = { justifyContent: isSender ? 'flex-end' : 'flex-start' };
   const date = moment(message.date).format('HH:mm');

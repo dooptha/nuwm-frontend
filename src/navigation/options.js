@@ -9,9 +9,7 @@ import {
   isRootRoute,
   getCurrentRouteIndex,
 } from './util';
-import { KEY_NAVIGATION_BACK } from './constants';
 import I18n from '../utils/i18n';
-import { StateContext } from '../utils/context';
 
 const MenuTopNavigationParams = {
   header: ({ navigation }) => {
@@ -19,19 +17,13 @@ const MenuTopNavigationParams = {
     const index = getCurrentRouteIndex(navigation);
 
     return (
-      <StateContext.Consumer>
-        {
-          () => (
-            <TopNavigationBar
-              border
-              title={I18n.t(`routes.${routeName}`)}
-              backIcon={isRootRoute(index) && ArrowIosBackFill}
-              rightControls={[]}
-              onBackPress={() => navigation.goBack(KEY_NAVIGATION_BACK)}
-            />
-          )
-        }
-      </StateContext.Consumer>
+      <TopNavigationBar
+        border
+        title={I18n.t(`routes.${routeName}`)}
+        backIcon={isRootRoute(index) && ArrowIosBackFill}
+        rightControls={[]}
+        onBackPress={() => navigation.goBack()}
+      />
     );
   },
 };
@@ -42,17 +34,11 @@ const SheduleTopNavigationParams = {
     const index = getCurrentRouteIndex(navigation);
 
     return (
-      <StateContext.Consumer>
-        {
-          () => (
-            <TopNavigationBar
-              title={I18n.t(`routes.${routeName}`)}
-              backIcon={isRootRoute(index) && ArrowIosBackFill}
-              onBackPress={() => navigation.goBack(KEY_NAVIGATION_BACK)}
-            />
-          )
-        }
-      </StateContext.Consumer>
+      <TopNavigationBar
+        title={I18n.t(`routes.${routeName}`)}
+        backIcon={isRootRoute(index) && ArrowIosBackFill}
+        onBackPress={() => navigation.goBack()}
+      />
     );
   },
 };
@@ -65,20 +51,12 @@ const ConversationTopNavigationParams = {
     const { title } = route ? route.params.conversation : '';
 
     return (
-      <StateContext.Consumer>
-        {
-          () => (
-            <TopNavigationBar
-              border
-              title={title}
-              backIcon={isRootRoute(index) && ArrowIosBackFill}
-              onBackPress={() => {
-                navigation.goBack(KEY_NAVIGATION_BACK);
-              }}
-            />
-          )
-        }
-      </StateContext.Consumer>
+      <TopNavigationBar
+        border
+        title={title}
+        backIcon={isRootRoute(index) && ArrowIosBackFill}
+        onBackPress={() => navigation.goBack()}
+      />
     );
   },
 };
@@ -88,20 +66,14 @@ const UserSettingsNavigationParams = {
     const { routeName } = getCurrentRouteState(navigation);
 
     return (
-      <StateContext.Consumer>
-        {
-          (context) => (
-            <TopNavigationBar
-              border
-              title={I18n.t(`routes.${routeName}`)}
-              backIcon={ArrowIosBackFill}
-              submitIcon={CheckmarkOutlineIcon}
-              onBackPress={() => navigation.goBack(KEY_NAVIGATION_BACK)}
-              onSubmitPress={context[0].app.actions.submitUserForm}
-            />
-          )
-        }
-      </StateContext.Consumer>
+      <TopNavigationBar
+        border
+        title={I18n.t(`routes.${routeName}`)}
+        backIcon={ArrowIosBackFill}
+        submitIcon={CheckmarkOutlineIcon}
+        onBackPress={() => navigation.goBack()}
+        onSubmitPress="submitUserForm"
+      />
     );
   },
 };
@@ -111,20 +83,14 @@ const TimetableSettingsNavigationParams = {
     const { routeName } = getCurrentRouteState(navigation);
 
     return (
-      <StateContext.Consumer>
-        {
-          (context) => (
-            <TopNavigationBar
-              border
-              title={I18n.t(`routes.${routeName}`)}
-              backIcon={ArrowIosBackFill}
-              submitIcon={CheckmarkOutlineIcon}
-              onBackPress={() => navigation.goBack(KEY_NAVIGATION_BACK)}
-              onSubmitPress={context[0].app.actions.submitTimetableForm}
-            />
-          )
-        }
-      </StateContext.Consumer>
+      <TopNavigationBar
+        border
+        title={I18n.t(`routes.${routeName}`)}
+        backIcon={ArrowIosBackFill}
+        submitIcon={CheckmarkOutlineIcon}
+        onBackPress={() => navigation.goBack()}
+        onSubmitPress="submitTimetableForm"
+      />
     );
   },
 };

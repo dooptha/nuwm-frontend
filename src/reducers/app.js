@@ -38,6 +38,18 @@ const appReducer = (state, action) => {
         onlineCounter: action.counter,
       };
 
+    case 'connect':
+      return {
+        ...state,
+        connected: true,
+      };
+
+    case 'disconnect':
+      return {
+        ...state,
+        connected: false,
+      };
+
     default:
       return state;
   }

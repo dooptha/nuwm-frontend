@@ -79,7 +79,8 @@
 		"Timetable": "Timetable",
 		"TimetableSettings": "Розклад",
 		"Twitter": "",
-		"User": "User"
+		"User": "User",
+		"disconnected": "Connecting"
 	},
 	"settings": {
 		"admin": {

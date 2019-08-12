@@ -24,9 +24,11 @@ export const GlobalState = ({ children }) => {
     app: {
       actions: {
         submitUserForm: () => {},
+        submitTimetableForm: () => {},
       },
       properties: DEFAULT_PROPERTIES,
       onlineCounter: 1,
+      connected: true,
     },
     conversations: {
       messages: [],

@@ -110,7 +110,11 @@
 		"user": {
 			"group": "Група",
 			"logOut": "Війті",
-			"name": "Имя"
+			"name": "Имя",
+			"username": "",
+			"validations": {
+				"username": "Максимальное количество символов"
+			}
 		}
 	},
 	"tabs": {

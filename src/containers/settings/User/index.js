@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import {
   Input,
-  Button,
   withStyles,
 } from 'react-native-ui-kitten';
 import { StateContext } from '../../../utils/context';
@@ -10,6 +9,7 @@ import { removeKey } from '../../../utils/storage';
 import I18n from '../../../utils/i18n';
 import { setAuthHeaders } from '../../../api';
 import api from '../../../api/user';
+import config from '../../../../config';
 
 class UserContainer extends Component {
   constructor(props) {
@@ -32,8 +32,10 @@ class UserContainer extends Component {
     });
   }
 
-  onInputChange(stateChange) {
-    this.setState(stateChange);
+  onInputChange({ username }) {
+    if (username.length > 0 && username.length <= config.MAX_USERNAME_LENGTH) {
+      this.setState({ username });
+    }
   }
 
   onFormSubmit() {
@@ -42,6 +44,16 @@ class UserContainer extends Component {
     const { navigation } = this.props;
 
     api.updateCurrentUser(dispatch, navigation, { username });
+  }
+
+  getCaption() {
+    const { username } = this.state;
+
+    if (username.length >= config.MAX_USERNAME_LENGTH) {
+      return I18n.t('settings.user.validations.username');
+    }
+
+    return '';
   }
 
   logOut() {
@@ -73,11 +85,12 @@ class UserContainer extends Component {
           style={themedStyle.input}
           labelStyle={themedStyle.text}
           textStyle={themedStyle.text}
-          label={I18n.t('settings.user.name')}
+          label={I18n.t('settings.user.username')}
           name="username"
           value={username}
           onChangeText={(text) => this.onInputChange({ username: text })}
           autoCompleteType="name"
+          caption={this.getCaption()}
         />
       </View>
     );

@@ -110,7 +110,11 @@
 		"user": {
 			"group": "Group",
 			"logOut": "Log out",
-			"name": "Name"
+			"name": "Name",
+			"username": "",
+			"validations": {
+				"username": "Maximum name length"
+			}
 		}
 	},
 	"tabs": {

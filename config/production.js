@@ -23,4 +23,5 @@ export default {
   ROLLBACK_USE_SOURCE_MAP: false,
 
   MAXIMUM_CHARS_IN_MESSAGE: 500,
+  MAX_USERNAME_LENGTH: 30,
 };

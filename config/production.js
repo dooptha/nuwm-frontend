@@ -21,4 +21,6 @@ export default {
   ROLLBACK_APP_TOKEN: '1fb60ff4e452430f9b79b7634025450a', // Should move it to .env file
   ROLLBACK_ENABLED: true,
   ROLLBACK_USE_SOURCE_MAP: false,
+
+  MAXIMUM_CHARS_IN_MESSAGE: 500,
 };

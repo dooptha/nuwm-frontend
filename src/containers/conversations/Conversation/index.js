@@ -14,6 +14,7 @@ import { StateContext } from '../../../utils/context';
 import I18n from '../../../utils/i18n';
 import api from '../../../api/user';
 import socket from '../../../api/socket';
+import config from '../../../../config';
 
 class Conversation extends Component {
   constructor(props) {
@@ -69,7 +70,7 @@ class Conversation extends Component {
     const { newMessage } = this.state;
     const [{ user }, dispatch] = this.context;
 
-    if (newMessage === '') return false;
+    if (newMessage.length < 1 || newMessage.length > config.MAXIMUM_CHARS_IN_MESSAGE) return false;
 
     const message = {
       body: newMessage,
@@ -109,7 +110,7 @@ class Conversation extends Component {
         size="small"
         icon={PaperPlaneIconFill}
         onPress={this.sendMessage}
-        disabled={newMessage === ''}
+        disabled={newMessage.length < 1 || newMessage.length > config.MAXIMUM_CHARS_IN_MESSAGE}
       />
     );
   }

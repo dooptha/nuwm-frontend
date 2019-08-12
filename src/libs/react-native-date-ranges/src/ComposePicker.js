@@ -3,9 +3,6 @@ import {
   View, TouchableHighlight, Modal, Text,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import 'moment/locale/uk';
-import 'moment/locale/ru';
-import 'moment/locale/en-au';
 import moment from 'moment';
 import DateRange from './DateRange';
 import normalize from './normalizeText';
@@ -32,7 +29,6 @@ const styles = {
 export default class ComposePicker extends Component {
   constructor(props) {
     super(props);
-    moment.locale(this.props.local);
     this.state = {
       modalVisible: false,
       allowPointerEvents: true,

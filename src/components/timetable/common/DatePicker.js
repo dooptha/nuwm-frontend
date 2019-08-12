@@ -3,11 +3,8 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'react-native-ui-kitten';
 import I18n from '../../../utils/i18n';
 import DatePicker from '../../../libs/react-native-date-ranges';
-import { StateContext } from '../../../utils/context';
 
 export class DatePickerWrapper extends Component {
-  static contextType = StateContext;
-
   static defaultProps = {
     mode: 'single',
   }
@@ -28,19 +25,6 @@ export class DatePickerWrapper extends Component {
       startDate: null,
       endDate: null,
     };
-  }
-
-
-  getCurrentLocale() {
-    if (!this.context) return 'ua';
-    const [{ app }] = this.context;
-
-    switch (app.properties.language) {
-      case 'ua': return 'uk';
-      case 'ru': return 'ru';
-      case 'en': return 'en-ua';
-      default: return 'ua';
-    }
   }
 
   getDate() {
@@ -92,7 +76,6 @@ export class DatePickerWrapper extends Component {
         selectedTextColor={themedStyle.mainText.color}
 
       // locales
-        local={this.getCurrentLocale()}
         markText={this.localize('Choose Date')}
         ButtonText={this.localize('OK')}
         startDateLabel={this.localize('Start')}

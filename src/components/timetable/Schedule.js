@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, ScrollView, RefreshControl } from 'react-native';
 import { withStyles, Text } from 'react-native-ui-kitten';
 import PropTypes from 'prop-types';
-import Timeline from './Timeline';
+import Timeline from './timeline';
 
 import Day from './Day';
 

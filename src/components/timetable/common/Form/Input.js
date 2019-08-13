@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles, Input } from 'react-native-ui-kitten';
 
-export class FormInput extends Component {
+class FormInput extends Component {
   state = {
     value: '',
     status: 'primary',
+    initialValue: '',
   }
 
   static defaultProps = {
@@ -26,9 +27,15 @@ export class FormInput extends Component {
 
   render() {
     const {
-      props: { themedStyle, placeholder, style },
-      state: { value, status },
+      props: {
+        themedStyle, placeholder, style, defaultValue,
+      },
+      state: { value, status, initialValue },
     } = this;
+
+    if (defaultValue !== initialValue) {
+      this.setState({ value: defaultValue, initialValue: defaultValue });
+    }
 
     const inputStatus = status === 'primary' ? null : status;
 

@@ -12,12 +12,18 @@ import FormInput from '../common/Form/Input';
 import DatePicker from '../common/DatePicker';
 import FormItem from '../common/FormItem';
 import { replaceDatesWithMomentObjects } from '../helper';
+import { StateContext } from '../../../utils/context';
 
 class Search extends Component {
+  static contextType = StateContext;
+
+  state = {
+    practicsOnly: false,
+  }
+
   constructor(props) {
     super(props);
     this.localize = (t) => I18n.t(`timetable.search.${t}`);
-    this.state = { practicsOnly: false };
   }
 
   getDate() {
@@ -57,7 +63,6 @@ class Search extends Component {
 
     if (isEnoughData) {
       getSchedule(searchData).then((data) => {
-        console.log(data);
         if (data.error || data.length === 0) {
           NavigationService.navigate('ScheduleList', { schedule: [], message: data.error });
         } else {
@@ -69,8 +74,11 @@ class Search extends Component {
   }
 
   render() {
+    const { context } = this;
     const { themedStyle } = this.props;
     const { practicsOnly } = this.state;
+
+    const defaultGroup = context[0].app.properties.group;
 
     return (
       <View style={themedStyle.searchContainer}>
@@ -88,6 +96,7 @@ class Search extends Component {
 
           <FormItem id="group" label={this.localize('Group')}>
             <FormInput
+              defaultValue={defaultGroup}
               placeholder={this.localize('GroupExample')}
               ref={(node) => { this.groupNode = node; }}
             />

@@ -36,8 +36,6 @@ export class Timetable extends Component {
       .then((resData) => {
         const newState = { refreshing: false };
 
-        console.log(resData);
-
         if (resData.error || resData.length === 0) {
           getKey('timetable').then((rawData) => {
             const data = rawData ? JSON.parse(rawData) : [];
@@ -65,8 +63,6 @@ export class Timetable extends Component {
         onRefresh={() => this.onRefresh()}
       />
     );
-
-    console.log(error);
 
     return (
       <ScrollView

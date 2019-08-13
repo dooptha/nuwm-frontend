@@ -79,7 +79,7 @@ class Search extends Component {
     return (
       <View style={themedStyle.searchContainer}>
         <ScrollView style={themedStyle.inputsContainer}>
-          <FormItem className="date" label="Дата">
+          <FormItem className="date" label={this.localize('Date')}>
             <DatePicker ref={(node) => { this.dateNode = node; }} />
           </FormItem>
 

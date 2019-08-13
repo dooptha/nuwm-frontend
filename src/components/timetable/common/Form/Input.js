@@ -14,6 +14,19 @@ class FormInput extends Component {
     style: {},
   }
 
+  shouldComponentUpdate(nextProps) {
+    const { defaultValue } = nextProps;
+    const { initialValue } = this.state;
+
+    console.log(defaultValue, initialValue);
+
+    if (defaultValue && defaultValue !== initialValue) {
+      this.setState({ value: defaultValue, initialValue: defaultValue });
+    }
+
+    return true;
+  }
+
   onChange(value) {
     const { status } = this.state;
     this.setState({ value });
@@ -27,15 +40,9 @@ class FormInput extends Component {
 
   render() {
     const {
-      props: {
-        themedStyle, placeholder, style, defaultValue,
-      },
-      state: { value, status, initialValue },
+      props: { themedStyle, placeholder, style },
+      state: { value, status },
     } = this;
-
-    if (defaultValue !== initialValue) {
-      this.setState({ value: defaultValue, initialValue: defaultValue });
-    }
 
     const inputStatus = status === 'primary' ? null : status;
 

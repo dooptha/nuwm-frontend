@@ -38,13 +38,19 @@ export const getSchedule = (data) => {
     .catch((err) => ({ error: errorParser(err) }));
 };
 
-const getGroups = (dispatch) => {
-  const groups = ['PM-41', 'AK-41', 'PM-34', 'PM-41', 'AK-41', 'PM-34', 'PM-41', 'AK-41', 'PM-34', 'PM-41', 'AK-41', 'PM-34'];
-  dispatch({
-    type: 'loadGroups',
-    groups,
-  });
-};
+const getGroups = (dispatch) => (
+  api.get('/timetable/groups')
+    .then((response) => {
+      const { groups } = response.data;
+
+      dispatch({
+        type: 'loadGroups',
+        groups,
+      });
+    })
+    .catch(() => {})
+);
+
 
 module.exports = {
   getScheduleOnWeek,

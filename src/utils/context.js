@@ -67,9 +67,6 @@ export const loadInitialData = async (dispatch) => {
   setLocale(properties.language);
   dispatch({ type: 'loadProperties', properties });
 
-  // Fetch groupds list for autocomplete
-  scheduleApi.getGroups(dispatch);
-
   if (user) {
     dispatch({ type: 'updateUser', user });
 
@@ -87,6 +84,10 @@ export const loadInitialData = async (dispatch) => {
     // Then initialize sockets
     initSockets({ dispatch, token: user.token });
   }
+
+  // Fetch groupds list for autocomplete
+  scheduleApi.getGroups(dispatch);
+
 
   dispatch({ type: 'updateDeviceId', deviceId });
 

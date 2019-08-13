@@ -108,7 +108,7 @@ export default withStyles(DatePickerWrapper, (theme) => ({
     backgroundColor: theme['background-basic-color-1'],
   },
   sub: {
-    backgroundColor: theme['background-basic-color-2'],
+    backgroundColor: theme['background-basic-color-3'],
   },
   mainText: {
     color: theme['text-basic-color'],

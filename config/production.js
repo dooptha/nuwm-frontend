@@ -1,8 +1,8 @@
 /* eslint-disable */
 export default {
   VERSION: '1.0.0',
-  API_ENDPOINT: 'http://192.168.0.101:3000',
-  SOCKET_IO_ENDPOINT: 'http://192.168.0.101:3000/',
+  API_ENDPOINT: 'http://192.168.0.104:3000',
+  SOCKET_IO_ENDPOINT: 'http://192.168.0.104:3000/',
   INITIAL_ROUTE_NAME: 'Timetable', /* [Timetable, Conversations, Settings] */
   INSTAGRAM_HASHTAG: 'нувгп',
   TWITTER_HASHTAG: 'нувгп',

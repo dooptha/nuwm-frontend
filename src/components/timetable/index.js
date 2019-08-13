@@ -5,8 +5,8 @@ import Search from './search';
 import Schedule from './Schedule';
 
 import I18n from '../../utils/i18n';
-import { getScheduleOnWeek } from '../../api/schedule';
-import { storeKey, getKey, removeKey } from '../../utils/storage';
+import { getScheduleOnWeek } from '../../api/timetable';
+import { storeKey, getKey } from '../../utils/storage';
 import { StateContext } from '../../utils/context';
 import { isToday, isTomorrow, replaceDatesWithMomentObjects } from './helper';
 
@@ -21,7 +21,6 @@ export class Timetable extends Component {
   };
 
   componentDidMount() {
-    removeKey('timetable');
     this.requestSchedule();
   }
 

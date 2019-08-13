@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import {
-  View, ScrollView,
-} from 'react-native';
-import {
-  Button, withStyles, Toggle,
-} from 'react-native-ui-kitten';
+import { View, ScrollView } from 'react-native';
+import { Button, withStyles, Toggle } from 'react-native-ui-kitten';
 import I18n from '../../../utils/i18n';
-import { getSchedule } from '../../../api/schedule';
+import { getSchedule } from '../../../api/timetable';
 import NavigationService from '../../../navigation/NavigationService';
 import FormInput from '../common/Form/Input';
 import DatePicker from '../common/DatePicker';

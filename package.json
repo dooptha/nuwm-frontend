@@ -4,7 +4,7 @@
   "private": "true",
   "scripts": {
     "start": "react-native start",
-    "test": "jest --detectOpenHandles --forceExit --collectCoverage --collectCoverageFrom=src/**/*.js",
+    "test": "jest --detectOpenHandles --forceExit",
     "style": "eslint .",
     "ios": "react-native run-ios --simulator='iPhone 7'",
     "android": "react-native run-android --deviceId=08e9b953",
@@ -58,9 +58,5 @@
     "metro-react-native-babel-preset": "0.54.1",
     "mock-async-storage": "^2.2.0",
     "react-dom": "^16.8.6"
-  },
-  "jest": {
-    "testEnvironment": "jsdom",
-    "preset": "react-native"
   }
 }

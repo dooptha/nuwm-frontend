@@ -3,7 +3,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { FormInput } from '../../../src/components/schedule/common/Form/Input';
+import FormInput from '../../../src/components/timetable/common/Form/Input';
 
 describe('<Lesson> ', () => {
   it('should switch status to primary if entering text', () => {

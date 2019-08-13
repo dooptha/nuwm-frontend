@@ -78,7 +78,7 @@
 		"Themes": "Тема",
 		"Timetable": "Расписание",
 		"TimetableSettings": "Розклад",
-		"Twitter": "",
+		"Twitter": "Твиттер",
 		"User": "Пользователь",
 		"disconnected": "Подключение"
 	},
@@ -110,8 +110,7 @@
 		"user": {
 			"group": "Група",
 			"logOut": "Війті",
-			"name": "Имя",
-			"username": "",
+			"username": "Имя",
 			"validations": {
 				"username": "Максимальное количество символов"
 			}

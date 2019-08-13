@@ -14,7 +14,8 @@ import { getObject } from './storage';
 import config from '../../config';
 import mainReducer from '../reducers';
 import { setAuthHeaders } from '../api';
-import api from '../api/user';
+import userApi from '../api/user';
+import scheduleApi from '../api/schedule';
 
 export const StateContext = createContext();
 
@@ -29,6 +30,7 @@ export const GlobalState = ({ children }) => {
       properties: DEFAULT_PROPERTIES,
       onlineCounter: 1,
       connected: true,
+      groups: [],
     },
     conversations: {
       messages: [],
@@ -65,6 +67,9 @@ export const loadInitialData = async (dispatch) => {
   setLocale(properties.language);
   dispatch({ type: 'loadProperties', properties });
 
+  // Fetch groupds list for autocomplete
+  scheduleApi.getGroups(dispatch);
+
   if (user) {
     dispatch({ type: 'updateUser', user });
 
@@ -74,7 +79,7 @@ export const loadInitialData = async (dispatch) => {
     const { username } = user;
 
     // Fetch current user
-    api.logIn(dispatch, null, {
+    userApi.logIn(dispatch, null, {
       username,
       deviceId,
     });

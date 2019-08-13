@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import {
-  Input,
   withStyles,
 } from 'react-native-ui-kitten';
+import { AutocompleteInput } from '../../../components/common';
 import { StateContext } from '../../../utils/context';
 import { storeKey } from '../../../utils/storage';
 import I18n from '../../../utils/i18n';
@@ -51,13 +51,21 @@ class TimetableSettings extends Component {
     navigation.goBack();
   }
 
+  getDatalist(text) {
+    const [{ app }] = this.context;
+
+    return app.groups
+      .filter((group) => group.includes(text))
+      .slice(0, 5);
+  }
+
   render() {
     const { group } = this.state;
     const { themedStyle } = this.props;
 
     return (
       <View style={themedStyle.container}>
-        <Input
+        <AutocompleteInput
           style={themedStyle.input}
           labelStyle={themedStyle.text}
           textStyle={themedStyle.text}
@@ -65,6 +73,7 @@ class TimetableSettings extends Component {
           name="group"
           value={group}
           onChangeText={(text) => this.onInputChange({ group: text })}
+          getDatalist={(text) => this.getDatalist(text)}
         />
       </View>
     );
@@ -76,7 +85,6 @@ TimetableSettings.contextType = StateContext;
 export default withStyles(TimetableSettings, (theme) => ({
   container: {
     backgroundColor: theme['background-basic-color-1'],
-    alignItems: 'center',
     paddingTop: 50,
     flex: 1,
     paddingLeft: 50,

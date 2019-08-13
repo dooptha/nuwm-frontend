@@ -110,7 +110,6 @@
 		"user": {
 			"group": "Група",
 			"logOut": "Вийти",
-			"name": "",
 			"username": "Ім'я",
 			"validations": {
 				"username": "Максимальна кількість символів"

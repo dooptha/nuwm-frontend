@@ -78,7 +78,7 @@
 		"Themes": "Theme",
 		"Timetable": "Timetable",
 		"TimetableSettings": "Розклад",
-		"Twitter": "",
+		"Twitter": "Twitter",
 		"User": "User",
 		"disconnected": "Connecting"
 	},
@@ -110,8 +110,7 @@
 		"user": {
 			"group": "Group",
 			"logOut": "Log out",
-			"name": "Name",
-			"username": "",
+			"username": "Name",
 			"validations": {
 				"username": "Maximum name length"
 			}

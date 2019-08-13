@@ -15,6 +15,6 @@ before_script:
 script:
   - nyc --reporter=lcov npm test
 after_script:
-  - ./cc-test-reporter after-build --exit-code $CODE_CLIMAT_TOKEN
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT -id $CODE_CLIMAT_TOKEN
 notifications:
   email: false

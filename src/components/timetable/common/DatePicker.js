@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import { withStyles } from 'react-native-ui-kitten';
 import I18n from '../../../utils/i18n';
 import DatePicker from '../../../libs/react-native-date-ranges';
+import FormInput from './Form/Input';
 
 export class DatePickerWrapper extends Component {
   static defaultProps = {
-    mode: 'single',
+    mode: 'range',
   }
 
   constructor(props) {
@@ -60,37 +62,43 @@ export class DatePickerWrapper extends Component {
       ? this.placeholders.range : this.placeholders.single;
 
     return (
-      <DatePicker
+      <View>
+        <FormInput
+          style={themedStyle.backgroundInput}
+          ref={(node) => { this.inputNode = node; }}
+        />
+        <DatePicker
       // styles
-        style={themedStyle.datePicker}
-        customStyles={{
-          placeholderText: themedStyle.datePickerInput,
-          contentText: themedStyle.datePickerInput,
-          // colors
-          main: themedStyle.main,
-          sub: themedStyle.sub,
-          mainText: themedStyle.mainText,
-          subText: themedStyle.subText,
-        }}
-        selectedBgColor={themedStyle.main.backgroundColor}
-        selectedTextColor={themedStyle.mainText.color}
+          style={themedStyle.datePicker}
+          customStyles={{
+            placeholderText: themedStyle.datePickerInput,
+            contentText: themedStyle.datePickerInput,
+            // colors
+            main: themedStyle.main,
+            sub: themedStyle.sub,
+            mainText: themedStyle.mainText,
+            subText: themedStyle.subText,
+          }}
+          selectedBgColor={themedStyle.main.backgroundColor}
+          selectedTextColor={themedStyle.mainText.color}
 
       // locales
-        markText={this.localize('Choose Date')}
-        ButtonText={this.localize('OK')}
-        startDateLabel={this.localize('Start')}
-        endDateLabel={this.localize('End')}
+          markText={this.localize('Choose Date')}
+          ButtonText={this.localize('OK')}
+          startDateLabel={this.localize('Start')}
+          endDateLabel={this.localize('End')}
 
-        outFormat="DD MMMM"
-        returnFormat="DD.MM.YYYY"
-        dateSplitter="-"
+          outFormat="DD MMMM"
+          returnFormat="DD.MM.YYYY"
+          dateSplitter="-"
 
-        allowFontScaling={false}
-        mode={mode}
-        placeholder={placeholder}
-        ref={(node) => { this.datePickerNode = node; }}
-        onConfirm={(data) => this.setDate(data)}
-      />
+          allowFontScaling={false}
+          mode={mode}
+          placeholder={placeholder}
+          ref={(node) => { this.datePickerNode = node; }}
+          onConfirm={(data) => this.setDate(data)}
+        />
+      </View>
     );
   }
 }
@@ -115,6 +123,12 @@ export default withStyles(DatePickerWrapper, (theme) => ({
     color: theme['text-hint-color'],
     fontSize: 15,
     marginLeft: -5,
+  },
+  backgroundInput: {
+    position: 'absolute',
+    borderRadius: 2,
+    width: '100%',
+    marginRight: '5%',
   },
 }));
 

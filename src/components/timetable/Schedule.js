@@ -34,7 +34,7 @@ class Schedule extends Component {
 
   renderMessage(message) {
     const { themedStyle } = this.props;
-
+    console.log(message);
     return (
       <View style={themedStyle.messageWrapper}>
         <Text style={themedStyle.messageText}>
@@ -91,6 +91,10 @@ export default withStyles(Schedule, (theme) => ({
   wrapper: {
     borderTopColor: theme['border-basic-color-4'],
     borderTopWidth: 1,
+    backgroundColor: theme['background-basic-color-1'],
+    width: '100%',
+    minHeight: '100%',
+    marginBottom: 40,
   },
   row: {
     flexDirection: 'row',

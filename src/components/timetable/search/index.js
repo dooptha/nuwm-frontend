@@ -5,17 +5,18 @@ import {
 import {
   Button, withStyles, Toggle,
 } from 'react-native-ui-kitten';
-// import I18n from '../../../utils/i18n';
-import Api from '../../../api/schedule';
+import I18n from '../../../utils/i18n';
+import { getSchedule } from '../../../api/schedule';
 import NavigationService from '../../../navigation/NavigationService';
 import FormInput from '../common/Form/Input';
-import DatePickerMultiple from '../common/DatePickerMultiple';
+import DatePicker from '../common/DatePicker';
 import FormItem from '../common/FormItem';
+import { replaceDatesWithMomentObjects } from '../helper';
 
 class Search extends Component {
   constructor(props) {
     super(props);
-    this.localize = (t) => 'qwe';
+    this.localize = (t) => I18n.t(`timetable.search.${t}`);
     this.state = { practicsOnly: false };
   }
 
@@ -24,7 +25,7 @@ class Search extends Component {
       state: { practicsOnly }, groupNode, lecturerNode, dateNode,
     } = this;
 
-    const { startDate, endDate } = dateNode.datePickerNode.getDate();
+    const { startDate, endDate } = dateNode.getDate();
     const group = groupNode.state.value;
     const lecturer = lecturerNode.state.value;
 
@@ -55,11 +56,13 @@ class Search extends Component {
     }
 
     if (isEnoughData) {
-      Api.getSchedule(searchData).then((data) => {
-        if (data.err || data.length === 0) {
-          NavigationService.navigate('ScheduleList', { schedule: data });
-        } else {
+      getSchedule(searchData).then((data) => {
+        console.log(data);
+        if (data.error || data.length === 0) {
           NavigationService.navigate('ScheduleList', { schedule: [], message: data.error });
+        } else {
+          NavigationService.navigate('ScheduleList',
+            { schedule: replaceDatesWithMomentObjects(data) });
         }
       });
     }
@@ -73,7 +76,7 @@ class Search extends Component {
       <View style={themedStyle.searchContainer}>
         <ScrollView style={themedStyle.inputsContainer}>
           <FormItem className="date" label="Дата">
-            <DatePickerMultiple ref={(node) => { this.dateNode = node; }} />
+            <DatePicker ref={(node) => { this.dateNode = node; }} />
           </FormItem>
 
           <FormItem className="lecturer" label={this.localize('Lecturer')}>
@@ -118,9 +121,6 @@ export default withStyles(Search, (theme) => ({
   inputsContainer: {
     backgroundColor: theme['background-basic-color-1'],
     paddingTop: 5,
-  },
-  indicatorStyle: {
-    display: 'none',
   },
   button: {
     width: '46%',

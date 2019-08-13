@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { View, ScrollView, RefreshControl } from 'react-native';
+import { ScrollView, RefreshControl } from 'react-native';
 import { Tab, TabView, withStyles } from 'react-native-ui-kitten';
-import moment from 'moment';
 import Search from './search';
 import Schedule from './Schedule';
 
 import I18n from '../../utils/i18n';
 import { getScheduleOnWeek } from '../../api/schedule';
-import { storeKey, getKey } from '../../utils/storage';
+import { storeKey, getKey, removeKey } from '../../utils/storage';
 import { StateContext } from '../../utils/context';
 import { isToday, isTomorrow, replaceDatesWithMomentObjects } from './helper';
 
@@ -22,6 +21,7 @@ export class Timetable extends Component {
   };
 
   componentDidMount() {
+    removeKey('timetable');
     this.requestSchedule();
   }
 
@@ -34,19 +34,19 @@ export class Timetable extends Component {
 
     getScheduleOnWeek()
       .then((resData) => {
-        let newState = { refreshing: false };
+        const newState = { refreshing: false };
+
+        console.log(resData);
 
         if (resData.error || resData.length === 0) {
           getKey('timetable').then((rawData) => {
             const data = rawData ? JSON.parse(rawData) : [];
-            newState = { ...newState, data, error: resData.error };
+            this.setState({ ...newState, data, error: resData.error });
           });
         } else {
           storeKey('timetable', JSON.stringify(resData));
-          newState = { ...newState, data: resData };
+          this.setState({ ...newState, data: resData });
         }
-
-        this.setState(newState);
       })
       .catch((err) => console.log({ err }));
   }
@@ -65,6 +65,8 @@ export class Timetable extends Component {
         onRefresh={() => this.onRefresh()}
       />
     );
+
+    console.log(error);
 
     return (
       <ScrollView

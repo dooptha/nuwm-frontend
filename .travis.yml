@@ -2,8 +2,19 @@ sudo: false
 language: node_js
 node_js:
   - "11"
+addons:
+  chrome: stable
 cache:
   directories:
     - node_modules
+before_script:
+  - npm install -g nyc
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 script:
-  - npm test
+  - nyc --reporter=lcov npm test
+after_script:
+  - ./cc-test-reporter after-build --exit-code $CODE_CLIMAT_TOKEN
+notifications:
+  email: false

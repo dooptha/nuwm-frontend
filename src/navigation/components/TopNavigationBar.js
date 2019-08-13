@@ -6,7 +6,6 @@ import {
   TopNavigationAction,
 } from 'react-native-ui-kitten';
 import SafeAreaView from './SafeAreaView';
-import { StateContext } from '../../utils/context';
 import I18n from '../../utils/i18n';
 
 class TopNavigationBar extends Component {
@@ -22,15 +21,13 @@ class TopNavigationBar extends Component {
   }
 
   renderSubmitButton(source) {
-    const [{ app }] = this.context;
     const { onSubmitPress } = this.props;
-    const onPress = app.actions[onSubmitPress];
 
-    if (onPress) {
+    if (onSubmitPress) {
       return (
         <TopNavigationAction
           icon={source}
-          onPress={onPress}
+          onPress={onSubmitPress}
         />
       );
     }
@@ -46,12 +43,12 @@ class TopNavigationBar extends Component {
     const {
       submitIcon,
       onSubmitPress,
+      connected,
     } = this.props;
 
-    const [{ app }] = this.context;
     const controls = [];
 
-    if (!app.connected) {
+    if (!connected) {
       controls.push(this.renderDisconnectedLoader());
     }
 
@@ -68,9 +65,9 @@ class TopNavigationBar extends Component {
       title,
       backIcon,
       border,
+      connected,
     } = this.props;
 
-    const [{ app }] = this.context;
     const leftControlElement = backIcon ? this.renderBackButton(backIcon) : null;
 
     return (
@@ -80,7 +77,7 @@ class TopNavigationBar extends Component {
       >
         <TopNavigation
           alignment="center"
-          title={app.connected ? title : I18n.t('routes.disconnected')}
+          title={connected ? title : I18n.t('routes.disconnected')}
           titleStyle={themedStyle.title}
           leftControl={leftControlElement}
           rightControls={this.renderRightControls()}
@@ -89,8 +86,6 @@ class TopNavigationBar extends Component {
     );
   }
 }
-
-TopNavigationBar.contextType = StateContext;
 
 export default withStyles(TopNavigationBar, (theme) => ({
   safeArea: {

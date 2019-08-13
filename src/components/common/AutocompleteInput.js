@@ -52,7 +52,7 @@ export class AutocompleteInput extends Component {
     return (
       <ListItem
         style={themedStyle.dropdownItem}
-        title={info.item}
+        description={info.item}
         onPress={() => this.onItemSelect(info.item)}
       />
     );
@@ -66,6 +66,8 @@ export class AutocompleteInput extends Component {
       label,
       name,
       value,
+      returnKeyType,
+      reference,
     } = this.props;
 
     const { menuVisible, data } = this.state;
@@ -79,7 +81,9 @@ export class AutocompleteInput extends Component {
           label={label}
           name={name}
           value={value}
+          returnKeyType={returnKeyType}
           onChangeText={(text) => this.onInputChange(text)}
+          ref={reference}
         />
         {
           menuVisible ? (

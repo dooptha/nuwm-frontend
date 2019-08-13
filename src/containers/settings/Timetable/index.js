@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import {
   withStyles,
 } from 'react-native-ui-kitten';
-import { AutocompleteInput } from '../../../components/common';
+import GroupInput from '../../common/GroupInput';
 import { StateContext } from '../../../utils/context';
 import { storeKey } from '../../../utils/storage';
 import I18n from '../../../utils/i18n';
@@ -51,21 +51,13 @@ class TimetableSettings extends Component {
     navigation.goBack();
   }
 
-  getDatalist(text) {
-    const [{ app }] = this.context;
-
-    return app.groups
-      .filter((group) => group.includes(text))
-      .slice(0, 5);
-  }
-
   render() {
     const { group } = this.state;
     const { themedStyle } = this.props;
 
     return (
       <View style={themedStyle.container}>
-        <AutocompleteInput
+        <GroupInput
           style={themedStyle.input}
           labelStyle={themedStyle.text}
           textStyle={themedStyle.text}
@@ -73,7 +65,6 @@ class TimetableSettings extends Component {
           name="group"
           value={group}
           onChangeText={(text) => this.onInputChange({ group: text })}
-          getDatalist={(text) => this.getDatalist(text)}
         />
       </View>
     );

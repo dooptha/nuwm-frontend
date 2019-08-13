@@ -120,6 +120,8 @@ class Search extends Component {
 
 export default withStyles(Search, (theme) => ({
   searchContainer: {
+    borderTopColor: theme['border-basic-color-4'],
+    borderTopWidth: 1,
     height: '100%',
     paddingTop: 10,
     flexDirection: 'column',

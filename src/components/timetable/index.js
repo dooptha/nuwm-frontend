@@ -66,6 +66,7 @@ export class Timetable extends Component {
 
     return (
       <ScrollView
+        style={themedStyle.scrollContainer}
         contentContainerStyle={themedStyle.scroll}
         refreshControl={refreshControl}
       >
@@ -119,5 +120,9 @@ export default withStyles(Timetable, (theme) => ({
   scroll: {
     flexDirection: 'row',
     minHeight: '100%',
+  },
+  scrollContainer: {
+    borderTopColor: theme['border-basic-color-4'],
+    borderTopWidth: 1,
   },
 }));

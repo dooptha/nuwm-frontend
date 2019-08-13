@@ -66,12 +66,14 @@ export class SignUp extends Component {
         autoDismiss
         offset={() => 0}
       >
-        <Text
-          style={[themedStyle.title, themedStyle.text]}
-          category="h6"
-        >
-          {I18n.t('SignUp.title')}
-        </Text>
+        <View>
+          <Text
+            style={[themedStyle.title, themedStyle.text]}
+            category="h6"
+          >
+            {I18n.t('SignUp.title')}
+          </Text>
+        </View>
         <Input
           style={themedStyle.input}
           labelStyle={themedStyle.text}

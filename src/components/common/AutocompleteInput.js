@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   View,
   TouchableOpacity,
+  LayoutAnimation,
 } from 'react-native';
 import {
   Input,
@@ -10,6 +11,7 @@ import {
   withStyles,
 } from 'react-native-ui-kitten';
 import { ArrowheadUpIcon } from '../../assets/icons';
+import { DropdownSpring, androidUseLayoutAnimations } from '../../utils/animations';
 
 export class AutocompleteInput extends Component {
   constructor(props) {
@@ -19,6 +21,8 @@ export class AutocompleteInput extends Component {
       menuVisible: false,
       data: [],
     };
+
+    androidUseLayoutAnimations();
   }
 
   onInputChange(text) {
@@ -31,9 +35,11 @@ export class AutocompleteInput extends Component {
     if (text.length >= minLengthToAutocomplete) {
       const data = getDatalist(text);
 
+      this.animate();
       this.setState({ menuVisible: data.length !== 0, data });
     } else {
-      this.setState({ menuVisible: false });
+      this.animate();
+      this.setState({ menuVisible: false, data: [] });
     }
 
     onChangeText(text);
@@ -46,7 +52,12 @@ export class AutocompleteInput extends Component {
     this.closeMenu();
   }
 
+  animate() {
+    LayoutAnimation.configureNext(DropdownSpring);
+  }
+
   closeMenu() {
+    this.animate();
     this.setState({ menuVisible: false });
   }
 

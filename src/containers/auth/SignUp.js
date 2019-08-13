@@ -66,7 +66,7 @@ export class SignUp extends Component {
         autoDismiss
         offset={() => 0}
       >
-        <View>
+        <View style={themedStyle.titleContainer}>
           <Text
             style={[themedStyle.title, themedStyle.text]}
             category="h6"
@@ -127,6 +127,9 @@ export default withStyles(SignUp, (theme) => ({
     paddingLeft: 50,
     paddingRight: 50,
     backgroundColor: theme['background-basic-color-1'],
+  },
+  titleContainer: {
+    alignItems: 'center',
   },
   title: {
     paddingBottom: 10,

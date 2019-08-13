@@ -11,6 +11,7 @@ export default {
   GITHUB_URL: 'https://github.com/dooptha',
   DISCORD_URL: 'https://discord.gg/Fcb922G',
   USE_DEFAULT_PROPERTIES: false,
+  FORCE_SIGN_UP_PAGE: false,
 
   // Exception handlers params
   USE_CUSTOM_JS_EXCEPTION_HANDLER_IN_DEV: false,

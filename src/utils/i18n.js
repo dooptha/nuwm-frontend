@@ -26,19 +26,18 @@ I18n.translations = {
   en,
 };
 
-const getMomentLocale = () => {
-  switch (I18n.locale) {
-    case 'ua': return 'uk';
-    case 'ru': return 'ru';
-    case 'en': return 'en-ua';
-    default: return 'en-ua';
-  }
-};
 
 export const setLocale = (locale) => {
   I18n.locale = locale;
 
-  console.log('called');
+  const getMomentLocale = () => {
+    switch (I18n.locale) {
+      case 'ua': return 'uk';
+      case 'ru': return 'ru';
+      case 'en': return 'en-ua';
+      default: return 'en-ua';
+    }
+  };
 
   moment.locale(getMomentLocale());
 };

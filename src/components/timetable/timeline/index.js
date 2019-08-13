@@ -233,14 +233,14 @@ class Timeline extends Component {
   }
 
   render() {
-    const { themedStyle, schedule } = this.props;
+    const { themedStyle, schedule, style } = this.props;
 
     this.splitSchedule(schedule);
 
     const circles = this.renderCircles();
 
     return (
-      <View style={[themedStyle.timeline, {
+      <View style={[themedStyle.timeline, style, {
         marginTop: -this.refreshPadding,
       }]}
       >
@@ -251,9 +251,7 @@ class Timeline extends Component {
           />
           { this.renderProgressBar()}
         </View>
-        <View style={{ alignItems: 'center' }}>
-          { circles }
-        </View>
+        { circles }
       </View>
     );
   }
@@ -261,21 +259,19 @@ class Timeline extends Component {
 
 export default withStyles(Timeline, (theme) => ({
   timeline: {
+    paddingLeft: 25,
     height: '100%',
-    marginLeft: '5%',
-    marginRight: '4%',
     alignItems: 'center',
+  },
+  lineWrapper: {
+    flexDirection: 'column',
+    position: 'absolute',
   },
   circle: {
     position: 'absolute',
     borderRadius: 50,
     width: 10,
     height: 10,
-  },
-  lineWrapper: {
-    height: '80%',
-    flexDirection: 'column',
-    position: 'absolute',
   },
   line: {
     width: 1,

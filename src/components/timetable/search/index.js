@@ -5,17 +5,17 @@ import {
 import {
   Button, withStyles, Toggle,
 } from 'react-native-ui-kitten';
-import I18n from '../../utils/i18n';
-import Api from '../../api/schedule';
-import NavigationService from '../../navigation/NavigationService';
-import FormInput from './common/Form/Input';
-import DatePickerMultiple from './common/DatePickerMultiple';
-import FormItem from './common/FormItem';
+// import I18n from '../../../utils/i18n';
+import Api from '../../../api/schedule';
+import NavigationService from '../../../navigation/NavigationService';
+import FormInput from '../common/Form/Input';
+import DatePickerMultiple from '../common/DatePickerMultiple';
+import FormItem from '../common/FormItem';
 
 class Search extends Component {
   constructor(props) {
     super(props);
-    this.localize = (t) => I18n.t(`timetable.search.${t}`);
+    this.localize = (t) => 'qwe';
     this.state = { practicsOnly: false };
   }
 

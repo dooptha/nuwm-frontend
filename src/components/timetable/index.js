@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { View, ScrollView, RefreshControl } from 'react-native';
 import { Tab, TabView, withStyles } from 'react-native-ui-kitten';
-import I18n from '../../utils/i18n';
+import moment from 'moment';
 import Search from './search';
-import { getScheduleOnWeek } from '../../api/schedule';
 import Schedule from './Schedule';
+
+import I18n from '../../utils/i18n';
+import { getScheduleOnWeek } from '../../api/schedule';
 import { storeKey, getKey } from '../../utils/storage';
 import { StateContext } from '../../utils/context';
-
 import { isToday, isTomorrow, replaceDatesWithMomentObjects } from './helper';
 
 export class Timetable extends Component {
@@ -25,18 +26,19 @@ export class Timetable extends Component {
   }
 
   onRefresh() {
-    this.setState({ refreshing: true });
     this.requestSchedule();
   }
 
   requestSchedule() {
+    this.setState({ refreshing: true });
+
     getScheduleOnWeek()
       .then((resData) => {
         let newState = { refreshing: false };
 
         if (resData.error || resData.length === 0) {
           getKey('timetable').then((rawData) => {
-            const data = rawData ? this.parseDates(JSON.parse(rawData)) : [];
+            const data = rawData ? JSON.parse(rawData) : [];
             newState = { ...newState, data, error: resData.error };
           });
         } else {
@@ -66,7 +68,7 @@ export class Timetable extends Component {
 
     return (
       <ScrollView
-        contentContainerStyle={themedStyle.listWrapper}
+        contentContainerStyle={themedStyle.scroll}
         refreshControl={refreshControl}
       >
         <Schedule
@@ -86,35 +88,38 @@ export class Timetable extends Component {
 
     const today = schedule.filter((day) => isToday(day.date));
     const tomorrow = schedule.filter((day) => isTomorrow(day.date));
+    const week = schedule.slice(0);
 
     return (
-      <View>
-        <TabView
-          selectedIndex={selectedIndex}
-          onSelect={(index) => this.switchTab(index)}
-          style={themedStyle.tabViewContainer}
-        >
-          <Tab title={I18n.t('timetable.tabs.Search')}>
-            <Search />
-          </Tab>
-          <Tab title={I18n.t('timetable.tabs.Today')}>
-            { this.renderSchedule(today) }
-          </Tab>
-          <Tab title={I18n.t('timetable.tabs.Tomorrow')}>
-            { this.renderSchedule(tomorrow) }
-          </Tab>
-          <Tab title={I18n.t('timetable.tabs.Week')}>
-            { this.renderSchedule(schedule) }
-          </Tab>
-        </TabView>
-      </View>
+      <TabView
+        selectedIndex={selectedIndex}
+        onSelect={(index) => this.switchTab(index)}
+        style={themedStyle.tabView}
+      >
+        <Tab title={I18n.t('timetable.tabs.Search')}>
+          <Search />
+        </Tab>
+        <Tab title={I18n.t('timetable.tabs.Today')}>
+          { this.renderSchedule(today) }
+        </Tab>
+        <Tab title={I18n.t('timetable.tabs.Tomorrow')}>
+          { this.renderSchedule(tomorrow) }
+        </Tab>
+        <Tab title={I18n.t('timetable.tabs.Week')}>
+          { this.renderSchedule(week) }
+        </Tab>
+      </TabView>
     );
   }
 }
 
 export default withStyles(Timetable, (theme) => ({
-  tabViewContainer: {
+  tabView: {
     height: '100%',
     backgroundColor: theme['background-basic-color-1'],
+  },
+  scroll: {
+    flexDirection: 'row',
+    minHeight: '100%',
   },
 }));

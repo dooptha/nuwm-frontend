@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, RefreshControl } from 'react-native';
+import { View } from 'react-native';
 import { withStyles, Text } from 'react-native-ui-kitten';
 import PropTypes from 'prop-types';
 import Timeline from './timeline';
@@ -10,7 +10,7 @@ import Day from './Day';
   * This class responsible for rendering schedule list and it's logic
   * when there is no subjects or when refreshing list
 */
-class ScheduleList extends Component {
+class Schedule extends Component {
   static propTypes = {
     /** array of days with subjects */
     schedule: PropTypes.array,
@@ -45,11 +45,23 @@ class ScheduleList extends Component {
   }
 
   renderSchedule(schedule) {
+    const { themedStyle } = this.props;
+
     const body = schedule.map((day) => (
       <Day key={day.date} day={day} />
     ));
 
-    return body;
+    return (
+      <View style={themedStyle.row}>
+        <Timeline
+          schedule={schedule}
+          style={themedStyle.timeline}
+        />
+        <View style={themedStyle.days}>
+          { body }
+        </View>
+      </View>
+    );
   }
 
   renderBody(schedule, mes) {
@@ -62,44 +74,40 @@ class ScheduleList extends Component {
 
     // schedule could be received by props or by navigation params
     const props = navigation ? navigation.state.params : this.props;
-
-    const {
-      allowRefresh, refreshing, onRefresh, schedule,
-    } = props;
-
-    const refreshControl = allowRefresh ? (
-      <RefreshControl
-        refreshing={refreshing}
-        onRefresh={() => onRefresh()}
-      />
-    ) : null;
+    const { refreshing, schedule, message } = props;
 
     // dont render anything while refreshing data
-    const body = refreshing ? null : this.renderBody(schedule, props.message);
-
-    const timeline = schedule && schedule.length > 0 && !refreshing
-      ? <Timeline schedule={schedule} /> : null;
+    const body = refreshing ? null : this.renderBody(schedule, message);
 
     return (
-      <View style={themedStyle.row}>
-        <ScrollView
-          contentContainerStyle={themedStyle.listWrapper}
-          refreshControl={refreshControl}
-        >
-          { timeline }
-          <View style={themedStyle.body}>
-            { body }
-          </View>
-        </ScrollView>
+      <View style={themedStyle.wrapper}>
+        { body }
       </View>
     );
   }
 }
 
-export default withStyles(ScheduleList, (theme) => ({
-  listWrapper: {
+export default withStyles(Schedule, (theme) => ({
+  wrapper: {
+    borderTopColor: theme['border-basic-color-4'],
+    borderTopWidth: 1,
+  },
+  row: {
     flexDirection: 'row',
-    minHeight: '100%',
+  },
+  days: {
+    width: '90%',
+    paddingLeft: 5,
+    paddingRight: 15,
+  },
+  timeline: {
+    width: '10%',
+    marginLeft: '0%',
+  },
+  messageWrapper: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   messageText: {
     paddingLeft: '10%',
@@ -107,19 +115,5 @@ export default withStyles(ScheduleList, (theme) => ({
     marginTop: '40%',
     textAlign: 'center',
     color: theme['text-basic-color'],
-  },
-  messageWrapper: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  body: {
-    width: '100%',
-    paddingRight: '5%',
-    paddingBottom: 30,
-  },
-  row: {
-    borderTopColor: theme['border-basic-color-4'],
-    borderTopWidth: 1,
   },
 }));

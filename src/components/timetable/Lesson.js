@@ -42,8 +42,8 @@ class Lesson extends Component {
       },
     } = this.props;
 
-    const wrapperStyles = [themedStyle.column,
-      isLastItem ? themedStyle.line : {}];
+    const wrapperStyles = [themedStyle.wrapper,
+      isLastItem ? themedStyle.bottomLine : {}];
 
     return (
       <TouchableOpacity style={wrapperStyles} onPress={() => this.onPress()}>
@@ -64,18 +64,17 @@ class Lesson extends Component {
 // if you are changing height(margin/padding/height), dont forget to change
 // them in <Timeline> constructor too
 export default withStyles(Lesson, (theme) => ({
-  column: {
+  wrapper: {
     paddingRight: 15,
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    width: '100%',
     paddingTop: 20,
     paddingBottom: 20,
     height: 130,
     borderTopColor: theme['text-hint-color'],
     borderTopWidth: 0.5,
   },
-  line: {
+  bottomLine: {
     borderBottomColor: theme['text-hint-color'],
     borderBottomWidth: 0.5,
   },
@@ -113,7 +112,6 @@ export default withStyles(Lesson, (theme) => ({
     color: theme['background-alternative-color-4'],
   },
   subdesc: {
-    paddingLeft: 0,
     paddingTop: 5,
     color: theme['text-hint-color'],
   },

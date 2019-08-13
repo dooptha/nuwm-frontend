@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
   View,
+  TouchableOpacity,
 } from 'react-native';
 import {
   Input,
@@ -8,6 +9,7 @@ import {
   ListItem,
   withStyles,
 } from 'react-native-ui-kitten';
+import { ArrowheadUpIcon } from '../../assets/icons';
 
 export class AutocompleteInput extends Component {
   constructor(props) {
@@ -29,7 +31,9 @@ export class AutocompleteInput extends Component {
     if (text.length >= minLengthToAutocomplete) {
       const data = getDatalist(text);
 
-      this.setState({ menuVisible: true, data });
+      this.setState({ menuVisible: data.length !== 0, data });
+    } else {
+      this.setState({ menuVisible: false });
     }
 
     onChangeText(text);
@@ -47,11 +51,8 @@ export class AutocompleteInput extends Component {
   }
 
   renderListItem(info) {
-    const { themedStyle } = this.props;
-
     return (
       <ListItem
-        style={themedStyle.dropdownItem}
         description={info.item}
         onPress={() => this.onItemSelect(info.item)}
       />
@@ -68,6 +69,7 @@ export class AutocompleteInput extends Component {
       value,
       returnKeyType,
       reference,
+      themedStyle,
     } = this.props;
 
     const { menuVisible, data } = this.state;
@@ -87,11 +89,19 @@ export class AutocompleteInput extends Component {
         />
         {
           menuVisible ? (
-            <List
-              data={data}
-              renderItem={(i) => this.renderListItem(i)}
-              scrollEnabled={false}
-            />
+            <View style={themedStyle.dropdown}>
+              <List
+                data={data}
+                renderItem={(i) => this.renderListItem(i)}
+                scrollEnabled={false}
+              />
+              <TouchableOpacity
+                style={themedStyle.dropdownIconContainer}
+                onPress={() => this.closeMenu()}
+              >
+                { ArrowheadUpIcon(themedStyle.dropdownIcon) }
+              </TouchableOpacity>
+            </View>
           ) : null
         }
       </View>
@@ -105,8 +115,18 @@ AutocompleteInput.defaultProps = {
 };
 
 export default withStyles(AutocompleteInput, (theme) => ({
-  dropdownItem: {
-  //   borderBottomWidth: 0.5,
-  //   borderBottomColor: theme['text-hint-color'],
+  dropdown: {
+    padding: 5,
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: theme['background-basic-color-3'],
+  },
+  dropdownIconContainer: {
+    alignItems: 'center',
+  },
+  dropdownIcon: {
+    tintColor: theme['text-hint-color'],
+    width: 22,
+    height: 22,
   },
 }));

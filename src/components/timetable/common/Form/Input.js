@@ -18,8 +18,6 @@ class FormInput extends Component {
     const { defaultValue } = nextProps;
     const { initialValue } = this.state;
 
-    console.log(defaultValue, initialValue);
-
     if (defaultValue && defaultValue !== initialValue) {
       this.setState({ value: defaultValue, initialValue: defaultValue });
     }

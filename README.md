@@ -1,4 +1,4 @@
-# nuwm-frontend
+# NUWM Frontend
 This is open source React Native application designed for students by students of the [NATIONAL UNIVERSITY OF WATER AND ENVIRONMENTAL ENGINEERING](http://en.nuwm.edu.ua/).
 
 [![Build Status](https://travis-ci.com/dooptha/nuwm-frontend.svg?branch=develop)](https://travis-ci.com/dooptha/nuwm-frontend)
@@ -14,20 +14,20 @@ This is open source React Native application designed for students by students o
 
 ###### IOS
 
---
+>TBD
 
 ###### Android
->F
+>RIP
 
 ### Debugging
 
 >JS Debugger
 
-Press `⌘ + D` / `Ctrl + D` on iOS simulator and `⌘ + M` / `Ctrl + M` on Android emulator to open JS Debugger.
+Press `⌘ + D` on iOS simulator and `⌘ + M` / `Ctrl + M` on Android emulator to open JS Debugger.
 
 ###### IOS
 
---
+>TBD
 
 ###### Android
 After RN version `>=0.60`, there is automatic `:8081` port forwarding for Metro Project Bundler,

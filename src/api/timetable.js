@@ -13,30 +13,24 @@ const errorParser = (err) => {
   return I18n.t('timetable.error-try-later');
 };
 
+const dateToApiFormat = (date) => (date.format('DD.MM.YYYY'));
+
 export const getScheduleOnWeek = () => {
   const group = 'ПМ-41';
   const now = moment('09.05.2018') || moment(new Date());
-  const startDate = now.format('DD.MM.YYYY');
-  const endDate = now.add(7, 'days').format('DD.MM.YYYY');
+  const startDate = dateToApiFormat(now);
+  const endDate = dateToApiFormat(now.add(7, 'days'));
 
   return api.get('/timetable/test', { params: { group, startDate, endDate } })
     .then((response) => response.data.schedule)
     .catch((err) => ({ error: errorParser(err) }));
 };
 
-export const getSchedule = (data) => {
-  const {
-    group, name, startDate, endDate, practicsOnly,
-  } = data;
-
-  return api.get('/timetable', {
-    params: {
-      group, name, startDate, endDate, practicsOnly,
-    },
-  })
-    .then((response) => response.data.schedule)
-    .catch((err) => ({ error: errorParser(err) }));
-};
+export const getSchedule = (data) => api.get('/timetable', {
+  params: data,
+})
+  .then((response) => response.data.schedule)
+  .catch((err) => ({ error: errorParser(err) }));
 
 module.exports = {
   getScheduleOnWeek,

@@ -23,7 +23,7 @@ class DetailedLesson extends Component {
           >
             { title }
           </Text>
-          <Text style={themedStyle.info}>
+          <Text style={themedStyle.desc}>
             { info }
           </Text>
         </View>
@@ -68,8 +68,8 @@ class DetailedLesson extends Component {
 
 export default withStyles(DetailedLesson, (theme) => ({
   detailsWrapper: {
-    paddingLeft: 20,
-    paddingRight: 20,
+    paddingLeft: 10,
+    paddingRight: 10,
     paddingTop: 10,
     height: '100%',
     backgroundColor: theme['background-basic-color-1'],
@@ -84,11 +84,13 @@ export default withStyles(DetailedLesson, (theme) => ({
   },
   title: {
     width: '30%',
+    paddingLeft: 5,
     paddingTop: 10,
     paddingBottom: 10,
   },
-  info: {
+  desc: {
     width: '70%',
+    paddingRight: 5,
     paddingTop: 10,
     paddingBottom: 10,
     paddingLeft: 35,

@@ -1,22 +1,25 @@
 import React, { Component } from 'react';
-import {
-  View, ScrollView,
-} from 'react-native';
-import {
-  Button, withStyles, Toggle,
-} from 'react-native-ui-kitten';
-import I18n from '../../utils/i18n';
-import Api from '../../api/schedule';
-import NavigationService from '../../navigation/NavigationService';
-import FormInput from './common/Form/Input';
-import DatePickerMultiple from './common/DatePickerMultiple';
-import FormItem from './common/FormItem';
+import { View, ScrollView } from 'react-native';
+import { Button, withStyles, Toggle } from 'react-native-ui-kitten';
+import I18n from '../../../utils/i18n';
+import { getSchedule } from '../../../api/timetable';
+import NavigationService from '../../../navigation/NavigationService';
+import FormInput from '../common/Form/Input';
+import DatePicker from '../common/DatePicker';
+import FormItem from '../common/FormItem';
+import { replaceDatesWithMomentObjects } from '../helper';
+import { StateContext } from '../../../utils/context';
 
 class Search extends Component {
+  static contextType = StateContext;
+
+  state = {
+    practicsOnly: false,
+  }
+
   constructor(props) {
     super(props);
     this.localize = (t) => I18n.t(`timetable.search.${t}`);
-    this.state = { practicsOnly: false };
   }
 
   getDate() {
@@ -24,7 +27,7 @@ class Search extends Component {
       state: { practicsOnly }, groupNode, lecturerNode, dateNode,
     } = this;
 
-    const { startDate, endDate } = dateNode.datePickerNode.getDate();
+    const { startDate, endDate } = dateNode.getDate();
     const group = groupNode.state.value;
     const lecturer = lecturerNode.state.value;
 
@@ -55,25 +58,29 @@ class Search extends Component {
     }
 
     if (isEnoughData) {
-      Api.getSchedule(searchData).then((data) => {
-        if (data.err || data.length === 0) {
-          NavigationService.navigate('ScheduleList', { schedule: data });
-        } else {
+      getSchedule(searchData).then((data) => {
+        if (data.error || data.length === 0) {
           NavigationService.navigate('ScheduleList', { schedule: [], message: data.error });
+        } else {
+          NavigationService.navigate('ScheduleList',
+            { schedule: replaceDatesWithMomentObjects(data) });
         }
       });
     }
   }
 
   render() {
+    const { context } = this;
     const { themedStyle } = this.props;
     const { practicsOnly } = this.state;
+
+    const defaultGroup = context[0].app.properties.group;
 
     return (
       <View style={themedStyle.searchContainer}>
         <ScrollView style={themedStyle.inputsContainer}>
           <FormItem className="date" label="Дата">
-            <DatePickerMultiple ref={(node) => { this.dateNode = node; }} />
+            <DatePicker ref={(node) => { this.dateNode = node; }} />
           </FormItem>
 
           <FormItem className="lecturer" label={this.localize('Lecturer')}>
@@ -85,6 +92,7 @@ class Search extends Component {
 
           <FormItem id="group" label={this.localize('Group')}>
             <FormInput
+              defaultValue={defaultGroup}
               placeholder={this.localize('GroupExample')}
               ref={(node) => { this.groupNode = node; }}
             />
@@ -108,6 +116,8 @@ class Search extends Component {
 
 export default withStyles(Search, (theme) => ({
   searchContainer: {
+    borderTopColor: theme['border-basic-color-4'],
+    borderTopWidth: 1,
     height: '100%',
     paddingTop: 10,
     flexDirection: 'column',
@@ -118,9 +128,6 @@ export default withStyles(Search, (theme) => ({
   inputsContainer: {
     backgroundColor: theme['background-basic-color-1'],
     paddingTop: 5,
-  },
-  indicatorStyle: {
-    display: 'none',
   },
   button: {
     width: '46%',

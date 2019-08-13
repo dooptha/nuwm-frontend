@@ -31,9 +31,9 @@ import {
   UserSettingsNavigationOptions,
   TimetableSettingsNavigationOptions,
 } from './options';
-import Schedule from '../components/schedule';
-import DetailedLesson from '../components/schedule/DetailedLesson';
-import ScheduleList from '../components/schedule/ScheduleList';
+import Schedule from '../components/timetable';
+import DetailedLesson from '../components/timetable/LessonScreen';
+import ScheduleList from '../components/timetable/Schedule';
 import SplashScreen from '../containers/SplashScreen';
 import SignUpScreen from '../containers/auth/SignUp';
 import NewPoll from '../containers/admin/NewPoll';

@@ -67,11 +67,9 @@ export default withStyles(Day, (theme) => ({
     alignItems: 'flex-start',
     marginTop: 10,
     marginBottom: 5,
-    paddingRight: 30,
     height: 25,
   },
   title: {
-    paddingLeft: 8,
     color: theme['text-basic-color'],
   },
   body: {
@@ -79,7 +77,5 @@ export default withStyles(Day, (theme) => ({
     borderRightWidth: 0.5,
     backgroundColor: theme['background-basic-color-1'],
     borderRadius: 3,
-    paddingLeft: 10,
-    width: '93%',
   },
 }));

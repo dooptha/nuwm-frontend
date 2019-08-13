@@ -2,15 +2,27 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles, Input } from 'react-native-ui-kitten';
 
-export class FormInput extends Component {
+class FormInput extends Component {
   state = {
     value: '',
     status: 'primary',
+    initialValue: '',
   }
 
   static defaultProps = {
     placeholder: '',
     style: {},
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const { defaultValue } = nextProps;
+    const { initialValue } = this.state;
+
+    if (defaultValue && defaultValue !== initialValue) {
+      this.setState({ value: defaultValue, initialValue: defaultValue });
+    }
+
+    return true;
   }
 
   onChange(value) {

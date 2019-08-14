@@ -198,7 +198,7 @@ class Timeline extends Component {
     }];
 
     this.progressBarHeight = height;
-    this.startPosition = height > this.refreshPadding ? this.refreshPadding : 0;
+    this.startPosition = height > this.refreshPadding ? this.refreshPadding - 1 : 0;
 
     return (
       <Animated.View style={styles} />

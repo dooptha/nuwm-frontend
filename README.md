@@ -21,20 +21,34 @@ This is open source React Native application designed for students by students o
 
 ### Debugging
 
->JS Debugger
+RN have a lot of tools for development purposes, more info you can find [_here_](https://facebook.github.io/react-native/docs/debugging).
 
-Press `⌘ + D` on iOS simulator and `⌘ + M` / `Ctrl + M` on Android emulator to open JS Debugger.
+Below, are some basic things.
 
+##### Developer Menu
 ###### IOS
 
->TBD
+- **Physical:** Shake your device
+- **Simulator:** Press `⌘ + D`
+- **Additional:** All is working out of the box
 
 ###### Android
-After RN version `>=0.60`, there is automatic `:8081` port forwarding for Metro Project Bundler,
+
+- **Physical:**
+```console
+$ adb shell input keyevent 82
+```
+- **Simulator:** Press `⌘ + M` / `Ctrl + M`
+
+- **Additional:**
+
+After RN version `>=0.60`, there is automatic `:8081` port forwarding for Metro Project Bundler _(sometimes it doesn't work :sweat_smile:)_,
 but for our backend you should forward additional port by default it's `:3000`
 
 ```console
-$ adb forward tcp:3000 tcp:3000
+$ adb -s <device name from "adb devices"> reverse tcp:3000 tcp:3000
 ```
 
  **IMPORTANT:** For connecting to a local server from Emulator device use `http://10.0.2.2:3000` <a href="https://developer.android.com/studio/run/emulator-networking" target="_blank">_(More info)_</a>
+
+___

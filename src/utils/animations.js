@@ -16,6 +16,17 @@ export const DropdownSpring = {
   },
 };
 
+export const LinearNewPoll = {
+  duration: 200,
+  create: {
+    type: LayoutAnimation.Types.linear,
+    property: LayoutAnimation.Properties.opacity,
+  },
+  update: {
+    type: LayoutAnimation.Types.linear,
+  },
+};
+
 export const androidUseLayoutAnimations = () => (
   UIManager.setLayoutAnimationEnabledExperimental
     && UIManager.setLayoutAnimationEnabledExperimental(true)

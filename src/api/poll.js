@@ -1,3 +1,5 @@
+import { LayoutAnimation } from 'react-native';
+import { LinearNewPoll } from '../utils/animations';
 import { api } from '.';
 import { handleRequestError } from '../utils/errors';
 
@@ -8,6 +10,7 @@ function getLastPoll(dispatch) {
     .then((response) => {
       const { poll } = response.data;
 
+      LayoutAnimation.configureNext(LinearNewPoll);
       dispatch({ type: 'loadCurrentPollSuccess', poll });
     })
     .catch(() => dispatch({ type: 'loadCurrentPollFailure' }));

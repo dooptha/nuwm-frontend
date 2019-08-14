@@ -21,6 +21,7 @@ const defaultStyle = StyleSheet.create({
 export default ({
   index,
   title,
+  description,
   style,
   onPress,
   selected,
@@ -35,6 +36,7 @@ export default ({
       titleStyle={defaultStyle.text}
       descriptionStyle={defaultStyle.text}
       title={title}
+      description={description}
       onPress={() => onPress(index)}
       icon={renderIcon}
       accessory={selected ? renderSelectedIcon : null}

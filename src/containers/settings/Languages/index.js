@@ -43,7 +43,8 @@ class LanguagesContainer extends Component {
     return (
       <ListItem
         index={info.index}
-        title={I18n.t(info.item.title)}
+        title={I18n.t(info.item.title, { locale: 'en' })}
+        description={I18n.t(info.item.title)}
         onPress={(i) => this.onItemSelect(i)}
         selected={selected}
       />

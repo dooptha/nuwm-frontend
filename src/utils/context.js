@@ -85,11 +85,10 @@ export const loadInitialData = async (dispatch) => {
     initSockets({ dispatch, token: user.token });
   }
 
+  dispatch({ type: 'updateDeviceId', deviceId });
+
   // Fetch groupds list for autocomplete
   timetableApi.getGroups(dispatch);
-
-
-  dispatch({ type: 'updateDeviceId', deviceId });
 
   return user;
 };

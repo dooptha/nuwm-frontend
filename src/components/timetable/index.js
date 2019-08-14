@@ -52,8 +52,8 @@ export class Timetable extends Component {
     this.setState({ selectedIndex: index });
   }
 
-  renderSchedule(schedule) {
-    const { refreshing, error } = this.state;
+  renderSchedule(schedule, index) {
+    const { refreshing, error, selectedIndex } = this.state;
     const { themedStyle } = this.props;
 
     const refreshControl = (
@@ -74,6 +74,8 @@ export class Timetable extends Component {
           allowRefresh
           schedule={schedule}
           message={error}
+          tabIndex={index}
+          activeTab={selectedIndex}
         />
       </ScrollView>
     );
@@ -98,13 +100,13 @@ export class Timetable extends Component {
           <Search />
         </Tab>
         <Tab title={I18n.t('timetable.tabs.Today')}>
-          { this.renderSchedule(today) }
+          { this.renderSchedule(today, 1) }
         </Tab>
         <Tab title={I18n.t('timetable.tabs.Tomorrow')}>
-          { this.renderSchedule(tomorrow) }
+          { this.renderSchedule(tomorrow, 2) }
         </Tab>
         <Tab title={I18n.t('timetable.tabs.Week')}>
-          { this.renderSchedule(week) }
+          { this.renderSchedule(week, 3) }
         </Tab>
       </TabView>
     );

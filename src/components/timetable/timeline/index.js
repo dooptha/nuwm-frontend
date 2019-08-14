@@ -54,20 +54,14 @@ class Timeline extends Component {
     this.addAnimationListener();
   }
 
-  componentDidMount() {
-    this.animateBar();
-  }
-
-  shouldComponentUpdate() {
-    this.resetAnimation();
-
-    return true;
-  }
-
   componentDidUpdate() {
-    // render method is no called when we switch tabs, so we use DidUpdate to
-    // detect it
-    this.animateBar();
+    const { props: { activeTab, tabIndex }, state: { animation } } = this;
+
+    if (activeTab === tabIndex) {
+      this.animateBar();
+    } else if (animation._value !== this.startPosition) {
+      this.resetAnimation();
+    }
   }
 
   animateBar() {

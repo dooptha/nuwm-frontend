@@ -47,7 +47,7 @@ class Schedule extends Component {
   }
 
   renderSchedule(schedule) {
-    const { themedStyle } = this.props;
+    const { themedStyle, tabIndex, activeTab } = this.props;
 
     const body = schedule.map((day) => (
       <Day key={day.date} day={day} />
@@ -58,6 +58,8 @@ class Schedule extends Component {
         <Timeline
           schedule={schedule}
           style={themedStyle.timeline}
+          tabIndex={tabIndex}
+          activeTab={activeTab}
         />
         <View style={themedStyle.days}>
           { body }

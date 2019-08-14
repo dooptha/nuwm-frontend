@@ -53,7 +53,7 @@ const appReducer = (state, action) => {
     case 'loadGroups':
       return {
         ...state,
-        groups: action.groups.map((group) => ({ title: group })),
+        groups: action.groups,
       };
 
     default:

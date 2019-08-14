@@ -1,6 +1,7 @@
 import moment from 'moment';
 import { api } from '.';
 import I18n from '../utils/i18n';
+import flexsearch from '../utils/flexsearch';
 
 const errorParser = (err) => {
   if (err.message === 'Network Error') return I18n.t('timetable.error-no-server');
@@ -36,6 +37,8 @@ const getGroups = (dispatch) => (
   api.get('/timetable/groups')
     .then((response) => {
       const { groups } = response.data;
+
+      flexsearch.loadGroups(groups);
 
       dispatch({
         type: 'loadGroups',

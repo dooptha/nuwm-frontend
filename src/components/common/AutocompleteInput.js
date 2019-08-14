@@ -62,10 +62,13 @@ export class AutocompleteInput extends Component {
   }
 
   renderListItem(info) {
+    const { getItemString } = this.props;
+    const title = getItemString(info.item);
+
     return (
       <ListItem
-        description={info.item}
-        onPress={() => this.onItemSelect(info.item)}
+        description={title}
+        onPress={() => this.onItemSelect(title)}
       />
     );
   }
@@ -123,6 +126,7 @@ export class AutocompleteInput extends Component {
 AutocompleteInput.defaultProps = {
   getDatalist: () => [],
   minLengthToAutocomplete: 1,
+  getItemString: (item) => item,
 };
 
 export default withStyles(AutocompleteInput, (theme) => ({

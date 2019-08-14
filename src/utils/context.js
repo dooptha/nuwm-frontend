@@ -14,7 +14,8 @@ import { getObject } from './storage';
 import config from '../../config';
 import mainReducer from '../reducers';
 import { setAuthHeaders } from '../api';
-import api from '../api/user';
+import userApi from '../api/user';
+import timetableApi from '../api/timetable';
 
 export const StateContext = createContext();
 
@@ -24,9 +25,12 @@ export const GlobalState = ({ children }) => {
     app: {
       actions: {
         submitUserForm: () => {},
+        submitTimetableForm: () => {},
       },
       properties: DEFAULT_PROPERTIES,
       onlineCounter: 1,
+      connected: true,
+      groups: [],
     },
     conversations: {
       messages: [],
@@ -72,7 +76,7 @@ export const loadInitialData = async (dispatch) => {
     const { username } = user;
 
     // Fetch current user
-    api.logIn(dispatch, null, {
+    userApi.logIn(dispatch, null, {
       username,
       deviceId,
     });
@@ -80,6 +84,10 @@ export const loadInitialData = async (dispatch) => {
     // Then initialize sockets
     initSockets({ dispatch, token: user.token });
   }
+
+  // Fetch groupds list for autocomplete
+  timetableApi.getGroups(dispatch);
+
 
   dispatch({ type: 'updateDeviceId', deviceId });
 

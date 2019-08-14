@@ -9,18 +9,27 @@ import {
 } from 'react-native-ui-kitten';
 import routes from './data';
 import { StateContext } from '../../../utils/context';
-// import I18n from '../../../utils/i18n';
 import { FloodCard } from '../../../components/conversations';
 import Poll from '../../../components/polls/Poll';
 import {
   SmallInstagramCard,
   SmallTwitterCard,
 } from '../../../components/social';
+import { androidUseLayoutAnimations } from '../../../utils/animations';
 import api from '../../../api/poll';
 
 class ConversationsContainer extends Component {
+  constructor(props) {
+    super(props);
+
+    this.initialLoaded = false;
+
+    androidUseLayoutAnimations();
+  }
+
   componentDidMount() {
-    this.loadData();
+    this.loadData()
+      .then(() => { this.initialLoaded = true; });
   }
 
   onVote(index) {
@@ -30,7 +39,7 @@ class ConversationsContainer extends Component {
 
   loadData() {
     const [, dispatch] = this.context;
-    api.getLastPoll(dispatch);
+    return api.getLastPoll(dispatch);
   }
 
   navigateTo(routeKey) {
@@ -53,7 +62,7 @@ class ConversationsContainer extends Component {
         style={themedStyle.container}
         refreshControl={(
           <RefreshControl
-            refreshing={poll.isLoading}
+            refreshing={poll.isLoading && this.initialLoaded}
             onRefresh={() => this.loadData()}
           />
         )}

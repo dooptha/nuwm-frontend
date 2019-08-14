@@ -15,7 +15,7 @@ const conversationsReducer = (state, action) => {
       return {
         ...state,
         messages,
-        unreadCounter: state.unreadCounter + 1,
+        unreadCounter: state.unreadCounter + (action.isInConversation ? 0 : 1),
       };
 
     case 'removeMessage':
@@ -28,6 +28,12 @@ const conversationsReducer = (state, action) => {
       return {
         ...state,
         unreadCounter: 0,
+      };
+
+    case 'loadMessages':
+      return {
+        ...state,
+        messages: action.messages,
       };
 
     default:

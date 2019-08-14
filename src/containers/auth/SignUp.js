@@ -10,6 +10,7 @@ import {
   withStyles,
 } from 'react-native-ui-kitten';
 import { AvoidKeyboard, InlineError } from '../../components/common';
+import GroupInput from '../common/GroupInput';
 import { StateContext } from '../../utils/context';
 import I18n from '../../utils/i18n';
 import api from '../../api/user';
@@ -65,12 +66,14 @@ export class SignUp extends Component {
         autoDismiss
         offset={() => 0}
       >
-        <Text
-          style={[themedStyle.title, themedStyle.text]}
-          category="h6"
-        >
-          {I18n.t('SignUp.title')}
-        </Text>
+        <View style={themedStyle.titleContainer}>
+          <Text
+            style={[themedStyle.title, themedStyle.text]}
+            category="h6"
+          >
+            {I18n.t('SignUp.title')}
+          </Text>
+        </View>
         <Input
           style={themedStyle.input}
           labelStyle={themedStyle.text}
@@ -82,7 +85,7 @@ export class SignUp extends Component {
           onChangeText={(text) => this.setState({ username: text })}
           onSubmitEditing={() => this.focusTheField('group')}
         />
-        <Input
+        <GroupInput
           style={themedStyle.input}
           labelStyle={themedStyle.text}
           textStyle={themedStyle.text}
@@ -91,7 +94,7 @@ export class SignUp extends Component {
           returnKeyType="done"
           value={group}
           onChangeText={(text) => this.setState({ group: text })}
-          ref={(input) => this.setInputRef(input, 'group')}
+          reference={(input) => this.setInputRef(input, 'group')}
         />
         <View style={themedStyle.buttonContainer}>
           <View style={{ flex: 1 }} />
@@ -119,12 +122,14 @@ SignUp.contextType = StateContext;
 
 export default withStyles(SignUp, (theme) => ({
   container: {
-    alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
     paddingLeft: 50,
     paddingRight: 50,
     backgroundColor: theme['background-basic-color-1'],
+  },
+  titleContainer: {
+    alignItems: 'center',
   },
   title: {
     paddingBottom: 10,

@@ -9,7 +9,7 @@ import {
 } from 'react-native-ui-kitten';
 
 const MessageComponent = ({ message, themedStyle }) => {
-  const alignmentStyle = { justifyContent: message.isSender ? 'flex-end' : 'flex-start' };
+  const alignmentStyle = { justifyContent: 'flex-end' };
 
   return (
     <View style={[themedStyle.messageContainer, alignmentStyle]}>
@@ -51,7 +51,7 @@ export default withStyles(MessageComponent, (theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 16,
-    borderRadius: 16,
+    borderRadius: 20,
     maxWidth: Dimensions.get('window').width - 120,
   },
   cloudRight: {

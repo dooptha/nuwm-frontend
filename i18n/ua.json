@@ -1,159 +1,164 @@
 {
-  "tabs": {
-    "timetable": "Розклад",
-    "chat": "Розмови",
-    "settings": "Налаштування"
-  },
-  "settings": {
-    "themes": {
-        "title": "Вигляд",
-        "anotherUserMessage": "Колись мені сказали",
-        "currentUserMessage": "що світ мене роздавить"
-      },
-    "languages": {
-      "title": "Мова",
-      "ua": "Ukrainian",
-      "ru": "Russian",
-      "en": "English"
-    },
-    "user": {
-      "name": "Ім'я",
-      "group": "Група",
-      "logOut": "Вийти"
-    },
-    "timetable": {
-      "title": "Розклад"
-    },
-    "questions": {
-      "title": "Зв'яжіться з нами"
-    },
-    "polls": {
-      "title": "Історія голосування"
-    },
-    "admin": {
-      "title": "Адміністрування"
-    }
-  },
-  "routes": {
-    "Timetable": "Розклад",
-    "Conversations": "Розмови",
-    "Settings": "Налаштування",
-    "Themes": "Вигляд",
-    "Language": "Мова",
-    "DetailedLesson": "Деталі",
-    "ScheduleList": "Розклад",
-    "User": "Користувач",
-    "Twitter": "Твіттер",
-    "Instagram": "Інстаграм",
-    "PollHistory": "Історія голосування",
-    "TimetableSettings": "Розклад",
-    "ContactUs": "Зв'яжіться з нами",
-    "Admin": "Нове голосування"
-  },
-  "datePicker": {
-    "Confirm": "Підтвердити",
-    "Cancel": "Відмінити"
-  },
-  "timetable": {
-    "no-lesson": "Нема пар, можна в батлу",
-    "error-no-server": "Неможливо з'єднатися з сервером' :-( \nПеревірте ваше інтернет з'єднання",
-    "error-try-later": "Шось пішло не так :-( \nСпробуйте пізніше",
-    "tabs": {
-      "Search": "Пошук",
-      "Today": "Сьогодні",
-      "Tomorrow": "Завтра",
-      "Week": "Тиждень"
-    },
-    "search":{
-      "Type": "Тип",
-      "Date": "Дата",
-      "Lecturer": "Викладач",
-      "Group": "Группа",
-      "PracticsOnly": "Тільки Практика",
-      "Search": "Пошук",
-      "GroupExample": "Приклад: ПМ-41",
-      "LecturerExample": "Приклад: Мічута Ольга Романівна",
-      "From": "З",
-      "To": "До",
-      "OnlyDay": "День",
-      "Range": "Проміжок"
-    },
-    "datepicker":{
-      "OK": "Готово",
-      "Start": "Початок",
-      "End": "Кінець",
-      "Choose Date": "Виберіть дату"
-    },
-    "lesson": {
-      "name": "Предмет",
-      "classroom": "Аудиторія",
-      "lecturer": "Викладач",
-      "subgroup": "Группа",
-      "streams_type": "Підгруппа",
-      "time": "Час",
-      "type": "Тип"
-    }
-  },
-  "conversations": {
-    "messagePlaceholder": "Повідомлення"
-  },
-  "flood": {
-    "title": "Флуд",
-    "description": "Цей чат призначений для срача, того залишається лише 100 останніх повідомлень",
-    "online": "oнлайн"
-  },
-  "SignUp": {
-    "title": "Перед тим як почати",
-    "name": "Ім'я",
-    "group": "Група",
-    "submit": "Почати"
-  },
-  "contactUs": {
-    "title": "Dooptha",
-    "alert": "Відвідати обраний ресурс",
-    "open": "Так",
-    "cancel": "Ні",
-    "discord": {
-      "title": "Discord",
-      "description": "Приєднуйся до спільноти"
-    },
-    "github": {
-      "title": "Github",
-      "description": "Вихідний код застосунку"
-    },
-    "mail": {
-      "title": "Пошта",
-      "description": "Побажання та запитання"
-    }
-  },
-  "admin": {
-    "yes": "Так",
-    "no": "Ні",
-    "deleteMessage": "Видалити повідомлення",
-    "poll": {
-      "question": {
-        "title": "Запитання",
-        "placeholder": "Поставити запитання"
-      },
-      "options": {
-        "title": "Варіанти відповіді",
-        "placeholder": "Варіант",
-        "add": "Додати інший варіант"
-      },
-      "submit": "Створити",
-      "close": {
-        "title": "Завершити попереднє голосування",
-        "description": "Цю дію не можна буде відмінити",
-        "confirm": "Так",
-        "cancel": "Ні"
-      }
-    }
-  },
-  "errors": {
-    "title": "Щось трапилося не так як задумано",
-    "description": "Відомості про помилку надіслані розробникам! Будь ласка, перезапустіть застосунок!",
-    "responseTitle": "Запит не відбувся",
-    "responseDescription": "Щось сталося під час запиту, перевірте підключення до мережі!",
-    "ok": "Добре"
-  }
+	"SignUp": {
+		"group": "Група",
+		"name": "Ім'я",
+		"submit": "Почати",
+		"title": "Перед тим як почати"
+	},
+	"admin": {
+		"deleteMessage": "Видалити повідомлення",
+		"no": "Ні",
+		"poll": {
+			"close": {
+				"cancel": "Ні",
+				"confirm": "Так",
+				"description": "Цю дію не можна буде відмінити",
+				"title": "Завершити попереднє голосування"
+			},
+			"options": {
+				"add": "Додати інший варіант",
+				"placeholder": "Варіант",
+				"title": "Варіанти відповідей"
+			},
+			"question": {
+				"placeholder": "Поставте запитання",
+				"title": "Запитання"
+			},
+			"submit": "Створити"
+		},
+		"yes": "Так"
+	},
+	"contactUs": {
+		"alert": "Відвідати обраний ресурс",
+		"cancel": "Ні",
+		"discord": {
+			"description": "Приєднуйся до спільноти",
+			"title": "Discord"
+		},
+		"github": {
+			"description": "Вихідний код застосунку",
+			"title": "Github"
+		},
+		"mail": {
+			"description": "Побажання та запитання",
+			"title": "Пошта"
+		},
+		"open": "Так",
+		"title": "Dooptha"
+	},
+	"conversations": {
+		"messagePlaceholder": "Повідомлення..."
+	},
+	"datePicker": {
+		"Cancel": "Відмінити",
+		"Confirm": "Підтвердити"
+	},
+	"errors": {
+		"description": "Відомості про помилку надіслані розробникам! Будь ласка, перезапустіть застосунок!",
+		"ok": "Добре",
+		"responseDescription": "Щось сталося під час запиту",
+		"responseTitle": "Запит не відбувся",
+		"title": "Щось трапилося не так як задумано"
+	},
+	"flood": {
+		"description": "Місце для спілкування з іншими студентами, в історії зберігаються лише останні 50 повідомлень",
+		"online": "oнлайн",
+		"title": "Флуд"
+	},
+	"routes": {
+		"Admin": "Нове голосування",
+		"ContactUs": "Зв'яжіться з нами",
+		"Conversations": "Розмови",
+		"DetailedLesson": "Деталі",
+		"Instagram": "Інстаграм",
+		"Language": "Мова",
+		"PollHistory": "Історія голосування",
+		"ScheduleList": "Розклад",
+		"Settings": "Налаштування",
+		"Themes": "Вигляд",
+		"Timetable": "Розклад",
+		"TimetableSettings": "Розклад",
+		"Twitter": "Твіттер",
+		"User": "Користувач",
+		"disconnected": "Підключення"
+	},
+	"settings": {
+		"admin": {
+			"title": "Адміністрування"
+		},
+		"languages": {
+			"en": "Англійська",
+			"ru": "Російська",
+			"title": "Мова",
+			"ua": "Українська"
+		},
+		"polls": {
+			"title": "Історія голосування"
+		},
+		"questions": {
+			"title": "Зв'яжіться з нами"
+		},
+		"themes": {
+			"anotherUserMessage": "Колись мені сказали",
+			"currentUserMessage": "що світ мене роздавить",
+			"sender": "Влад Проценко",
+			"title": "Вигляд"
+		},
+		"timetable": {
+			"title": "Розклад"
+		},
+		"user": {
+			"group": "Група",
+			"logOut": "Вийти",
+			"username": "Ім'я",
+			"validations": {
+				"username": "Максимальна кількість символів"
+			}
+		}
+	},
+	"tabs": {
+		"chat": "Розмови",
+		"settings": "Налаштування",
+		"timetable": "Розклад"
+	},
+	"timetable": {
+		"datepicker": {
+			"Choose Date": "Виберіть дату",
+			"End": "Кінець",
+			"OK": "Добре",
+			"Start": "Початок"
+		},
+		"error-no-server": "Неможливо з'єднатися з сервером' :-( \nПеревірте ваше інтернет з'єднання",
+		"error-try-later": "Шось пішло не так :-( \nСпробуйте пізніше",
+		"lesson": {
+			"classroom": "Аудиторія",
+			"lecturer": "Викладач",
+			"name": "Предмет",
+			"streams_type": "Підгруппа",
+			"subgroup": "Группа",
+			"time": "Час",
+			"type": "Тип"
+		},
+		"no-lesson": "Нема пар, можна в батлу",
+		"search": {
+			"Date": "Дата",
+			"From": "З",
+			"Group": "Группа",
+			"GroupExample": "Приклад: ПМ-41",
+			"Lecturer": "Викладач",
+			"LecturerExample": "Приклад: Мічута Ольга Романівна",
+			"OnlyDay": "День",
+			"PracticsOnly": "Тільки Практика",
+			"Range": "Проміжок",
+			"Search": "Пошук",
+			"To": "До",
+			"Type": "Тип"
+		},
+		"tabs": {
+			"Search": "Пошук",
+			"Today": "Сьогодні",
+			"Tomorrow": "Завтра",
+			"Week": "Тиждень"
+		}
+	}
 }

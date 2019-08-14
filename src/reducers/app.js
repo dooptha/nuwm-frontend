@@ -38,6 +38,24 @@ const appReducer = (state, action) => {
         onlineCounter: action.counter,
       };
 
+    case 'connect':
+      return {
+        ...state,
+        connected: true,
+      };
+
+    case 'disconnect':
+      return {
+        ...state,
+        connected: false,
+      };
+
+    case 'loadGroups':
+      return {
+        ...state,
+        groups: action.groups.map((group) => ({ title: group })),
+      };
+
     default:
       return state;
   }

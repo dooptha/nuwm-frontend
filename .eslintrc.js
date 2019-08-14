@@ -26,7 +26,8 @@ module.exports = {
     "react/forbid-prop-types": [1, { "forbid": ["any"] }],
     "react/prop-types": [0],
     "arrow-parens": [2, "always"],
-    "class-methods-use-this": [0]
+    "class-methods-use-this": [0],
+    "no-underscore-dangle": ["error", { "allow": ["_id", "_navigator"] }]
   },
   "env": {
     "jest/globals": true

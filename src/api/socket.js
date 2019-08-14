@@ -1,17 +1,40 @@
 import io from 'socket.io-client';
 import Sound from 'react-native-sound';
+import NavigationService from '../navigation/NavigationService';
 import config from '../../config';
 
 const newMessageSound = new Sound('new_message.mp3', Sound.MAIN_BUNDLE);
 let socket;
 
 export const socketEvents = ({ dispatch }) => {
+  socket.on('connect', () => {
+    dispatch({ type: 'connect' });
+  });
+
+  socket.on('connect_error', () => {
+    dispatch({ type: 'disconnect' });
+  });
+
+  socket.on('disconnect', (reason) => {
+    if (reason === 'io server disconnect') {
+      socket.connect();
+    }
+
+    dispatch({ type: 'disconnect' });
+  });
+
   socket.on('message:received', (message) => {
-    newMessageSound.play();
+    const currentRoute = NavigationService.getCurrentRoute();
+    const isInConversation = currentRoute.routeName === 'Conversation';
+
+    if (!isInConversation && newMessageSound) {
+      newMessageSound.play();
+    }
 
     dispatch({
       type: 'receiveMessage',
       message,
+      isInConversation,
     });
   });
 
@@ -22,12 +45,19 @@ export const socketEvents = ({ dispatch }) => {
     })
   ));
 
-  socket.on('online:update', (counter) => (
+  socket.on('counter:update', (counter) => {
     dispatch({
       type: 'updateOnlineCounter',
       counter,
-    })
-  ));
+    });
+  });
+
+  socket.on('messages:history', (messages) => {
+    dispatch({
+      type: 'loadMessages',
+      messages,
+    });
+  });
 
   socket.on('poll:updated', (poll) => {
     dispatch({

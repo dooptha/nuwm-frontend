@@ -9,7 +9,6 @@ import {
   isRootRoute,
   getCurrentRouteIndex,
 } from './util';
-import { KEY_NAVIGATION_BACK } from './constants';
 import I18n from '../utils/i18n';
 import { StateContext } from '../utils/context';
 
@@ -21,13 +20,13 @@ const MenuTopNavigationParams = {
     return (
       <StateContext.Consumer>
         {
-          () => (
+          ([{ app }]) => (
             <TopNavigationBar
               border
               title={I18n.t(`routes.${routeName}`)}
               backIcon={isRootRoute(index) && ArrowIosBackFill}
-              rightControls={[]}
-              onBackPress={() => navigation.goBack(KEY_NAVIGATION_BACK)}
+              onBackPress={() => navigation.goBack(null)}
+              connected={app.connected}
             />
           )
         }
@@ -44,11 +43,12 @@ const SheduleTopNavigationParams = {
     return (
       <StateContext.Consumer>
         {
-          () => (
+          ([{ app }]) => (
             <TopNavigationBar
               title={I18n.t(`routes.${routeName}`)}
               backIcon={isRootRoute(index) && ArrowIosBackFill}
-              onBackPress={() => navigation.goBack(KEY_NAVIGATION_BACK)}
+              onBackPress={() => navigation.goBack(null)}
+              connected={app.connected}
             />
           )
         }
@@ -67,14 +67,13 @@ const ConversationTopNavigationParams = {
     return (
       <StateContext.Consumer>
         {
-          () => (
+          ([{ app }]) => (
             <TopNavigationBar
               border
               title={title}
               backIcon={isRootRoute(index) && ArrowIosBackFill}
-              onBackPress={() => {
-                navigation.goBack(KEY_NAVIGATION_BACK);
-              }}
+              onBackPress={() => navigation.goBack(null)}
+              connected={app.connected}
             />
           )
         }
@@ -90,14 +89,15 @@ const UserSettingsNavigationParams = {
     return (
       <StateContext.Consumer>
         {
-          (context) => (
+          ([{ app }]) => (
             <TopNavigationBar
               border
               title={I18n.t(`routes.${routeName}`)}
               backIcon={ArrowIosBackFill}
               submitIcon={CheckmarkOutlineIcon}
-              onBackPress={() => navigation.goBack(KEY_NAVIGATION_BACK)}
-              onSubmitPress={context[0].app.actions.submitUserForm}
+              onBackPress={() => navigation.goBack(null)}
+              onSubmitPress={app.actions.submitUserForm}
+              connected={app.connected}
             />
           )
         }
@@ -113,14 +113,15 @@ const TimetableSettingsNavigationParams = {
     return (
       <StateContext.Consumer>
         {
-          (context) => (
+          ([{ app }]) => (
             <TopNavigationBar
               border
               title={I18n.t(`routes.${routeName}`)}
               backIcon={ArrowIosBackFill}
               submitIcon={CheckmarkOutlineIcon}
-              onBackPress={() => navigation.goBack(KEY_NAVIGATION_BACK)}
-              onSubmitPress={context[0].app.actions.submitTimetableForm}
+              onBackPress={() => navigation.goBack(null)}
+              onSubmitPress={app.actions.submitTimetableForm}
+              connected={app.connected}
             />
           )
         }

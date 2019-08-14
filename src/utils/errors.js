@@ -29,6 +29,8 @@ export const Rollbar = new Client(new Configuration(config.ROLLBACK_APP_TOKEN, {
 }));
 
 export const handleRequestError = (error) => {
+  if (!error.response) return false;
+
   Alert.alert(
     I18n.t('errors.responseTitle'),
     `${error.response.data.error}
@@ -38,6 +40,8 @@ export const handleRequestError = (error) => {
       text: I18n.t('errors.ok'),
     }],
   );
+
+  return true;
 };
 
 const handleNonRequestError = (error, isFatal) => {

@@ -3,6 +3,10 @@ import {
   light,
 } from '@eva-design/eva';
 
+// #213F51
+// #3E515F
+// #59656F
+
 const nuwmDark = {
   ...dark,
 

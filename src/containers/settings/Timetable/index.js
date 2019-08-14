@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import {
-  Input,
   withStyles,
 } from 'react-native-ui-kitten';
+import GroupInput from '../../common/GroupInput';
 import { StateContext } from '../../../utils/context';
 import { storeKey } from '../../../utils/storage';
 import I18n from '../../../utils/i18n';
@@ -57,7 +57,7 @@ class TimetableSettings extends Component {
 
     return (
       <View style={themedStyle.container}>
-        <Input
+        <GroupInput
           style={themedStyle.input}
           labelStyle={themedStyle.text}
           textStyle={themedStyle.text}
@@ -76,7 +76,6 @@ TimetableSettings.contextType = StateContext;
 export default withStyles(TimetableSettings, (theme) => ({
   container: {
     backgroundColor: theme['background-basic-color-1'],
-    alignItems: 'center',
     paddingTop: 50,
     flex: 1,
     paddingLeft: 50,

@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
+import { ActivityIndicator } from 'react-native';
 import {
   withStyles,
   TopNavigation,
   TopNavigationAction,
 } from 'react-native-ui-kitten';
 import SafeAreaView from './SafeAreaView';
+import I18n from '../../utils/i18n';
 
 class TopNavigationBar extends Component {
   renderBackButton(source) {
     const { onBackPress } = this.props;
+
     return (
       <TopNavigationAction
         icon={source}
@@ -19,12 +22,41 @@ class TopNavigationBar extends Component {
 
   renderSubmitButton(source) {
     const { onSubmitPress } = this.props;
-    return (
-      <TopNavigationAction
-        icon={source}
-        onPress={onSubmitPress}
-      />
-    );
+
+    if (onSubmitPress) {
+      return (
+        <TopNavigationAction
+          icon={source}
+          onPress={onSubmitPress}
+        />
+      );
+    }
+
+    return null;
+  }
+
+  renderDisconnectedLoader() {
+    return <ActivityIndicator />;
+  }
+
+  renderRightControls() {
+    const {
+      submitIcon,
+      onSubmitPress,
+      connected,
+    } = this.props;
+
+    const controls = [];
+
+    if (!connected) {
+      controls.push(this.renderDisconnectedLoader());
+    }
+
+    if (submitIcon && onSubmitPress) {
+      controls.push(this.renderSubmitButton(submitIcon));
+    }
+
+    return controls;
   }
 
   render() {
@@ -33,11 +65,10 @@ class TopNavigationBar extends Component {
       title,
       backIcon,
       border,
-      submitIcon,
+      connected,
     } = this.props;
 
     const leftControlElement = backIcon ? this.renderBackButton(backIcon) : null;
-    const rightControlElement = submitIcon ? this.renderSubmitButton(submitIcon) : null;
 
     return (
       <SafeAreaView
@@ -46,10 +77,10 @@ class TopNavigationBar extends Component {
       >
         <TopNavigation
           alignment="center"
-          title={title}
+          title={connected ? title : I18n.t('routes.disconnected')}
           titleStyle={themedStyle.title}
           leftControl={leftControlElement}
-          rightControls={rightControlElement}
+          rightControls={this.renderRightControls()}
         />
       </SafeAreaView>
     );

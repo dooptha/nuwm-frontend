@@ -7,9 +7,13 @@ import {
   withStyles,
   Text,
 } from 'react-native-ui-kitten';
+import { getSenderColor } from '../../utils/colors';
 
 const MessageComponent = ({ message, themedStyle }) => {
-  const alignmentStyle = { justifyContent: message.isSender ? 'flex-end' : 'flex-start' };
+  const alignmentStyle = { justifyContent: 'flex-start' };
+  const textColor = {
+    color: getSenderColor(message.sender.username, themedStyle.textTheme.color, 0.7),
+  };
 
   return (
     <View style={[themedStyle.messageContainer, alignmentStyle]}>
@@ -17,10 +21,10 @@ const MessageComponent = ({ message, themedStyle }) => {
       <View style={themedStyle.cloudContainer} key={1}>
         <View style={[themedStyle.cloud, themedStyle.cloudRight]}>
           <Text
-            style={[themedStyle.sender, themedStyle.text]}
+            style={[themedStyle.sender, themedStyle.text, textColor]}
             category="c1"
           >
-            {message.sender}
+            {message.sender.username}
           </Text>
           <Text
             style={themedStyle.text}
@@ -62,7 +66,7 @@ export default withStyles(MessageComponent, (theme) => ({
   cloud: {
     padding: 16,
     paddingTop: 8,
-    borderRadius: 16,
+    borderRadius: 20,
     maxWidth: Dimensions.get('window').width - 120,
   },
   cloudRight: {
@@ -80,5 +84,8 @@ export default withStyles(MessageComponent, (theme) => ({
   },
   text: {
     fontFamily: 'Roboto',
+  },
+  textTheme: {
+    color: theme['text-basic-color'],
   },
 }));

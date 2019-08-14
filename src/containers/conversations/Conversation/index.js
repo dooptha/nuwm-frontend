@@ -14,6 +14,7 @@ import { StateContext } from '../../../utils/context';
 import I18n from '../../../utils/i18n';
 import api from '../../../api/user';
 import socket from '../../../api/socket';
+import config from '../../../../config';
 
 class Conversation extends Component {
   constructor(props) {
@@ -67,25 +68,25 @@ class Conversation extends Component {
 
   sendMessage() {
     const { newMessage } = this.state;
+    const [{ user }, dispatch] = this.context;
 
-    if (newMessage === '') return false;
+    if (newMessage.length < 1 || newMessage.length > config.MAXIMUM_CHARS_IN_MESSAGE) return false;
 
     const message = {
       body: newMessage,
       date: new Date(),
-      isSender: true,
+      sender: {
+        id: user.current._id,
+        username: user.current.username,
+      },
     };
 
-    const [{ user }, dispatch] = this.context;
     dispatch({
       type: 'sendMessage',
       message,
     });
 
-    socket.emit('message:send', {
-      body: newMessage,
-      sender: user.current.username,
-    });
+    socket.emit('message:send', message);
 
     this.setState({ newMessage: '' });
 
@@ -109,14 +110,14 @@ class Conversation extends Component {
         size="small"
         icon={() => PaperPlaneIconFill(themedStyle.addMessageButtonIcon)}
         onPress={this.sendMessage}
-        disabled={newMessage === ''}
+        disabled={newMessage.length < 1 || newMessage.length > config.MAXIMUM_CHARS_IN_MESSAGE}
       />
     );
   }
 
   render() {
     const { newMessage } = this.state;
-    const [{ conversations }] = this.context;
+    const [{ conversations, user }] = this.context;
     const { themedStyle } = this.props;
 
     return (
@@ -129,6 +130,7 @@ class Conversation extends Component {
           style={themedStyle.chatContainer}
           data={conversations.messages}
           onMessagePress={(m) => this.onMessagePress(m)}
+          current={user.current}
         />
         <View style={themedStyle.inputContainer}>
           <Input

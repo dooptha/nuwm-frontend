@@ -28,13 +28,14 @@ class Conversation extends Component {
   }
 
   renderListItem(info) {
-    const { onMessagePress } = this.props;
+    const { onMessagePress, current } = this.props;
 
     return (
       <Message
         index={info.index}
         message={info.item}
         onPress={(m) => onMessagePress(m)}
+        current={current}
       />
     );
   }

@@ -48,15 +48,7 @@ function logIn(dispatch, navigation, data) {
       }
 
       // Configure Rollback user
-      Rollbar.configure({
-        payload: {
-          person: {
-            id: user.id,
-            username: user.username,
-            email: user.role,
-          },
-        },
-      });
+      Rollbar.setPerson(user._id, user.username, user.role);
     })
     .catch((error) => {
       dispatch({ type: 'logInFailure', error });

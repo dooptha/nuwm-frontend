@@ -32,7 +32,22 @@ export const getSchedule = (data) => api.get('/timetable', {
   .then((response) => response.data.schedule)
   .catch((err) => ({ error: errorParser(err) }));
 
+const getGroups = (dispatch) => (
+  api.get('/timetable/groups')
+    .then((response) => {
+      const { groups } = response.data;
+
+      dispatch({
+        type: 'loadGroups',
+        groups,
+      });
+    })
+    .catch(() => {})
+);
+
+
 module.exports = {
   getScheduleOnWeek,
   getSchedule,
+  getGroups,
 };

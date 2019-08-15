@@ -39,7 +39,6 @@ class FormInput extends Component {
   render() {
     const {
       value,
-      status,
     } = this.state;
 
     const {
@@ -47,15 +46,14 @@ class FormInput extends Component {
       placeholder,
       style,
       label,
+      status,
     } = this.props;
-
-    const inputStatus = status === 'primary' ? null : status;
 
     return (
       <Input
         label={label}
         value={value}
-        status={inputStatus}
+        status={status}
         style={[themedStyle.input, style]}
         placeholder={placeholder || null}
         onChangeText={(v) => this.onChange(v)}

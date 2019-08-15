@@ -24,24 +24,7 @@ export class DatePickerWrapper extends Component {
 
     this.state = {
       mode: mode || 'range',
-      startDate: null,
-      endDate: null,
     };
-  }
-
-  getDate() {
-    const { startDate, endDate } = this.state;
-    return { startDate, endDate };
-  }
-
-  setDate(data) {
-    const { currentDate, startDate, endDate } = data;
-
-    if (currentDate) {
-      this.setState({ startDate: currentDate, endDate: currentDate });
-    } else {
-      this.setState({ startDate, endDate });
-    }
   }
 
   switchPicker() {
@@ -50,14 +33,17 @@ export class DatePickerWrapper extends Component {
     this.datePickerNode.setState({ selected: '', showContent: false });
     this.setState({
       mode: mode === 'single' ? 'range' : 'single',
-      startDate: null,
-      endDate: null,
     });
   }
 
   render() {
     const { mode } = this.state;
-    const { themedStyle, label } = this.props;
+    const {
+      themedStyle,
+      label,
+      onConfirm,
+      status,
+    } = this.props;
 
     const placeholder = mode === 'range'
       ? this.placeholders.range : this.placeholders.single;
@@ -67,7 +53,7 @@ export class DatePickerWrapper extends Component {
         <FormInput
           style={themedStyle.backgroundInput}
           label={label}
-          ref={(node) => { this.inputNode = node; }}
+          status={status}
         />
         <DatePicker
       // styles
@@ -97,8 +83,7 @@ export class DatePickerWrapper extends Component {
           allowFontScaling={false}
           mode={mode}
           placeholder={placeholder}
-          ref={(node) => { this.datePickerNode = node; }}
-          onConfirm={(data) => this.setDate(data)}
+          onConfirm={onConfirm}
         />
       </View>
     );

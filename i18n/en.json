@@ -130,6 +130,10 @@
 		},
 		"error-no-server": "Can't connect to the server :-( \nCheck your network connection",
 		"error-try-later": "Something went wrong :-( \nTry again later",
+		"errorInvalidData": {
+			"description": "For successful search you need to input data range and at least one of next: group, lecturer",
+			"title": "Not enough search data!"
+		},
 		"lesson": {
 			"classroom": "Classroom",
 			"lecturer": "Lecturer",

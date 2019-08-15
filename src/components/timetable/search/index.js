@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { View, ScrollView } from 'react-native';
+import {
+  View,
+  ScrollView,
+  Alert,
+} from 'react-native';
 import {
   Button,
   Toggle,
@@ -25,6 +29,14 @@ class Search extends Component {
   constructor(props) {
     super(props);
     this.localize = (t) => I18n.t(`timetable.search.${t}`);
+
+    this.state = {
+      group: '',
+      lecturer: '',
+      errors: {},
+      startDate: null,
+      endDate: null,
+    };
   }
 
   componentDidMount() {
@@ -34,32 +46,75 @@ class Search extends Component {
     this.setState({ group });
   }
 
-  getDate() {
+  onInputChange(key, text) {
+    const { errors } = this.state;
+    const clearError = {};
+    const change = {};
+
+    // Reset input error
+    clearError[key] = false;
+    change.errors = { ...errors, ...clearError };
+
+    // Change input value
+    change[key] = text;
+    this.setState(change);
+  }
+
+  onDataPickerChange(data) {
+    const { errors } = this.state;
     const {
-      state: { practicsOnly, group, lecturer }, dateNode,
-    } = this;
+      currentDate,
+      startDate,
+      endDate,
+    } = data;
 
-    const { startDate, endDate } = dateNode.getDate();
-
-    return {
-      startDate, endDate, lecturer, group, practicsOnly,
-    };
+    if (currentDate) {
+      this.setState({
+        startDate: currentDate,
+        endDate: currentDate,
+      });
+    } else {
+      this.setState({
+        startDate,
+        endDate,
+        errors: { ...errors, date: false },
+      });
+    }
   }
 
   findSubjects() {
-    const searchData = this.getDate();
+    const {
+      practicsOnly,
+      group,
+      lecturer,
+      startDate,
+      endDate,
+    } = this.state;
 
     let isEnoughData = true;
+    const errors = {};
+    const validGroup = group && group !== '';
+    const validLecturer = lecturer && lecturer !== '';
 
-    if (!searchData.startDate || !searchData.endDate) {
-      this.dateNode.inputNode.setStatus('danger');
+    if (!(validGroup || validLecturer)) {
+      errors.group = true;
+      errors.lecturer = true;
       isEnoughData = false;
-    } else {
-      this.dateNode.inputNode.setStatus('primary');
+    }
+
+    if (!startDate || !endDate) {
+      errors.date = true;
+      isEnoughData = false;
     }
 
     if (isEnoughData) {
-      getSchedule(searchData).then((data) => {
+      getSchedule({
+        startDate,
+        endDate,
+        group,
+        lecturer,
+        practicsOnly,
+      }).then((data) => {
         if (data.error || data.length === 0) {
           NavigationService.navigate('ScheduleList', { schedule: [], message: data.error });
         } else {
@@ -67,6 +122,16 @@ class Search extends Component {
             { schedule: replaceDatesWithMomentObjects(data) });
         }
       });
+    } else {
+      Alert.alert(
+        I18n.t('timetable.errorInvalidData.title'),
+        I18n.t('timetable.errorInvalidData.description'),
+        [{
+          text: I18n.t('errors.ok'),
+        }],
+      );
+
+      this.setState({ errors });
     }
   }
 
@@ -75,6 +140,7 @@ class Search extends Component {
       practicsOnly,
       group,
       lecturer,
+      errors,
     } = this.state;
 
     const { themedStyle } = this.props;
@@ -85,7 +151,8 @@ class Search extends Component {
           <View style={themedStyle.inputContainer}>
             <DatePicker
               label={I18n.t('timetable.search.Date')}
-              ref={(node) => { this.dateNode = node; }}
+              status={errors.date ? 'danger' : null}
+              onConfirm={(data) => this.onDataPickerChange(data)}
             />
           </View>
 
@@ -95,7 +162,8 @@ class Search extends Component {
               placeholder={I18n.t('timetable.search.LecturerExample')}
               name="lecturer"
               value={lecturer}
-              onChangeText={(text) => this.setState({ lecturer: text })}
+              status={errors.lecturer ? 'danger' : null}
+              onChangeText={(text) => this.onInputChange('lecturer', text)}
             />
           </View>
 
@@ -104,7 +172,8 @@ class Search extends Component {
               label={I18n.t('timetable.search.Group')}
               name="group"
               value={group}
-              onChangeText={(text) => this.setState({ group: text })}
+              status={errors.group ? 'danger' : null}
+              onChangeText={(text) => this.onInputChange('group', text)}
             />
           </View>
 

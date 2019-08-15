@@ -32,7 +32,16 @@
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>http://192.168.0.104:3000 - 2</key>
+			<key>https://api.dooptha.com</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSTemporaryExceptionMinimumTLSVersion</key>
+				<string>TLSv1.1</string>
+			</dict>
+			<key>http://192.168.0.104:3000</key>
 			<dict>
 				<key>NSIncludesSubdomains</key>
 				<true/>

@@ -71,12 +71,12 @@ export default withStyles(Lesson, (theme) => ({
     paddingTop: 20,
     paddingBottom: 20,
     height: 130,
-    borderTopColor: theme['text-hint-color'],
-    borderTopWidth: 0.5,
+    borderTopColor: theme['background-basic-color-3'],
+    borderTopWidth: 1,
   },
   bottomLine: {
-    borderBottomColor: theme['text-hint-color'],
-    borderBottomWidth: 0.5,
+    borderBottomColor: theme['background-basic-color-3'],
+    borderBottomWidth: 1,
   },
   row: {
     flexDirection: 'row',

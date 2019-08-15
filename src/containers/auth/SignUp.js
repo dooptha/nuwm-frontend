@@ -94,7 +94,6 @@ export class SignUp extends Component {
           returnKeyType="done"
           value={group}
           onChangeText={(text) => this.setState({ group: text })}
-          reference={(input) => this.setInputRef(input, 'group')}
         />
         <View style={themedStyle.buttonContainer}>
           <View style={{ flex: 1 }} />

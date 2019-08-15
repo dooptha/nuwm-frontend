@@ -56,7 +56,8 @@ export class DatePickerWrapper extends Component {
   }
 
   render() {
-    const { props: { themedStyle }, state: { mode } } = this;
+    const { mode } = this.state;
+    const { themedStyle, label } = this.props;
 
     const placeholder = mode === 'range'
       ? this.placeholders.range : this.placeholders.single;
@@ -65,6 +66,7 @@ export class DatePickerWrapper extends Component {
       <View>
         <FormInput
           style={themedStyle.backgroundInput}
+          label={label}
           ref={(node) => { this.inputNode = node; }}
         />
         <DatePicker
@@ -117,6 +119,7 @@ export default withStyles(DatePickerWrapper, (theme) => ({
     color: theme['text-hint-color'],
   },
   datePicker: {
+    marginTop: 22,
     borderWidth: 0,
   },
   datePickerInput: {

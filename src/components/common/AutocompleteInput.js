@@ -79,6 +79,7 @@ export class AutocompleteInput extends Component {
       labelStyle,
       textStyle,
       label,
+      placeholder,
       name,
       value,
       returnKeyType,
@@ -95,6 +96,7 @@ export class AutocompleteInput extends Component {
           labelStyle={labelStyle}
           textStyle={textStyle}
           label={label}
+          placeholder={placeholder}
           name={name}
           value={value}
           returnKeyType={returnKeyType}

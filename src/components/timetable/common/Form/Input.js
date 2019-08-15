@@ -38,14 +38,22 @@ class FormInput extends Component {
 
   render() {
     const {
-      props: { themedStyle, placeholder, style },
-      state: { value, status },
-    } = this;
+      value,
+      status,
+    } = this.state;
+
+    const {
+      themedStyle,
+      placeholder,
+      style,
+      label,
+    } = this.props;
 
     const inputStatus = status === 'primary' ? null : status;
 
     return (
       <Input
+        label={label}
         value={value}
         status={inputStatus}
         style={[themedStyle.input, style]}

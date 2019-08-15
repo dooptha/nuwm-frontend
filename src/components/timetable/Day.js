@@ -73,8 +73,8 @@ export default withStyles(Day, (theme) => ({
     color: theme['text-basic-color'],
   },
   body: {
-    borderRightColor: theme['text-hint-color'],
-    borderRightWidth: 0.5,
+    borderRightColor: theme['background-basic-color-3'],
+    borderRightWidth: 1,
     backgroundColor: theme['background-basic-color-1'],
     borderRadius: 3,
   },

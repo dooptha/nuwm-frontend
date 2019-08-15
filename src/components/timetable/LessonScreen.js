@@ -79,7 +79,7 @@ export default withStyles(DetailedLesson, (theme) => ({
     flexDirection: 'row',
     alignItems: 'center',
     width: '100%',
-    borderBottomColor: theme['text-hint-color'],
+    borderBottomColor: theme['background-basic-color-3'],
     borderBottomWidth: 1,
   },
   title: {

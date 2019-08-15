@@ -19,6 +19,23 @@ This is open source React Native application designed for students by students o
 ###### Android
 >RIP
 
+### Configuration
+
+You can configure app by using configuration files in `/config` directory.
+In development environment `production.js` will be overwritten by `development.js`.
+
+Also you can create `override.js` file in `/config` directory.
+It will override configuration in `development.js`.
+
+`override.js` is ignored by git, so it is perfect for local changes, like **CUSTOM_INITIAL_ROUTE**, and you won't
+accidentally push your custom config to remote repository.
+
+
+In production environment `override.js` and `development.js` will be ignored.
+
+If you have any error related to `override.js`, restarting metro bundler, or creating `override.js` file (if you haven't done this yet) can solve that error.
+
+
 ### Debugging
 
 RN have a lot of tools for development purposes, more info you can find [_here_](https://facebook.github.io/react-native/docs/debugging).

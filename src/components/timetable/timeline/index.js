@@ -54,15 +54,25 @@ class Timeline extends Component {
     this.addAnimationListener();
   }
 
-  componentDidUpdate() {
+  shouldComponentUpdate() {
     const { active } = this.props;
     const { animation } = this.state;
 
-    if (active) {
-      this.animateBar();
-    } else if (animation._value !== this.startPosition) {
+    if (!active && animation._value !== this.startPosition) {
       this.resetAnimation();
     }
+
+    return active;
+  }
+
+  componentDidUpdate() {
+    const { animation } = this.state;
+
+    if (animation._value === this.startPosition || animation._value === 0) {
+      this.animateBar();
+    }
+
+    return true;
   }
 
   animateBar() {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView, RefreshControl, Dimensions } from 'react-native';
 import { withStyles } from 'react-native-ui-kitten';
-import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
+import { TabView, TabBar } from 'react-native-tab-view';
 import Search from './search';
 import Schedule from './Schedule';
 
@@ -15,18 +15,27 @@ export class Timetable extends Component {
   static contextType = StateContext;
 
   state = {
+    /** data without moment objects */
     data: [],
+    /** data with moment objects */
     schedule: [],
     today: [],
     tomorrow: [],
+    /** store language to detect when it changes */
     language: '',
     refreshing: false,
     error: false,
+    /** current tab index */
     index: 3,
-    routes: [
-
-    ],
+    routes: [],
   };
+
+  constructor(props) {
+    super(props);
+
+    this.deviceWidth = Dimensions.get('window').width;
+    this.switchTab = (index) => this.setState({ index });
+  }
 
   componentDidMount() {
     this.requestSchedule();
@@ -37,9 +46,9 @@ export class Timetable extends Component {
   }
 
   splitSchedule(props = {}) {
-    console.log('UPD');
-    const schedule = replaceDatesWithMoment(props.data || this.state.data);
+    const { data } = this.state;
 
+    const schedule = replaceDatesWithMoment(props.data || data);
     const today = schedule.filter((day) => isToday(day.date));
     const tomorrow = schedule.filter((day) => isTomorrow(day.date));
 
@@ -75,6 +84,21 @@ export class Timetable extends Component {
       .catch((err) => console.log({ err }));
   }
 
+  updateLocales() {
+    const { language } = this.state;
+    const [{ app: { properties } }] = this.context;
+
+    if (language !== properties.language) {
+      const routes = [
+        { key: 'search', title: I18n.t('timetable.tabs.Search') },
+        { key: 'today', title: I18n.t('timetable.tabs.Today') },
+        { key: 'tomorrow', title: I18n.t('timetable.tabs.Tomorrow') },
+        { key: 'week', title: I18n.t('timetable.tabs.Week') },
+      ];
+      this.splitSchedule({ routes, language: properties.language });
+    }
+  }
+
   renderSchedule(schedule, tabIndex) {
     const { refreshing, error, index } = this.state;
     const { themedStyle } = this.props;
@@ -86,6 +110,8 @@ export class Timetable extends Component {
       />
     );
 
+    const active = tabIndex === index;
+
     return (
       <ScrollView
         style={themedStyle.scrollContainer}
@@ -96,46 +122,33 @@ export class Timetable extends Component {
           refreshing={refreshing}
           schedule={schedule}
           message={error}
-          tabIndex={tabIndex}
-          activeTab={index}
+          active={active}
         />
       </ScrollView>
     );
   }
 
   renderScene = ({ route }) => {
+    const { today, tomorrow, schedule } = this.state;
+
     switch (route.key) {
       case 'search':
         return <Search />;
       case 'today':
-        return this.renderSchedule(this.state.today, 1);
+        return this.renderSchedule(today, 1);
       case 'tomorrow':
-        return this.renderSchedule(this.state.tomorrow, 2);
+        return this.renderSchedule(tomorrow, 2);
       case 'week':
-        return this.renderSchedule(this.state.schedule, 3);
+        return this.renderSchedule(schedule, 3);
       default:
         return null;
     }
   };
 
-  updateLocales() {
-    if (this.state.language !== this.context[0].app.properties.language) {
-      const routes = [
-        { key: 'search', title: I18n.t('timetable.tabs.Search') },
-        { key: 'today', title: I18n.t('timetable.tabs.Today') },
-        { key: 'tomorrow', title: I18n.t('timetable.tabs.Tomorrow') },
-        { key: 'week', title: I18n.t('timetable.tabs.Week') },
-      ];
-      this.splitSchedule({ routes, language: this.context[0].app.properties.language });
-    }
-  }
-
   render() {
     const { props: { themedStyle } } = this;
 
     this.updateLocales();
-
-    console.log('rerender');
 
     return (
       <TabView
@@ -151,8 +164,8 @@ export class Timetable extends Component {
         )}
         navigationState={this.state}
         renderScene={this.renderScene}
-        onIndexChange={(index) => this.setState({ index })}
-        initialLayout={{ width: Dimensions.get('window').width }}
+        onIndexChange={this.switchTab}
+        initialLayout={{ width: this.deviceWidth }}
       />
     );
   }

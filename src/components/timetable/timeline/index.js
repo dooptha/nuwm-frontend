@@ -55,9 +55,10 @@ class Timeline extends Component {
   }
 
   componentDidUpdate() {
-    const { props: { activeTab, tabIndex }, state: { animation } } = this;
+    const { active } = this.props;
+    const { animation } = this.state;
 
-    if (activeTab === tabIndex) {
+    if (active) {
       this.animateBar();
     } else if (animation._value !== this.startPosition) {
       this.resetAnimation();

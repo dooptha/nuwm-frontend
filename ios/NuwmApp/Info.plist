@@ -32,7 +32,7 @@
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>https://api.dooptha.com</key>
+			<key>calc.nuwm.edu.ua</key>
 			<dict>
 				<key>NSIncludesSubdomains</key>
 				<true/>
@@ -41,7 +41,7 @@
 				<key>NSTemporaryExceptionMinimumTLSVersion</key>
 				<string>TLSv1.1</string>
 			</dict>
-			<key>http://192.168.0.104:3000</key>
+			<key>calc.nuwm.edu.ua:3002</key>
 			<dict>
 				<key>NSIncludesSubdomains</key>
 				<true/>
@@ -59,16 +59,7 @@
 				<key>NSTemporaryExceptionMinimumTLSVersion</key>
 				<string>TLSv1.1</string>
 			</dict>
-			<key>calc.nuwm.edu.ua</key>
-			<dict>
-				<key>NSIncludesSubdomains</key>
-				<true/>
-				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-				<key>NSTemporaryExceptionMinimumTLSVersion</key>
-				<string>TLSv1.1</string>
-			</dict>
-			<key>calc.nuwm.edu.ua:3002</key>
+			<key>http://192.168.0.104:3000</key>
 			<dict>
 				<key>NSIncludesSubdomains</key>
 				<true/>
@@ -96,6 +87,15 @@
 				<string>TLSv1.1</string>
 			</dict>
 			<key>http://nuwm.edu.ua</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSTemporaryExceptionMinimumTLSVersion</key>
+				<string>TLSv1.1</string>
+			</dict>
+			<key>https://api.dooptha.com</key>
 			<dict>
 				<key>NSIncludesSubdomains</key>
 				<true/>

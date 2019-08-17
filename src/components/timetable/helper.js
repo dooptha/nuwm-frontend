@@ -21,7 +21,7 @@ export const isTomorrow = (date) => {
   return false;
 };
 
-export const replaceDatesWithMomentObjects = (_data) => {
+export const replaceDatesWithMoment = (_data) => {
   if (_data && _data.length > 0) {
     const data = JSON.parse(JSON.stringify(_data));
 

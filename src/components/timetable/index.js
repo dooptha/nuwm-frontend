@@ -9,22 +9,22 @@ import I18n from '../../utils/i18n';
 import { getScheduleOnWeek } from '../../api/timetable';
 import { storeKey, getKey } from '../../utils/storage';
 import { StateContext } from '../../utils/context';
-import { isToday, isTomorrow, replaceDatesWithMomentObjects } from './helper';
+import { isToday, isTomorrow, replaceDatesWithMoment } from './helper';
 
 export class Timetable extends Component {
   static contextType = StateContext;
 
   state = {
     data: [],
-    selectedIndex: 3,
+    schedule: [],
+    today: [],
+    tomorrow: [],
+    language: '',
     refreshing: false,
     error: false,
-    index: 0,
+    index: 3,
     routes: [
-      { key: 'first', title: I18n.t('timetable.tabs.Search') },
-      { key: 'second', title: I18n.t('timetable.tabs.Today') },
-      { key: 'third', title: I18n.t('timetable.tabs.Tomorrow') },
-      { key: 'fourth', title: I18n.t('timetable.tabs.Week') },
+
     ],
   };
 
@@ -34,6 +34,18 @@ export class Timetable extends Component {
 
   onRefresh() {
     this.requestSchedule();
+  }
+
+  splitSchedule(props = {}) {
+    console.log('UPD');
+    const schedule = replaceDatesWithMoment(props.data || this.state.data);
+
+    const today = schedule.filter((day) => isToday(day.date));
+    const tomorrow = schedule.filter((day) => isTomorrow(day.date));
+
+    this.setState({
+      ...props, today, tomorrow, schedule,
+    });
   }
 
   requestSchedule() {
@@ -46,22 +58,25 @@ export class Timetable extends Component {
         if (resData.error || resData.length === 0) {
           getKey('timetable').then((rawData) => {
             const data = rawData ? JSON.parse(rawData) : [];
-            this.setState({ ...newState, data, error: resData.error });
+            this.splitSchedule({
+              ...newState,
+              data,
+              error: resData.error,
+            });
           });
         } else {
           storeKey('timetable', JSON.stringify(resData));
-          this.setState({ ...newState, data: resData });
+          this.splitSchedule({
+            ...newState,
+            data: resData,
+          });
         }
       })
       .catch((err) => console.log({ err }));
   }
 
-  switchTab(index) {
-    this.setState({ selectedIndex: index });
-  }
-
-  renderSchedule(schedule, index) {
-    const { refreshing, error, selectedIndex } = this.state;
+  renderSchedule(schedule, tabIndex) {
+    const { refreshing, error, index } = this.state;
     const { themedStyle } = this.props;
 
     const refreshControl = (
@@ -79,41 +94,48 @@ export class Timetable extends Component {
       >
         <Schedule
           refreshing={refreshing}
-          allowRefresh
           schedule={schedule}
           message={error}
-          tabIndex={index}
-          activeTab={selectedIndex}
+          tabIndex={tabIndex}
+          activeTab={index}
         />
       </ScrollView>
     );
   }
 
   renderScene = ({ route }) => {
-    const { data } = this.state;
-    const schedule = replaceDatesWithMomentObjects(data);
-
-    const today = schedule.filter((day) => isToday(day.date));
-    const tomorrow = schedule.filter((day) => isTomorrow(day.date));
-    const week = schedule.slice(0);
-
     switch (route.key) {
-      case 'first':
+      case 'search':
         return <Search />;
-      case 'second':
-        return this.renderSchedule(today, 1);
-      case 'third':
-        return this.renderSchedule(tomorrow, 2);
-      case 'fourth':
-        return this.renderSchedule(week, 3);
+      case 'today':
+        return this.renderSchedule(this.state.today, 1);
+      case 'tomorrow':
+        return this.renderSchedule(this.state.tomorrow, 2);
+      case 'week':
+        return this.renderSchedule(this.state.schedule, 3);
       default:
         return null;
     }
   };
 
+  updateLocales() {
+    if (this.state.language !== this.context[0].app.properties.language) {
+      const routes = [
+        { key: 'search', title: I18n.t('timetable.tabs.Search') },
+        { key: 'today', title: I18n.t('timetable.tabs.Today') },
+        { key: 'tomorrow', title: I18n.t('timetable.tabs.Tomorrow') },
+        { key: 'week', title: I18n.t('timetable.tabs.Week') },
+      ];
+      this.splitSchedule({ routes, language: this.context[0].app.properties.language });
+    }
+  }
 
   render() {
-    const { props: { themedStyle }, state: { selectedIndex } } = this;
+    const { props: { themedStyle } } = this;
+
+    this.updateLocales();
+
+    console.log('rerender');
 
     return (
       <TabView

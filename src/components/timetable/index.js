@@ -180,7 +180,8 @@ export default withStyles(Timetable, (theme) => ({
   },
   tabBarLabel: {
     fontWeight: 'bold',
-    width: 'auto',
+    width: '100%',
+    fontSize: 13,
     textTransform: 'capitalize',
   },
   tabBarIndicator: {
@@ -200,6 +201,7 @@ export default withStyles(Timetable, (theme) => ({
     minHeight: '100%',
   },
   scrollContainer: {
+    backgroundColor: theme['background-basic-color-1'],
     borderTopColor: theme['border-basic-color-4'],
     borderTopWidth: 1,
   },

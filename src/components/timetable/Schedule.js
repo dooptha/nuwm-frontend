@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { withStyles, Text } from 'react-native-ui-kitten';
-import PropTypes from 'prop-types';
 import Timeline from './timeline';
 
 import Day from './Day';
@@ -13,23 +12,8 @@ import InlineError from '../common/InlineError';
   * when there is no subjects or when refreshing list
 */
 class Schedule extends Component {
-  static propTypes = {
-    /** array of days with subjects */
-    schedule: PropTypes.array,
-    /** if Timeline is enabled */
-    allowTimeline: PropTypes.bool,
-    /** if RefreshControl feature is enabled */
-    allowRefresh: PropTypes.bool,
-    /** callback for RefreshControl */
-    onRefresh: PropTypes.func,
-    /** if RefreshControl is active */
-    refreshing: PropTypes.bool,
-  }
-
   static defaultProps = {
     schedule: [],
-    allowTimeline: false,
-    allowRefresh: false,
     onRefresh: () => console.warn('Unpredictable callback from Schedule List'),
     refreshing: false,
   }
@@ -47,7 +31,7 @@ class Schedule extends Component {
   }
 
   renderSchedule(schedule) {
-    const { themedStyle, tabIndex, activeTab } = this.props;
+    const { themedStyle, active } = this.props;
 
     const body = schedule.map((day) => (
       <Day key={day.date} day={day} />
@@ -58,8 +42,7 @@ class Schedule extends Component {
         <Timeline
           schedule={schedule}
           style={themedStyle.timeline}
-          tabIndex={tabIndex}
-          activeTab={activeTab}
+          active={active}
         />
         <View style={themedStyle.days}>
           { body }

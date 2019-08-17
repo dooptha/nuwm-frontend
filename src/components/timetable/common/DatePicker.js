@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import { withStyles } from 'react-native-ui-kitten';
+import DatePicker from 'react-native-date-ranges';
 import I18n from '../../../utils/i18n';
-import DatePicker from '../../../libs/react-native-date-ranges';
 import FormInput from './Form/Input';
 
 export class DatePickerWrapper extends Component {

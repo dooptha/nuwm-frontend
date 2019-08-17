@@ -43,6 +43,7 @@
     "@babel/core": "7.4.5",
     "@babel/runtime": "7.4.5",
     "@react-native-community/eslint-config": "0.0.3",
+    "@welldone-software/why-did-you-render": "^3.3.3",
     "babel-jest": "24.8.0",
     "babel-plugin-optional-require": "^0.3.1",
     "enzyme": "^3.10.0",

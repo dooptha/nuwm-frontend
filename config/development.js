@@ -2,8 +2,8 @@
 import { Platform } from 'react-native';
 import config from './production';
 
-const apiEndpoint = Platform.OS === 'ios' ? 'https://api.dooptha.com' : 'https://api.dooptha.com';
-const socketIoEndpoint = Platform.OS === 'ios' ? 'https://api.dooptha.com/flood' : 'https://api.dooptha.com/flood';
+const apiEndpoint = Platform.OS === 'ios' ? 'https://api.dooptha.com' : 'http://10.0.2.2:3000';
+const socketIoEndpoint = Platform.OS === 'ios' ? 'https://api.dooptha.com/flood' : 'http://10.0.2.2:3000/flood';
 
 const devConfig = {
   API_ENDPOINT: apiEndpoint,

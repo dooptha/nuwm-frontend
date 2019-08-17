@@ -18,6 +18,7 @@ import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.reactcommunity.rnlocalize.RNLocalizePackage;
 import com.swmansion.rnscreens.RNScreensPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+import com.swmansion.reanimated.ReanimatedPackage;
 
 import java.util.List;
 
@@ -43,6 +44,7 @@ public class MainApplication extends Application implements ReactApplication {
       packages.add(new RNDeviceInfo());
       packages.add(new RNSoundPackage());
       packages.add(new RollbarReactNativePackage());
+      packages.add(new ReanimatedPackage());
       packages.add(new ReactNativeExceptionHandlerPackage());
       return packages;
     }

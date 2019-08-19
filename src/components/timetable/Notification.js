@@ -21,14 +21,6 @@ class Notification extends Component {
     }, 5000);
   }
 
-  componentDidUpdate() {
-    this.appear();
-
-    setTimeout(() => {
-      this.dissappear();
-    }, 5000);
-  }
-
   appear() {
     const { animation } = this.state;
 
@@ -77,6 +69,7 @@ export default withStyles(Notification, (theme) => ({
     borderBottomWidth: 1,
   },
   messText: {
+    color: theme['text-basic-color'],
     paddingTop: 10,
   },
 }));

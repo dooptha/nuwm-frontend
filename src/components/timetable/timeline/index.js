@@ -1,9 +1,34 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { View, Animated, Dimensions } from 'react-native';
-import { withStyles } from 'react-native-ui-kitten';
-import PropTypes from 'prop-types';
 import moment from 'moment';
 import Circle from './Circle';
+
+const styles = {
+  timeline: {
+    paddingLeft: 25,
+    height: '100%',
+    alignItems: 'center',
+    width: '10%',
+    marginLeft: '0%',
+  },
+  lineWrapper: {
+    flexDirection: 'column',
+    position: 'absolute',
+  },
+  point: {
+    position: 'absolute',
+    borderRadius: 50,
+    width: 10,
+    height: 10,
+  },
+  line: {
+    width: 1,
+    borderWidth: 1.5,
+  },
+  activeLine: {
+    position: 'absolute',
+  },
+};
 
 /**
   * This class responsible for visualing and animating timeline.
@@ -11,18 +36,11 @@ import Circle from './Circle';
   * If you change margin/padding/height of this components, dont forget to
   * change their height in this class constructor too
 */
-class Timeline extends Component {
-  static propTypes = {
-    /** array of days with subjects */
-    schedule: PropTypes.array,
-  }
-
+export default class Timeline extends PureComponent {
   static defaultProps = {
     schedule: [],
-  }
-
-  state = {
-    animation: new Animated.Value(0),
+    activeColor: 'white',
+    inactiveColor: 'black',
   }
 
   constructor(props) {
@@ -30,8 +48,12 @@ class Timeline extends Component {
 
     // TODO: replace this with new Date()
     this.currentDate = moment('2018-09-06 10:00:00');
-
     this.screenHeight = Dimensions.get('window').height;
+
+    this.state = { animation: new Animated.Value(0) };
+
+    this.refreshPadding = 300;
+    this.duration = 3000;
 
     // circle
     this.circlesMargin = 30;
@@ -42,47 +64,79 @@ class Timeline extends Component {
     // <Day>'s titleWrapper height
     this.dateHeight = 40;
 
-    // bar
-    this.progressBarHeight = 0;
-    this.barHeight = 0;
     this.startPosition = 0;
-    this.refreshPadding = 300;
-
-    this.intervals = [];
-    this.moments = [];
 
     this.addAnimationListener();
+    this.updateData();
   }
 
-  shouldComponentUpdate() {
-    const { active } = this.props;
-    const { animation } = this.state;
+  getPointsForTimeline(schedule, points = []) {
+    let height = this.refreshPadding;
+    const firstDate = schedule[0].date.clone();
+    const lastDate = schedule[schedule.length - 1].date.clone();
 
-    if (!active && animation._value !== this.startPosition) {
-      this.resetAnimation();
+    points.push({
+      moment: firstDate.set({ hour: 0, minute: 0, second: 0 }), height,
+    });
+
+    height += this.circlesMargin;
+
+    schedule.forEach((day, dayIndex) => {
+      day.subjects.forEach((subject, subjectIndex) => {
+        if (subjectIndex === 0) height += this.dateHeight;
+        if (dayIndex !== 0 || subjectIndex !== 0) height += this.subjectHeight;
+
+        points.push({ moment: subject.momentTime, height });
+      });
+    });
+
+    height = this.screenHeight + 2 * this.refreshPadding;
+
+    points.push({
+      moment: lastDate.set({ hour: 23, minute: 59, second: 59 }), height,
+    });
+    return points;
+  }
+
+  getProgressBarHeight() {
+    if (this.currentDate > this.points[this.points.length - 1].moment) {
+      return this.barHeight;
+    }
+    for (let i = 0; i < this.points.length - 1; i += 1) {
+      const start = this.points[i];
+      const end = this.points[i + 1];
+
+      if (start.moment <= this.currentDate && end.moment > this.currentDate) {
+        const hDiff = end.height - start.height;
+        const tDiff = end.moment.diff(start.moment);
+        const timePassed = this.currentDate.diff(start.moment);
+
+        const time = timePassed > tDiff ? tDiff : timePassed;
+
+        return Math.round((time / (tDiff / hDiff)) + start.height);
+      }
     }
 
-    return active;
+    return 0;
   }
 
-  componentDidUpdate() {
-    const { animation } = this.state;
+  updateData() {
+    const { schedule } = this.props;
 
-    if (animation._value === this.startPosition || animation._value === 0) {
-      this.animateBar();
-    }
-
-    return true;
+    this.points = this.getPointsForTimeline(schedule);
+    this.barHeight = this.points[this.points.length - 1].height;
+    this.progressBarHeight = this.getProgressBarHeight();
+    this.startPosition = this.progressBarHeight > this.refreshPadding ? this.refreshPadding - 1 : 0;
   }
 
-  animateBar() {
+  startAnimation() {
     const { animation } = this.state;
 
     Animated.timing(
       animation,
       {
         toValue: this.progressBarHeight,
-        duration: this.progressBarHeight / this.barHeight * 3000,
+        duration: this.progressBarHeight / this.barHeight * this.duration,
         // for Android systems only, it may not work without it
         perspective: 1000,
       },
@@ -95,14 +149,14 @@ class Timeline extends Component {
     animation.stopAnimation();
     animation.setValue(this.startPosition);
 
-    for (let i = 1; i < this.moments.length - 1; i += 1) {
-      this.moments[i].node.setUnActive();
+    for (let i = 0; i < this.points.length; i += 1) {
+      const point = this.points[i];
+      if (point.node) {
+        point.node.setUnActive();
+      }
     }
   }
 
-  /**
-   * if progress bar height is equal to the circle position - make it active
-   */
   addAnimationListener() {
     const { animation } = this.state;
 
@@ -110,127 +164,44 @@ class Timeline extends Component {
       const height = bar.value - this.circleSize / 2;
 
       // exclude first and last element, because they are not visible
-      for (let i = 1; i < this.moments.length - 1; i += 1) {
-        if (this.moments[i].node && !this.moments[i].node.state.active) {
-          if (this.moments[i].height < height) {
-            this.moments[i].node.setActive();
-          }
+      for (let i = 1; i < this.points.length - 1; i += 1) {
+        const point = this.points[i];
+
+        if (point.node && !point.node.state.active && point.height < height) {
+          point.node.setActive();
         }
       }
     });
-  }
-
-  /**
-   * here we parse our schedule and divide it into intervals
-   */
-  splitSchedule(schedule) {
-    this.intervals = [];
-    this.moments = [];
-
-    this.barHeight = this.refreshPadding;
-
-    this.moments.push({
-      moment: schedule[0].date.clone().set({
-        hour: 0,
-        minute: 0,
-        second: 0,
-      }),
-      height: this.barHeight,
-    });
-
-    this.barHeight += this.circlesMargin;
-
-    schedule.forEach((day, dayIndex) => {
-      day.subjects.forEach((subject, subjectIndex) => {
-        if (subjectIndex === 0) {
-          this.barHeight += this.dateHeight;
-        }
-
-        if (!(dayIndex === 0 && subjectIndex === 0)) {
-          this.barHeight += this.subjectHeight;
-        }
-
-        this.moments.push({ moment: subject.momentTime, height: this.barHeight });
-      });
-    });
-
-    const padding = this.screenHeight + 2 * this.refreshPadding - this.barHeight;
-
-    this.barHeight += padding;
-
-    this.moments.push({
-      moment: schedule[schedule.length - 1].date.clone().set({
-        hour: 23,
-        minute: 59,
-        second: 59,
-      }),
-      height: this.barHeight,
-    });
-
-    for (let i = 0; i < this.moments.length - 1; i += 1) {
-      this.intervals.push({
-        start: {
-          moment: this.moments[i].moment,
-          height: this.moments[i].height,
-        },
-        end: {
-          moment: this.moments[i + 1].moment,
-          height: this.moments[i + 1].height,
-        },
-      });
-    }
   }
 
   renderProgressBar() {
-    const { props: { themedStyle }, state: { animation } } = this;
+    const { activeColor } = this.props;
+    const { animation } = this.state;
 
-    let height = 0;
 
-    if (this.currentDate > this.intervals[this.intervals.length - 1].end.moment) {
-      height = this.barHeight;
-    } else {
-      for (let i = 0; i < this.intervals.length; i += 1) {
-        const { start, end } = this.intervals[i];
-
-        if (start.moment <= this.currentDate && end.moment > this.currentDate) {
-          const heightDiff = end.height - start.height;
-          const timeDiff = end.moment.diff(start.moment);
-          const timePassed = this.currentDate.diff(start.moment);
-
-          const time = timePassed > timeDiff ? timeDiff : timePassed;
-
-          height = Math.round((time / (timeDiff / heightDiff)) + start.height);
-        }
-      }
-    }
-
-    const styles = [themedStyle.line, themedStyle.activeLine, {
+    const progressBarStyles = [styles.line, styles.activeLine, {
       height: animation,
+      borderColor: activeColor,
     }];
 
-    this.progressBarHeight = height;
-    this.startPosition = height > this.refreshPadding ? this.refreshPadding - 1 : 0;
-
     return (
-      <Animated.View style={styles} />
+      <Animated.View style={progressBarStyles} />
     );
   }
 
   renderCircles() {
-    const { themedStyle } = this.props;
     const circles = [];
 
     // exclude first and last element, because they are not visible
-    for (let i = 1; i < this.moments.length - 1; i += 1) {
-      const styles = [
-        themedStyle.circle,
-        { marginTop: this.moments[i].height },
-      ];
+    for (let i = 1; i < this.points.length - 1; i += 1) {
+      const point = this.points[i];
+
+      const pointStyles = [styles.point, { marginTop: point.height }];
 
       circles.push(<Circle
-        key={`${this.moments[i].height}`}
-        styles={styles}
-        ref={(node) => { this.moments[i].node = node; }}
+        key={`${point.height}`}
+        styles={pointStyles}
+        ref={(node) => { this.points[i].node = node; }}
       />);
     }
 
@@ -238,55 +209,24 @@ class Timeline extends Component {
   }
 
   render() {
-    const { themedStyle, schedule, style } = this.props;
+    const { inactiveColor } = this.props;
 
-    this.splitSchedule(schedule);
-
-    const circles = this.renderCircles();
+    const timelineStyles = [styles.timeline, {
+      marginTop: -this.refreshPadding,
+    }];
+    const barStyles = [styles.line, {
+      height: this.barHeight,
+      borderColor: inactiveColor,
+    }];
 
     return (
-      <View style={[themedStyle.timeline, style, {
-        marginTop: -this.refreshPadding,
-      }]}
-      >
-        <View style={themedStyle.lineWrapper}>
-          <View style={[themedStyle.line, themedStyle.unactiveLine, {
-            height: this.barHeight,
-          }]}
-          />
-          { this.renderProgressBar()}
+      <View style={timelineStyles}>
+        <View style={styles.lineWrapper}>
+          <View style={barStyles} />
+          { this.renderProgressBar() }
         </View>
-        { circles }
+        { this.renderCircles() }
       </View>
     );
   }
 }
-
-export default withStyles(Timeline, (theme) => ({
-  timeline: {
-    paddingLeft: 25,
-    height: '100%',
-    alignItems: 'center',
-  },
-  lineWrapper: {
-    flexDirection: 'column',
-    position: 'absolute',
-  },
-  circle: {
-    position: 'absolute',
-    borderRadius: 50,
-    width: 10,
-    height: 10,
-  },
-  line: {
-    width: 1,
-    borderWidth: 1.5,
-  },
-  activeLine: {
-    position: 'absolute',
-    borderColor: theme['background-primary-color-1'],
-  },
-  unactiveLine: {
-    borderColor: theme['border-basic-color-5'],
-  },
-}));

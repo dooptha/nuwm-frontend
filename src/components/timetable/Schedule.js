@@ -5,8 +5,6 @@ import Timeline from './timeline';
 
 import Day from './Day';
 
-import InlineError from '../common/InlineError';
-
 /**
   * This class responsible for rendering schedule list and it's logic
   * when there is no subjects or when refreshing list
@@ -16,6 +14,27 @@ class Schedule extends Component {
     schedule: [],
     onRefresh: () => console.warn('Unpredictable callback from Schedule List'),
     refreshing: false,
+  }
+
+  componentDidMount() {
+    if (this.timeline) {
+      this.timeline.startAnimation();
+    }
+  }
+
+  shouldComponentUpdate() {
+    if (this.timeline) {
+      this.timeline.resetAnimation();
+    }
+
+    return true;
+  }
+
+  componentDidUpdate() {
+    const { active } = this.props;
+    if (this.timeline && active) {
+      this.timeline.startAnimation();
+    }
   }
 
   renderMessage(message) {
@@ -31,7 +50,7 @@ class Schedule extends Component {
   }
 
   renderSchedule(schedule) {
-    const { themedStyle, active } = this.props;
+    const { themedStyle, active, refreshing } = this.props;
 
     const body = schedule.map((day) => (
       <Day key={day.date} day={day} />
@@ -43,6 +62,10 @@ class Schedule extends Component {
           schedule={schedule}
           style={themedStyle.timeline}
           active={active}
+          refreshing={refreshing}
+          activeColor={themedStyle.colors.active}
+          inactiveColor={themedStyle.colors.inactive}
+          ref={(node) => this.timeline = node}
         />
         <View style={themedStyle.days}>
           { body }
@@ -61,10 +84,10 @@ class Schedule extends Component {
 
     // schedule could be received by props or by navigation params
     const props = navigation ? navigation.state.params : this.props;
-    const { refreshing, schedule, message } = props;
+    const { schedule, message } = props;
 
     // dont render anything while refreshing data
-    const body = refreshing ? null : this.renderBody(schedule, message);
+    const body = this.renderBody(schedule, message);
 
     return (
       <View style={themedStyle.wrapper}>
@@ -89,9 +112,9 @@ export default withStyles(Schedule, (theme) => ({
     paddingLeft: 5,
     paddingRight: 15,
   },
-  timeline: {
-    width: '10%',
-    marginLeft: '0%',
+  colors: {
+    active: theme['background-primary-color-1'],
+    inactive: theme['border-basic-color-5'],
   },
   messageWrapper: {
     flexDirection: 'column',

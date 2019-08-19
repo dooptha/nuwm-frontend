@@ -7,7 +7,7 @@ import Schedule from './Schedule';
 
 import I18n from '../../utils/i18n';
 import { getScheduleOnWeek } from '../../api/timetable';
-import { storeKey, getKey } from '../../utils/storage';
+import { storeKey, getKey, removeKey } from '../../utils/storage';
 import { StateContext } from '../../utils/context';
 import { isToday, isTomorrow, replaceDatesWithMoment } from './helper';
 
@@ -34,7 +34,6 @@ export class Timetable extends Component {
     super(props);
 
     this.deviceWidth = Dimensions.get('window').width;
-    this.switchTab = (index) => this.setState({ index });
   }
 
   componentDidMount() {
@@ -43,6 +42,10 @@ export class Timetable extends Component {
 
   onRefresh() {
     this.requestSchedule();
+  }
+
+  switchTab = (index) => {
+    this.setState({ index });
   }
 
   splitSchedule(props = {}) {

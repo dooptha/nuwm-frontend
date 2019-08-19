@@ -18,7 +18,7 @@ if (Array.isArray(locales)) {
 I18n.defaultLocale = 'en';
 
 // Use default locale for fallbacks
-I18n.fallbacks = false;
+I18n.fallbacks = true;
 
 I18n.translations = {
   ua,
@@ -30,8 +30,8 @@ const getMomentLocale = () => {
   switch (I18n.locale) {
     case 'ua': return 'uk';
     case 'ru': return 'ru';
-    case 'en': return 'en-ua';
-    default: return 'en-ua';
+    case 'en': return 'en-au';
+    default: return 'en-au';
   }
 };
 

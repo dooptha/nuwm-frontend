@@ -63,7 +63,6 @@ export const socketEvents = ({ dispatch, user }) => {
   });
 
   socket.on('messages:history', (messages) => {
-    console.log('messages:history', messages);
     dispatch({
       type: 'loadMessages',
       messages,

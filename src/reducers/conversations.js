@@ -1,16 +1,44 @@
+import moment from 'moment';
+
+const formatDate = (message) => moment(message.date).format('HH:mm');
+
+const formattedMessage = (message) => ({
+  ...message,
+  date: formatDate(message),
+});
+
+const formatMessages = (messages) => (
+  messages.map((message) => formattedMessage(message))
+);
+
+const findPendingMessageIndex = (messages, newMessage) => (
+  messages.findIndex((message) => (
+    !message.id
+    && message.sender.id === newMessage.sender.id
+    && message.body === newMessage.body
+  ))
+);
+
 const conversationsReducer = (state, action) => {
   const { messages } = state;
+  let index;
 
   switch (action.type) {
     case 'sendMessage':
-      messages.push(action.message);
+      messages.push(formattedMessage(action.message));
 
       return {
         ...state,
         messages,
       };
+
     case 'receiveMessage':
-      messages.push(action.message);
+      if (action.isSender) {
+        index = findPendingMessageIndex(messages, action.message);
+        messages.splice(index, 1, formattedMessage(action.message));
+      } else {
+        messages.push(formattedMessage(action.message));
+      }
 
       return {
         ...state,
@@ -33,7 +61,7 @@ const conversationsReducer = (state, action) => {
     case 'loadMessages':
       return {
         ...state,
-        messages: action.messages,
+        messages: formatMessages(action.messages),
       };
 
     default:

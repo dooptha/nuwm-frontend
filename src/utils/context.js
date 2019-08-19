@@ -80,9 +80,6 @@ export const loadInitialData = async (dispatch) => {
       username,
       deviceId,
     });
-
-    // Then initialize sockets
-    initSockets({ dispatch, token: user.token });
   }
 
   dispatch({ type: 'updateDeviceId', deviceId });

@@ -8,7 +8,6 @@ class Conversation extends Component {
   constructor(props) {
     super(props);
 
-    this.data = props.data;
     this.listRef = React.createRef();
     this.scrollToLastMessageTimeout = null;
   }
@@ -24,31 +23,51 @@ class Conversation extends Component {
   }
 
   scrollToLastMessage() {
-    this.listRef.current.scrollToEnd({ animated: true });
+    this.listRef.current.scrollToEnd({ animated: false });
   }
 
   renderListItem(info) {
-    const { onMessagePress, current } = this.props;
+    const { onMessagePress, current, data } = this.props;
+    const message = info.item;
+
+    if (!message) return null;
+
+    const prevMessage = data[info.index - 1];
+    const nextMessage = data[info.index + 1];
+    const prevSender = prevMessage && (message.sender.id === prevMessage.sender.id);
+    const nextSender = nextMessage && (message.sender.id === nextMessage.sender.id);
+    let messagePosition = 'solo';
+
+    if (nextSender) {
+      if (prevSender) {
+        messagePosition = 'middle';
+      } else {
+        messagePosition = 'first';
+      }
+    } else if (prevSender) {
+      messagePosition = 'last';
+    }
 
     return (
       <Message
-        index={info.index}
-        message={info.item}
-        onPress={(m) => onMessagePress(m)}
+        index={message.id}
+        message={message}
+        onMessagePress={onMessagePress}
         current={current}
+        messagePosition={messagePosition}
       />
     );
   }
 
   render() {
-    const { style } = this.props;
+    const { data, style } = this.props;
 
     return (
       <List
         style={style}
         ref={this.listRef}
         onContentSizeChange={() => this.onListContentSizeChange()}
-        data={this.data}
+        data={data}
         renderItem={(info) => this.renderListItem(info)}
       />
     );

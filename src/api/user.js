@@ -39,7 +39,7 @@ function logIn(dispatch, navigation, data) {
 
       if (token) {
         setAuthHeaders(token);
-        initSockets({ dispatch, token });
+        initSockets({ dispatch, user, token });
       }
 
       // Should navigate to app after successful validation on server if needed
@@ -80,7 +80,7 @@ function updateCurrentUser(dispatch, navigation, { username }) {
 }
 
 function deleteMessage(message) {
-  return api.post('/delete_message', { message });
+  return api.post('/admin/messages/delete', { message });
 }
 
 export default {

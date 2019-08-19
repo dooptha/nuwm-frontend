@@ -26,6 +26,7 @@ class Conversation extends Component {
 
     this.onNewMessageChange = this.onNewMessageChange.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
+    this.onMessagePress = this.onMessagePress.bind(this);
   }
 
   componentDidMount() {
@@ -122,14 +123,14 @@ class Conversation extends Component {
 
     return (
       <AvoidKeyboard
-        style={{ flex: 1 }}
+        style={themedStyle.avoidKeyboard}
         autoDismiss={false}
         offset={this.keyboardOffset}
       >
         <Chat
           style={themedStyle.chatContainer}
           data={conversations.messages}
-          onMessagePress={(m) => this.onMessagePress(m)}
+          onMessagePress={this.onMessagePress}
           current={user.current}
         />
         <View style={themedStyle.inputContainer}>
@@ -137,6 +138,7 @@ class Conversation extends Component {
             style={themedStyle.messageInput}
             textStyle={themedStyle.text}
             size="small"
+            multiline
             value={newMessage}
             placeholder={I18n.t('conversations.messagePlaceholder')}
             onChangeText={this.onNewMessageChange}
@@ -151,18 +153,21 @@ class Conversation extends Component {
 Conversation.contextType = StateContext;
 
 export default withStyles(Conversation, (theme) => ({
+  avoidKeyboard: {
+    flex: 1,
+  },
   container: {
     flex: 1,
   },
   chatContainer: {
-    paddingHorizontal: 16,
+    paddingHorizontal: 5,
     backgroundColor: theme['background-basic-color-3'],
   },
   inputContainer: {
     padding: 5,
     paddingTop: 10,
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     justifyContent: 'space-between',
     backgroundColor: theme['background-basic-color-2'],
   },
@@ -173,7 +178,7 @@ export default withStyles(Conversation, (theme) => ({
     width: 24,
     height: 24,
     borderRadius: 24,
-    marginBottom: 2,
+    marginBottom: 8,
   },
   messageInput: {
     flex: 1,

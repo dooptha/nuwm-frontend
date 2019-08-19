@@ -13,6 +13,14 @@ export const ArrowheadUpIcon = (style) => {
   return Icon(source, style);
 };
 
+export const DoneAllOutlineIcon = (style) => {
+  const source = {
+    imageSource: require('./eva/done-all-outline.png'),
+  };
+
+  return Icon(source, style);
+};
+
 export const ClockOutlineIcon = (style) => {
   const source = {
     imageSource: require('./eva/clock-outline.png'),

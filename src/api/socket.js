@@ -6,7 +6,7 @@ import config from '../../config';
 const newMessageSound = new Sound('new_message.mp3', Sound.MAIN_BUNDLE);
 let socket;
 
-export const socketEvents = ({ dispatch }) => {
+export const socketEvents = ({ dispatch, user }) => {
   socket.on('connect', () => {
     dispatch({ type: 'connect' });
   });
@@ -24,8 +24,15 @@ export const socketEvents = ({ dispatch }) => {
   });
 
   socket.on('message:received', (message) => {
+    if (!message) return null;
+
     const currentRoute = NavigationService.getCurrentRoute();
     const isInConversation = currentRoute.routeName === 'Conversation';
+
+    const isSender = user && message.sender
+      && user._id === message.sender.id;
+
+    console.log("USER", user, message, user._id, message.sender.id, isSender)
 
     if (!isInConversation && newMessageSound) {
       newMessageSound.play();
@@ -35,7 +42,10 @@ export const socketEvents = ({ dispatch }) => {
       type: 'receiveMessage',
       message,
       isInConversation,
+      isSender,
     });
+
+    return true;
   });
 
   socket.on('message:remove', (messageId) => (
@@ -53,6 +63,7 @@ export const socketEvents = ({ dispatch }) => {
   });
 
   socket.on('messages:history', (messages) => {
+    console.log('messages:history', messages);
     dispatch({
       type: 'loadMessages',
       messages,
@@ -74,7 +85,7 @@ export const socketEvents = ({ dispatch }) => {
   });
 };
 
-export const initSockets = ({ dispatch, token }) => {
+export const initSockets = ({ dispatch, token, user }) => {
   if (socket) socket.disconnect();
 
   socket = io(config.SOCKET_IO_ENDPOINT, {
@@ -83,7 +94,7 @@ export const initSockets = ({ dispatch, token }) => {
     forceNew: true,
   });
 
-  socketEvents({ dispatch, socket });
+  socketEvents({ dispatch, user });
 };
 
 export default {

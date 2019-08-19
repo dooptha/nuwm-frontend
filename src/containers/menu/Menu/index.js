@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import {
   View,
 } from 'react-native';
@@ -15,9 +15,11 @@ import {
   MessageCircleIcon,
 } from '../../../assets/icons';
 import I18n from '../../../utils/i18n';
-import { StateContext } from '../../../utils/context';
+import { connect } from '../../../utils/context';
 
-class MenuContainer extends Component {
+class MenuContainer extends PureComponent {
+  static whyDidYouRender = true;
+
   constructor(props) {
     super(props);
 
@@ -35,9 +37,7 @@ class MenuContainer extends Component {
   }
 
   renderMessageIconWithCounter(style) {
-    const { themedStyle } = this.props;
-    const [{ conversations }] = this.context;
-    const { unreadCounter } = conversations;
+    const { themedStyle, unreadCounter } = this.props;
 
     return (
       <View>
@@ -87,9 +87,12 @@ class MenuContainer extends Component {
   }
 }
 
-MenuContainer.contextType = StateContext;
+const mapStateToProps = (state) => ({
+  unreadCounter: state.conversations.unreadCounter,
+  language: state.app.properties.language,
+});
 
-export default withStyles(MenuContainer, (theme) => ({
+const wrappedMenu = withStyles(connect(mapStateToProps)(MenuContainer), (theme) => ({
   safeAreaContainer: {
     backgroundColor: theme['background-basic-color-1'],
   },
@@ -110,3 +113,7 @@ export default withStyles(MenuContainer, (theme) => ({
     color: 'white',
   },
 }));
+
+console.log('wrappedMenu', wrappedMenu);
+
+export default wrappedMenu;

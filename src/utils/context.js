@@ -80,9 +80,6 @@ export const loadInitialData = async (dispatch) => {
       username,
       deviceId,
     });
-
-    // Then initialize sockets
-    initSockets({ dispatch, token: user.token });
   }
 
   dispatch({ type: 'updateDeviceId', deviceId });
@@ -94,3 +91,21 @@ export const loadInitialData = async (dispatch) => {
 };
 
 export const useGlobalState = () => useContext(StateContext);
+
+
+// Works only with PureComponent
+export const connect = (mapStateToProps) => (
+  (WrappedComponent) => {
+    class Connect extends React.Component {
+      static contextType = StateContext;
+
+      render() {
+        const [state] = this.context;
+        const props = { ...this.props, ...mapStateToProps(state) };
+        return <WrappedComponent {...props} />;
+      }
+    }
+
+    return Connect;
+  }
+);

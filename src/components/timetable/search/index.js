@@ -37,6 +37,9 @@ class Search extends Component {
       startDate: null,
       endDate: null,
     };
+
+    this.scrollViewRef = React.createRef();
+    this.onContentSizeChange = this.onContentSizeChange.bind(this);
   }
 
   componentDidMount() {
@@ -60,6 +63,7 @@ class Search extends Component {
     this.setState(change);
   }
 
+
   onDataPickerChange(data) {
     const { errors } = this.state;
     const {
@@ -80,6 +84,10 @@ class Search extends Component {
         errors: { ...errors, date: false },
       });
     }
+  }
+
+  onContentSizeChange() {
+    this.scrollViewRef.current.scrollToEnd({ animated: false });
   }
 
   findSubjects() {
@@ -147,7 +155,11 @@ class Search extends Component {
 
     return (
       <View style={themedStyle.searchContainer}>
-        <ScrollView style={themedStyle.inputsContainer}>
+        <ScrollView
+          ref={this.scrollViewRef}
+          onContentSizeChange={this.onContentSizeChange}
+          style={themedStyle.inputsContainer}
+        >
           <View style={themedStyle.inputContainer}>
             <DatePicker
               label={I18n.t('timetable.search.Date')}

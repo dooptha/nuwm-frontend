@@ -1,4 +1,5 @@
 import React from 'react';
+import { Platform } from 'react-native';
 import {
   ArrowIosBackFill,
   CheckmarkOutlineIcon,
@@ -12,6 +13,11 @@ import {
 import I18n from '../utils/i18n';
 import { StateContext } from '../utils/context';
 
+const backIconIfNeeded = (route) => (
+  isRootRoute(route) && Platform.OS === 'ios'
+    ? ArrowIosBackFill : null
+);
+
 const MenuTopNavigationParams = {
   header: ({ navigation }) => {
     const { routeName } = getCurrentRouteState(navigation);
@@ -24,7 +30,7 @@ const MenuTopNavigationParams = {
             <TopNavigationBar
               border
               title={I18n.t(`routes.${routeName}`)}
-              backIcon={isRootRoute(index) && ArrowIosBackFill}
+              backIcon={backIconIfNeeded(index)}
               onBackPress={() => navigation.goBack(null)}
               connected={app.connected}
             />
@@ -46,7 +52,7 @@ const SheduleTopNavigationParams = {
           ([{ app }]) => (
             <TopNavigationBar
               title={I18n.t(`routes.${routeName}`)}
-              backIcon={isRootRoute(index) && ArrowIosBackFill}
+              backIcon={backIconIfNeeded(index)}
               onBackPress={() => navigation.goBack(null)}
               connected={app.connected}
             />
@@ -71,7 +77,7 @@ const ConversationTopNavigationParams = {
             <TopNavigationBar
               border
               title={title}
-              backIcon={isRootRoute(index) && ArrowIosBackFill}
+              backIcon={backIconIfNeeded(index)}
               onBackPress={() => navigation.goBack(null)}
               connected={app.connected}
             />

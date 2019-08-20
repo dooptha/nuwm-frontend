@@ -16,6 +16,12 @@ const pollReducer = (state, action) => {
         isLoading: false,
       };
 
+    case 'hidePoll':
+      return {
+        ...state,
+        current: null,
+      };
+
     case 'socketPollUpdated':
       return {
         ...state,

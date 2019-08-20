@@ -55,7 +55,12 @@ class ConversationsContainer extends Component {
 
   render() {
     const { themedStyle } = this.props;
-    const [{ poll, app, conversations }] = this.context;
+
+    const [{
+      poll,
+      app,
+      conversations,
+    }, dispatch] = this.context;
 
     return (
       <ScrollView
@@ -73,6 +78,8 @@ class ConversationsContainer extends Component {
             poll={poll.current}
             onVote={(i) => this.onVote(i)}
             votingFor={poll.votingFor}
+            dispatch={dispatch}
+            exitButton
           />
         </View>
         <View style={themedStyle.floodShadowBox}>

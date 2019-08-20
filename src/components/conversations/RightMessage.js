@@ -183,6 +183,7 @@ export default withStyles(Message, (theme) => ({
     maxWidth: Dimensions.get('window').width - 120,
     minWidth: 70,
     fontFamily: 'Roboto',
+    color: theme['text-basic-color'],
   },
   infoContainer: {
     flexDirection: 'row',

@@ -32,8 +32,6 @@ export const socketEvents = ({ dispatch, user }) => {
     const isSender = user && message.sender
       && user._id === message.sender.id;
 
-    console.log("USER", user, message, user._id, message.sender.id, isSender)
-
     if (!isInConversation && newMessageSound) {
       newMessageSound.play();
     }

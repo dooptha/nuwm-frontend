@@ -197,6 +197,14 @@ export const EmailIcon = (style) => {
   return Icon(source, style);
 };
 
+export const PlusIcon = (style) => {
+  const source = {
+    imageSource: require('./eva/plus.png'),
+  };
+
+  return Icon(source, style);
+}
+
 export const CirclePlusIcon = (color) => {
   const source = {
     imageSource: require('./eva/plus.png'),

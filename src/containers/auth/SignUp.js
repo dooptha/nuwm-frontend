@@ -86,6 +86,7 @@ export class SignUp extends Component {
           onSubmitEditing={() => this.focusTheField('group')}
         />
         <GroupInput
+          inputReference={(ref) => this.setInputRef(ref, 'group')}
           style={themedStyle.input}
           labelStyle={themedStyle.text}
           textStyle={themedStyle.text}

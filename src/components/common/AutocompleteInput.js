@@ -83,7 +83,7 @@ export class AutocompleteInput extends Component {
       name,
       value,
       returnKeyType,
-      reference,
+      inputReference,
       themedStyle,
       status,
     } = this.props;
@@ -103,7 +103,7 @@ export class AutocompleteInput extends Component {
           returnKeyType={returnKeyType}
           status={status}
           onChangeText={(text) => this.onInputChange(text)}
-          ref={reference}
+          ref={inputReference}
         />
         {
           menuVisible ? (

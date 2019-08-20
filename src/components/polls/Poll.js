@@ -1,12 +1,14 @@
 import React from 'react';
 import {
   View,
+  TouchableOpacity,
 } from 'react-native';
 import {
   withStyles,
   Text,
 } from 'react-native-ui-kitten';
 import Option from './Option';
+import { PlusIcon } from '../../assets/icons';
 
 const Poll = ({
   poll,
@@ -14,6 +16,8 @@ const Poll = ({
   onVote,
   style,
   votingFor,
+  exitButton,
+  dispatch,
 }) => {
   if (!poll || !poll.options) {
     return null;
@@ -24,8 +28,29 @@ const Poll = ({
 
   const { question, options } = poll;
 
+  const HidePoll = () => {
+    if (dispatch) {
+      dispatch({ type: 'hidePoll' });
+    }
+  };
+
+  const renderExitButton = () => (
+    exitButton && poll.voted
+      ? (
+        <View style={themedStyle.exitIconContainer}>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            onPress={HidePoll}
+          >
+            {PlusIcon(themedStyle.exitIcon)}
+          </TouchableOpacity>
+        </View>
+      ) : null
+  );
+
   return (
     <View style={[themedStyle.container, styles.container]}>
+      {renderExitButton()}
       <Text
         category="h3"
         style={[themedStyle.question, styles.question]}
@@ -40,13 +65,22 @@ const Poll = ({
             index={index}
             option={option}
             poll={poll}
-            onVote={(i) => onVote(i)}
+            onVote={onVote}
             votingFor={votingFor}
           />
         ))
       }
     </View>
   );
+};
+
+Poll.defaultProps = {
+  poll: false,
+  themedStyle: {},
+  onVote: () => {},
+  style: {},
+  votingFor: undefined,
+  exitButton: false,
 };
 
 export default withStyles(Poll, (theme) => ({
@@ -60,5 +94,17 @@ export default withStyles(Poll, (theme) => ({
   question: {
     marginBottom: 10,
     fontFamily: 'Roboto',
+  },
+  exitIconContainer: {
+    alignItems: 'flex-end',
+    marginRight: -10,
+    marginTop: -10,
+    marginBottom: -14,
+  },
+  exitIcon: {
+    transform: [{ rotate: '45deg' }],
+    tintColor: '#ffffff',
+    width: 24,
+    height: 24,
   },
 }));

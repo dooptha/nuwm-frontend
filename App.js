@@ -2,6 +2,8 @@ import React from 'react';
 import { YellowBox } from 'react-native';
 import { mapping } from '@eva-design/eva';
 import { ApplicationProvider } from 'react-native-ui-kitten';
+import DefaultPreference from 'react-native-default-preference';
+import DeviceInfo from 'react-native-device-info';
 import { DynamicStatusBar } from './src/components/common';
 import Router from './src/navigation/routes';
 import { themes, customMapping } from './src/utils/themes';
@@ -13,6 +15,8 @@ import { setupExceptionHandlers } from './src/utils/errors';
 // if (__DEV__) {
 //   whyDidYouRender(React);
 // }
+//
+//
 
 YellowBox.ignoreWarnings([
   'Unrecognized WebSocket connection option(s) `agent`, `perMessageDeflate`, `pfx`, `key`, `passphrase`, `cert`, `ca`, `ciphers`, `rejectUnauthorized`. Did you mean to put these under `headers`?',
@@ -22,6 +26,11 @@ setupExceptionHandlers();
 
 const App = () => {
   const [{ app }] = useGlobalState();
+
+  console.log('@ device   ', DeviceInfo.getBundleId());
+  const bundleId = DeviceInfo.getBundleId();
+  DefaultPreference.setName('group.nuwmapp.com');
+  DefaultPreference.set('group', 'Minecraft').then(() => console.log('done'));
 
   return (
     <ApplicationProvider

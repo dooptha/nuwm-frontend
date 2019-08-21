@@ -38,6 +38,8 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     
     self.tableView.contentInset = UIEdgeInsets(top: 5,left: 0,bottom: 0,right: 0)
     
+    let group = UserDefaults(suiteName: "group.nuwmapp.com")?.string(forKey: "group")
+    
     Alamofire.request(url, method: .get).response{ response in
       
       let json = JSON(response.data!)
@@ -71,7 +73,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         
         let noDataLabel: UILabel  = UILabel(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: self.tableView.bounds.size.height))
         
-        noDataLabel.text = "NoLesson".localized
+        noDataLabel.text = group
         noDataLabel.textColor = UIColor.darkGray
         noDataLabel.textAlignment = .center
         

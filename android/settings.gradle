@@ -1,4 +1,6 @@
 rootProject.name = 'NuwmApp'
+include ':react-native-default-preference'
+project(':react-native-default-preference').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-default-preference/android')
 include ':rollbar-react-native'
 project(':rollbar-react-native').projectDir = new File(rootProject.projectDir, '../node_modules/rollbar-react-native/android')
 include ':react-native-sound'

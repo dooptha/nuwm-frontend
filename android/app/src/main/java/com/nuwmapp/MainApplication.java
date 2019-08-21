@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.kevinresol.react_native_default_preference.RNDefaultPreferencePackage;
 import com.rollbar.RollbarReactNativePackage;
 import com.rollbar.RollbarReactNative;
 import com.zmxv.RNSound.RNSoundPackage;

@@ -13,6 +13,9 @@ export default {
   USE_DEFAULT_PROPERTIES: false,
   FORCE_SIGN_UP_PAGE: false,
 
+  // Today Widget
+  APP_GROUP: 'group.nuwmapp.com',
+
   // Exception handlers params
   USE_CUSTOM_JS_EXCEPTION_HANDLER_IN_DEV: false,
   NATIVE_EXCEPTION_HANDLER_FORCE_APP_QUIT: false,

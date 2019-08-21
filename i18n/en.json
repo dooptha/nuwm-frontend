@@ -164,5 +164,13 @@
 			"Tomorrow": "Tomorrow",
 			"Week": "Week"
 		}
+	},
+	"iosWidget": {
+		"modal": {
+			"text": "Widget allows you to see timetable for today even on locked screen",
+			"confirm": "Yes, understood",
+		},
+		"title": "Advice",
+		"text": "Use widget for fast access to timetable"
 	}
 }

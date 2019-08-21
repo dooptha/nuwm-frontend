@@ -3,7 +3,7 @@ import Sound from 'react-native-sound';
 import NavigationService from '../navigation/NavigationService';
 import config from '../../config';
 
-const newMessageSound = new Sound('new_message.mp3', Sound.MAIN_BUNDLE);
+// const newMessageSound = new Sound('new_message.mp3', Sound.MAIN_BUNDLE);
 let socket;
 
 export const socketEvents = ({ dispatch, user }) => {

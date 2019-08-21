@@ -2,8 +2,6 @@ import React from 'react';
 import { YellowBox } from 'react-native';
 import { mapping } from '@eva-design/eva';
 import { ApplicationProvider } from 'react-native-ui-kitten';
-import DefaultPreference from 'react-native-default-preference';
-import DeviceInfo from 'react-native-device-info';
 import { DynamicStatusBar } from './src/components/common';
 import Router from './src/navigation/routes';
 import { themes, customMapping } from './src/utils/themes';
@@ -26,11 +24,6 @@ setupExceptionHandlers();
 
 const App = () => {
   const [{ app }] = useGlobalState();
-
-  console.log('@ device   ', DeviceInfo.getBundleId());
-  const bundleId = DeviceInfo.getBundleId();
-  DefaultPreference.setName('group.nuwmapp.com');
-  DefaultPreference.set('group', 'Minecraft').then(() => console.log('done'));
 
   return (
     <ApplicationProvider

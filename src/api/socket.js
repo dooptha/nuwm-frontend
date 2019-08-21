@@ -32,9 +32,9 @@ export const socketEvents = ({ dispatch, user }) => {
     const isSender = user && message.sender
       && user._id === message.sender.id;
 
-    if (!isInConversation && newMessageSound) {
-      newMessageSound.play();
-    }
+    // if (!isInConversation && newMessageSound) {
+    //   newMessageSound.play();
+    // }
 
     dispatch({
       type: 'receiveMessage',

@@ -13,7 +13,7 @@ import {
 import { ArrowheadUpIcon } from '../../assets/icons';
 import { DropdownSpring, androidUseLayoutAnimations } from '../../utils/animations';
 
-export class AutocompleteInput extends Component {
+export class AutocompleteInputComponent extends Component {
   constructor(props) {
     super(props);
 
@@ -127,13 +127,13 @@ export class AutocompleteInput extends Component {
   }
 }
 
-AutocompleteInput.defaultProps = {
+AutocompleteInputComponent.defaultProps = {
   getDatalist: () => [],
   minLengthToAutocomplete: 1,
   getItemString: (item) => item,
 };
 
-export default withStyles(AutocompleteInput, (theme) => ({
+export default withStyles(AutocompleteInputComponent, (theme) => ({
   dropdown: {
     padding: 5,
     borderWidth: 1,

@@ -3,6 +3,7 @@ import {
   View,
   ScrollView,
   RefreshControl,
+  Platform,
 } from 'react-native';
 import {
   withStyles,
@@ -17,6 +18,7 @@ import {
 } from '../../../components/social';
 import { androidUseLayoutAnimations } from '../../../utils/animations';
 import api from '../../../api/poll';
+import IOSWidgetModal from '../../modals/IOSWidgetModal';
 
 class ConversationsContainer extends Component {
   constructor(props) {
@@ -53,6 +55,19 @@ class ConversationsContainer extends Component {
     });
   }
 
+  renderIOSWidgetModal() {
+    const { themedStyle } = this.props;
+    const [{ app }, dispatch] = this.context;
+
+    // Should be in prod Platform.OS === 'ios' && !app.properties.IOSWidjetTutorialComplete
+    return !app.properties.IOSWidjetTutorialComplete
+      ? (
+        <View style={themedStyle.shadowBox}>
+          <IOSWidgetModal dispatch={dispatch} />
+        </View>
+      ) : null;
+  }
+
   render() {
     const { themedStyle } = this.props;
 
@@ -82,7 +97,8 @@ class ConversationsContainer extends Component {
             exitButton
           />
         </View>
-        <View style={themedStyle.floodShadowBox}>
+        {this.renderIOSWidgetModal()}
+        <View style={themedStyle.shadowBox}>
           <View style={themedStyle.box}>
             <FloodCard
               onlineCounter={app.onlineCounter}
@@ -136,7 +152,7 @@ export default withStyles(ConversationsContainer, (theme) => ({
       },
     },
   },
-  floodShadowBox: {
+  shadowBox: {
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

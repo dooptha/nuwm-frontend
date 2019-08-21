@@ -11,3 +11,7 @@ export const DefaultUserImage = {
 export const DoopthaImage = {
   imageSource: require('./source/dooptha.png'),
 }
+
+export const IOSWidgetImage = {
+  imageSource: require('./source/ios_widget.jpg'),
+}

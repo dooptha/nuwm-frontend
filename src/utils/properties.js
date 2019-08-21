@@ -29,6 +29,7 @@ export const DEFAULT_PROPERTIES = {
   language: getDefaultLocale(),
   theme: 'Eva Light',
   group: 'ПМ-41',
+  IOSWidjetTutorialComplete: false,
 };
 
 export const getProperties = async (useDefaults) => {
@@ -48,6 +49,9 @@ export const getProperties = async (useDefaults) => {
     const [key, value] = property;
     properties[key] = value;
   });
+
+  // Override properties from storage like that
+  properties.IOSWidjetTutorialComplete = false;
 
   // Flag to check if properties are loaded from storage
   properties.loaded = true;

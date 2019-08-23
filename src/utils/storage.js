@@ -12,8 +12,6 @@ export const storeKey = async (key, value) => {
     console.error(e);
   }
 
-  console.log(key, value);
-
   if (extensionsProps.includes(key)) {
     DefaultPreference.set(key, value)
       .then(() => console.log('done'))

@@ -35,7 +35,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
   var mode: NCWidgetDisplayMode?
   var tomorrowCampus: String?
   var tomorrowTime: String?
-  let url: String = "https://api.dooptha.com/timetable/test";
+  let url: String = "https://api.dooptha.com/timetable/test"
         
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -52,8 +52,6 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
   func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
     
     self.tableView.contentInset = UIEdgeInsets(top: 5,left: 0,bottom: 0,right: 0)
-    
-    print("update")
     
     self.getSchedule(){ (data) in
       
@@ -85,6 +83,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     if let group = UserDefaults(suiteName: "group.nuwmapp.com")?.string(forKey: "group"){
       Alamofire.request(url, method: .get).response{ response in
         if(response.response == nil){
+          
           completion(self.loadScheduleFromDefaults())
         }else{
           let json = JSON(response.data!)
@@ -175,6 +174,10 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     return Calendar.current.date(byAdding: .day, value: 1, to: date)
   }
   
+  func addWeek(date: Date) -> Date?{
+    return Calendar.current.date(byAdding: .day, value: 7, to: date)
+  }
+  
   func getCurrentTime() -> Date{
     
     let calendar = Calendar.current
@@ -219,9 +222,33 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     User Defaults
   *****/
   
+  func checkIfNotOutdated(schedule: JSON) -> Bool{
+    
+    let currentDate = self.getCurrentTime()
+    let time = schedule[schedule.count - 1]["date"].string
+    if let date = self.getSubjectTimeStamp(time: "12:00-12:00", date: time!){
+      if(currentDate > date){
+        print("outdated")
+        UserDefaults(suiteName: "group.nuwmapp.com")?.removeObject(forKey: "schedule")
+        return true
+      }
+    }else{
+      print("outdated")
+      UserDefaults(suiteName: "group.nuwmapp.com")?.removeObject(forKey: "schedule")
+      return true
+    }
+    
+    return false
+  }
+  
   func loadScheduleFromDefaults() -> Array<Subject>?{
     if let rawJson = UserDefaults(suiteName: "group.nuwmapp.com")?.string(forKey: "schedule"){
       let schedule = JSON.init(parseJSON: rawJson)
+      let outdated = self.checkIfNotOutdated(schedule: schedule)
+      
+      if(outdated){
+        return nil
+      }
       return self.serializeResponse(schedule: schedule)
     }
     
@@ -293,6 +320,12 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
   func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
     
     let mode: NCWidgetDisplayMode = activeDisplayMode
+    
+    if(activeDisplayMode == .expanded){
+      print("expanded")
+    }else{
+      print("compact")
+    }
     
     if self.mode != mode {
       if mode == .expanded {

@@ -6,7 +6,7 @@
   Copyright © 2019 Facebook. All rights reserved.
 */
 
-"NoLesson" = "No Lesson Today";
+"NoLesson" = "There is no lesson left";
 "NoGroup" = "No group selected. Go to app -> settings -> timetable to select it";
 "NoServer" = "Cant update schedule";
 "GoSleep" = "There is no lesson left.\n Wake up to %@ oclock go to the %@ campus";

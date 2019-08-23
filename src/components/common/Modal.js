@@ -32,5 +32,7 @@ export default withStyles(ModalComponent, (theme) => ({
     backgroundColor: theme['background-basic-color-1'],
     borderRadius: 20,
     padding: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 }));

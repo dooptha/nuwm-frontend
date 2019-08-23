@@ -439,7 +439,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = M6RV2RH6PN;
+						DevelopmentTeam = UMCUFFGWD9;
 						ProvisioningStyle = Automatic;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -453,7 +453,7 @@
 					};
 					F928925622F5D1BB00764E14 = {
 						CreatedOnToolsVersion = 10.2.1;
-						DevelopmentTeam = M6RV2RH6PN;
+						DevelopmentTeam = UMCUFFGWD9;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -883,16 +883,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = M6RV2RH6PN;
+				DEVELOPMENT_TEAM = UMCUFFGWD9;
 				INFOPLIST_FILE = NuwmApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nuwmapp.ihatexcodeDooptha1337;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nuwmapp.ihatexcodeDooptha13371;
 				PRODUCT_NAME = NuwmApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -910,9 +910,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = M6RV2RH6PN;
+				DEVELOPMENT_TEAM = UMCUFFGWD9;
 				INFOPLIST_FILE = NuwmApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -920,7 +920,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nuwmapp.ihatexcodeDooptha1337;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nuwmapp.ihatexcodeDooptha13371;
 				PRODUCT_NAME = NuwmApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1152,14 +1152,14 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = M6RV2RH6PN;
+				DEVELOPMENT_TEAM = UMCUFFGWD9;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = ScheduleWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nuwmapp.ihatexcodeDooptha1337.ScheduleWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nuwmapp.ihatexcodeDooptha13371.ScheduleWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -1183,13 +1183,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = M6RV2RH6PN;
+				DEVELOPMENT_TEAM = UMCUFFGWD9;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = ScheduleWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nuwmapp.ihatexcodeDooptha1337.ScheduleWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nuwmapp.ihatexcodeDooptha13371.ScheduleWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

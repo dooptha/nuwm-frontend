@@ -1,3 +1,5 @@
+import config from '../../../../config';
+
 export default {
   chat: {
     routeName: 'Conversation',
@@ -9,9 +11,17 @@ export default {
     },
   },
   twitter: {
-    routeName: 'Twitter',
+    routeName: 'WebView',
+    params: {
+      url: `https://twitter.com/hashtag/${config.TWITTER_HASHTAG}?f=tweets&vertical=default&src=unkn`,
+      title: 'Twitter',
+    },
   },
   instagram: {
-    routeName: 'Instagram',
+    routeName: 'WebView',
+    params: {
+      url: `https://www.instagram.com/explore/tags/${config.INSTAGRAM_HASHTAG}/?hl=uk`,
+      title: 'Instagram',
+    },
   },
 };

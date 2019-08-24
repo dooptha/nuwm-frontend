@@ -14,6 +14,7 @@ import GroupInput from '../common/GroupInput';
 import { StateContext } from '../../utils/context';
 import I18n from '../../utils/i18n';
 import api from '../../api/user';
+import config from '../../../config';
 
 export class SignUp extends Component {
   constructor(props) {
@@ -24,7 +25,25 @@ export class SignUp extends Component {
       username: '',
       group: '',
     };
+
+    this.onPrivatePolicyButtonPress = this.onPrivatePolicyButtonPress.bind(this);
   }
+
+  onPrivatePolicyButtonPress() {
+    const { navigation } = this.props;
+
+    navigation.navigate(
+      {
+        key: 'SignUp',
+        routeName: 'WebView',
+        params: {
+          title: 'Privacy',
+          url: config.PRIVACY_POLICY_URL,
+        },
+      },
+    );
+  }
+
 
   setInputRef(input, id) {
     this.inputs[id] = input;
@@ -53,6 +72,52 @@ export class SignUp extends Component {
 
   renderIndicator(shouldRender) {
     return shouldRender ? <ActivityIndicator /> : null;
+  }
+
+  renderPrivacyButton() {
+    const { themedStyle } = this.props;
+
+    return (
+      <Button
+        appearance="ghost"
+        size="small"
+        status="info"
+        style={themedStyle.privacyButton}
+        onPress={this.onPrivatePolicyButtonPress}
+      >
+        <Text
+          category="c1"
+          style={themedStyle.privacyText}
+        >
+          { I18n.t('SignUp.privacyText') }
+        </Text>
+        { I18n.t('SignUp.privacyTitle') }
+      </Button>
+    );
+  }
+
+  renderSubmitButton() {
+    const [{ user }] = this.context;
+    const { themedStyle } = this.props;
+
+    return (
+      <View style={themedStyle.buttonContainer}>
+        <View style={{ flex: 1 }} />
+        <View style={{ flex: 2 }}>
+          <Button
+            textStyle={themedStyle.text}
+            disabled={!this.canSubmitForm() || user.isLoading}
+            onPress={() => this.submitForm()}
+          >
+            {I18n.t('SignUp.submit')}
+          </Button>
+        </View>
+
+        <View style={themedStyle.indicator}>
+          {this.renderIndicator(user.isLoading)}
+        </View>
+      </View>
+    );
   }
 
   render() {
@@ -96,22 +161,9 @@ export class SignUp extends Component {
           value={group}
           onChangeText={(text) => this.setState({ group: text })}
         />
-        <View style={themedStyle.buttonContainer}>
-          <View style={{ flex: 1 }} />
-          <View style={{ flex: 2 }}>
-            <Button
-              textStyle={themedStyle.text}
-              disabled={!this.canSubmitForm() || user.isLoading}
-              onPress={() => this.submitForm()}
-            >
-              {I18n.t('SignUp.submit')}
-            </Button>
-          </View>
 
-          <View style={themedStyle.indicator}>
-            {this.renderIndicator(user.isLoading)}
-          </View>
-        </View>
+        { this.renderSubmitButton() }
+        { this.renderPrivacyButton() }
         <InlineError error={user.error} />
       </AvoidKeyboard>
     );
@@ -139,7 +191,7 @@ export default withStyles(SignUp, (theme) => ({
     paddingBottom: 10,
   },
   buttonContainer: {
-    paddingTop: 20,
+    marginTop: 10,
     flexDirection: 'row',
     marginBottom: 20,
   },
@@ -150,5 +202,12 @@ export default withStyles(SignUp, (theme) => ({
   },
   text: {
     fontFamily: 'Roboto',
+  },
+  privacyButton: {
+    marginTop: 5,
+    paddingHorizontal: 10,
+  },
+  privacyText: {
+    color: theme['text-hint-color'],
   },
 }));

@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import {
   Input,
   withStyles,
+  Button,
 } from 'react-native-ui-kitten';
 import { StateContext } from '../../../utils/context';
 import { removeKey } from '../../../utils/storage';
@@ -20,6 +21,8 @@ class UserContainer extends Component {
     this.state = {
       username: user.username,
     };
+
+    this.onPrivatePolicyButtonPress = this.onPrivatePolicyButtonPress.bind(this);
   }
 
   componentDidMount() {
@@ -44,6 +47,19 @@ class UserContainer extends Component {
     const { navigation } = this.props;
 
     api.updateCurrentUser(dispatch, navigation, { username });
+  }
+
+  onPrivatePolicyButtonPress() {
+    const { navigation } = this.props;
+
+    navigation.navigate({
+      key: 'UserSettingsContainer',
+      routeName: 'WebView',
+      params: {
+        url: config.PRIVACY_POLICY_URL,
+        title: 'Twitter',
+      },
+    });
   }
 
   getCaption() {
@@ -92,6 +108,12 @@ class UserContainer extends Component {
           autoCompleteType="name"
           caption={this.getCaption()}
         />
+        <Button
+          appearance="ghost"
+          onPress={this.onPrivatePolicyButtonPress}
+        >
+          {I18n.t('settings.user.privacyPolicy')}
+        </Button>
       </View>
     );
   }
@@ -103,6 +125,7 @@ export default withStyles(UserContainer, (theme) => ({
   container: {
     backgroundColor: theme['background-basic-color-1'],
     alignItems: 'center',
+    justifyContent: 'space-between',
     paddingTop: 50,
     flex: 1,
     paddingLeft: 50,

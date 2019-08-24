@@ -3,7 +3,9 @@
 		"group": "Група",
 		"name": "Имя",
 		"submit": "Продолжить",
-		"title": "Перед тем как начать"
+		"title": "Перед тем как начать",
+		"privacyText": "Продолжая, вы соглашаетесь с нашей ",
+		"privacyTitle": "Политикой конфиденциальности"
 	},
 	"admin": {
 		"deleteMessage": "Удалить сообщение",
@@ -80,6 +82,7 @@
 		"TimetableSettings": "Розклад",
 		"Twitter": "Твиттер",
 		"User": "Пользователь",
+		"WebView": "WebView",
 		"disconnected": "Подключение"
 	},
 	"settings": {
@@ -113,7 +116,8 @@
 			"username": "Имя",
 			"validations": {
 				"username": "Максимальное количество символов"
-			}
+			},
+			"privacyPolicy": "Политика конфиденциальности"
 		}
 	},
 	"tabs": {

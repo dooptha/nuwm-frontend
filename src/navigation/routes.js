@@ -21,15 +21,13 @@ import {
 } from '../containers/settings';
 import {
   Conversation,
-  Twitter,
-  Instagram,
 } from '../containers/conversations';
 import {
   MenuNavigationOptions,
-  ConversationNavigationOptions,
   SheduleNavigationOptions,
   UserSettingsNavigationOptions,
   TimetableSettingsNavigationOptions,
+  WebViewNavigationOptions,
 } from './options';
 import Schedule from '../components/timetable';
 import DetailedLesson from '../components/timetable/LessonScreen';
@@ -37,6 +35,7 @@ import ScheduleList from '../components/timetable/Schedule';
 import SplashScreen from '../containers/SplashScreen';
 import SignUpScreen from '../containers/auth/SignUp';
 import NewPoll from '../containers/admin/NewPoll';
+import WebView from '../containers/common/WebView';
 
 import config from '../../config';
 
@@ -85,14 +84,6 @@ const SettingsNavigationMap = {
 const ConversationsNavigationMap = {
   Conversation: {
     screen: Conversation,
-    navigationOptions: ConversationNavigationOptions,
-  },
-  Twitter: {
-    screen: Twitter,
-    navigationOptions: MenuNavigationOptions,
-  },
-  Instagram: {
-    screen: Instagram,
     navigationOptions: MenuNavigationOptions,
   },
 };
@@ -136,6 +127,23 @@ const AppNavigator = createStackNavigator({
   ...SettingsNavigationMap,
   ...ConversationsNavigationMap,
   ...ScheduleNavigationMap,
+  WebView: {
+    screen: WebView,
+    navigationOptions: WebViewNavigationOptions,
+  },
+}, {
+  headerMode: 'screen',
+  defaultNavigationOptions: {
+    header: null,
+  },
+});
+
+const AuthNavigator = createStackNavigator({
+  Home: SignUpScreen,
+  WebView: {
+    screen: WebView,
+    navigationOptions: WebViewNavigationOptions,
+  },
 }, {
   headerMode: 'screen',
   defaultNavigationOptions: {
@@ -150,7 +158,7 @@ const createAppRouter = (container) => {
 
 const InitialNavigator = createSwitchNavigator({
   Splash: SplashScreen,
-  SignUp: SignUpScreen,
+  SignUp: AuthNavigator,
   App: AppNavigator,
 });
 

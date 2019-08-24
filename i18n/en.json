@@ -3,7 +3,9 @@
 		"group": "Group",
 		"name": "Name",
 		"submit": "Sign up",
-		"title": "Before we start"
+		"title": "Before we start",
+		"privacyText": "By clicking “Sign up” above, you agree to our ",
+		"privacyTitle": "Privacy Statement"
 	},
 	"admin": {
 		"deleteMessage": "Delete message",
@@ -80,6 +82,7 @@
 		"TimetableSettings": "Розклад",
 		"Twitter": "Twitter",
 		"User": "User",
+		"WebView": "WebView",
 		"disconnected": "Connecting"
 	},
 	"settings": {
@@ -113,7 +116,8 @@
 			"username": "Name",
 			"validations": {
 				"username": "Maximum name length"
-			}
+			},
+			"privacyPolicy": "Privacy policy"
 		}
 	},
 	"tabs": {

@@ -4,7 +4,6 @@ import {
   StyleSheet,
 } from 'react-native';
 import { WebView } from 'react-native-webview';
-import config from '../../../../config';
 
 const style = StyleSheet.create({
   loader: {
@@ -18,13 +17,17 @@ const style = StyleSheet.create({
   },
 });
 
-export default () => {
+export default ({ navigation }) => {
   const renderIndicator = () => <ActivityIndicator size="large" style={style.loader} />;
-  const uri = `https://twitter.com/hashtag/${config.TWITTER_HASHTAG}?f=tweets&vertical=default&src=unkn`;
+  const url = navigation.getParam('url', null);
+
+  if (!url) {
+    navigation.goBack();
+  }
 
   return (
     <WebView
-      source={{ uri }}
+      source={{ url }}
       renderLoading={renderIndicator}
       allowsBackForwardNavigationGestures
       startInLoadingState

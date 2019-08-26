@@ -57,7 +57,7 @@ class UserContainer extends Component {
       routeName: 'WebView',
       params: {
         url: config.PRIVACY_POLICY_URL,
-        title: 'Twitter',
+        title: 'Privacy Policy',
       },
     });
   }

@@ -37,13 +37,12 @@ export class SignUp extends Component {
         key: 'SignUp',
         routeName: 'WebView',
         params: {
-          title: 'Privacy',
+          title: 'Privacy Policy',
           url: config.PRIVACY_POLICY_URL,
         },
       },
     );
   }
-
 
   setInputRef(input, id) {
     this.inputs[id] = input;
@@ -152,7 +151,6 @@ export class SignUp extends Component {
         />
         <GroupInput
           inputReference={(ref) => this.setInputRef(ref, 'group')}
-          style={themedStyle.input}
           labelStyle={themedStyle.text}
           textStyle={themedStyle.text}
           label={I18n.t('SignUp.group')}
@@ -186,11 +184,10 @@ export default withStyles(SignUp, (theme) => ({
     paddingBottom: 10,
   },
   input: {
-    paddingTop: 10,
-    paddingBottom: 10,
+    marginVertical: 10,
   },
   buttonContainer: {
-    marginTop: 10,
+    marginTop: 15,
     flexDirection: 'row',
     marginBottom: 20,
   },

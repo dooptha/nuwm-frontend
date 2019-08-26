@@ -226,8 +226,8 @@ export default withStyles(Search, (theme) => ({
     paddingTop: 5,
   },
   inputContainer: {
-    paddingBottom: 30,
-    paddingHorizontal: 15,
+    marginBottom: 30,
+    marginHorizontal: 15,
   },
   button: {
     width: '46%',

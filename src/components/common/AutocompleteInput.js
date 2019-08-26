@@ -10,7 +10,7 @@ import {
   ListItem,
   withStyles,
 } from 'react-native-ui-kitten';
-import { ArrowheadUpIcon } from '../../assets/icons';
+import { ArrowheadUpIcon, PlusIcon } from '../../assets/icons';
 import { DropdownSpring, androidUseLayoutAnimations } from '../../utils/animations';
 
 export class AutocompleteInputComponent extends Component {
@@ -23,6 +23,7 @@ export class AutocompleteInputComponent extends Component {
     };
 
     androidUseLayoutAnimations();
+    this.onClearInputButtonPress = this.onClearInputButtonPress.bind(this);
   }
 
   onInputChange(text) {
@@ -52,6 +53,10 @@ export class AutocompleteInputComponent extends Component {
     this.closeMenu();
   }
 
+  onClearInputButtonPress() {
+    this.onItemSelect('');
+  }
+
   animate() {
     LayoutAnimation.configureNext(DropdownSpring);
   }
@@ -73,6 +78,23 @@ export class AutocompleteInputComponent extends Component {
     );
   }
 
+  renderClearInputButton() {
+    const {
+      value,
+      themedStyle,
+      clearInput,
+    } = this.props;
+
+    return clearInput && value.length > 0 ? (
+      <TouchableOpacity
+        style={themedStyle.clearInputContainer}
+        onPress={this.onClearInputButtonPress}
+      >
+        { PlusIcon(themedStyle.clearInputIcon) }
+      </TouchableOpacity>
+    ) : null;
+  }
+
   render() {
     const {
       style,
@@ -91,20 +113,23 @@ export class AutocompleteInputComponent extends Component {
     const { menuVisible, data } = this.state;
 
     return (
-      <View>
-        <Input
-          style={style}
-          labelStyle={labelStyle}
-          textStyle={textStyle}
-          label={label}
-          placeholder={placeholder}
-          name={name}
-          value={value}
-          returnKeyType={returnKeyType}
-          status={status}
-          onChangeText={(text) => this.onInputChange(text)}
-          ref={inputReference}
-        />
+      <>
+        <View>
+          <Input
+            style={style}
+            labelStyle={labelStyle}
+            textStyle={textStyle}
+            label={label}
+            placeholder={placeholder}
+            name={name}
+            value={value}
+            returnKeyType={returnKeyType}
+            status={status}
+            onChangeText={(text) => this.onInputChange(text)}
+            ref={inputReference}
+          />
+          { this.renderClearInputButton() }
+        </View>
         {
           menuVisible ? (
             <View style={themedStyle.dropdown}>
@@ -122,7 +147,7 @@ export class AutocompleteInputComponent extends Component {
             </View>
           ) : null
         }
-      </View>
+      </>
     );
   }
 }
@@ -131,6 +156,8 @@ AutocompleteInputComponent.defaultProps = {
   getDatalist: () => [],
   minLengthToAutocomplete: 1,
   getItemString: (item) => item,
+  clearInput: true,
+  value: '',
 };
 
 export default withStyles(AutocompleteInputComponent, (theme) => ({
@@ -147,5 +174,20 @@ export default withStyles(AutocompleteInputComponent, (theme) => ({
     tintColor: theme['text-hint-color'],
     width: 22,
     height: 22,
+  },
+  clearInputContainer: {
+    position: 'absolute',
+    top: '50%',
+    right: 3,
+    width: 24,
+    height: 24,
+    // backgroundColor: theme['background-basic-color-1'],
+    // borderRadius: 12,
+  },
+  clearInputIcon: {
+    transform: [{ rotate: '45deg' }],
+    width: 20,
+    height: 20,
+    tintColor: theme['text-hint-color'],
   },
 }));

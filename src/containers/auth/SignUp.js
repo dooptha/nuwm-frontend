@@ -161,7 +161,6 @@ export class SignUp extends Component {
           value={group}
           onChangeText={(text) => this.setState({ group: text })}
         />
-
         { this.renderSubmitButton() }
         { this.renderPrivacyButton() }
         <InlineError error={user.error} />

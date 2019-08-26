@@ -27,6 +27,7 @@ export default (props) => {
   return (
     <AutocompleteInput
       {...props}
+      clearInput
       getDatalist={(text) => getDatalist(text)}
       getItemString={(item) => item.title}
     />

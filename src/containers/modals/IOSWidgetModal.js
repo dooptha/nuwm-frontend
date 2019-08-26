@@ -105,7 +105,8 @@ export default withStyles(IOSWidgetModal, (theme) => ({
   imageContainer: {
     borderRadius: 20,
     overflow: 'hidden',
-    marginVertical: 10,
+    marginTop: 10,
+    marginBottom: 5,
     maxWidth: Dimensions.get('window').width - 100,
   },
   image: {

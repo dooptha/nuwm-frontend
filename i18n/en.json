@@ -83,6 +83,7 @@
 		"Twitter": "Twitter",
 		"User": "User",
 		"WebView": "WebView",
+		"Conversation": "Flood",
 		"disconnected": "Connecting"
 	},
 	"settings": {

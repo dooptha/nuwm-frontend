@@ -80,8 +80,8 @@ const ContactUs = ({ themedStyle }) => {
         style={[themedStyle.version, themedStyle.text]}
         category="s1"
       >
-        NUWMApp v
-        {config.VERSION}
+        v
+        {`${config.VERSION}`}
       </Text>
     </View>
   );

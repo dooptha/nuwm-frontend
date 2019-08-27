@@ -2,15 +2,15 @@ import React from 'react';
 import {
   View,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 import {
-  Avatar,
   Text,
   withStyles,
 } from 'react-native-ui-kitten';
 import I18n from '../../utils/i18n';
 import { FloodImage } from '../../assets/images';
-import { ArrowForwardOutline, PeopleIcon } from '../../assets/icons';
+import { PeopleIcon } from '../../assets/icons';
 
 const FloodCard = ({
   themedStyle,
@@ -23,46 +23,36 @@ const FloodCard = ({
     onPress={navigateToChat}
   >
     <View style={themedStyle.floodContainer}>
-      <View style={themedStyle.offset} />
-      <View style={themedStyle.avatarContainer}>
-        <Avatar
-          style={themedStyle.avatar}
-          source={FloodImage.imageSource}
-          shape="rounded"
-        />
-        <View style={themedStyle.textContainer}>
+      <Image
+        style={themedStyle.avatar}
+        source={FloodImage.imageSource}
+      />
+      {
+        unreadCounter > 0 ? (
+          <View style={themedStyle.badgeContainer}>
+            <Text style={themedStyle.badgeTitle}>{unreadCounter}</Text>
+          </View>
+        ) : null
+      }
+      <View style={themedStyle.textContainer}>
+        <View style={themedStyle.titleContainer}>
+          <Text
+            style={themedStyle.text}
+            category="h3"
+          >
+            {I18n.t('flood.title')}
+          </Text>
           <View style={themedStyle.onlineContainer}>
             <Text style={themedStyle.onlineText}>{onlineCounter}</Text>
             {PeopleIcon(themedStyle.onlineIcon)}
           </View>
-          <View style={themedStyle.titleContainer}>
-            <Text
-              style={themedStyle.text}
-              category="h3"
-            >
-              {I18n.t('flood.title')}
-            </Text>
-            {
-              unreadCounter > 0 ? (
-                <View style={themedStyle.badgeContainer}>
-                  <Text style={themedStyle.badgeTitle}>{unreadCounter}</Text>
-                </View>
-              ) : null
-            }
-          </View>
-          <Text
-            style={[themedStyle.floodDescription, themedStyle.text]}
-            category="p1"
-          >
-            {I18n.t('flood.description')}
-          </Text>
         </View>
-      </View>
-
-      <View
-        style={themedStyle.arrowContainer}
-      >
-        {ArrowForwardOutline(themedStyle.arrow)}
+        <Text
+          style={[themedStyle.floodDescription, themedStyle.text]}
+          category="p1"
+        >
+          {I18n.t('flood.description')}
+        </Text>
       </View>
     </View>
   </TouchableOpacity>
@@ -70,79 +60,60 @@ const FloodCard = ({
 
 export default withStyles(FloodCard, (theme) => ({
   floodContainer: {
-    flexDirection: 'row',
     paddingTop: 20,
     alignItems: 'center',
     backgroundColor: theme['background-basic-color-1'],
   },
-  offset: {
-    flex: 1,
-  },
   avatarContainer: {
-    flex: 4,
     alignItems: 'center',
   },
   avatar: {
-    width: 150,
-    height: 150,
+    height: 200,
+    resizeMode: 'contain',
+    marginTop: -20,
   },
   textContainer: {
-    paddingLeft: 10,
-    paddingRight: 10,
-    alignItems: 'center',
-    paddingBottom: 20,
+    paddingHorizontal: 15,
+    paddingBottom: 15,
+  },
+  titleContainer: {
+    flexDirection: 'row',
+    marginVertical: 5,
   },
   floodDescription: {
-    paddingTop: 10,
-  },
-  arrowContainer: {
-    flex: 1,
-    width: 56,
-    height: 56,
-  },
-  arrow: {
-    width: 40,
-    height: 40,
-    tintColor: theme['text-basic-color'],
+    color: theme['text-hint-color'],
   },
   onlineContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: 10,
+    paddingTop: 5,
+    marginLeft: 10,
   },
-  // onlineCircle: {
-  //   width: 20,
-  //   height: 20,
-  //   borderRadius: 10,
-  //   backgroundColor: theme['color-success-700'],
-  //   justifyContent: 'center',
-  //   alignItems: 'center',
-  // },
   onlineText: {
-    color: theme['text-disabled-color'],
+    color: theme['text-hint-color'],
   },
   onlineIcon: {
     width: 20,
     height: 20,
-    tintColor: theme['text-disabled-color'],
+    tintColor: theme['text-hint-color'],
   },
   text: {
     fontFamily: 'Roboto',
   },
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
   badgeContainer: {
     backgroundColor: '#FF3566',
-    borderRadius: 10,
-    width: 20,
-    height: 20,
+    borderRadius: 15,
+    width: 30,
+    height: 30,
     alignItems: 'center',
-    marginLeft: 5,
+    justifyContent: 'center',
+    position: 'absolute',
+    right: 10,
+    top: 10,
   },
   badgeTitle: {
     color: 'white',
+    fontSize: 18,
   },
 }));

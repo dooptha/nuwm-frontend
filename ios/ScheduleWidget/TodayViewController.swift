@@ -35,12 +35,8 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
   var mode: NCWidgetDisplayMode?
   var tomorrowCampus: String?
   var tomorrowTime: String?
-  let url: String = "https://api.dooptha.com/timetable/test"
-        
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    self.tableView.backgroundView = nil;
-  }
+  // prod - https://api.dooptha.com/timetable
+  let url: String = "http://localhost:3000/timetable/test"
   
   func getWakeUpMessage() -> String?{
     if(self.tomorrowTime != nil && self.tomorrowCampus != nil && self.tomorrowCampus != "-" && self.tomorrowTime != ""){
@@ -48,6 +44,55 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     }
     return nil
   }
+  
+  func getStringFromDate(date: Date) -> String{
+
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "dd.MM.yyyy"
+    
+    return dateFormatter.string(from: date)
+  }
+  
+  func getTomorrowDateString() -> String{
+    let now = self.getCurrentTime()
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "dd.MM.yyyy"
+    
+    return dateFormatter.string(from: now)
+  }
+  
+  func getSchedule(completion: @escaping (Array<Subject>?) -> Void){
+    if let group = UserDefaults(suiteName: "group.nuwmapp.com")?.string(forKey: "group"){
+
+      let startDate = self.getStringFromDate(date: self.getCurrentTime())
+      let endDate = self.getStringFromDate(date: self.addOneDay(date: self.getCurrentTime())!)
+      
+      var parameters: Parameters = ["group": group, startDate: startDate, endDate: endDate]
+      Alamofire.request(url, method: .get, parameters: parameters).response{ response in
+        if(response.response == nil){
+          
+          completion(self.loadScheduleFromDefaults())
+        }else{
+          let json = JSON(response.data!)
+          
+          let schedule = json["schedule"]
+          debugPrint(schedule)
+          let data = self.serializeResponse(schedule: schedule)
+          self.saveScheduleInDefaults(schedule: schedule)
+          
+          completion(data)
+        }
+      }
+    } else {
+      completion(nil)
+    }
+  }
+  
+  /*****
+    Callbacks
+  *****/
+  
+  // every time widget appears(but not when you just swipe from lockscreen to widgets)
   
   func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
     
@@ -79,25 +124,43 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     completionHandler(NCUpdateResult.newData)
   }
   
-  func getSchedule(completion: @escaping (Array<Subject>?) -> Void){
-    if let group = UserDefaults(suiteName: "group.nuwmapp.com")?.string(forKey: "group"){
-      Alamofire.request(url, method: .get).response{ response in
-        if(response.response == nil){
-          
-          completion(self.loadScheduleFromDefaults())
-        }else{
-          let json = JSON(response.data!)
-          
-          let schedule = json["schedule"]
-          let data = self.serializeResponse(schedule: schedule)
-          self.saveScheduleInDefaults(schedule: schedule)
-          
-          completion(data)
-        }
+  // when widget loaded
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    self.tableView.backgroundView = nil;
+  }
+  
+  // when widget switched its display mdde
+  
+  @available(iOSApplicationExtension 10.0, *)
+  func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
+    
+    let mode: NCWidgetDisplayMode = activeDisplayMode
+    
+    if self.mode != mode {
+      if mode == .expanded {
+        self.widgetPerformUpdate(){ (res) in }
+        preferredContentSize = CGSize(width: maxSize.width, height: 300)
       }
-    } else {
-      completion(nil)
+      else if activeDisplayMode == .compact {
+        self.widgetPerformUpdate(){ (res) in }
+        preferredContentSize = maxSize
+      }
+      
+      self.mode = mode
     }
+  }
+  
+  // every time widget appears(even when you just swipe from lockscreen to widgets)
+  
+  override func viewDidAppear(_ animated: Bool){
+    super.viewDidAppear(animated)
+    
+    if #available(iOSApplicationExtension 10.0, *) {
+      extensionContext?.widgetLargestAvailableDisplayMode = .expanded
+    }
+    // self.preferredContentSize.height = 100
   }
   
   /*****
@@ -129,6 +192,9 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     let currentTime = self.getCurrentTime()
     let tomorrow = self.addOneDay(date: currentTime)
     
+    let formatter = DateFormatter()
+    formatter.dateFormat = "dd.MM.yyyy HH"
+    
     for (index,day):(String, JSON) in schedule {
       let subjects = day["subjects"]
       
@@ -137,9 +203,8 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
           if let time = subject["time"].string{
             
             if let subjectTime = self.getSubjectTimeStamp(time: time, date: date){
-              if(compareDate(date1: subjectTime, date2: currentTime)){
-                
-                if(self.mode == .expanded || subjectTime > currentTime){
+              if(compareDate(date1: subjectTime, date2: subjectTime)){
+                if(self.mode == .expanded || subjectTime > currentTime && newData.count < 7){
                   newData.append(Subject(title: subject["time"].string ?? "-", desc: subject["name"].string ?? "-", subtitle: subject["classroom"].string ?? "-"))
                 }
               }
@@ -178,18 +243,11 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     return Calendar.current.date(byAdding: .day, value: 7, to: date)
   }
   
+  // used for tests to replace current date with other values
+  
   func getCurrentTime() -> Date{
     
-    let calendar = Calendar.current
-    var components = DateComponents()
-    
-    components.day = 5
-    components.month = 9
-    components.year = 2018
-    components.hour = 12
-    components.minute = 0
-    
-    return calendar.date(from: components)!
+    return Date()
   }
   
   func getSubjectTimeStamp(time: String, date: String) -> Date?{
@@ -222,11 +280,13 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     User Defaults
   *****/
   
+  // erase data after 7 days pass
+  
   func checkIfNotOutdated(schedule: JSON) -> Bool{
     
     let currentDate = self.getCurrentTime()
-    let time = schedule[schedule.count - 1]["date"].string
-    if let date = self.getSubjectTimeStamp(time: "12:00-12:00", date: time!){
+    let time = schedule[schedule.count - 1]["date"].string ?? "01.01.1901"
+    if let date = self.addWeek(self.getSubjectTimeStamp(time: "12:00-12:00", date: time)){
       if(currentDate > date){
         print("outdated")
         UserDefaults(suiteName: "group.nuwmapp.com")?.removeObject(forKey: "schedule")
@@ -302,43 +362,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     return cell
   }
   
-  override func viewDidAppear(_ animated: Bool){
-    super.viewDidAppear(animated)
-    
-    if #available(iOSApplicationExtension 10.0, *) {
-      extensionContext?.widgetLargestAvailableDisplayMode = .expanded
-    }
-    self.preferredContentSize.height = 100
-  }
-  
   func widgetMarginInsets(forProposedMarginInsets defaultMarginInsets: UIEdgeInsets) -> (UIEdgeInsets) {
     return UIEdgeInsets.zero
   }
-  
-  @available(iOSApplicationExtension 10.0, *)
-  
-  func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
-    
-    let mode: NCWidgetDisplayMode = activeDisplayMode
-    
-    if(activeDisplayMode == .expanded){
-      print("expanded")
-    }else{
-      print("compact")
-    }
-    
-    if self.mode != mode {
-      if mode == .expanded {
-        self.widgetPerformUpdate(){ (res) in }
-        preferredContentSize = CGSize(width: maxSize.width, height: 300)
-      }
-      else if activeDisplayMode == .compact {
-        self.widgetPerformUpdate(){ (res) in }
-        preferredContentSize = maxSize
-      }
-      
-      self.mode = mode
-    }
-  }
-    
 }

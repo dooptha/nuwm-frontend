@@ -13,9 +13,10 @@ import Alamofire
 import SwiftyJSON
 
 struct Subject: Equatable {
-  var title: String
-  var desc: String
-  var subtitle: String
+  var time: String
+  var name: String
+  var classroom: String
+  var date: Date
 }
 
 extension String {
@@ -32,33 +33,17 @@ extension String {
 class TodayViewController: UITableViewController, NCWidgetProviding {
   
   var data: Array<Subject> = Array()
+  var subjects: Array<Subject>? = Array()
   var mode: NCWidgetDisplayMode?
   var tomorrowCampus: String?
   var tomorrowTime: String?
-  // prod - https://api.dooptha.com/timetable
-  let url: String = "http://localhost:3000/timetable/test"
+  let url: String = "https://api.dooptha.com/timetable"
   
   func getWakeUpMessage() -> String?{
     if(self.tomorrowTime != nil && self.tomorrowCampus != nil && self.tomorrowCampus != "-" && self.tomorrowTime != ""){
       return "GoSleep".localized(with: [self.tomorrowTime!, self.tomorrowCampus!])
     }
     return nil
-  }
-  
-  func getStringFromDate(date: Date) -> String{
-
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "dd.MM.yyyy"
-    
-    return dateFormatter.string(from: date)
-  }
-  
-  func getTomorrowDateString() -> String{
-    let now = self.getCurrentTime()
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "dd.MM.yyyy"
-    
-    return dateFormatter.string(from: now)
   }
   
   func getSchedule(completion: @escaping (Array<Subject>?) -> Void){
@@ -76,8 +61,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
           let json = JSON(response.data!)
           
           let schedule = json["schedule"]
-          debugPrint(schedule)
-          let data = self.serializeResponse(schedule: schedule)
+          let data = self.serializeData(schedule: schedule)
           self.saveScheduleInDefaults(schedule: schedule)
           
           completion(data)
@@ -86,6 +70,50 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     } else {
       completion(nil)
     }
+  }
+  
+  func updateTable(){
+    
+    if(self.subjects == nil){
+      self.showMessage(message: "NoServer".localized)
+      self.data = Array()
+      self.tableView.reloadData()
+    }else{
+      let data = self.filterSubjects()
+      
+      if(data.count == 0){
+        if(self.mode == .compact){
+          if let message = self.getWakeUpMessage(){
+            self.showMessage(message: message)
+          }else{
+            self.showMessage(message: "NoLesson".localized)
+          }
+          
+        }else{
+          self.showMessage(message: "NoLesson".localized)
+        }
+        
+        self.data = data
+        self.tableView.reloadData()
+      }else{
+        if(data != self.data){
+          self.data = data
+          self.tableView.reloadData()
+          self.tableView.backgroundView = nil;
+        }
+      }
+    }
+  }
+  
+  /*****
+    Animations
+  *****/
+  
+  func animateTable(){
+    self.tableView.alpha = 0
+    UIView.animate(withDuration: 0.4, animations: {
+      self.tableView.alpha = 1
+    })
   }
   
   /*****
@@ -100,25 +128,8 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     
     self.getSchedule(){ (data) in
       
-      if(data == nil){
-        self.showMessage(message: "NoServer".localized)
-      }else{
-        if(data != self.data){
-          self.data = data!
-          self.tableView.reloadData()
-          self.tableView.backgroundView = nil;
-        }
-        if(data!.count == 0){
-          if(self.mode == .compact){
-            if let message = self.getWakeUpMessage(){
-              self.showMessage(message: message)
-            }else{
-              self.showMessage(message: "NoLesson".localized)
-            }
-            self.tableView.reloadData()
-          }
-        }
-      }
+      self.subjects = data
+      self.updateTable()
     }
     
     completionHandler(NCUpdateResult.newData)
@@ -128,7 +139,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.tableView.backgroundView = nil;
+    self.showMessage(message: "NoLesson".localized)
   }
   
   // when widget switched its display mdde
@@ -139,16 +150,17 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     let mode: NCWidgetDisplayMode = activeDisplayMode
     
     if self.mode != mode {
-      if mode == .expanded {
-        self.widgetPerformUpdate(){ (res) in }
-        preferredContentSize = CGSize(width: maxSize.width, height: 300)
-      }
-      else if activeDisplayMode == .compact {
-        self.widgetPerformUpdate(){ (res) in }
-        preferredContentSize = maxSize
-      }
       
       self.mode = mode
+      self.updateTable()
+      
+      if mode == .expanded {
+        preferredContentSize = CGSize(width: maxSize.width, height: CGFloat(self.data.count * 50))
+      }
+      else if activeDisplayMode == .compact {
+        preferredContentSize = maxSize
+      }
+      self.animateTable()
     }
   }
   
@@ -160,7 +172,8 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     if #available(iOSApplicationExtension 10.0, *) {
       extensionContext?.widgetLargestAvailableDisplayMode = .expanded
     }
-    // self.preferredContentSize.height = 100
+    self.preferredContentSize.height = CGFloat(self.data.count * 50)
+    
   }
   
   /*****
@@ -186,14 +199,9 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     Serialization
   *****/
   
-  func serializeResponse(schedule: JSON) -> Array<Subject>{
-    var newData: Array<Subject> = Array()
+  func serializeData(schedule: JSON) -> Array<Subject>{
     
-    let currentTime = self.getCurrentTime()
-    let tomorrow = self.addOneDay(date: currentTime)
-    
-    let formatter = DateFormatter()
-    formatter.dateFormat = "dd.MM.yyyy HH"
+    var newSubjects: Array<Subject> = Array()
     
     for (index,day):(String, JSON) in schedule {
       let subjects = day["subjects"]
@@ -201,29 +209,45 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
       if let date = day["date"].string{
         for (index2,subject):(String, JSON) in subjects {
           if let time = subject["time"].string{
-            
             if let subjectTime = self.getSubjectTimeStamp(time: time, date: date){
-              if(compareDate(date1: subjectTime, date2: subjectTime)){
-                if(self.mode == .expanded || subjectTime > currentTime && newData.count < 7){
-                  newData.append(Subject(title: subject["time"].string ?? "-", desc: subject["name"].string ?? "-", subtitle: subject["classroom"].string ?? "-"))
-                }
-              }
+            
+              newSubjects.append(Subject(
+                time: subject["time"].string ?? "-",
+                name: subject["name"].string ?? "-",
+                classroom: subject["classroom"].string ?? "-",
+                date: subjectTime
+              ))
             }
           }
         }
-        
-        if(self.mode == .compact){
-          if let dayDate = self.getSubjectTimeStamp(time: "12:00-13:20", date: date){
-            if(compareDate(date1: dayDate, date2: tomorrow!)){
-              if let classroom = subjects[0]["classroom"].string{
-                self.tomorrowCampus = String(Array(classroom)[0])
-              }
-              
-              if let time = subjects[0]["time"].string{
-                self.tomorrowTime = time.components(separatedBy: "-")[0]
-              }
-            }
-          }
+      }
+    }
+    
+    return newSubjects
+  }
+  
+  func filterSubjects() -> Array<Subject>{
+    
+    var newData: Array<Subject> = Array()
+    
+    
+    self.tomorrowTime = nil
+    self.tomorrowCampus = nil
+    
+    let currentTime = self.getCurrentTime()
+    let tomorrow = self.addOneDay(date: currentTime)
+    
+    for subject in self.subjects!{
+      if(compareDate(date1: subject.date, date2: currentTime)){
+        if((self.mode == .expanded || subject.date > currentTime) && newData.count < 7){
+          newData.append(subject)
+        }
+      }
+      
+      if(self.mode == .compact){
+        if(compareDate(date1: subject.date, date2: tomorrow!)){
+            self.tomorrowCampus = String(Array(subject.classroom)[0])
+            self.tomorrowTime = subject.time.components(separatedBy: "-")[0]
         }
       }
     }
@@ -241,6 +265,14 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
   
   func addWeek(date: Date) -> Date?{
     return Calendar.current.date(byAdding: .day, value: 7, to: date)
+  }
+  
+  func getStringFromDate(date: Date) -> String{
+    
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "dd.MM.yyyy"
+    
+    return dateFormatter.string(from: date)
   }
   
   // used for tests to replace current date with other values
@@ -286,7 +318,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     
     let currentDate = self.getCurrentTime()
     let time = schedule[schedule.count - 1]["date"].string ?? "01.01.1901"
-    if let date = self.addWeek(self.getSubjectTimeStamp(time: "12:00-12:00", date: time)){
+    if let date = self.addWeek(date: self.getSubjectTimeStamp(time: "12:00-12:00", date: time)!){
       if(currentDate > date){
         print("outdated")
         UserDefaults(suiteName: "group.nuwmapp.com")?.removeObject(forKey: "schedule")
@@ -309,7 +341,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
       if(outdated){
         return nil
       }
-      return self.serializeResponse(schedule: schedule)
+      return self.serializeData(schedule: schedule)
     }
     
     return nil
@@ -355,9 +387,9 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     
     let item = data[indexPath.row]
     
-    cell.itemTitle.text = item.title
-    cell.itemDesc.text = item.desc
-    cell.itemSubtitle.text = item.subtitle
+    cell.itemTitle.text = item.name
+    cell.itemDesc.text = item.time
+    cell.itemSubtitle.text = item.classroom
     
     return cell
   }

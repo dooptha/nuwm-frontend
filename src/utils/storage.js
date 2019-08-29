@@ -13,6 +13,9 @@ export const storeKey = async (key, value) => {
   }
 
   if (extensionsProps.includes(key)) {
+    if (key === 'group') {
+      DefaultPreference.clear('schedule');
+    }
     DefaultPreference.set(key, value)
       .then(() => console.log('done'))
       .catch((e) => console.log(e));

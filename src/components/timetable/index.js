@@ -65,8 +65,10 @@ export class Timetable extends Component {
     const today = schedule.filter((day) => isToday(day.date));
     const tomorrow = schedule.filter((day) => isTomorrow(day.date));
 
+    const error = schedule.length > 0 ? false : props.error || false;
+
     this.setState({
-      ...props, today, tomorrow, schedule,
+      ...props, today, tomorrow, schedule, error,
     });
   }
 

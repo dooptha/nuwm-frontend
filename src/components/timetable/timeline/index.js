@@ -47,7 +47,7 @@ export default class Timeline extends PureComponent {
     super(props);
 
     // TODO: replace this with new Date()
-    this.currentDate = moment('2018-09-06 10:00:00');
+    this.currentDate = moment();
     this.screenHeight = Dimensions.get('window').height;
 
     this.state = { animation: new Animated.Value(0) };

@@ -19,23 +19,25 @@ const errorParser = (err) => {
 const dateToApiFormat = (date) => (date.format('DD.MM.YYYY'));
 
 export const getScheduleOnWeek = (group) => {
-  const now = moment(new Date());
+  const now = moment();
   const startDate = dateToApiFormat(now);
   const endDate = dateToApiFormat(now.add(7, 'days'));
 
-  return api.get('/timetable', { params: { group: 'qwe', startDate, endDate } })
+  return api.get('/timetable', { params: { group, startDate, endDate } })
     .then((response) => {
-      console.log(response);
       if (response.data.schedule) return response.data.schedule;
       return { error: I18n.t('timetable.error-try-later') };
     })
-    .catch((err) => { console.log({ err }); return { error: errorParser(err) }; });
+    .catch((err) => ({ error: errorParser(err) }));
 };
 
 export const getSchedule = (data) => api.get('/timetable', {
   params: data,
 })
-  .then((response) => { console.log(response); return response.data.schedule; })
+  .then((response) => {
+    if (response.data.schedule) return response.data.schedule;
+    return response.data.schedule;
+  })
   .catch((err) => ({ error: errorParser(err) }));
 
 const getGroups = (dispatch) => (

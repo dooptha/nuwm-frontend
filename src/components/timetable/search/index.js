@@ -128,7 +128,7 @@ class Search extends Component {
       }).then((data) => {
         this.setState({ loading: false });
         if (data.error || data.length === 0) {
-          NavigationService.navigate('SearchScreen', { schedule: [], message: data.error });
+          NavigationService.navigate('SearchScreen', { schedule: [], error: data.error });
         } else {
           NavigationService.navigate('SearchScreen',
             { schedule: replaceDatesWithMoment(data) });

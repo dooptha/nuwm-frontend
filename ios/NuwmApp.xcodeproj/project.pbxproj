@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* NuwmAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* NuwmAppTests.m */; };
+		014EEEC42317E91600A5A576 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 014EEEC62317E91600A5A576 /* InfoPlist.strings */; };
 		01AC7AD922FAEB20004AB39C /* new_message.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 01AC7AD822FAEB20004AB39C /* new_message.mp3 */; };
 		01AC7ADA22FAEB20004AB39C /* new_message.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 01AC7AD822FAEB20004AB39C /* new_message.mp3 */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
@@ -88,6 +89,9 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* NuwmAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NuwmAppTests.m; sourceTree = "<group>"; };
 		00F4A8ADB6794F0C9F68A580 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Regular.ttf"; path = "../src/assets/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		014EEEC52317E91600A5A576 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		014EEEC72317E92E00A5A576 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		014EEEC82317E93100A5A576 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		01AC7AD822FAEB20004AB39C /* new_message.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = new_message.mp3; path = ../android/app/src/main/res/raw/new_message.mp3; sourceTree = "<group>"; };
 		063DCFBE774A05AA6D5EB774 /* Pods-NuwmAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NuwmAppTests.release.xcconfig"; path = "Target Support Files/Pods-NuwmAppTests/Pods-NuwmAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		0CD6A87FB7FCC536088A96BE /* libPods-NuwmAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NuwmAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -217,6 +221,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				014EEEC62317E91600A5A576 /* InfoPlist.strings */,
 			);
 			name = NuwmApp;
 			sourceTree = "<group>";
@@ -496,6 +501,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				014EEEC42317E91600A5A576 /* InfoPlist.strings in Resources */,
 				01AC7AD922FAEB20004AB39C /* new_message.mp3 in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				5664E98D89824E9199FFB9F2 /* Roboto-Black.ttf in Resources */,
@@ -784,6 +790,17 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		014EEEC62317E91600A5A576 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				014EEEC52317E91600A5A576 /* uk */,
+				014EEEC72317E92E00A5A576 /* ru */,
+				014EEEC82317E93100A5A576 /* en */,
+			);
+			name = InfoPlist.strings;
+			path = NuwmApp;
+			sourceTree = "<group>";
+		};
 		13B07FB11A68108700A75B9A /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (

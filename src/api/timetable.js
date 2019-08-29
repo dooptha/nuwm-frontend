@@ -15,14 +15,16 @@ const errorParser = (err) => {
 
 const dateToApiFormat = (date) => (date.format('DD.MM.YYYY'));
 
-export const getScheduleOnWeek = () => {
-  const group = 'ПМ-41';
-  const now = moment('09.05.2018') || moment(new Date());
+export const getScheduleOnWeek = (group) => {
+  const now = moment(new Date());
   const startDate = dateToApiFormat(now);
   const endDate = dateToApiFormat(now.add(7, 'days'));
 
-  return api.get('/timetable/test', { params: { group, startDate, endDate } })
-    .then((response) => response.data.schedule)
+  return api.get('/timetable', { params: { group, startDate, endDate } })
+    .then((response) => {
+      if (response.data.schedule) return response.data.schedule;
+      return { error: I18n.t('timetable.error-try-later') };
+    })
     .catch((err) => ({ error: errorParser(err) }));
 };
 

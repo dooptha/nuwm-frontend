@@ -64,7 +64,10 @@ export class Timetable extends Component {
   requestSchedule() {
     this.setState({ refreshing: true });
 
-    getScheduleOnWeek()
+    const [{ app }] = this.context;
+    const { group } = app.properties;
+
+    getScheduleOnWeek(group)
       .then((resData) => {
         const newState = { refreshing: false };
 

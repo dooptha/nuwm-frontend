@@ -3,7 +3,7 @@ import moment from 'moment';
 const initialDateFormat = 'DD.MM.YYYY';
 const initialTimeFormat = 'DD.MM.YYYY HH:mm';
 
-export const getCurrentTime = () => moment('2018-09-05 01:00:00');
+export const getCurrentTime = () => moment();
 
 export const isToday = (date) => {
   if (moment.isMoment(date)) {

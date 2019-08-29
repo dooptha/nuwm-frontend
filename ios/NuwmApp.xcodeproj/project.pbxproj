@@ -907,11 +907,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-<<<<<<< HEAD
-				PRODUCT_BUNDLE_IDENTIFIER = com.nuwmapp.ihatexcodeDooptha13371;
-=======
 				PRODUCT_BUNDLE_IDENTIFIER = com.dooptha.nuwee;
->>>>>>> fixes
 				PRODUCT_NAME = NuwmApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -940,11 +936,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-<<<<<<< HEAD
-				PRODUCT_BUNDLE_IDENTIFIER = com.nuwmapp.ihatexcodeDooptha13371;
-=======
 				PRODUCT_BUNDLE_IDENTIFIER = com.dooptha.nuwee;
->>>>>>> fixes
 				PRODUCT_NAME = NuwmApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1185,11 +1177,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-<<<<<<< HEAD
-				PRODUCT_BUNDLE_IDENTIFIER = com.nuwmapp.ihatexcodeDooptha13371.ScheduleWidget;
-=======
 				PRODUCT_BUNDLE_IDENTIFIER = com.dooptha.nuwee.ScheduleWidget;
->>>>>>> fixes
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -1221,11 +1209,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_FAST_MATH = YES;
-<<<<<<< HEAD
-				PRODUCT_BUNDLE_IDENTIFIER = com.nuwmapp.ihatexcodeDooptha13371.ScheduleWidget;
-=======
 				PRODUCT_BUNDLE_IDENTIFIER = com.dooptha.nuwee.ScheduleWidget;
->>>>>>> fixes
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

@@ -21,6 +21,8 @@ export const isTomorrow = (date) => {
   return false;
 };
 
+export const isOutdated = (date) => getCurrentTime().subtract(7, 'd') > date;
+
 export const replaceDatesWithMoment = (_data) => {
   if (_data && _data.length > 0) {
     const data = JSON.parse(JSON.stringify(_data));

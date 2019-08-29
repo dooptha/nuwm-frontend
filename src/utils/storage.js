@@ -3,7 +3,7 @@ import DefaultPreference from 'react-native-default-preference';
 import config from '../../config';
 
 DefaultPreference.setName(config.APP_GROUP);
-const extensionsProps = ['group'];
+const extensionsProps = ['group', 'schedule'];
 
 export const storeKey = async (key, value) => {
   try {

@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { Platform } from 'react-native';
 
-const apiEndpoint = Platform.OS === 'ios' ? 'https://api.dooptha.com' : 'http://10.0.2.2:3000';
+const apiEndpoint = Platform.OS === 'ios' ? 'http://localhost:3000/' : 'http://10.0.2.2:3000';
 const socketIoEndpoint = Platform.OS === 'ios' ? 'https://api.dooptha.com/flood' : 'http://10.0.2.2:3000/flood';
 
 export default {

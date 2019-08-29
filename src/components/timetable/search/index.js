@@ -18,12 +18,14 @@ import { replaceDatesWithMoment } from '../helper';
 import { StateContext } from '../../../utils/context';
 import GroupInput from '../../../containers/common/GroupInput';
 import TeacherInput from '../../../containers/common/TeacherInput';
+import ActivityIndicator from '../common/ActivityIndicator';
 
 class Search extends Component {
   static contextType = StateContext;
 
   state = {
     practicsOnly: false,
+    loading: false,
   }
 
   constructor(props) {
@@ -116,6 +118,7 @@ class Search extends Component {
     }
 
     if (isEnoughData) {
+      this.setState({ loading: true });
       getSchedule({
         startDate,
         endDate,
@@ -123,6 +126,7 @@ class Search extends Component {
         lecturer,
         practicsOnly,
       }).then((data) => {
+        this.setState({ loading: false });
         if (data.error || data.length === 0) {
           NavigationService.navigate('SearchScreen', { schedule: [], message: data.error });
         } else {
@@ -149,9 +153,16 @@ class Search extends Component {
       group,
       lecturer,
       errors,
+      loading,
     } = this.state;
 
     const { themedStyle } = this.props;
+
+    const button = loading ? <ActivityIndicator color={themedStyle.colors.icon} /> : (
+      <Button id="search-button" style={themedStyle.button} onPress={() => this.findSubjects()}>
+        {this.localize('Search')}
+      </Button>
+    );
 
     return (
       <View style={themedStyle.searchContainer}>
@@ -201,9 +212,9 @@ class Search extends Component {
             />
           </View>
 
-          <Button id="search-button" style={themedStyle.button} onPress={() => this.findSubjects()}>
-            {this.localize('Search')}
-          </Button>
+          <View style={themedStyle.buttonWrapper}>
+            { button }
+          </View>
         </ScrollView>
       </View>
     );
@@ -231,10 +242,14 @@ export default withStyles(Search, (theme) => ({
   },
   button: {
     width: '46%',
-    marginLeft: '27%',
-    borderWidth: 0,
-    marginBottom: 45,
-    marginTop: 8,
+  },
+  colors: {
+    icon: theme['text-basic-color'],
+  },
+  buttonWrapper: {
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   practicsOnlyContainer: {
     flexDirection: 'row',

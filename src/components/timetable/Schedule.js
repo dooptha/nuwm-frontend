@@ -13,7 +13,6 @@ class Schedule extends Component {
   static defaultProps = {
     schedule: [],
     onRefresh: () => console.warn('Unpredictable callback from Schedule List'),
-    refreshing: false,
   }
 
   componentDidMount() {
@@ -50,7 +49,7 @@ class Schedule extends Component {
   }
 
   renderSchedule(schedule) {
-    const { themedStyle, active, refreshing } = this.props;
+    const { themedStyle, active } = this.props;
 
     const body = schedule.map((day) => (
       <Day key={day.date} day={day} />
@@ -62,7 +61,6 @@ class Schedule extends Component {
           schedule={schedule}
           style={themedStyle.timeline}
           active={active}
-          refreshing={refreshing}
           activeColor={themedStyle.colors.active}
           inactiveColor={themedStyle.colors.inactive}
           ref={(node) => this.timeline = node}
@@ -80,13 +78,7 @@ class Schedule extends Component {
   }
 
   render() {
-    const { navigation, themedStyle } = this.props;
-
-    // schedule could be received by props or by navigation params
-    const props = navigation ? navigation.state.params : this.props;
-    const { schedule, message } = props;
-
-    // dont render anything while refreshing data
+    const { themedStyle, schedule, message } = this.props;
     const body = this.renderBody(schedule, message);
 
     return (

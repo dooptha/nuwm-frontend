@@ -90,7 +90,8 @@ export default class Timeline extends PureComponent {
       });
     });
 
-    height = this.screenHeight + 2 * this.refreshPadding;
+    const pageSize = this.screenHeight > height ? this.screenHeight + this.refreshPadding : height;
+    height = pageSize + this.refreshPadding;
 
     points.push({
       moment: lastDate.set({ hour: 23, minute: 59, second: 59 }), height,

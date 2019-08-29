@@ -14,7 +14,7 @@ import I18n from '../../../utils/i18n';
 import { getSchedule } from '../../../api/timetable';
 import NavigationService from '../../../navigation/NavigationService';
 import DatePicker from '../common/DatePicker';
-import { replaceDatesWithMomentObjects } from '../helper';
+import { replaceDatesWithMoment } from '../helper';
 import { StateContext } from '../../../utils/context';
 import GroupInput from '../../../containers/common/GroupInput';
 import TeacherInput from '../../../containers/common/TeacherInput';
@@ -124,10 +124,10 @@ class Search extends Component {
         practicsOnly,
       }).then((data) => {
         if (data.error || data.length === 0) {
-          NavigationService.navigate('ScheduleList', { schedule: [], message: data.error });
+          NavigationService.navigate('SearchScreen', { schedule: [], message: data.error });
         } else {
-          NavigationService.navigate('ScheduleList',
-            { schedule: replaceDatesWithMomentObjects(data) });
+          NavigationService.navigate('SearchScreen',
+            { schedule: replaceDatesWithMoment(data) });
         }
       });
     } else {

@@ -33,7 +33,7 @@ import {
 } from './options';
 import Schedule from '../components/timetable';
 import DetailedLesson from '../components/timetable/LessonScreen';
-import ScheduleList from '../components/timetable/Schedule';
+import SearchScreen from '../components/timetable/search/SearchScreen';
 import SplashScreen from '../containers/SplashScreen';
 import SignUpScreen from '../containers/auth/SignUp';
 import NewPoll from '../containers/admin/NewPoll';
@@ -45,8 +45,8 @@ const ScheduleNavigationMap = {
     screen: DetailedLesson,
     navigationOptions: MenuNavigationOptions,
   },
-  ScheduleList: {
-    screen: ScheduleList,
+  SearchScreen: {
+    screen: SearchScreen,
     navigationOptions: MenuNavigationOptions,
   },
 };

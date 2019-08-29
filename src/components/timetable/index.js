@@ -135,7 +135,6 @@ export class Timetable extends Component {
         refreshControl={refreshControl}
       >
         <Schedule
-          refreshing={refreshing}
           schedule={schedule}
           message={error || I18n.t('timetable.no-lesson')}
           active={active}

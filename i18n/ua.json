@@ -38,7 +38,7 @@
 			"title": "Discord"
 		},
 		"github": {
-			"description": "Вихідний код застосунку",
+			"description": "Візьми участь в розробці",
 			"title": "Github"
 		},
 		"mail": {
@@ -143,8 +143,8 @@
 			"classroom": "Аудиторія",
 			"lecturer": "Викладач",
 			"name": "Предмет",
-			"streams_type": "Підгруппа",
-			"subgroup": "Группа",
+			"streams_type": "Підгрупа",
+			"subgroup": "Група",
 			"time": "Час",
 			"type": "Тип"
 		},
@@ -152,7 +152,7 @@
 		"search": {
 			"Date": "Дата",
 			"From": "З",
-			"Group": "Группа",
+			"Group": "Група",
 			"GroupExample": "Приклад: ПМ-41",
 			"Lecturer": "Викладач",
 			"LecturerExample": "Приклад: Мічута Ольга Романівна",

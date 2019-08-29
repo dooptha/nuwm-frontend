@@ -47,6 +47,7 @@ public class MainApplication extends Application implements ReactApplication {
       packages.add(new RollbarReactNativePackage());
       packages.add(new ReanimatedPackage());
       packages.add(new ReactNativeExceptionHandlerPackage());
+      packages.add(new RNDefaultPreferencePackage());
       return packages;
     }
 

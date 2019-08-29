@@ -25,3 +25,7 @@ export const api = axios.create({
 export const setAuthHeaders = (token) => {
   api.defaults.headers.common['x-access-token'] = token;
 };
+
+export const setLocaleHeader = (locale) => {
+  api.defaults.headers.common['Accept-Language'] = locale;
+};

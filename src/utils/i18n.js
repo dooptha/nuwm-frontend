@@ -1,6 +1,7 @@
 import I18n from 'i18n-js';
 import * as RNLocalize from 'react-native-localize';
 import moment from 'moment';
+import { setLocaleHeader } from '../api';
 import * as ua from '../../i18n/ua';
 import * as ru from '../../i18n/ru';
 import * as en from '../../i18n/en';
@@ -38,6 +39,7 @@ const getMomentLocale = () => {
 export const setLocale = (locale) => {
   I18n.locale = locale;
 
+  setLocaleHeader(locale);
   moment.locale(getMomentLocale());
 };
 

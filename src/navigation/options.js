@@ -63,31 +63,6 @@ const SheduleTopNavigationParams = {
   },
 };
 
-const ConversationTopNavigationParams = {
-  header: ({ navigation }) => {
-    const index = getCurrentRouteIndex(navigation);
-
-    const route = navigation.state.routes[1];
-    const { title } = route ? route.params.conversation : '';
-
-    return (
-      <StateContext.Consumer>
-        {
-          ([{ app }]) => (
-            <TopNavigationBar
-              border
-              title={title}
-              backIcon={backIconIfNeeded(index)}
-              onBackPress={() => navigation.goBack(null)}
-              connected={app.connected}
-            />
-          )
-        }
-      </StateContext.Consumer>
-    );
-  },
-};
-
 const UserSettingsNavigationParams = {
   header: ({ navigation }) => {
     const { routeName } = getCurrentRouteState(navigation);
@@ -136,16 +111,35 @@ const TimetableSettingsNavigationParams = {
   },
 };
 
+const WebViewNavigationParams = {
+  header: ({ navigation }) => {
+    const route = navigation.state.routes[2]
+      || navigation.state.routes[1];
+
+    const { title } = route ? route.params : '';
+
+    return (
+      <TopNavigationBar
+        border
+        title={title}
+        backIcon={ArrowIosBackFill}
+        onBackPress={() => navigation.goBack(null)}
+        connected
+      />
+    );
+  },
+};
+
+export const WebViewNavigationOptions = {
+  ...WebViewNavigationParams,
+};
+
 export const MenuNavigationOptions = {
   ...MenuTopNavigationParams,
 };
 
 export const SheduleNavigationOptions = {
   ...SheduleTopNavigationParams,
-};
-
-export const ConversationNavigationOptions = {
-  ...ConversationTopNavigationParams,
 };
 
 export const UserSettingsNavigationOptions = {

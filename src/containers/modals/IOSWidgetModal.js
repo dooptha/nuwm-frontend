@@ -105,7 +105,8 @@ export default withStyles(IOSWidgetModal, (theme) => ({
   imageContainer: {
     borderRadius: 20,
     overflow: 'hidden',
-    marginVertical: 20,
+    marginTop: 10,
+    marginBottom: 5,
     maxWidth: Dimensions.get('window').width - 100,
   },
   image: {
@@ -114,7 +115,8 @@ export default withStyles(IOSWidgetModal, (theme) => ({
     height: Dimensions.get('window').height * 0.3,
   },
   modalText: {
-    marginHorizontal: 10,
+    marginTop: 10,
+    marginHorizontal: 20,
   },
   title: {
     fontSize: 30,

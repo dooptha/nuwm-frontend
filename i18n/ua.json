@@ -3,7 +3,9 @@
 		"group": "Група",
 		"name": "Ім'я",
 		"submit": "Почати",
-		"title": "Перед тим як почати"
+		"title": "Перед тим як почати",
+		"privacyText": "Продовжуючи, ви погоджуєтеся з нашою ",
+		"privacyTitle": "Політикою конфіденційності"
 	},
 	"admin": {
 		"deleteMessage": "Видалити повідомлення",
@@ -80,6 +82,8 @@
 		"TimetableSettings": "Розклад",
 		"Twitter": "Твіттер",
 		"User": "Користувач",
+		"WebView": "WebView",
+		"Conversation": "Флуд",
 		"disconnected": "Підключення"
 	},
 	"settings": {
@@ -113,7 +117,8 @@
 			"username": "Ім'я",
 			"validations": {
 				"username": "Максимальна кількість символів"
-			}
+			},
+			"privacyPolicy": "Політика конфіденційності"
 		}
 	},
 	"tabs": {

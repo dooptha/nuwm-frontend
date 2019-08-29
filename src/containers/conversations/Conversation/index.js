@@ -15,6 +15,7 @@ import I18n from '../../../utils/i18n';
 import api from '../../../api/user';
 import socket from '../../../api/socket';
 import config from '../../../../config';
+import SafeAreaView from '../../../navigation/components/SafeAreaView';
 
 class Conversation extends Component {
   constructor(props) {
@@ -122,30 +123,35 @@ class Conversation extends Component {
     const { themedStyle } = this.props;
 
     return (
-      <AvoidKeyboard
-        style={themedStyle.avoidKeyboard}
-        autoDismiss={false}
-        offset={this.keyboardOffset}
+      <SafeAreaView
+        forceInset={{ top: 'never', bottom: 'always' }}
+        style={themedStyle.container}
       >
-        <Chat
-          style={themedStyle.chatContainer}
-          data={conversations.messages}
-          onMessagePress={this.onMessagePress}
-          current={user.current}
-        />
-        <View style={themedStyle.inputContainer}>
-          <Input
-            style={themedStyle.messageInput}
-            textStyle={themedStyle.text}
-            size="small"
-            multiline
-            value={newMessage}
-            placeholder={I18n.t('conversations.messagePlaceholder')}
-            onChangeText={this.onNewMessageChange}
+        <AvoidKeyboard
+          style={themedStyle.avoidKeyboard}
+          autoDismiss={false}
+          offset={this.keyboardOffset}
+        >
+          <Chat
+            style={themedStyle.chatContainer}
+            data={conversations.messages}
+            onMessagePress={this.onMessagePress}
+            current={user.current}
           />
-          {this.renderSendMessageButton()}
-        </View>
-      </AvoidKeyboard>
+          <View style={themedStyle.inputContainer}>
+            <Input
+              style={themedStyle.messageInput}
+              textStyle={themedStyle.text}
+              size="small"
+              multiline
+              value={newMessage}
+              placeholder={I18n.t('conversations.messagePlaceholder')}
+              onChangeText={this.onNewMessageChange}
+            />
+            {this.renderSendMessageButton()}
+          </View>
+        </AvoidKeyboard>
+      </SafeAreaView>
     );
   }
 }
@@ -158,6 +164,7 @@ export default withStyles(Conversation, (theme) => ({
   },
   container: {
     flex: 1,
+    backgroundColor: theme['background-basic-color-2'],
   },
   chatContainer: {
     paddingHorizontal: 5,

@@ -59,8 +59,7 @@ class ConversationsContainer extends Component {
     const { themedStyle } = this.props;
     const [{ app }, dispatch] = this.context;
 
-    // Should be in prod Platform.OS === 'ios' && !app.properties.IOSWidjetTutorialComplete === 'completed'
-    return !app.properties.IOSWidjetTutorialComplete
+    return Platform.OS === 'ios' && !app.properties.IOSWidjetTutorialComplete === 'completed'
       ? (
         <View style={themedStyle.shadowBox}>
           <IOSWidgetModal dispatch={dispatch} />

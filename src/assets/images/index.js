@@ -1,11 +1,11 @@
 /* eslint-disable */
 
 export const FloodImage = {
-  imageSource: require('./source/flood.png'),
+  imageSource: require('./source/flood.jpg'),
 };
 
 export const DefaultUserImage = {
-  imageSource: require('./source/flood.png'),
+  imageSource: require('./source/logo_outline.png'),
 }
 
 export const DoopthaImage = {

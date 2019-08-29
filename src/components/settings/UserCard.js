@@ -1,17 +1,40 @@
 import React from 'react';
 import {
   View,
-  StyleSheet,
+  Image,
 } from 'react-native';
 import {
-  Avatar,
   ListItem,
   Text,
+  withStyles,
 } from 'react-native-ui-kitten';
 import { ArrowForwardOutline } from '../../assets/icons';
 import { DefaultUserImage } from '../../assets/images';
 
-const style = StyleSheet.create({
+const UserCard = ({ user, onItemSelect, themedStyle }) => (
+  <ListItem
+    style={themedStyle.listItem}
+    onPress={() => onItemSelect()}
+  >
+    <View style={themedStyle.contentContainer}>
+      <Image
+        style={themedStyle.avatar}
+        source={DefaultUserImage.imageSource}
+      />
+      <View style={themedStyle.userInfo}>
+        <Text
+          category="s1"
+          style={themedStyle.text}
+        >
+          {user.username}
+        </Text>
+      </View>
+    </View>
+    {ArrowForwardOutline(themedStyle.arrow)}
+  </ListItem>
+);
+
+export default withStyles(UserCard, (theme) => ({
   listItem: {
     justifyContent: 'space-between',
   },
@@ -20,14 +43,15 @@ const style = StyleSheet.create({
     alignItems: 'center',
   },
   avatar: {
-    marginTop: 10,
-    marginBottom: 10,
+    width: 75,
+    height: 75,
+    tintColor: theme['text-basic-color'],
   },
   group: {
     color: 'grey',
   },
   userInfo: {
-    paddingLeft: 20,
+    paddingLeft: 10,
   },
   arrow: {
     tintColor: 'grey',
@@ -37,29 +61,4 @@ const style = StyleSheet.create({
   text: {
     fontFamily: 'Roboto',
   },
-});
-
-export default ({ user, onItemSelect }) => (
-  <ListItem
-    style={style.listItem}
-    onPress={() => onItemSelect()}
-  >
-    <View style={style.contentContainer}>
-      <Avatar
-        style={style.avatar}
-        source={DefaultUserImage.imageSource}
-        shape="round"
-        size="giant"
-      />
-      <View style={style.userInfo}>
-        <Text
-          category="s1"
-          style={style.text}
-        >
-          {user.username}
-        </Text>
-      </View>
-    </View>
-    {ArrowForwardOutline(style.arrow)}
-  </ListItem>
-);
+}));

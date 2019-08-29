@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  NuwmApp
+
+  Created by Andriy Pelykh on 8/29/19.
+  Copyright © 2019 Facebook. All rights reserved.
+*/
+
+"CFBundleDisplayName" = "Timetable";
+"CFBundleName" = "Timetable";

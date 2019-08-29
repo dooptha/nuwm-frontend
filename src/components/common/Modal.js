@@ -31,7 +31,7 @@ export default withStyles(ModalComponent, (theme) => ({
   box: {
     backgroundColor: theme['background-basic-color-1'],
     borderRadius: 20,
-    padding: 20,
+    padding: 5,
     alignItems: 'center',
     justifyContent: 'center',
   },

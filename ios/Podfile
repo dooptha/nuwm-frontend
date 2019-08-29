@@ -42,6 +42,8 @@ target 'NuwmApp' do
 
   pod 'RollbarReactNative', :path => '../node_modules/rollbar-react-native'
 
+  pod 'RNDefaultPreference', :path => '../node_modules/react-native-default-preference'
+
   target 'NuwmAppTests' do
     inherit! :search_paths
     # Pods for testing

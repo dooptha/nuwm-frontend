@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView, RefreshControl, Dimensions } from 'react-native';
 import { withStyles } from 'react-native-ui-kitten';
 import { TabView, TabBar } from 'react-native-tab-view';
+import DefaultPreference from 'react-native-default-preference';
 import Search from './search';
 import Schedule from './Schedule';
 
@@ -9,7 +10,9 @@ import I18n from '../../utils/i18n';
 import { getScheduleOnWeek } from '../../api/timetable';
 import { storeKey, getKey } from '../../utils/storage';
 import { StateContext } from '../../utils/context';
-import { isToday, isTomorrow, replaceDatesWithMoment } from './helper';
+import {
+  isToday, isTomorrow, replaceDatesWithMoment, isOutdated,
+} from './helper';
 
 export class Timetable extends Component {
   static contextType = StateContext;
@@ -52,7 +55,13 @@ export class Timetable extends Component {
   splitSchedule(props = {}) {
     const { data } = this.state;
 
-    const schedule = replaceDatesWithMoment(props.data || data);
+    let schedule = replaceDatesWithMoment(props.data || data);
+
+    if (schedule[0] && schedule[0].date && isOutdated(schedule[0].date)) {
+      DefaultPreference.clear('schedule');
+      schedule = [];
+    }
+
     const today = schedule.filter((day) => isToday(day.date));
     const tomorrow = schedule.filter((day) => isTomorrow(day.date));
 
@@ -64,12 +73,15 @@ export class Timetable extends Component {
   requestSchedule() {
     this.setState({ refreshing: true });
 
-    getScheduleOnWeek()
+    const [{ app }] = this.context;
+    const { group } = app.properties;
+
+    getScheduleOnWeek(group)
       .then((resData) => {
         const newState = { refreshing: false };
 
         if (resData.error || resData.length === 0) {
-          getKey('timetable').then((rawData) => {
+          DefaultPreference.get('schedule').then((rawData) => {
             const data = rawData ? JSON.parse(rawData) : [];
             this.splitSchedule({
               ...newState,
@@ -78,7 +90,7 @@ export class Timetable extends Component {
             });
           });
         } else {
-          storeKey('timetable', JSON.stringify(resData));
+          storeKey('schedule', JSON.stringify(resData));
           this.splitSchedule({
             ...newState,
             data: resData,
@@ -125,7 +137,7 @@ export class Timetable extends Component {
         <Schedule
           refreshing={refreshing}
           schedule={schedule}
-          message={error}
+          message={error || I18n.t('timetable.no-lesson')}
           active={active}
         />
       </ScrollView>

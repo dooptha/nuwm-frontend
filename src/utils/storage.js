@@ -1,10 +1,21 @@
 import AsyncStorage from '@react-native-community/async-storage';
+import DefaultPreference from 'react-native-default-preference';
+import config from '../../config';
+
+DefaultPreference.setName(config.APP_GROUP);
+const extensionsProps = ['group', 'schedule'];
 
 export const storeKey = async (key, value) => {
   try {
     await AsyncStorage.setItem(key, value);
   } catch (e) {
     console.error(e);
+  }
+
+  if (extensionsProps.includes(key)) {
+    DefaultPreference.set(key, value)
+      .then(() => console.log('done'))
+      .catch((e) => console.log(e));
   }
 };
 

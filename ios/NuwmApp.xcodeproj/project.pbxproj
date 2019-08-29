@@ -141,6 +141,8 @@
 		F928927E22F6005500764E14 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F928928022F6005900764E14 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F928928122F6005A00764E14 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F93530A8230DA8640004A87D /* NuwmApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = NuwmApp.entitlements; path = NuwmApp/NuwmApp.entitlements; sourceTree = "<group>"; };
+		F93530A9230DA86D0004A87D /* ScheduleWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ScheduleWidget.entitlements; sourceTree = "<group>"; };
 		FADD3470028A41A1CDBDDC6A /* Pods-ScheduleWidget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScheduleWidget.debug.xcconfig"; path = "Target Support Files/Pods-ScheduleWidget/Pods-ScheduleWidget.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -209,6 +211,7 @@
 		13B07FAE1A68108700A75B9A /* NuwmApp */ = {
 			isa = PBXGroup;
 			children = (
+				F93530A8230DA8640004A87D /* NuwmApp.entitlements */,
 				01AC7AD822FAEB20004AB39C /* new_message.mp3 */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -292,6 +295,7 @@
 		F928925A22F5D1BB00764E14 /* ScheduleWidget */ = {
 			isa = PBXGroup;
 			children = (
+				F93530A9230DA86D0004A87D /* ScheduleWidget.entitlements */,
 				F928925B22F5D1BB00764E14 /* TodayViewController.swift */,
 				F928925D22F5D1BB00764E14 /* MainInterface.storyboard */,
 				F928926022F5D1BB00764E14 /* Info.plist */,
@@ -441,6 +445,11 @@
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = UMCUFFGWD9;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -455,6 +464,11 @@
 						CreatedOnToolsVersion = 10.2.1;
 						DevelopmentTeam = UMCUFFGWD9;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -879,6 +893,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = NuwmApp/NuwmApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -892,7 +907,11 @@
 					"-ObjC",
 					"-lc++",
 				);
+<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = com.nuwmapp.ihatexcodeDooptha13371;
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = com.dooptha.nuwee;
+>>>>>>> fixes
 				PRODUCT_NAME = NuwmApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -906,6 +925,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = NuwmApp/NuwmApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -920,7 +940,11 @@
 					"-ObjC",
 					"-lc++",
 				);
+<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = com.nuwmapp.ihatexcodeDooptha13371;
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = com.dooptha.nuwee;
+>>>>>>> fixes
 				PRODUCT_NAME = NuwmApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1143,12 +1167,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FADD3470028A41A1CDBDDC6A /* Pods-ScheduleWidget.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = ScheduleWidget/ScheduleWidget.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -1159,7 +1185,11 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
+<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = com.nuwmapp.ihatexcodeDooptha13371.ScheduleWidget;
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = com.dooptha.nuwee.ScheduleWidget;
+>>>>>>> fixes
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -1173,12 +1203,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5EE956F13254264FCE7432C7 /* Pods-ScheduleWidget.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = ScheduleWidget/ScheduleWidget.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
@@ -1189,7 +1221,11 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_FAST_MATH = YES;
+<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = com.nuwmapp.ihatexcodeDooptha13371.ScheduleWidget;
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = com.dooptha.nuwee.ScheduleWidget;
+>>>>>>> fixes
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

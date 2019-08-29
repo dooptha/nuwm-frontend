@@ -105,7 +105,6 @@ export default withStyles(ContactUs, (theme) => ({
   avatar: {
     width: 150,
     height: 150,
-    tintColor: theme['text-basic-color'],
   },
   list: {
     backgroundColor: theme['background-basic-color-1'],

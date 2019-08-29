@@ -10,7 +10,7 @@ export default {
   WEBSITE_URL: 'https://dooptha.com',
   GITHUB_URL: 'https://github.com/dooptha',
   DISCORD_URL: 'https://discord.gg/Fcb922G',
-  PRIVACY_POLICY_URL: 'https://dooptha.com/privacy-policy',
+  PRIVACY_POLICY_URL: 'https://dooptha.com/policy/nuwee',
   USE_DEFAULT_PROPERTIES: false,
   FORCE_SIGN_UP_PAGE: false,
 

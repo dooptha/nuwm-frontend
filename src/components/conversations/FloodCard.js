@@ -69,7 +69,8 @@ export default withStyles(FloodCard, (theme) => ({
   },
   avatar: {
     height: 200,
-    resizeMode: 'contain',
+    maxWidth: '100%',
+    resizeMode: 'cover',
     marginTop: -20,
   },
   textContainer: {

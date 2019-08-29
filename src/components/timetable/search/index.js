@@ -92,6 +92,22 @@ class Search extends Component {
     this.scrollViewRef.current.scrollToEnd({ animated: false });
   }
 
+  removeLections(schedule) {
+    schedule.forEach((day) => {
+      const newSubjects = [];
+
+      day.subjects.forEach((subject) => {
+        if (subject.type !== 'Лекція') {
+          newSubjects.push(subject);
+        }
+      });
+
+      day.subjects = newSubjects;
+    });
+
+    return schedule;
+  }
+
   findSubjects() {
     const {
       practicsOnly,
@@ -130,6 +146,7 @@ class Search extends Component {
         if (data.error || data.length === 0) {
           NavigationService.navigate('SearchScreen', { schedule: [], error: data.error });
         } else {
+          const newData = practicsOnly ? this.removeLections(data) : data;
           NavigationService.navigate('SearchScreen',
             { schedule: replaceDatesWithMoment(data) });
         }

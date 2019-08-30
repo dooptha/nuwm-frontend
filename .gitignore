@@ -30,6 +30,8 @@ local.properties
 *.iml
 debug.log
 my-upload-key.keystore
+Task
+Configure
 
 
 # node.js

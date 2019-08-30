@@ -19,6 +19,11 @@ This is open source React Native application designed for students by students o
 ###### Android
 >RIP
 
+To build *.apk use this command:
+```console
+$ cd android && ./gradlew assembleRelease
+```
+
 ### Configuration
 
 You can configure app by using configuration files in `/config` directory.

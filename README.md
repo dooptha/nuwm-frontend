@@ -19,9 +19,13 @@ This is open source React Native application designed for students by students o
 ###### Android
 >RIP
 
-To build *.apk use this command:
+To build development version *.apk use this command:
 ```console
 $ cd android && ./gradlew assembleRelease
+```
+To build production version use this [instruction.](https://facebook.github.io/react-native/docs/signed-apk-android)
+```console
+$ cd android && ./gradlew bundleRelease -PkeyPassword=<password> -PstorePassword=<password>
 ```
 
 ### Configuration

@@ -29,6 +29,8 @@ project.xcworkspace
 local.properties
 *.iml
 debug.log
+my-upload-key.keystore
+
 
 # node.js
 #

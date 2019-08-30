@@ -50,9 +50,9 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     if let group = UserDefaults(suiteName: "group.com.dooptha.nuwee")?.string(forKey: "group"){
 
       let startDate = self.getStringFromDate(date: self.getCurrentTime())
-      let endDate = self.getStringFromDate(date: self.addOneDay(date: self.getCurrentTime())!)
+      let endDate = self.getStringFromDate(date: self.addWeek(date: self.getCurrentTime())!)
       
-      var parameters: Parameters = ["group": group, startDate: startDate, endDate: endDate]
+      var parameters: Parameters = ["group": group, "startDate": startDate, "endDate": endDate]
       Alamofire.request(url, method: .get, parameters: parameters).response{ response in
         if(response.response == nil){
           

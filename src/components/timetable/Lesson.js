@@ -34,28 +34,42 @@ class Lesson extends Component {
     const {
       themedStyle,
       isLastItem,
+      sameAsPrevious,
+      showTime,
       subject: {
-        classroom,
         time,
-        type,
+        classroom,
         name,
+        type,
       },
     } = this.props;
 
-    const wrapperStyles = [themedStyle.wrapper,
-      isLastItem ? themedStyle.bottomLine : {}];
+    const timeWrapper = showTime ? (
+      <View style={themedStyle.separateTime}>
+        <View style={themedStyle.subRow}>
+          { ClockOutlineIcon(themedStyle.icon) }
+          <Text style={themedStyle.title}>{ time }</Text>
+        </View>
+      </View>
+    ) : null;
+
+    const wrapperStyles = [
+      themedStyle.wrapper,
+      isLastItem ? themedStyle.bottomLine : {},
+      showTime ? themedStyle.topLine : {},
+      { height: showTime ? 140 : 90 },
+    ];
 
     return (
       <TouchableOpacity style={wrapperStyles} onPress={() => this.onPress()}>
-        <View style={themedStyle.row}>
-          <View style={themedStyle.subRow}>
-            { ClockOutlineIcon(themedStyle.icon) }
-            <Text style={themedStyle.title}>{ time }</Text>
+        { timeWrapper }
+        <View style={themedStyle.subjectRow}>
+          <Text style={themedStyle.button}>{ classroom || '-' }</Text>
+          <View style={themedStyle.descWrapper}>
+            <Text style={themedStyle.desc}>{ name }</Text>
+            <Text style={themedStyle.subdesc}>{ type }</Text>
           </View>
-          <Text style={themedStyle.button}>{ classroom }</Text>
         </View>
-        <Text style={themedStyle.desc}>{ name }</Text>
-        <Text style={themedStyle.subdesc}>{ type }</Text>
       </TouchableOpacity>
     );
   }
@@ -65,24 +79,26 @@ class Lesson extends Component {
 // them in <Timeline> constructor too
 export default withStyles(Lesson, (theme) => ({
   wrapper: {
-    paddingRight: 15,
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    paddingTop: 20,
     paddingBottom: 20,
+    paddingTop: 10,
+    paddingRight: 10,
+  },
+  subjectColumn: {
     height: 130,
+    flexDirection: 'column',
+  },
+  subjectRow: {
+    flexDirection: 'row-reverse',
+    alignItems: 'flex-start',
+  },
+  topLine: {
+    paddingTop: 20,
     borderTopColor: theme['background-basic-color-3'],
     borderTopWidth: 1,
   },
   bottomLine: {
     borderBottomColor: theme['background-basic-color-3'],
     borderBottomWidth: 1,
-  },
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingBottom: 10,
   },
   subRow: {
     flexDirection: 'row',
@@ -98,6 +114,9 @@ export default withStyles(Lesson, (theme) => ({
     fontWeight: 'bold',
     color: theme['text-basic-color'],
   },
+  separateTime: {
+    paddingBottom: 15,
+  },
   button: {
     paddingTop: 7,
     paddingBottom: 7,
@@ -107,6 +126,11 @@ export default withStyles(Lesson, (theme) => ({
     width: 70,
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  descWrapper: {
+    flexDirection: 'column',
+    flex: 1,
+    paddingRight: 10,
   },
   desc: {
     color: theme['background-alternative-color-4'],

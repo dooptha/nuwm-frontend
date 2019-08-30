@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 export const FloodImage = {
-  imageSource: require('./source/flood.jpg'),
+  imageSource: require('./source/flood.jpeg'),
 };
 
 export const DefaultUserImage = {

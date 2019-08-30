@@ -1,5 +1,4 @@
 import React from 'react';
-import { Platform } from 'react-native';
 import {
   ArrowIosBackFill,
   CheckmarkOutlineIcon,
@@ -13,8 +12,8 @@ import {
 import I18n from '../utils/i18n';
 import { StateContext } from '../utils/context';
 
-const backIconIfNeeded = (route) => (
-  isRootRoute(route) && Platform.OS === 'ios'
+const backIconIfNeeded = (index) => (
+  isRootRoute(index)
     ? ArrowIosBackFill : null
 );
 
@@ -66,6 +65,7 @@ const SheduleTopNavigationParams = {
 const UserSettingsNavigationParams = {
   header: ({ navigation }) => {
     const { routeName } = getCurrentRouteState(navigation);
+    const index = getCurrentRouteIndex(navigation);
 
     return (
       <StateContext.Consumer>
@@ -74,7 +74,7 @@ const UserSettingsNavigationParams = {
             <TopNavigationBar
               border
               title={I18n.t(`routes.${routeName}`)}
-              backIcon={ArrowIosBackFill}
+              backIcon={backIconIfNeeded(index)}
               submitIcon={CheckmarkOutlineIcon}
               onBackPress={() => navigation.goBack(null)}
               onSubmitPress={app.actions.submitUserForm}
@@ -90,6 +90,7 @@ const UserSettingsNavigationParams = {
 const TimetableSettingsNavigationParams = {
   header: ({ navigation }) => {
     const { routeName } = getCurrentRouteState(navigation);
+    const index = getCurrentRouteIndex(navigation);
 
     return (
       <StateContext.Consumer>
@@ -98,7 +99,7 @@ const TimetableSettingsNavigationParams = {
             <TopNavigationBar
               border
               title={I18n.t(`routes.${routeName}`)}
-              backIcon={ArrowIosBackFill}
+              backIcon={backIconIfNeeded(index)}
               submitIcon={CheckmarkOutlineIcon}
               onBackPress={() => navigation.goBack(null)}
               onSubmitPress={app.actions.submitTimetableForm}
@@ -117,12 +118,13 @@ const WebViewNavigationParams = {
       || navigation.state.routes[1];
 
     const { title } = route ? route.params : '';
+    const index = getCurrentRouteIndex(navigation);
 
     return (
       <TopNavigationBar
         border
         title={title}
-        backIcon={ArrowIosBackFill}
+        backIcon={backIconIfNeeded(index)}
         onBackPress={() => navigation.goBack(null)}
         connected
       />

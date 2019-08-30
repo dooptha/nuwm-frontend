@@ -86,12 +86,13 @@ export class AutocompleteInputComponent extends Component {
     } = this.props;
 
     return clearInput && value.length > 0 ? (
-      <TouchableOpacity
-        style={themedStyle.clearInputContainer}
-        onPress={this.onClearInputButtonPress}
-      >
-        { PlusIcon(themedStyle.clearInputIcon) }
-      </TouchableOpacity>
+      <View style={themedStyle.clearInputContainer}>
+        <TouchableOpacity
+          onPress={this.onClearInputButtonPress}
+        >
+          { PlusIcon(themedStyle.clearInputIcon) }
+        </TouchableOpacity>
+      </View>
     ) : null;
   }
 
@@ -177,12 +178,10 @@ export default withStyles(AutocompleteInputComponent, (theme) => ({
   },
   clearInputContainer: {
     position: 'absolute',
-    bottom: 18,
     right: 8,
-    width: 20,
-    height: 20,
-    // backgroundColor: theme['background-basic-color-1'],
-    // borderRadius: 12,
+    justifyContent: 'center',
+    height: '100%',
+    paddingTop: 17.5,
   },
   clearInputIcon: {
     transform: [{ rotate: '45deg' }],

@@ -4,7 +4,7 @@
 <dict>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.nuwmapp.com</string>
+		<string>group.com.dooptha.nuwee</string>
 	</array>
 </dict>
 </plist>

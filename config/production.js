@@ -15,7 +15,7 @@ export default {
   FORCE_SIGN_UP_PAGE: false,
 
   // Today Widget
-  APP_GROUP: 'group.nuwmapp.com',
+  APP_GROUP: 'group.com.dooptha.nuwee',
 
   // Exception handlers params
   USE_CUSTOM_JS_EXCEPTION_HANDLER_IN_DEV: false,

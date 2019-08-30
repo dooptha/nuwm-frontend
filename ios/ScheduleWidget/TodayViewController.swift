@@ -47,7 +47,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
   }
   
   func getSchedule(completion: @escaping (Array<Subject>?) -> Void){
-    if let group = UserDefaults(suiteName: "group.nuwmapp.com")?.string(forKey: "group"){
+    if let group = UserDefaults(suiteName: "group.com.dooptha.nuwee")?.string(forKey: "group"){
 
       let startDate = self.getStringFromDate(date: self.getCurrentTime())
       let endDate = self.getStringFromDate(date: self.addOneDay(date: self.getCurrentTime())!)
@@ -321,12 +321,12 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     if let date = self.addWeek(date: self.getSubjectTimeStamp(time: "12:00-12:00", date: time)!){
       if(currentDate > date){
         print("outdated")
-        UserDefaults(suiteName: "group.nuwmapp.com")?.removeObject(forKey: "schedule")
+        UserDefaults(suiteName: "group.com.dooptha.nuwee")?.removeObject(forKey: "schedule")
         return true
       }
     }else{
       print("outdated")
-      UserDefaults(suiteName: "group.nuwmapp.com")?.removeObject(forKey: "schedule")
+      UserDefaults(suiteName: "group.com.dooptha.nuwee")?.removeObject(forKey: "schedule")
       return true
     }
     
@@ -334,7 +334,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
   }
   
   func loadScheduleFromDefaults() -> Array<Subject>?{
-    if let rawJson = UserDefaults(suiteName: "group.nuwmapp.com")?.string(forKey: "schedule"){
+    if let rawJson = UserDefaults(suiteName: "group.com.dooptha.nuwee")?.string(forKey: "schedule"){
       let schedule = JSON.init(parseJSON: rawJson)
       let outdated = self.checkIfNotOutdated(schedule: schedule)
       
@@ -348,7 +348,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
   }
   
   func saveScheduleInDefaults(schedule: JSON){
-    UserDefaults(suiteName: "group.nuwmapp.com")?.set(schedule.rawString(String.Encoding.utf8, options: JSONSerialization.WritingOptions(rawValue: 0)), forKey: "schedule")
+    UserDefaults(suiteName: "group.com.dooptha.nuwee")?.set(schedule.rawString(String.Encoding.utf8, options: JSONSerialization.WritingOptions(rawValue: 0)), forKey: "schedule")
   }
   
   /*****

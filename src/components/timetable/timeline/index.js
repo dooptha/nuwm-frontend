@@ -56,11 +56,12 @@ export default class Timeline extends PureComponent {
     this.duration = 3000;
 
     // circle
-    this.circlesMargin = 30;
+    this.circlesMargin = 24;
     this.circleSize = 10;
 
     // <Lesson /> height
-    this.subjectHeight = 130;
+    this.subjectHeight = 140;
+    this.minSubjectHeight = 90;
     // <Day>'s titleWrapper height
     this.dateHeight = 40;
 
@@ -84,9 +85,13 @@ export default class Timeline extends PureComponent {
     schedule.forEach((day, dayIndex) => {
       day.subjects.forEach((subject, subjectIndex) => {
         if (subjectIndex === 0) height += this.dateHeight;
-        if (dayIndex !== 0 || subjectIndex !== 0) height += this.subjectHeight;
 
-        points.push({ moment: subject.momentTime, height });
+        if (subjectIndex > 0 && day.subjects[subjectIndex - 1].time === subject.time) {
+          height += this.minSubjectHeight;
+        } else {
+          if (dayIndex !== 0 || subjectIndex !== 0) height += this.subjectHeight;
+          points.push({ moment: subject.momentTime, height });
+        }
       });
     });
 

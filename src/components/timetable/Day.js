@@ -32,13 +32,24 @@ class Day extends Component {
   renderAllSubjects() {
     const { day } = this.props;
 
-    return day.subjects.map((subject, index) => (
-      <Lesson
-        key={subject.time + day.dayOfYear}
-        subject={subject}
-        isLastItem={day.subjects.length - 1 === index}
-      />
-    ));
+    return day.subjects.map((subject, index) => {
+      let showTime = true;
+
+      if (index > 0) {
+        if (day.subjects[index - 1].time === subject.time) {
+          showTime = false;
+        }
+      }
+
+      return (
+        <Lesson
+          showTime={showTime}
+          key={subject.time + subject.name}
+          subject={subject}
+          isLastItem={day.subjects.length - 1 === index}
+        />
+      );
+    });
   }
 
   render() {
@@ -70,6 +81,7 @@ export default withStyles(Day, (theme) => ({
     height: 25,
   },
   title: {
+    fontWeight: 'bold',
     color: theme['text-basic-color'],
   },
   body: {

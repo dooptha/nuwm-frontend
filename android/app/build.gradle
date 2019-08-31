@@ -124,9 +124,9 @@ android {
         release {
             if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
                 storeFile file(MYAPP_UPLOAD_STORE_FILE)
-                storePassword project.getProperty("storePassword")
+                storePassword project.findProperty('storePassword') ?: 'password'
                 keyAlias MYAPP_UPLOAD_KEY_ALIAS
-                keyPassword project.getProperty("keyPassword")
+                keyPassword project.findProperty("keyPassword") ?: 'password'
             }
         }
     }

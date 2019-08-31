@@ -75,7 +75,7 @@ TimetableSettings.contextType = StateContext;
 export default withStyles(TimetableSettings, (theme) => ({
   container: {
     backgroundColor: theme['background-basic-color-1'],
-    margin: 50,
+    padding: 50,
     flex: 1,
   },
   submitButton: {

@@ -57,7 +57,7 @@ class Lesson extends Component {
       themedStyle.wrapper,
       isLastItem ? themedStyle.bottomLine : {},
       showTime ? themedStyle.topLine : {},
-      { height: showTime ? 140 : 90 },
+      { height: showTime ? 150 : 90 },
     ];
 
     return (

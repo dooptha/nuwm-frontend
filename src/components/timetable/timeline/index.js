@@ -60,7 +60,7 @@ export default class Timeline extends PureComponent {
     this.circleSize = 10;
 
     // <Lesson /> height
-    this.subjectHeight = 140;
+    this.subjectHeight = 150;
     this.minSubjectHeight = 90;
     // <Day>'s titleWrapper height
     this.dateHeight = 40;

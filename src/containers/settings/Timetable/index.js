@@ -58,7 +58,6 @@ class TimetableSettings extends Component {
     return (
       <View style={themedStyle.container}>
         <GroupInput
-          style={themedStyle.input}
           labelStyle={themedStyle.text}
           textStyle={themedStyle.text}
           label={I18n.t('settings.user.group')}
@@ -76,16 +75,11 @@ TimetableSettings.contextType = StateContext;
 export default withStyles(TimetableSettings, (theme) => ({
   container: {
     backgroundColor: theme['background-basic-color-1'],
-    paddingTop: 50,
+    margin: 50,
     flex: 1,
-    paddingLeft: 50,
-    paddingRight: 50,
   },
   submitButton: {
     marginTop: 50,
-  },
-  input: {
-    paddingTop: 10,
   },
   text: {
     fontFamily: 'Roboto',

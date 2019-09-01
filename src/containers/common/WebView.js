@@ -19,15 +19,15 @@ const style = StyleSheet.create({
 
 export default ({ navigation }) => {
   const renderIndicator = () => <ActivityIndicator size="large" style={style.loader} />;
-  const url = navigation.getParam('url', null);
+  const uri = navigation.getParam('url', null);
 
-  if (!url) {
+  if (!uri) {
     navigation.goBack();
   }
 
   return (
     <WebView
-      source={{ url }}
+      source={{ uri }}
       renderLoading={renderIndicator}
       allowsBackForwardNavigationGestures
       startInLoadingState

@@ -137,8 +137,20 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
   
   // when widget loaded
   
+  @objc func checkAction(sender : UITapGestureRecognizer) {
+    print("opened")
+    
+    let url: NSURL = NSURL.init(string: "NuwmApp://")!
+    debugPrint(url)
+    self.extensionContext?.open(url as URL, completionHandler: nil)
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    let gesture = UITapGestureRecognizer(target: self, action:  #selector(self.checkAction))
+    self.tableView.addGestureRecognizer(gesture)
+    
     self.showMessage(message: "NoLesson".localized)
   }
   
@@ -244,7 +256,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         }
       }
       
-      if(self.mode == .compact){
+      if(self.mode == .compact && tomorrowTime == nil){
         if(compareDate(date1: subject.date, date2: tomorrow!)){
             self.tomorrowCampus = String(Array(subject.classroom)[0])
             self.tomorrowTime = subject.time.components(separatedBy: "-")[0]

@@ -62,7 +62,7 @@ PODS:
     - React-cxxreact (= 0.60.0)
     - React-jsi (= 0.60.0)
   - React-jsinspector (0.60.0)
-  - react-native-webview (5.12.1):
+  - react-native-webview (7.0.1):
     - React
   - React-RCTActionSheet (0.60.0):
     - React-Core (= 0.60.0)
@@ -131,7 +131,7 @@ DEPENDENCIES:
   - React-jsi (from `../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
-  - react-native-webview (from `/Users/pelykh/projects/NuwmApp/node_modules/react-native-webview`)
+  - react-native-webview (from `../node_modules/react-native-webview`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
   - React-RCTBlob (from `../node_modules/react-native/Libraries/Blob`)
@@ -190,7 +190,7 @@ EXTERNAL SOURCES:
   React-jsinspector:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   react-native-webview:
-    :path: "/Users/pelykh/projects/NuwmApp/node_modules/react-native-webview"
+    :path: "../node_modules/react-native-webview"
   React-RCTActionSheet:
     :path: "../node_modules/react-native/Libraries/ActionSheetIOS"
   React-RCTAnimation:
@@ -250,7 +250,7 @@ SPEC CHECKSUMS:
   React-jsi: 8e128c4d0d8febc2977ef617d1c09bb54326069c
   React-jsiexecutor: 7a3554f703a58963ec80b860144ea0f0e9b910e1
   React-jsinspector: d4ed52225912efe0019bb7f1a225aec20f23049a
-  react-native-webview: 21c396687cb983fadc6ccc0751cc74f554131f3f
+  react-native-webview: b59469634752e8b227f56994119f1b2a25075432
   React-RCTActionSheet: b27ff3cf3a68f917c46d2b94abf938b625b96570
   React-RCTAnimation: 9e4708e5bd65fca8285ce7c0aa076f3f4fa5c2f8
   React-RCTBlob: 6eafcc3a24f33785692a7be24918ade607bc8719
@@ -275,6 +275,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   yoga: 616fde658be980aa60a2158835170f3f9c2d04b4
 
-PODFILE CHECKSUM: de9e50158eca745add69b2047a5706af8ff08b37
+PODFILE CHECKSUM: 7cf555eb546c863f3edb1cf0305b97829f2ea53a
 
 COCOAPODS: 1.7.3

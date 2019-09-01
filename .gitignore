@@ -24,17 +24,22 @@ project.xcworkspace
 
 # Android/IntelliJ
 #
-build/
 .idea
 .gradle
 local.properties
 *.iml
+debug.log
+my-upload-key.keystore
+Task
+Configure
+
 
 # node.js
 #
 node_modules/
 npm-debug.log
 yarn-error.log
+coverage/
 
 # BUCK
 buck-out/
@@ -57,3 +62,9 @@ buck-out/
 
 # CocoaPods
 /ios/Pods/
+
+# Project config override
+config/override.js
+
+# Environment variables
+.env

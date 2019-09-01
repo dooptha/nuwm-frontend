@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  NuwmApp
+
+  Created by Roman Sereda on 8/3/19.
+  Copyright © 2019 Facebook. All rights reserved.
+*/
+
+"CFBundleDisplayName"   = "Schedule";
+"CFBundleName"          = "Schedule";

@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  NuwmApp
+
+  Created by Roman Sereda on 8/3/19.
+  Copyright © 2019 Facebook. All rights reserved.
+*/
+
+"NoLesson" = "Пар на сьогодні немає";
+"NoGroup" = "Група не вибрана. Перейдіть в застосунок -> налаштування -> розклад, щоб змінити групу";
+"NoServer" = "Неможливо оновити розклад";
+"GoSleep" = "Пар на сьогодні немає.\n Завтра вставай на %@ в %@ корпус";
+"Loading" = "Завантаження";

@@ -1,97 +1,48 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+import React from 'react';
+import { YellowBox } from 'react-native';
+import { mapping } from '@eva-design/eva';
+import { ApplicationProvider } from 'react-native-ui-kitten';
+import { DynamicStatusBar } from './src/components/common';
+import Router from './src/navigation/routes';
+import { themes, customMapping } from './src/utils/themes';
+import { GlobalState, useGlobalState } from './src/utils/context';
+import NavigationService from './src/navigation/NavigationService';
+import { setupExceptionHandlers } from './src/utils/errors';
 
-import React, {Fragment} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+// import whyDidYouRender  from '@welldone-software/why-did-you-render';
+// if (__DEV__) {
+//   whyDidYouRender(React);
+// }
+//
+//
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+YellowBox.ignoreWarnings([
+  'Unrecognized WebSocket connection option(s) `agent`, `perMessageDeflate`, `pfx`, `key`, `passphrase`, `cert`, `ca`, `ciphers`, `rejectUnauthorized`. Did you mean to put these under `headers`?',
+]);
+
+setupExceptionHandlers();
 
 const App = () => {
+  const [{ app }] = useGlobalState();
+
   return (
-    <Fragment>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </Fragment>
+    <ApplicationProvider
+      mapping={mapping}
+      customMapping={customMapping}
+      theme={themes[app.properties.theme]}
+    >
+      <DynamicStatusBar currentTheme={app.properties.theme} />
+      <Router
+        ref={
+          (navigatorRef) => NavigationService.setTopLevelNavigator(navigatorRef)
+        }
+      />
+    </ApplicationProvider>
   );
 };
 
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
-
-export default App;
+export default () => (
+  <GlobalState>
+    <App />
+  </GlobalState>
+);

@@ -1,0 +1,181 @@
+{
+	"SignUp": {
+		"group": "Група",
+		"name": "Ім'я",
+		"submit": "Почати",
+		"title": "Перед тим як почати",
+		"privacyText": "Продовжуючи, ви погоджуєтеся з нашою ",
+		"privacyTitle": "Політикою конфіденційності"
+	},
+	"admin": {
+		"deleteMessage": "Видалити повідомлення",
+		"no": "Ні",
+		"poll": {
+			"close": {
+				"cancel": "Ні",
+				"confirm": "Так",
+				"description": "Цю дію не можна буде відмінити",
+				"title": "Завершити попереднє голосування"
+			},
+			"options": {
+				"add": "Додати інший варіант",
+				"placeholder": "Варіант",
+				"title": "Варіанти відповідей"
+			},
+			"question": {
+				"placeholder": "Поставте запитання",
+				"title": "Запитання"
+			},
+			"submit": "Створити"
+		},
+		"yes": "Так"
+	},
+	"contactUs": {
+		"alert": "Відвідати обраний ресурс",
+		"cancel": "Ні",
+		"discord": {
+			"description": "Приєднуйся до спільноти",
+			"title": "Discord"
+		},
+		"github": {
+			"description": "Візьми участь в розробці",
+			"title": "Github"
+		},
+		"mail": {
+			"description": "Побажання та запитання",
+			"title": "Пошта"
+		},
+		"open": "Так",
+		"title": "Dooptha"
+	},
+	"conversations": {
+		"messagePlaceholder": "Повідомлення..."
+	},
+	"datePicker": {
+		"Cancel": "Відмінити",
+		"Confirm": "Підтвердити"
+	},
+	"errors": {
+		"description": "Відомості про помилку надіслані розробникам! Будь ласка, перезапустіть застосунок!",
+		"ok": "Добре",
+		"responseDescription": "Щось сталося під час запиту",
+		"responseTitle": "Запит не відбувся",
+		"title": "Щось трапилося не так як задумано"
+	},
+	"flood": {
+		"description": "Місце для спілкування з іншими студентами, в історії зберігаються лише останні 50 повідомлень",
+		"online": "oнлайн",
+		"title": "Флуд"
+	},
+	"routes": {
+		"Admin": "Нове голосування",
+		"ContactUs": "Зв'яжіться з нами",
+		"Conversations": "Розмови",
+		"DetailedLesson": "Деталі",
+		"Instagram": "Інстаграм",
+		"Language": "Мова",
+		"PollHistory": "Історія голосування",
+		"SearchScreen": "Розклад",
+		"Settings": "Налаштування",
+		"Themes": "Вигляд",
+		"Timetable": "Розклад",
+		"TimetableSettings": "Розклад",
+		"Twitter": "Твіттер",
+		"User": "Користувач",
+		"WebView": "WebView",
+		"Conversation": "Флуд",
+		"disconnected": "Підключення"
+	},
+	"settings": {
+		"admin": {
+			"title": "Адміністрування"
+		},
+		"languages": {
+			"en": "Англійська",
+			"ru": "Російська",
+			"title": "Мова",
+			"ua": "Українська"
+		},
+		"polls": {
+			"title": "Історія голосування"
+		},
+		"questions": {
+			"title": "Зв'яжіться з нами"
+		},
+		"themes": {
+			"anotherUserMessage": "Колись мені сказали",
+			"currentUserMessage": "що світ мене роздавить",
+			"sender": "Влад Проценко",
+			"title": "Вигляд"
+		},
+		"timetable": {
+			"title": "Розклад"
+		},
+		"user": {
+			"group": "Група",
+			"logOut": "Вийти",
+			"username": "Ім'я",
+			"validations": {
+				"username": "Максимальна кількість символів"
+			},
+			"privacyPolicy": "Політика конфіденційності"
+		}
+	},
+	"tabs": {
+		"chat": "Розмови",
+		"settings": "Налаштування",
+		"timetable": "Розклад"
+	},
+	"timetable": {
+		"datepicker": {
+			"Choose Date": "Виберіть дату",
+			"End": "Кінець",
+			"OK": "Добре",
+			"Start": "Початок"
+		},
+		"error-no-server": "Неможливо з'єднатися з сервером' :-( \nПеревірте ваше інтернет з'єднання",
+		"error-try-later": "Шось пішло не так :-( \nСпробуйте пізніше",
+		"errorInvalidData": {
+			"description": "Для вдалого пошуку необхідний проміжок часу та хоча б одне з двох наступних: викладач та група",
+			"title": "Неповні вхідні дані!"
+		},
+		"lesson": {
+			"classroom": "Аудиторія",
+			"lecturer": "Викладач",
+			"name": "Предмет",
+			"streams_type": "Підгрупа",
+			"subgroup": "Група",
+			"time": "Час",
+			"type": "Тип"
+		},
+		"no-lesson": "Нема пар, можна відпочивати",
+		"search": {
+			"Date": "Дата",
+			"From": "З",
+			"Group": "Група",
+			"GroupExample": "Приклад: ПМ-41",
+			"Lecturer": "Викладач",
+			"LecturerExample": "Приклад: Мічута Ольга Романівна",
+			"OnlyDay": "День",
+			"PracticsOnly": "Тільки Практика",
+			"Range": "Проміжок",
+			"Search": "Пошук",
+			"To": "До",
+			"Type": "Тип"
+		},
+		"tabs": {
+			"Search": "Пошук",
+			"Today": "Сьогодні",
+			"Tomorrow": "Завтра",
+			"Week": "Тиждень"
+		}
+	},
+	"iosWidget": {
+		"modal": {
+			"text": "Віджет дозволяє швидко дізнатися розклад на сьогодні, навіть на заблокованому екрані",
+			"confirm": "Так, зрозуміло",
+		},
+		"title": "Порада",
+		"text": "Скористайтеся віджетом для швидкого доступу до розкладу"
+	}
+}

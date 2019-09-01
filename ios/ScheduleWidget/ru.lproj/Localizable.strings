@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  NuwmApp
+
+  Created by Roman Sereda on 8/3/19.
+  Copyright © 2019 Facebook. All rights reserved.
+*/
+
+"NoLesson" = "Сегодня пар больше нету";
+"NoGroup" = "Группа не выбрана. Перейдите в приложение -> настройки -> расписание, чтобы выбрать группу";
+"NoServer" = "Невозможно обновить расписание";
+"GoSleep" = "Сегодня пар больше нету.\n Вставай завтра до %@ часов в %@ корпус";
+"Loading" = "Загрузка";

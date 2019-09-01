@@ -8,18 +8,41 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* NuwmAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* NuwmAppTests.m */; };
+		014EEEC42317E91600A5A576 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 014EEEC62317E91600A5A576 /* InfoPlist.strings */; };
+		01AC7AD922FAEB20004AB39C /* new_message.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 01AC7AD822FAEB20004AB39C /* new_message.mp3 */; };
+		01AC7ADA22FAEB20004AB39C /* new_message.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 01AC7AD822FAEB20004AB39C /* new_message.mp3 */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		20B0ADD7D3C645EEA38DDB25 /* Roboto-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 62D657209BE44BDF8895B7B7 /* Roboto-BlackItalic.ttf */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* NuwmAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* NuwmAppTests.m */; };
 		355FBAA6A4D354A796CD6B5F /* libPods-NuwmApp-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D01BC03E69448E3E53B75605 /* libPods-NuwmApp-tvOS.a */; };
+		35E299C94BC4420DB0679E5E /* Roboto-RegularItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 599B704CA3BF43709555ACE6 /* Roboto-RegularItalic.ttf */; };
+		3B50A6086D024B0B9C3B6FF9 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D434F2C96674CC9B25AA0AB /* Roboto-Thin.ttf */; };
+		3CE73CACE7644D6680A22C60 /* Roboto-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC101D47E36C4C35958C1193 /* Roboto-ThinItalic.ttf */; };
+		5288A0D9F8F5496A8DFBBF35 /* Roboto-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 55738C7E76C04534B9503EE2 /* Roboto-MediumItalic.ttf */; };
+		5664E98D89824E9199FFB9F2 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EB6850A377F41AEB23F8CE9 /* Roboto-Black.ttf */; };
+		5EC5F60E090640F08B76761B /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00F4A8ADB6794F0C9F68A580 /* Roboto-Regular.ttf */; };
 		6DA63E10547E274D73D12D5B /* libPods-NuwmAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CD6A87FB7FCC536088A96BE /* libPods-NuwmAppTests.a */; };
+		789EAEA62EB1375F45BCDF24 /* libPods-ScheduleWidget.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA6F64B720097F4FA0DF568 /* libPods-ScheduleWidget.a */; };
 		833DAF11C9208E0FA43175D5 /* libPods-NuwmApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F3CEC994837039CE2FE306B0 /* libPods-NuwmApp.a */; };
+		920FA74A66904E44BA587CD5 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1D8D815D1B1D48DCB8202BA6 /* Roboto-Bold.ttf */; };
 		AE64CE7F48214E95D2D3889C /* libPods-NuwmApp-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C1DA2A39BBAE72483B85DCA1 /* libPods-NuwmApp-tvOSTests.a */; };
+		B9D0F54FD25441949D13C0EE /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 89BE854D68A34D05B6C67B3D /* Roboto-Light.ttf */; };
+		BC061C77DA3943E6BA393DC5 /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9CD096480953436F9B0C1058 /* Roboto-LightItalic.ttf */; };
+		C48C12D495A44E9483829BF6 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 70A3BF7EBF8E4D7BAE1EC2C3 /* Roboto-Medium.ttf */; };
+		D7D7E3641A194593870D6783 /* Roboto-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E77CF08834CB4AB5B82D78AC /* Roboto-BoldItalic.ttf */; };
+		F928925922F5D1BB00764E14 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F928925822F5D1BB00764E14 /* NotificationCenter.framework */; };
+		F928925C22F5D1BB00764E14 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F928925B22F5D1BB00764E14 /* TodayViewController.swift */; };
+		F928925F22F5D1BB00764E14 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F928925D22F5D1BB00764E14 /* MainInterface.storyboard */; };
+		F928926322F5D1BB00764E14 /* ScheduleWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F928925722F5D1BB00764E14 /* ScheduleWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F928926D22F5D5CA00764E14 /* ScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F928926C22F5D5CA00764E14 /* ScheduleTableViewCell.swift */; };
+		F928927022F5F09C00764E14 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F928927222F5F09C00764E14 /* InfoPlist.strings */; };
+		F928927D22F6005500764E14 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F928927F22F6005500764E14 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,13 +60,39 @@
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
 			remoteInfo = "NuwmApp-tvOS";
 		};
+		F928926122F5D1BB00764E14 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F928925622F5D1BB00764E14;
+			remoteInfo = ScheduleWidget;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F928926722F5D1BB00764E14 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				F928926322F5D1BB00764E14 /* ScheduleWidget.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00E356EE1AD99517003FC87E /* NuwmAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NuwmAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* NuwmAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NuwmAppTests.m; sourceTree = "<group>"; };
+		00F4A8ADB6794F0C9F68A580 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Regular.ttf"; path = "../src/assets/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		014EEEC52317E91600A5A576 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		014EEEC72317E92E00A5A576 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		014EEEC82317E93100A5A576 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		01AC7AD822FAEB20004AB39C /* new_message.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = new_message.mp3; path = ../android/app/src/main/res/raw/new_message.mp3; sourceTree = "<group>"; };
 		063DCFBE774A05AA6D5EB774 /* Pods-NuwmAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NuwmAppTests.release.xcconfig"; path = "Target Support Files/Pods-NuwmAppTests/Pods-NuwmAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		0CD6A87FB7FCC536088A96BE /* libPods-NuwmAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NuwmAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07F961A680F5B00A75B9A /* NuwmApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NuwmApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,20 +102,52 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = NuwmApp/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = NuwmApp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = NuwmApp/main.m; sourceTree = "<group>"; };
+		1D8D815D1B1D48DCB8202BA6 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Bold.ttf"; path = "../src/assets/fonts/Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* NuwmApp-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NuwmApp-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* NuwmApp-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "NuwmApp-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EA6F64B720097F4FA0DF568 /* libPods-ScheduleWidget.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ScheduleWidget.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D434F2C96674CC9B25AA0AB /* Roboto-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Thin.ttf"; path = "../src/assets/fonts/Roboto-Thin.ttf"; sourceTree = "<group>"; };
 		4F08AF75BC3CA1EFEFC3EF47 /* Pods-NuwmAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NuwmAppTests.debug.xcconfig"; path = "Target Support Files/Pods-NuwmAppTests/Pods-NuwmAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		55738C7E76C04534B9503EE2 /* Roboto-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-MediumItalic.ttf"; path = "../src/assets/fonts/Roboto-MediumItalic.ttf"; sourceTree = "<group>"; };
+		599B704CA3BF43709555ACE6 /* Roboto-RegularItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-RegularItalic.ttf"; path = "../src/assets/fonts/Roboto-RegularItalic.ttf"; sourceTree = "<group>"; };
+		5EE956F13254264FCE7432C7 /* Pods-ScheduleWidget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScheduleWidget.release.xcconfig"; path = "Target Support Files/Pods-ScheduleWidget/Pods-ScheduleWidget.release.xcconfig"; sourceTree = "<group>"; };
+		62D657209BE44BDF8895B7B7 /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-BlackItalic.ttf"; path = "../src/assets/fonts/Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
+		6EB6850A377F41AEB23F8CE9 /* Roboto-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Black.ttf"; path = "../src/assets/fonts/Roboto-Black.ttf"; sourceTree = "<group>"; };
+		70A3BF7EBF8E4D7BAE1EC2C3 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Medium.ttf"; path = "../src/assets/fonts/Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		8356F5AEF9F40DE94394A5D8 /* Pods-NuwmApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NuwmApp.release.xcconfig"; path = "Target Support Files/Pods-NuwmApp/Pods-NuwmApp.release.xcconfig"; sourceTree = "<group>"; };
+		89BE854D68A34D05B6C67B3D /* Roboto-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Light.ttf"; path = "../src/assets/fonts/Roboto-Light.ttf"; sourceTree = "<group>"; };
+		9CD096480953436F9B0C1058 /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-LightItalic.ttf"; path = "../src/assets/fonts/Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
 		A50F5400DD61D77C256E0283 /* Pods-NuwmApp-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NuwmApp-tvOS.release.xcconfig"; path = "Target Support Files/Pods-NuwmApp-tvOS/Pods-NuwmApp-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		BC101D47E36C4C35958C1193 /* Roboto-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-ThinItalic.ttf"; path = "../src/assets/fonts/Roboto-ThinItalic.ttf"; sourceTree = "<group>"; };
 		C1DA2A39BBAE72483B85DCA1 /* libPods-NuwmApp-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NuwmApp-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4FD8287454E163919BD33D6 /* Pods-NuwmApp-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NuwmApp-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-NuwmApp-tvOSTests/Pods-NuwmApp-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		CC70A3B931386C423B5B02B7 /* Pods-NuwmApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NuwmApp.debug.xcconfig"; path = "Target Support Files/Pods-NuwmApp/Pods-NuwmApp.debug.xcconfig"; sourceTree = "<group>"; };
 		D01BC03E69448E3E53B75605 /* libPods-NuwmApp-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NuwmApp-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D36E464A5DB9573132EE72F7 /* Pods-NuwmApp-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NuwmApp-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-NuwmApp-tvOS/Pods-NuwmApp-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		E671A507B1F9BDD69750F869 /* Pods-NuwmApp-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NuwmApp-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-NuwmApp-tvOSTests/Pods-NuwmApp-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E77CF08834CB4AB5B82D78AC /* Roboto-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-BoldItalic.ttf"; path = "../src/assets/fonts/Roboto-BoldItalic.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F3CEC994837039CE2FE306B0 /* libPods-NuwmApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NuwmApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F928925722F5D1BB00764E14 /* ScheduleWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ScheduleWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		F928925822F5D1BB00764E14 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		F928925B22F5D1BB00764E14 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		F928925E22F5D1BB00764E14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		F928926022F5D1BB00764E14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F928926C22F5D5CA00764E14 /* ScheduleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewCell.swift; sourceTree = "<group>"; };
+		F928927122F5F09C00764E14 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F928927322F5F1FF00764E14 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		F928927422F5F1FF00764E14 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MainInterface.strings; sourceTree = "<group>"; };
+		F928927522F5F1FF00764E14 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F928927622F5F21200764E14 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		F928927722F5F21200764E14 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/MainInterface.strings; sourceTree = "<group>"; };
+		F928927822F5F21200764E14 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F928927E22F6005500764E14 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F928928022F6005900764E14 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F928928122F6005A00764E14 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F93530A8230DA8640004A87D /* NuwmApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = NuwmApp.entitlements; path = NuwmApp/NuwmApp.entitlements; sourceTree = "<group>"; };
+		F93530A9230DA86D0004A87D /* ScheduleWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ScheduleWidget.entitlements; sourceTree = "<group>"; };
+		FADD3470028A41A1CDBDDC6A /* Pods-ScheduleWidget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScheduleWidget.debug.xcconfig"; path = "Target Support Files/Pods-ScheduleWidget/Pods-ScheduleWidget.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +183,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F928925422F5D1BB00764E14 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F928925922F5D1BB00764E14 /* NotificationCenter.framework in Frameworks */,
+				789EAEA62EB1375F45BCDF24 /* libPods-ScheduleWidget.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -125,6 +215,8 @@
 		13B07FAE1A68108700A75B9A /* NuwmApp */ = {
 			isa = PBXGroup;
 			children = (
+				F93530A8230DA8640004A87D /* NuwmApp.entitlements */,
+				01AC7AD822FAEB20004AB39C /* new_message.mp3 */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -132,6 +224,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				014EEEC62317E91600A5A576 /* InfoPlist.strings */,
 			);
 			name = NuwmApp;
 			sourceTree = "<group>";
@@ -145,6 +238,8 @@
 				D01BC03E69448E3E53B75605 /* libPods-NuwmApp-tvOS.a */,
 				C1DA2A39BBAE72483B85DCA1 /* libPods-NuwmApp-tvOSTests.a */,
 				0CD6A87FB7FCC536088A96BE /* libPods-NuwmAppTests.a */,
+				F928925822F5D1BB00764E14 /* NotificationCenter.framework */,
+				2EA6F64B720097F4FA0DF568 /* libPods-ScheduleWidget.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -160,8 +255,9 @@
 				C4FD8287454E163919BD33D6 /* Pods-NuwmApp-tvOSTests.release.xcconfig */,
 				4F08AF75BC3CA1EFEFC3EF47 /* Pods-NuwmAppTests.debug.xcconfig */,
 				063DCFBE774A05AA6D5EB774 /* Pods-NuwmAppTests.release.xcconfig */,
+				FADD3470028A41A1CDBDDC6A /* Pods-ScheduleWidget.debug.xcconfig */,
+				5EE956F13254264FCE7432C7 /* Pods-ScheduleWidget.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -178,9 +274,11 @@
 				13B07FAE1A68108700A75B9A /* NuwmApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* NuwmAppTests */,
+				F928925A22F5D1BB00764E14 /* ScheduleWidget */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				473649EC8BA0D368EF064184 /* Pods */,
+				FC4620722B4146AD84DEF8D9 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -194,8 +292,42 @@
 				00E356EE1AD99517003FC87E /* NuwmAppTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* NuwmApp-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* NuwmApp-tvOSTests.xctest */,
+				F928925722F5D1BB00764E14 /* ScheduleWidget.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		F928925A22F5D1BB00764E14 /* ScheduleWidget */ = {
+			isa = PBXGroup;
+			children = (
+				F93530A9230DA86D0004A87D /* ScheduleWidget.entitlements */,
+				F928925B22F5D1BB00764E14 /* TodayViewController.swift */,
+				F928925D22F5D1BB00764E14 /* MainInterface.storyboard */,
+				F928926022F5D1BB00764E14 /* Info.plist */,
+				F928926C22F5D5CA00764E14 /* ScheduleTableViewCell.swift */,
+				F928927222F5F09C00764E14 /* InfoPlist.strings */,
+				F928927F22F6005500764E14 /* Localizable.strings */,
+			);
+			path = ScheduleWidget;
+			sourceTree = "<group>";
+		};
+		FC4620722B4146AD84DEF8D9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6EB6850A377F41AEB23F8CE9 /* Roboto-Black.ttf */,
+				62D657209BE44BDF8895B7B7 /* Roboto-BlackItalic.ttf */,
+				1D8D815D1B1D48DCB8202BA6 /* Roboto-Bold.ttf */,
+				E77CF08834CB4AB5B82D78AC /* Roboto-BoldItalic.ttf */,
+				89BE854D68A34D05B6C67B3D /* Roboto-Light.ttf */,
+				9CD096480953436F9B0C1058 /* Roboto-LightItalic.ttf */,
+				70A3BF7EBF8E4D7BAE1EC2C3 /* Roboto-Medium.ttf */,
+				55738C7E76C04534B9503EE2 /* Roboto-MediumItalic.ttf */,
+				00F4A8ADB6794F0C9F68A580 /* Roboto-Regular.ttf */,
+				599B704CA3BF43709555ACE6 /* Roboto-RegularItalic.ttf */,
+				4D434F2C96674CC9B25AA0AB /* Roboto-Thin.ttf */,
+				BC101D47E36C4C35958C1193 /* Roboto-ThinItalic.ttf */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -230,10 +362,12 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				F928926722F5D1BB00764E14 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				F928926222F5D1BB00764E14 /* PBXTargetDependency */,
 			);
 			name = NuwmApp;
 			productName = NuwmApp;
@@ -279,18 +413,48 @@
 			productReference = 2D02E4901E0B4A5D006451C7 /* NuwmApp-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		F928925622F5D1BB00764E14 /* ScheduleWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F928926622F5D1BB00764E14 /* Build configuration list for PBXNativeTarget "ScheduleWidget" */;
+			buildPhases = (
+				FF72DB5C91164A0EC83DC967 /* [CP] Check Pods Manifest.lock */,
+				F928925322F5D1BB00764E14 /* Sources */,
+				F928925422F5D1BB00764E14 /* Frameworks */,
+				F928925522F5D1BB00764E14 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ScheduleWidget;
+			productName = ScheduleWidget;
+			productReference = F928925722F5D1BB00764E14 /* ScheduleWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0940;
+				DefaultBuildSystemTypeForWorkspace = Original;
+				LastSwiftUpdateCheck = 1020;
+				LastUpgradeCheck = 940;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = M6RV2RH6PN;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = UMCUFFGWD9;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -301,15 +465,27 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = 2D02E47A1E0B4A5D006451C7;
 					};
+					F928925622F5D1BB00764E14 = {
+						CreatedOnToolsVersion = 10.2.1;
+						DevelopmentTeam = UMCUFFGWD9;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
 				};
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "NuwmApp" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				ru,
+				uk,
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
@@ -320,6 +496,7 @@
 				00E356ED1AD99517003FC87E /* NuwmAppTests */,
 				2D02E47A1E0B4A5D006451C7 /* NuwmApp-tvOS */,
 				2D02E48F1E0B4A5D006451C7 /* NuwmApp-tvOSTests */,
+				F928925622F5D1BB00764E14 /* ScheduleWidget */,
 			);
 		};
 /* End PBXProject section */
@@ -329,6 +506,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01AC7ADA22FAEB20004AB39C /* new_message.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,7 +515,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				014EEEC42317E91600A5A576 /* InfoPlist.strings in Resources */,
+				01AC7AD922FAEB20004AB39C /* new_message.mp3 in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				5664E98D89824E9199FFB9F2 /* Roboto-Black.ttf in Resources */,
+				20B0ADD7D3C645EEA38DDB25 /* Roboto-BlackItalic.ttf in Resources */,
+				920FA74A66904E44BA587CD5 /* Roboto-Bold.ttf in Resources */,
+				D7D7E3641A194593870D6783 /* Roboto-BoldItalic.ttf in Resources */,
+				B9D0F54FD25441949D13C0EE /* Roboto-Light.ttf in Resources */,
+				BC061C77DA3943E6BA393DC5 /* Roboto-LightItalic.ttf in Resources */,
+				C48C12D495A44E9483829BF6 /* Roboto-Medium.ttf in Resources */,
+				5288A0D9F8F5496A8DFBBF35 /* Roboto-MediumItalic.ttf in Resources */,
+				5EC5F60E090640F08B76761B /* Roboto-Regular.ttf in Resources */,
+				35E299C94BC4420DB0679E5E /* Roboto-RegularItalic.ttf in Resources */,
+				3B50A6086D024B0B9C3B6FF9 /* Roboto-Thin.ttf in Resources */,
+				3CE73CACE7644D6680A22C60 /* Roboto-ThinItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,6 +545,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F928925522F5D1BB00764E14 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F928925F22F5D1BB00764E14 /* MainInterface.storyboard in Resources */,
+				F928927D22F6005500764E14 /* Localizable.strings in Resources */,
+				F928927022F5F09C00764E14 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -513,6 +715,28 @@
 			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		FF72DB5C91164A0EC83DC967 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ScheduleWidget-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -550,6 +774,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F928925322F5D1BB00764E14 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F928926D22F5D5CA00764E14 /* ScheduleTableViewCell.swift in Sources */,
+				F928925C22F5D1BB00764E14 /* TodayViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -563,16 +796,64 @@
 			target = 2D02E47A1E0B4A5D006451C7 /* NuwmApp-tvOS */;
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
 		};
+		F928926222F5D1BB00764E14 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F928925622F5D1BB00764E14 /* ScheduleWidget */;
+			targetProxy = F928926122F5D1BB00764E14 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		014EEEC62317E91600A5A576 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				014EEEC52317E91600A5A576 /* uk */,
+				014EEEC72317E92E00A5A576 /* ru */,
+				014EEEC82317E93100A5A576 /* en */,
+			);
+			name = InfoPlist.strings;
+			path = NuwmApp;
+			sourceTree = "<group>";
+		};
 		13B07FB11A68108700A75B9A /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				13B07FB21A68108700A75B9A /* Base */,
+				F928927322F5F1FF00764E14 /* ru */,
+				F928927622F5F21200764E14 /* uk */,
 			);
 			name = LaunchScreen.xib;
 			path = NuwmApp;
+			sourceTree = "<group>";
+		};
+		F928925D22F5D1BB00764E14 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F928925E22F5D1BB00764E14 /* Base */,
+				F928927422F5F1FF00764E14 /* ru */,
+				F928927722F5F21200764E14 /* uk */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+		F928927222F5F09C00764E14 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F928927122F5F09C00764E14 /* en */,
+				F928927522F5F1FF00764E14 /* ru */,
+				F928927822F5F21200764E14 /* uk */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		F928927F22F6005500764E14 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F928927E22F6005500764E14 /* en */,
+				F928928022F6005900764E14 /* ru */,
+				F928928122F6005A00764E14 /* uk */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -583,6 +864,7 @@
 			baseConfigurationReference = 4F08AF75BC3CA1EFEFC3EF47 /* Pods-NuwmAppTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = M6RV2RH6PN;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -607,6 +889,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = M6RV2RH6PN;
 				INFOPLIST_FILE = NuwmAppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -625,18 +908,26 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CC70A3B931386C423B5B02B7 /* Pods-NuwmApp.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_ENTITLEMENTS = NuwmApp/NuwmApp.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0.0;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = UMCUFFGWD9;
 				INFOPLIST_FILE = NuwmApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dooptha.nuwee;
 				PRODUCT_NAME = NuwmApp;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -645,17 +936,27 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8356F5AEF9F40DE94394A5D8 /* Pods-NuwmApp.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_ENTITLEMENTS = NuwmApp/NuwmApp.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0.0;
+				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = UMCUFFGWD9;
 				INFOPLIST_FILE = NuwmApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dooptha.nuwee;
 				PRODUCT_NAME = NuwmApp;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -774,6 +1075,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -827,6 +1129,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -866,6 +1169,69 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F928926422F5D1BB00764E14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FADD3470028A41A1CDBDDC6A /* Pods-ScheduleWidget.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = ScheduleWidget/ScheduleWidget.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = UMCUFFGWD9;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = ScheduleWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dooptha.nuwee.ScheduleWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F928926522F5D1BB00764E14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5EE956F13254264FCE7432C7 /* Pods-ScheduleWidget.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = ScheduleWidget/ScheduleWidget.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = UMCUFFGWD9;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = ScheduleWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dooptha.nuwee.ScheduleWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -913,6 +1279,15 @@
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
 				83CBBA211A601CBA00E9B192 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F928926622F5D1BB00764E14 /* Build configuration list for PBXNativeTarget "ScheduleWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F928926422F5D1BB00764E14 /* Debug */,
+				F928926522F5D1BB00764E14 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

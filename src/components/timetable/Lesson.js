@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'react-native-ui-kitten';
-import {
-  View, Text, TouchableOpacity, Dimensions,
-} from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import NavigationService from '../../navigation/NavigationService';
 import { ClockOutlineIcon } from '../../assets/icons';
 
@@ -33,19 +31,13 @@ class Lesson extends Component {
     NavigationService.navigate('DetailedLesson', { subject });
   }
 
-  onLayout = (e) => {
-    const { height } = e.nativeEvent.layout;
-    this.setState({ height });
-  }
-
   render() {
     const {
       themedStyle,
       isLastItem,
-      sameAsPrevious,
       showTime,
       index,
-      callback,
+      watchLessons,
       hasDate,
       subject: {
         time,
@@ -73,7 +65,7 @@ class Lesson extends Component {
 
     return (
       <TouchableOpacity
-        onLayout={(e) => callback({
+        onLayout={(e) => watchLessons({
           height: e.nativeEvent.layout.height, hasDate, hasTime: showTime, time: momentTime,
         }, index)}
         style={wrapperStyles}

@@ -42,6 +42,14 @@ export class Timetable extends Component {
 
   componentDidMount() {
     this.requestSchedule();
+
+    DefaultPreference.get('schedule').then((rawData) => {
+      const data = JSON.parse(rawData);
+
+      if (rawData) {
+        this.splitSchedule({ data });
+      }
+    });
   }
 
   onRefresh() {
@@ -138,7 +146,7 @@ export class Timetable extends Component {
       >
         <Schedule
           schedule={schedule}
-          message={error || I18n.t('timetable.no-lesson')}
+          message={error || (refreshing ? I18n.t('timetable.loading') : I18n.t('timetable.no-lesson'))}
           active={active}
         />
       </ScrollView>

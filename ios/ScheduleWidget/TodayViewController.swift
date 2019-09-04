@@ -19,6 +19,10 @@ struct Subject: Equatable {
   var date: Date
 }
 
+enum Action{
+  case updateTable, noLesson, noServer, loading, wakeUpMessage, noUpdate
+}
+
 extension String {
   
   public func localized(with arguments: [CVarArg]) -> String {
@@ -36,14 +40,12 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
   var subjects: Array<Subject>? = Array()
   var mode: NCWidgetDisplayMode?
   var tomorrowCampus: String?
+  var currentAction: Action = .loading
   var tomorrowTime: String?
   let url: String = "https://api.dooptha.com/timetable"
   
-  func getWakeUpMessage() -> String?{
-    if(self.tomorrowTime != nil && self.tomorrowCampus != nil && self.tomorrowCampus != "-" && self.tomorrowTime != ""){
+  func getWakeUpMessage() -> String{
       return "GoSleep".localized(with: [self.tomorrowTime!, self.tomorrowCampus!])
-    }
-    return nil
   }
   
   func getSchedule(completion: @escaping (Array<Subject>?) -> Void){
@@ -72,37 +74,65 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     }
   }
   
-  func updateTable(){
+  func getAction() -> Action{
     
     if(self.subjects == nil){
-      self.showMessage(message: "NoServer".localized)
-      self.data = Array()
-      self.tableView.reloadData()
+      return .noServer
     }else{
       let data = self.filterSubjects()
       
       if(data.count == 0){
-        if(self.mode == .compact){
-          if let message = self.getWakeUpMessage(){
-            self.showMessage(message: message)
-          }else{
-            self.showMessage(message: "NoLesson".localized)
+        self.data = data
+        if(self.mode != .expanded){
+          if(self.tomorrowTime != nil && self.tomorrowCampus != nil && self.tomorrowCampus != "-" && self.tomorrowTime != ""){
+            return .wakeUpMessage;
           }
-          
-        }else{
-          self.showMessage(message: "NoLesson".localized)
         }
         
-        self.data = data
-        self.tableView.reloadData()
+        return .noLesson;
       }else{
         if(data != self.data){
           self.data = data
-          self.tableView.reloadData()
-          self.tableView.backgroundView = nil;
+          return .updateTable;
         }
       }
     }
+    
+    return .noUpdate
+  }
+  
+  func updateTable(action: Action){
+    
+    switch(action){
+    case .noServer:
+      self.showMessage(message: "NoServer".localized)
+      self.data = Array();
+      break
+    case .noLesson:
+      self.showMessage(message: "NoLesson".localized)
+      break
+    case .loading:
+      self.showMessage(message: "Loading".localized)
+      break
+    case .wakeUpMessage:
+      self.showMessage(message: self.getWakeUpMessage().localized)
+      break
+    default: break
+    }
+    
+    print("=====")
+    print(self.currentAction)
+    print(action)
+    
+    if(action != .noUpdate && (self.currentAction != action || action == .updateTable)){
+      self.tableView.reloadData()
+      
+      if(action == .updateTable){
+        self.tableView.backgroundView = nil;
+      }
+    }
+    
+    self.currentAction = action;
   }
   
   /*****
@@ -129,7 +159,8 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     self.getSchedule(){ (data) in
       
       self.subjects = data
-      self.updateTable()
+      let action = self.getAction()
+      self.updateTable(action: action)
     }
     
     completionHandler(NCUpdateResult.newData)
@@ -138,20 +169,28 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
   // when widget loaded
   
   @objc func checkAction(sender : UITapGestureRecognizer) {
-    print("opened")
     
     let url: NSURL = NSURL.init(string: "NuwmApp://")!
-    debugPrint(url)
     self.extensionContext?.open(url as URL, completionHandler: nil)
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    if #available(iOSApplicationExtension 10.0, *) {
+      extensionContext?.widgetLargestAvailableDisplayMode = .expanded
+    }
+    
     let gesture = UITapGestureRecognizer(target: self, action:  #selector(self.checkAction))
     self.tableView.addGestureRecognizer(gesture)
     
-    self.showMessage(message: "NoLesson".localized)
+    self.subjects = self.loadScheduleFromDefaults()
+    if(self.subjects == nil){
+      self.updateTable(action: .loading)
+    }else{
+      let action = self.getAction()
+      self.updateTable(action: action)
+    }
   }
   
   // when widget switched its display mdde
@@ -164,7 +203,8 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     if self.mode != mode {
       
       self.mode = mode
-      self.updateTable()
+      let action = self.getAction()
+      self.updateTable(action: action)
       
       if mode == .expanded {
         preferredContentSize = CGSize(width: maxSize.width, height: CGFloat(self.data.count * 50))
@@ -242,7 +282,6 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     
     var newData: Array<Subject> = Array()
     
-    
     self.tomorrowTime = nil
     self.tomorrowCampus = nil
     
@@ -256,10 +295,10 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         }
       }
       
-      if(self.mode == .compact && tomorrowTime == nil){
+      if(self.mode != .expanded && tomorrowTime == nil){
         if(compareDate(date1: subject.date, date2: tomorrow!)){
-            self.tomorrowCampus = String(Array(subject.classroom)[0])
-            self.tomorrowTime = subject.time.components(separatedBy: "-")[0]
+          self.tomorrowCampus = String(Array(subject.classroom)[0])
+          self.tomorrowTime = subject.time.components(separatedBy: "-")[0]
         }
       }
     }

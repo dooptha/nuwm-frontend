@@ -127,6 +127,7 @@
 		"timetable": "Розклад"
 	},
 	"timetable": {
+		"loading": "Завантаження...",
 		"datepicker": {
 			"Choose Date": "Виберіть дату",
 			"End": "Кінець",

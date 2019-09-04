@@ -37,6 +37,8 @@ const styles = {
   * change their height in this class constructor too
 */
 export default class Timeline extends PureComponent {
+  state = { ready: false }
+
   static defaultProps = {
     schedule: [],
     activeColor: 'white',
@@ -68,32 +70,32 @@ export default class Timeline extends PureComponent {
     this.startPosition = 0;
 
     this.addAnimationListener();
-    this.updateData();
   }
 
-  getPointsForTimeline(schedule, points = []) {
+  getPointsForTimeline(fDate, lDate, lessons, points = []) {
     let height = this.refreshPadding;
-    const firstDate = schedule[0].date.clone();
-    const lastDate = schedule[schedule.length - 1].date.clone();
+    const firstDate = fDate.clone();
+    const lastDate = lDate.clone();
+
+    height -= 7;
 
     points.push({
       moment: firstDate.set({ hour: 0, minute: 0, second: 0 }), height,
     });
 
-    height += this.circlesMargin;
+    for (let i = 0; i < lessons.length; i += 1) {
+      const { hasTime, hasDate } = lessons[i];
 
-    schedule.forEach((day, dayIndex) => {
-      day.subjects.forEach((subject, subjectIndex) => {
-        if (subjectIndex === 0) height += this.dateHeight;
+      if (i !== 0) {
+        height += lessons[i - 1].height;
+      }
 
-        if (subjectIndex > 0 && day.subjects[subjectIndex - 1].time === subject.time) {
-          height += this.minSubjectHeight;
-        } else {
-          if (dayIndex !== 0 || subjectIndex !== 0) height += this.subjectHeight;
-          points.push({ moment: subject.momentTime, height });
-        }
-      });
-    });
+      if (hasDate) height += 40;
+
+      if (hasTime) {
+        points.push({ moment: lessons[i].time, height: height + 31 });
+      }
+    }
 
     const pageSize = this.screenHeight > height ? this.screenHeight + this.refreshPadding : height;
     height = pageSize + this.refreshPadding;
@@ -101,6 +103,9 @@ export default class Timeline extends PureComponent {
     points.push({
       moment: lastDate.set({ hour: 23, minute: 59, second: 59 }), height,
     });
+
+    console.log(points);
+
     return points;
   }
 
@@ -126,13 +131,13 @@ export default class Timeline extends PureComponent {
     return 0;
   }
 
-  updateData() {
-    const { schedule } = this.props;
-
-    this.points = this.getPointsForTimeline(schedule);
+  updateData(firstDate, lastDate, lessons) {
+    this.points = this.getPointsForTimeline(firstDate, lastDate, lessons);
     this.barHeight = this.points[this.points.length - 1].height;
     this.progressBarHeight = this.getProgressBarHeight();
     this.startPosition = this.progressBarHeight > this.refreshPadding ? this.refreshPadding - 1 : 0;
+
+    this.setState({ ready: true });
   }
 
   startAnimation() {
@@ -166,6 +171,8 @@ export default class Timeline extends PureComponent {
   addAnimationListener() {
     const { animation } = this.state;
 
+    console.log('pass');
+
     animation.addListener((bar) => {
       const height = bar.value - this.circleSize / 2;
 
@@ -177,7 +184,11 @@ export default class Timeline extends PureComponent {
           point.node.setActive();
         }
       }
+
+      console.log('fail');
     });
+
+    console.log('fail 2');
   }
 
   renderProgressBar() {
@@ -216,6 +227,7 @@ export default class Timeline extends PureComponent {
 
   render() {
     const { inactiveColor } = this.props;
+    const { ready } = this.state;
 
     const timelineStyles = [styles.timeline, {
       marginTop: -this.refreshPadding,
@@ -225,7 +237,7 @@ export default class Timeline extends PureComponent {
       borderColor: inactiveColor,
     }];
 
-    return (
+    return ready ? (
       <View style={timelineStyles}>
         <View style={styles.lineWrapper}>
           <View style={barStyles} />
@@ -233,6 +245,6 @@ export default class Timeline extends PureComponent {
         </View>
         { this.renderCircles() }
       </View>
-    );
+    ) : <View style={timelineStyles} />;
   }
 }

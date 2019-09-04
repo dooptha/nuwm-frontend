@@ -22,11 +22,34 @@ class Day extends Component {
     },
   }
 
+  constructor(props) {
+    super(props);
+
+    this.lessons = [];
+  }
+
+  componentDidUpdate() {
+
+  }
+
   getDateLabel(moment) {
     const date = moment.format('D MMMM');
     const week = moment.format('dddd');
 
     return `${week.charAt(0).toUpperCase() + week.slice(1)}, ${date}`;
+  }
+
+  callbackDay(lesson, subjectIndex) {
+    const { index, day, callback } = this.props;
+
+    this.lessons[subjectIndex] = lesson;
+
+    for (let i = 0; i < day.subjects.length; i += 1) {
+      if (!this.lessons[i]) {
+        return;
+      }
+    }
+    callback(this.lessons, index);
   }
 
   renderAllSubjects() {
@@ -43,6 +66,9 @@ class Day extends Component {
 
       return (
         <Lesson
+          index={index}
+          callback={(lesson, index) => this.callbackDay(lesson, index)}
+          hasDate={index === 0}
           showTime={showTime}
           key={subject.time + subject.name}
           subject={subject}

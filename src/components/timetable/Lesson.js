@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'react-native-ui-kitten';
-import { View, Text, TouchableOpacity } from 'react-native';
+import {
+  View, Text, TouchableOpacity, Dimensions,
+} from 'react-native';
 import NavigationService from '../../navigation/NavigationService';
 import { ClockOutlineIcon } from '../../assets/icons';
 
 /**
   * Displays short information about one lessons
 */
+
 class Lesson extends Component {
   static propTypes = {
     subject: PropTypes.shape({
@@ -30,14 +33,23 @@ class Lesson extends Component {
     NavigationService.navigate('DetailedLesson', { subject });
   }
 
+  onLayout = (e) => {
+    const { height } = e.nativeEvent.layout;
+    this.setState({ height });
+  }
+
   render() {
     const {
       themedStyle,
       isLastItem,
       sameAsPrevious,
       showTime,
+      index,
+      callback,
+      hasDate,
       subject: {
         time,
+        momentTime,
         classroom,
         name,
         type,
@@ -57,17 +69,22 @@ class Lesson extends Component {
       themedStyle.wrapper,
       isLastItem ? themedStyle.bottomLine : {},
       showTime ? themedStyle.topLine : {},
-      { height: showTime ? 150 : 90 },
     ];
 
     return (
-      <TouchableOpacity style={wrapperStyles} onPress={() => this.onPress()}>
+      <TouchableOpacity
+        onLayout={(e) => callback({
+          height: e.nativeEvent.layout.height, hasDate, hasTime: showTime, time: momentTime,
+        }, index)}
+        style={wrapperStyles}
+        onPress={() => this.onPress()}
+      >
         { timeWrapper }
         <View style={themedStyle.subjectRow}>
           <Text style={themedStyle.button}>{ classroom || '-' }</Text>
           <View style={themedStyle.descWrapper}>
             <Text style={themedStyle.desc}>{ name }</Text>
-            <Text style={themedStyle.subdesc}>{ type }</Text>
+            { type.length > 0 ? <Text style={themedStyle.subdesc}>{ type }</Text> : null }
           </View>
         </View>
       </TouchableOpacity>
@@ -79,8 +96,8 @@ class Lesson extends Component {
 // them in <Timeline> constructor too
 export default withStyles(Lesson, (theme) => ({
   wrapper: {
-    paddingBottom: 20,
-    paddingTop: 10,
+    paddingBottom: 15,
+    paddingTop: 5,
     paddingRight: 10,
   },
   subjectColumn: {
@@ -89,16 +106,16 @@ export default withStyles(Lesson, (theme) => ({
   },
   subjectRow: {
     flexDirection: 'row-reverse',
-    alignItems: 'flex-start',
   },
   topLine: {
-    paddingTop: 20,
+    paddingTop: 15,
     borderTopColor: theme['background-basic-color-3'],
     borderTopWidth: 1,
   },
   bottomLine: {
     borderBottomColor: theme['background-basic-color-3'],
     borderBottomWidth: 1,
+    paddingBottom: 20,
   },
   subRow: {
     flexDirection: 'row',
@@ -120,6 +137,7 @@ export default withStyles(Lesson, (theme) => ({
   button: {
     paddingTop: 7,
     paddingBottom: 7,
+    height: 32,
     backgroundColor: theme['background-primary-color-1'],
     color: 'white',
     borderRadius: 15,
@@ -128,6 +146,7 @@ export default withStyles(Lesson, (theme) => ({
     textAlign: 'center',
   },
   descWrapper: {
+    alignSelf: 'center',
     flexDirection: 'column',
     flex: 1,
     paddingRight: 10,

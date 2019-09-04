@@ -10,6 +10,12 @@ import Day from './Day';
   * when there is no subjects or when refreshing list
 */
 class Schedule extends Component {
+  constructor(props) {
+    super(props);
+
+    this.lessons = [];
+  }
+
   static defaultProps = {
     schedule: [],
     onRefresh: () => console.warn('Unpredictable callback from Schedule List'),
@@ -17,13 +23,13 @@ class Schedule extends Component {
 
   componentDidMount() {
     if (this.timeline) {
-      this.timeline.startAnimation();
+      // this.timeline.startAnimation();
     }
   }
 
   shouldComponentUpdate() {
     if (this.timeline) {
-      this.timeline.resetAnimation();
+      // this.timeline.resetAnimation();
     }
 
     return true;
@@ -32,8 +38,30 @@ class Schedule extends Component {
   componentDidUpdate() {
     const { active } = this.props;
     if (this.timeline && active) {
-      this.timeline.startAnimation();
+      // this.timeline.startAnimation();
     }
+
+    console.log('ComponentDidUpdate');
+  }
+
+  callback(lessons, index) {
+    const { schedule } = this.props;
+
+    this.lessons[index] = lessons;
+
+    for (let i = 0; i < schedule.length; i += 1) {
+      if (!this.lessons[i]) {
+        return;
+      }
+    }
+
+    let array = [];
+
+    for (let i = 0; i < schedule.length; i += 1) {
+      array = array.concat(this.lessons[i]);
+    }
+
+    this.timeline.updateData(schedule[0].date, schedule[schedule.length - 1].date, array);
   }
 
   renderMessage(message) {
@@ -51,8 +79,8 @@ class Schedule extends Component {
   renderSchedule(schedule) {
     const { themedStyle, active } = this.props;
 
-    const body = schedule.map((day) => (
-      <Day key={day.date} day={day} />
+    const body = schedule.map((day, dayIndex) => (
+      <Day key={day.date} index={dayIndex} day={day} callback={(lessons, index) => this.callback(lessons, index)} />
     ));
 
     return (

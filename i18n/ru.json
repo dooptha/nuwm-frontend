@@ -127,6 +127,7 @@
 		"timetable": "Расписание"
 	},
 	"timetable": {
+		"loading": "Загрузка...",
 		"datepicker": {
 			"Choose Date": "Выберите дату",
 			"End": "Конец",

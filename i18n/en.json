@@ -127,6 +127,7 @@
 		"timetable": "Timetable"
 	},
 	"timetable": {
+		"loading": "Loading...",
 		"datepicker": {
 			"Choose Date": "Choose Date",
 			"End": "End",

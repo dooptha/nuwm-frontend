@@ -1,17 +1,16 @@
-import DeviceInfo from 'react-native-device-info';
+import * as RNLocalize from 'react-native-localize';
 import { getKey } from './storage';
 
-
-const getDefaultLocale = () => {
-  const preferredLocales = DeviceInfo.getPreferredLocales();
+export const getDefaultLocale = () => {
+  const preferredLocales = RNLocalize.getLocales();
   let defaultLocale = 'en';
 
   preferredLocales.some((locale) => {
-    switch (locale) {
-      case 'uk-UA':
+    switch (locale.languageCode) {
+      case 'uk':
         defaultLocale = 'ua';
         return true;
-      case 'ru-US':
+      case 'ru':
         defaultLocale = 'ru';
         return true;
       case 'en':

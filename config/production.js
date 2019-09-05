@@ -1,11 +1,11 @@
 /* eslint-disable */
 export default {
-  VERSION: '1.0.0',
+  VERSION: '1.0.1',
   API_ENDPOINT: 'https://api.dooptha.com',
   SOCKET_IO_ENDPOINT: 'https://api.dooptha.com/flood',
   INITIAL_ROUTE_NAME: 'Timetable', /* [Timetable, Conversations, Settings] */
   INSTAGRAM_HASHTAG: 'нувгп',
-  TWITTER_HASHTAG: 'нувгп',
+  TWITTER_нуHASHTAG: 'нувгп',
   CONTACT_EMAIL: 'dooptha@gmail.com',
   WEBSITE_URL: 'https://dooptha.com',
   GITHUB_URL: 'https://github.com/dooptha',

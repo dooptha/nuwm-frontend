@@ -82,7 +82,7 @@ class Day extends Component {
           watchLessons={(lesson, i) => this.watchLessons(lesson, i)}
           hasDate={index === 0}
           showTime={showTime}
-          key={subject.time + subject.name}
+          key={day.dayOfYear + subject.time + subject.name + subject.group}
           subject={subject}
           isLastItem={day.subjects.length - 1 === index}
         />

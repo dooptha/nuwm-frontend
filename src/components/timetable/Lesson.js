@@ -42,9 +42,9 @@ class Lesson extends Component {
       subject: {
         time,
         momentTime,
-        classroom,
+        shortInfo,
+        shortClassroom,
         name,
-        type,
       },
     } = this.props;
 
@@ -73,10 +73,10 @@ class Lesson extends Component {
       >
         { timeWrapper }
         <View style={themedStyle.subjectRow}>
-          <Text style={themedStyle.button}>{ classroom || '-' }</Text>
+          <Text style={themedStyle.button}>{ shortClassroom || '-' }</Text>
           <View style={themedStyle.descWrapper}>
             <Text style={themedStyle.desc}>{ name }</Text>
-            { type.length > 0 ? <Text style={themedStyle.subdesc}>{ type }</Text> : null }
+            <Text style={themedStyle.subdesc}>{ shortInfo }</Text>
           </View>
         </View>
       </TouchableOpacity>

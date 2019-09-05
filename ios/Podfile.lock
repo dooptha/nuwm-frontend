@@ -118,7 +118,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.8.0)
-  - BVLinearGradient (from `/Users/pelykh/projects/NuwmApp/node_modules/react-native-linear-gradient`)
+  - BVLinearGradient (from `/Users/romansereda/Documents/Projects/nuwm-frontend/node_modules/react-native-linear-gradient`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
@@ -143,13 +143,13 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - React-RCTWebSocket (from `../node_modules/react-native/Libraries/WebSocket`)
   - ReactNativeExceptionHandler (from `../node_modules/react-native-exception-handler`)
-  - "RNCAsyncStorage (from `/Users/pelykh/projects/NuwmApp/node_modules/@react-native-community/async-storage`)"
+  - "RNCAsyncStorage (from `/Users/romansereda/Documents/Projects/nuwm-frontend/node_modules/@react-native-community/async-storage`)"
   - RNDefaultPreference (from `../node_modules/react-native-default-preference`)
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
-  - RNGestureHandler (from `/Users/pelykh/projects/NuwmApp/node_modules/react-native-gesture-handler`)
-  - RNLocalize (from `/Users/pelykh/projects/NuwmApp/node_modules/react-native-localize`)
-  - RNReanimated (from `/Users/pelykh/projects/NuwmApp/node_modules/react-native-reanimated`)
-  - RNScreens (from `/Users/pelykh/projects/NuwmApp/node_modules/react-native-screens`)
+  - RNGestureHandler (from `/Users/romansereda/Documents/Projects/nuwm-frontend/node_modules/react-native-gesture-handler`)
+  - RNLocalize (from `/Users/romansereda/Documents/Projects/nuwm-frontend/node_modules/react-native-localize`)
+  - RNReanimated (from `/Users/romansereda/Documents/Projects/nuwm-frontend/node_modules/react-native-reanimated`)
+  - RNScreens (from `/Users/romansereda/Documents/Projects/nuwm-frontend/node_modules/react-native-screens`)
   - RNSound (from `../node_modules/react-native-sound`)
   - RollbarReactNative (from `../node_modules/rollbar-react-native`)
   - SwiftyJSON (~> 4.0)
@@ -164,7 +164,7 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   BVLinearGradient:
-    :path: "/Users/pelykh/projects/NuwmApp/node_modules/react-native-linear-gradient"
+    :path: "/Users/romansereda/Documents/Projects/nuwm-frontend/node_modules/react-native-linear-gradient"
   DoubleConversion:
     :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
   Folly:
@@ -214,19 +214,19 @@ EXTERNAL SOURCES:
   ReactNativeExceptionHandler:
     :path: "../node_modules/react-native-exception-handler"
   RNCAsyncStorage:
-    :path: "/Users/pelykh/projects/NuwmApp/node_modules/@react-native-community/async-storage"
+    :path: "/Users/romansereda/Documents/Projects/nuwm-frontend/node_modules/@react-native-community/async-storage"
   RNDefaultPreference:
     :path: "../node_modules/react-native-default-preference"
   RNDeviceInfo:
     :path: "../node_modules/react-native-device-info"
   RNGestureHandler:
-    :path: "/Users/pelykh/projects/NuwmApp/node_modules/react-native-gesture-handler"
+    :path: "/Users/romansereda/Documents/Projects/nuwm-frontend/node_modules/react-native-gesture-handler"
   RNLocalize:
-    :path: "/Users/pelykh/projects/NuwmApp/node_modules/react-native-localize"
+    :path: "/Users/romansereda/Documents/Projects/nuwm-frontend/node_modules/react-native-localize"
   RNReanimated:
-    :path: "/Users/pelykh/projects/NuwmApp/node_modules/react-native-reanimated"
+    :path: "/Users/romansereda/Documents/Projects/nuwm-frontend/node_modules/react-native-reanimated"
   RNScreens:
-    :path: "/Users/pelykh/projects/NuwmApp/node_modules/react-native-screens"
+    :path: "/Users/romansereda/Documents/Projects/nuwm-frontend/node_modules/react-native-screens"
   RNSound:
     :path: "../node_modules/react-native-sound"
   RollbarReactNative:
@@ -277,4 +277,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 7cf555eb546c863f3edb1cf0305b97829f2ea53a
 
-COCOAPODS: 1.7.3
+COCOAPODS: 1.7.5

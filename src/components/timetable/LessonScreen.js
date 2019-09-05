@@ -45,8 +45,8 @@ class DetailedLesson extends Component {
     const {
       classroom,
       lecturer,
-      subgroup,
-      streams_type,
+      group,
+      streamsType,
       /* lessonNum, */
       time,
       type,
@@ -55,7 +55,7 @@ class DetailedLesson extends Component {
 
     // in which order information will be displayed
     const quarry = {
-      name, classroom, lecturer, subgroup, streams_type, time, type,
+      name, classroom, lecturer, group, streamsType, time, type,
     };
 
     return (

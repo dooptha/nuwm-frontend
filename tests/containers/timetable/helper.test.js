@@ -1,6 +1,6 @@
 import {
   isToday, isTomorrow, replaceDatesWithMomentObjects, getCurrentTime,
-} from '../../src/components/timetable/helper';
+} from '../../../src/components/timetable/helper';
 
 describe('Timetable helper, ', () => {
   it('replaceDatesWithMomentObjects should return array', () => {

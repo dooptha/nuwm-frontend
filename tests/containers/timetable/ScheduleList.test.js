@@ -4,10 +4,10 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { mapping } from '@eva-design/eva';
 import { ApplicationProvider } from 'react-native-ui-kitten';
-import { themes } from '../../src/utils/themes';
+import { themes } from '../../../src/utils/themes';
 import schedule from './data';
-import ScheduleList from '../../src/components/schedule/ScheduleList';
-import Day from '../../src/components/schedule/Day';
+import ScheduleList from '../../../src/components/timetable/Schedule';
+import Day from '../../../src/components/timetable/Day';
 
 describe('ScheduleList ', () => {
   it('should render one <Day />', () => {

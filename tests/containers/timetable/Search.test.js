@@ -5,12 +5,12 @@ import { mount } from 'enzyme';
 
 import { mapping } from '@eva-design/eva';
 import { ApplicationProvider } from 'react-native-ui-kitten';
-import api from '../../src/api/schedule';
-import NavigationService from '../../src/navigation/NavigationService';
+import api from '../../../src/api/timetable';
+import NavigationService from '../../../src/navigation/NavigationService';
 import schedule from './data';
-import { themes } from '../../src/utils/themes';
+import { themes } from '../../../src/utils/themes';
 
-import Search from '../../src/components/schedule/Search';
+import Search from '../../../src/components/timetable/search';
 
 let lecturer, group, date, button;
 

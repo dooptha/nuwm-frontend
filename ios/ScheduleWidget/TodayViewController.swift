@@ -19,8 +19,27 @@ struct Subject: Equatable {
   var date: Date
 }
 
+@IBDesignable class PaddingLabel: UILabel {
+  
+  @IBInspectable var topInset: CGFloat = 5.0
+  @IBInspectable var bottomInset: CGFloat = 5.0
+  @IBInspectable var leftInset: CGFloat = 16.0
+  @IBInspectable var rightInset: CGFloat = 16.0
+  
+  override func drawText(in rect: CGRect) {
+    let insets = UIEdgeInsets.init(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
+    super.drawText(in: rect.inset(by: insets))
+  }
+  
+  override var intrinsicContentSize: CGSize {
+    let size = super.intrinsicContentSize
+    return CGSize(width: size.width + leftInset + rightInset,
+                  height: size.height + topInset + bottomInset)
+  }
+}
+
 enum Action{
-  case updateTable, noLesson, noServer, loading, wakeUpMessage, noUpdate
+  case updateTable, noLesson, noServer, loading, wakeUpMessage, lessonsEnded, noUpdate
 }
 
 extension String {
@@ -40,12 +59,17 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
   var subjects: Array<Subject>? = Array()
   var mode: NCWidgetDisplayMode?
   var tomorrowCampus: String?
+  var thereWasLessonsToday: Bool = false
   var currentAction: Action = .loading
   var tomorrowTime: String?
   let url: String = "https://api.dooptha.com/timetable"
   
   func getWakeUpMessage() -> String{
-      return "GoSleep".localized(with: [self.tomorrowTime!, self.tomorrowCampus!])
+      return "NoLesson".localized + ". \n" + "GoSleep".localized(with: [self.tomorrowTime!, self.tomorrowCampus ?? "-"])
+  }
+  
+  func getLessonsEndedMessage() -> String{
+    return "LessonsEnded".localized + ". \n" + "GoSleep".localized(with: [self.tomorrowTime!, self.tomorrowCampus ?? "-"])
   }
   
   func getSchedule(completion: @escaping (Array<Subject>?) -> Void){
@@ -54,7 +78,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
       let startDate = self.getStringFromDate(date: self.getCurrentTime())
       let endDate = self.getStringFromDate(date: self.addWeek(date: self.getCurrentTime())!)
       
-      var parameters: Parameters = ["group": group, "startDate": startDate, "endDate": endDate]
+      let parameters: Parameters = ["group": group, "startDate": startDate, "endDate": endDate]
       Alamofire.request(url, method: .get, parameters: parameters).response{ response in
         if(response.response == nil){
           
@@ -84,11 +108,14 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
       if(data.count == 0){
         self.data = data
         if(self.mode != .expanded){
-          if(self.tomorrowTime != nil && self.tomorrowCampus != nil && self.tomorrowCampus != "-" && self.tomorrowTime != ""){
-            return .wakeUpMessage;
+          if(self.tomorrowTime != nil && self.tomorrowTime != ""){
+            if(thereWasLessonsToday){
+              return .lessonsEnded;
+            }else{
+              return .wakeUpMessage;
+            }
           }
         }
-        
         return .noLesson;
       }else{
         if(data != self.data){
@@ -113,6 +140,9 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
       break
     case .loading:
       self.showMessage(message: "Loading".localized)
+      break
+    case .lessonsEnded:
+      self.showMessage(message: self.getLessonsEndedMessage().localized)
       break
     case .wakeUpMessage:
       self.showMessage(message: self.getWakeUpMessage().localized)
@@ -233,7 +263,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
   *****/
   
   func showMessage(message: String){
-    let noDataLabel: UILabel  = UILabel(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: self.tableView.bounds.size.height))
+    let noDataLabel: PaddingLabel  = PaddingLabel(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: self.tableView.bounds.size.height))
     
     noDataLabel.lineBreakMode = .byWordWrapping // notice the 'b' instead of 'B'
     noDataLabel.numberOfLines = 0
@@ -262,11 +292,13 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         for (index2,subject):(String, JSON) in subjects {
           if let time = subject["time"].string{
             if let subjectTime = self.getSubjectTimeStamp(time: time, date: date){
+              
+              let classroom: String = subject["classroom"].string ?? "-"
             
               newSubjects.append(Subject(
-                time: subject["time"].string ?? "-",
+                time: time,
                 name: subject["name"].string ?? "-",
-                classroom: subject["classroom"].string ?? "-",
+                classroom: classroom.isEmpty ? "-" : classroom,
                 date: subjectTime
               ))
             }
@@ -278,18 +310,30 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     return newSubjects
   }
   
+  func getCampus(string: String) -> String{
+    
+    let arrayOfLetters = Array(string)
+    if(arrayOfLetters.count > 0){
+      return String(arrayOfLetters[0])
+    }
+    
+    return "-"
+  }
+  
   func filterSubjects() -> Array<Subject>{
     
     var newData: Array<Subject> = Array()
     
     self.tomorrowTime = nil
     self.tomorrowCampus = nil
+    self.thereWasLessonsToday = false
     
     let currentTime = self.getCurrentTime()
     let tomorrow = self.addOneDay(date: currentTime)
     
     for subject in self.subjects!{
       if(compareDate(date1: subject.date, date2: currentTime)){
+        self.thereWasLessonsToday = true
         if((self.mode == .expanded || subject.date > currentTime) && newData.count < 7){
           newData.append(subject)
         }
@@ -297,7 +341,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
       
       if(self.mode != .expanded && tomorrowTime == nil){
         if(compareDate(date1: subject.date, date2: tomorrow!)){
-          self.tomorrowCampus = String(Array(subject.classroom)[0])
+          self.tomorrowCampus = self.getCampus(string: subject.classroom)
           self.tomorrowTime = subject.time.components(separatedBy: "-")[0]
         }
       }
@@ -439,7 +483,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     let item = data[indexPath.row]
     
     cell.itemTitle.text = item.name
-    cell.itemDesc.text = item.time
+    cell.itemDesc.text = item.time ?? "-"
     cell.itemSubtitle.text = item.classroom
     
     return cell

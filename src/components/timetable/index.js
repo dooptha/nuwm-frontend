@@ -72,11 +72,10 @@ export class Timetable extends Component {
 
     const today = schedule.filter((day) => isToday(day.date));
     const tomorrow = schedule.filter((day) => isTomorrow(day.date));
-    const error = schedule.length > 0 ? false : props.error || false;
     const scheduleKey = new Date().getTime();
 
     this.setState({
-      ...props, today, tomorrow, schedule, error, scheduleKey,
+      ...props, today, tomorrow, schedule, error: props.error, scheduleKey,
     });
   }
 
@@ -117,7 +116,7 @@ export class Timetable extends Component {
 
   renderSchedule(schedule, tabIndex) {
     const {
-      refreshing, error, index, scheduleKey,
+      refreshing, index, scheduleKey,
     } = this.state;
     const { themedStyle } = this.props;
 
@@ -127,6 +126,8 @@ export class Timetable extends Component {
         onRefresh={() => this.onRefresh()}
       />
     );
+
+    const error = this.state.schedule.length > 0 ? false : this.state.error || false;
 
     const message = error || (refreshing
       ? I18n.t('timetable.loading') : I18n.t('timetable.no-lesson'));

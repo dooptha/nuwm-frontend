@@ -15,6 +15,10 @@ class Day extends Component {
     }),
   }
 
+  state = {
+    scheduleKey: -2,
+  }
+
   static defaultProps = {
     day: {
       subject: [],
@@ -26,6 +30,17 @@ class Day extends Component {
     super(props);
 
     this.lessons = [];
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const { scheduleKey } = this.state;
+
+    if (nextProps.scheduleKey !== scheduleKey) {
+      this.setState({ scheduleKey: nextProps.scheduleKey });
+      this.lessons = [];
+    }
+
+    return true;
   }
 
   getDateLabel(moment) {
@@ -45,6 +60,7 @@ class Day extends Component {
         return;
       }
     }
+
     watchDays(this.lessons, index);
   }
 
@@ -79,8 +95,6 @@ class Day extends Component {
     const body = day.subjects.length > 0 ? this.renderAllSubjects() : null;
 
     const date = this.getDateLabel(day.date);
-
-    this.lessons = [];
 
     return (
       <View>

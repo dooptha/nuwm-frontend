@@ -62,7 +62,9 @@ class Schedule extends Component {
       concatedLessons = concatedLessons.concat(this.lessons[i]);
     }
 
-    this.timeline.updateData(schedule[0].date, schedule[len - 1].date, concatedLessons);
+    if (this.timeline) {
+      this.timeline.updateData(schedule[0].date, schedule[len - 1].date, concatedLessons);
+    }
   }
 
   renderMessage(message) {
@@ -78,13 +80,14 @@ class Schedule extends Component {
   }
 
   renderSchedule(schedule) {
-    const { themedStyle, active } = this.props;
+    const { themedStyle, active, scheduleKey } = this.props;
 
     const body = schedule.map((day, dayIndex) => (
       <Day
         key={day.date}
         index={dayIndex}
         day={day}
+        scheduleKey={scheduleKey}
         watchDays={(lessons, index) => this.watchForLessonsSizes(lessons, index)}
       />
     ));
@@ -114,6 +117,8 @@ class Schedule extends Component {
   render() {
     const { themedStyle, schedule, message } = this.props;
     const body = this.renderBody(schedule, message);
+
+    console.log(message);
 
     return (
       <View style={themedStyle.wrapper}>

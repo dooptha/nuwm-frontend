@@ -132,7 +132,8 @@ export default class Timeline extends PureComponent {
   }
 
   updateTime() {
-    this.currentDate = moment(new Date('2019-09-06T14:00:00'));
+    // new Date('2019-09-05T14:00:00')
+    this.currentDate = moment();
   }
 
   startTimer() {

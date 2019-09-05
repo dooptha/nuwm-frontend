@@ -9,7 +9,6 @@ import {
   DEFAULT_PROPERTIES,
 } from './properties';
 import { setLocale } from './i18n';
-import { initSockets } from '../api/socket';
 import { getObject } from './storage';
 import config from '../../config';
 import mainReducer from '../reducers';
@@ -61,7 +60,7 @@ export const loadInitialData = async (dispatch) => {
   const [properties, user, deviceId] = await Promise.all([
     getProperties(config.USE_DEFAULT_PROPERTIES),
     getObject('user'),
-    DeviceInfo.getUniqueID(),
+    DeviceInfo.getUniqueId(),
   ]);
 
   setLocale(properties.language);

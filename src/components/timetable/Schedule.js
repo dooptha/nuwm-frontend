@@ -118,8 +118,6 @@ class Schedule extends Component {
     const { themedStyle, schedule, message } = this.props;
     const body = this.renderBody(schedule, message);
 
-    console.log(message);
-
     return (
       <View style={themedStyle.wrapper}>
         { body }

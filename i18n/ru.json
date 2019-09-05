@@ -144,10 +144,10 @@
 			"classroom": "Аудитория",
 			"lecturer": "Преподаватель",
 			"name": "Предмет",
-			"streams_type": "Подгруппа",
-			"subgroup": "Группа",
+			"streamsType": "Тип",
+			"group": "Группа",
 			"time": "Время",
-			"type": "Тип"
+			"type": "Вид"
 		},
 		"no-lesson": "Нету пар, можно отдыхать",
 		"search": {

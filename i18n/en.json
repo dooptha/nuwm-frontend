@@ -144,8 +144,8 @@
 			"classroom": "Classroom",
 			"lecturer": "Lecturer",
 			"name": "Subject",
-			"streams_type": "Stream Type",
-			"subgroup": "Subgroup",
+			"streamsType": "Stream Type",
+			"group": "Subgroup",
 			"time": "Time",
 			"type": "Type"
 		},

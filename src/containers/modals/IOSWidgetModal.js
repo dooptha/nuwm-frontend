@@ -38,13 +38,13 @@ class IOSWidgetModal extends Component {
   onModalButtonPress() {
     const { dispatch } = this.props;
 
-    storeKey('IOSWidjetTutorialComplete', 'completed');
+    storeKey('IOSWidgetTutorialComplete', 'completed');
     LayoutAnimation.configureNext(LinearIOSWidgetTutorialComplete);
 
     dispatch({
       type: 'setProperty',
-      key: 'IOSWidjetTutorialComplete',
-      value: true,
+      key: 'IOSWidgetTutorialComplete',
+      value: 'completed',
     });
   }
 

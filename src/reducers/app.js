@@ -50,12 +50,6 @@ const appReducer = (state, action) => {
         connected: false,
       };
 
-    case 'loadGroups':
-      return {
-        ...state,
-        groups: action.groups.map((group) => ({ title: group })),
-      };
-
     default:
       return state;
   }

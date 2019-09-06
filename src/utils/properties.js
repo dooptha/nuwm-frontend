@@ -29,17 +29,26 @@ export const DEFAULT_PROPERTIES = {
   theme: 'Eva Light',
   group: 'ПМ-41',
   IOSWidgetTutorialComplete: false,
+  autocompleteGroups: {
+    values: [],
+    lastUpdated: 0,
+  },
+  autocompleteTeachers: {
+    values: [],
+    lastUpdated: 0,
+  },
 };
 
 export const getProperties = async (useDefaults) => {
   const propsPromises = [];
 
-  Object.keys(DEFAULT_PROPERTIES).forEach((key) => {
-    propsPromises.push(
-      getObject(key)
-        .then((value) => [key, (!useDefaults && value) || DEFAULT_PROPERTIES[key]]),
-    );
-  });
+  Object.keys(DEFAULT_PROPERTIES)
+    .forEach((key) => {
+      propsPromises.push(
+        getObject(key)
+          .then((value) => [key, (!useDefaults && value) || DEFAULT_PROPERTIES[key]]),
+      );
+    });
 
   const loadedPropertiesArray = await Promise.all(propsPromises);
   const properties = {};

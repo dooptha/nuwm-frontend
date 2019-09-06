@@ -1,6 +1,7 @@
 import moment from 'moment';
 import { api } from '.';
 import I18n from '../utils/i18n';
+import { storeObject } from '../utils/storage';
 
 const errorParser = (err) => {
   if (err.message === 'Network Error') return I18n.t('timetable.error-no-server');
@@ -17,6 +18,10 @@ const errorParser = (err) => {
 };
 
 const dateToApiFormat = (date) => (date.format('DD.MM.YYYY'));
+
+const parseAutocompleteData = (array) => (
+  array.map((item) => ({ title: item }))
+);
 
 export const getScheduleOnWeek = (group) => {
   const now = moment();
@@ -45,17 +50,46 @@ const getGroups = (dispatch) => (
     .then((response) => {
       const { groups } = response.data;
 
+      const autocompleteGroups = {
+        values: parseAutocompleteData(groups),
+        lastUpdated: Date.now(),
+      };
+
+      storeObject('autocompleteGroups', autocompleteGroups);
+
       dispatch({
-        type: 'loadGroups',
-        groups,
+        type: 'setProperty',
+        key: 'autocompleteGroups',
+        value: autocompleteGroups,
       });
     })
     .catch(() => {})
 );
 
+const getTeachers = (dispatch) => (
+  api.get('/timetable/lecturers')
+    .then((response) => {
+      const { lecturers } = response.data;
+
+      const autocompleteTeachers = {
+        values: parseAutocompleteData(lecturers),
+        lastUpdated: Date.now(),
+      };
+
+      storeObject('autocompleteTeachers', autocompleteTeachers);
+
+      dispatch({
+        type: 'setProperty',
+        key: 'autocompleteTeachers',
+        value: autocompleteTeachers,
+      });
+    })
+    .catch(() => {})
+);
 
 module.exports = {
   getScheduleOnWeek,
   getSchedule,
   getGroups,
+  getTeachers,
 };

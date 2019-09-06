@@ -17,11 +17,13 @@ const options = {
 
 export default (props) => {
   const [{ app }] = useGlobalState();
+  const { autocompleteGroups } = app.properties;
 
   const getDatalist = (text) => {
-    const fuse = new Fuse(app.groups, options);
+    const fuse = new Fuse(autocompleteGroups.values, options);
 
-    return fuse.search(text).splice(0, 5);
+    return fuse.search(text)
+      .splice(0, 5);
   };
 
   return (

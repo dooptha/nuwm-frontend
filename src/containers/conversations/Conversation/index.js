@@ -71,6 +71,7 @@ class Conversation extends Component {
   sendMessage() {
     const { newMessage } = this.state;
     const [{ user }, dispatch] = this.context;
+    const { _id, username, role } = user.current;
 
     if (newMessage.length < 1 || newMessage.length > config.MAXIMUM_CHARS_IN_MESSAGE) return false;
 
@@ -78,8 +79,9 @@ class Conversation extends Component {
       body: newMessage,
       date: new Date(),
       sender: {
-        id: user.current._id,
-        username: user.current.username,
+        id: _id,
+        username,
+        role,
       },
     };
 

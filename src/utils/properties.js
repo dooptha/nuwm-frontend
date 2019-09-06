@@ -1,5 +1,5 @@
 import * as RNLocalize from 'react-native-localize';
-import { getKey } from './storage';
+import { getObject } from './storage';
 
 export const getDefaultLocale = () => {
   const preferredLocales = RNLocalize.getLocales();
@@ -36,7 +36,7 @@ export const getProperties = async (useDefaults) => {
 
   Object.keys(DEFAULT_PROPERTIES).forEach((key) => {
     propsPromises.push(
-      getKey(key)
+      getObject(key)
         .then((value) => [key, (!useDefaults && value) || DEFAULT_PROPERTIES[key]]),
     );
   });

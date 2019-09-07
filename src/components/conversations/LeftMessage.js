@@ -11,21 +11,6 @@ import {
 import { getSenderColor } from '../../utils/colors';
 
 class Message extends Component {
-  constructor(props) {
-    super(props);
-
-    this.onPress = this.onPress.bind(this);
-  }
-
-  onPress() {
-    const {
-      message,
-      onMessagePress,
-    } = this.props;
-
-    onMessagePress(message);
-  }
-
   getCloudStyle() {
     const {
       messagePosition,
@@ -113,7 +98,8 @@ class Message extends Component {
 
     return (
       <View style={themedStyle.container}>
-        <TouchableWithoutFeedback onPress={this.onPress}>
+        {/* TouchableWithoutFeedback */}
+        <View>
           <View style={themedStyle.messageContainer}>
             {this.renderTriangle()}
             <View style={themedStyle.cloudContainer}>
@@ -132,7 +118,7 @@ class Message extends Component {
               </View>
             </View>
           </View>
-        </TouchableWithoutFeedback>
+        </View>
       </View>
     );
   }

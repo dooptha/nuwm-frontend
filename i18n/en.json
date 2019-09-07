@@ -1,182 +1,188 @@
 {
-	"SignUp": {
-		"group": "Group",
-		"name": "Name",
-		"submit": "Sign up",
-		"title": "Before we start",
-		"privacyText": "By clicking “Sign up” above, you agree to our ",
-		"privacyTitle": "Privacy Statement"
-	},
-	"admin": {
-		"deleteMessage": "Delete message",
-		"no": "No",
-		"poll": {
-			"close": {
-				"cancel": "No",
-				"confirm": "Yes",
-				"description": "You can't revert this action",
-				"title": "End last poll"
-			},
-			"options": {
-				"add": "Add another option",
-				"placeholder": "Option",
-				"title": "Options"
-			},
-			"question": {
-				"placeholder": "Ask question",
-				"title": "Question"
-			},
-			"submit": "Create"
-		},
-		"yes": "Yes"
-	},
-	"contactUs": {
-		"alert": "Open link in browser",
-		"cancel": "Cancel",
-		"discord": {
-			"description": "Connect to community",
-			"title": "Discord"
-		},
-		"github": {
-			"description": "Contribute to project",
-			"title": "Github"
-		},
-		"mail": {
-			"description": "Wishes and questions",
-			"title": "Mail"
-		},
-		"open": "Yes",
-		"title": "Dooptha"
-	},
-	"conversations": {
-		"messagePlaceholder": "Type something..."
-	},
-	"datePicker": {
-		"Cancel": "Cancel",
-		"Confirm": "Confirm"
-	},
-	"errors": {
-		"description": "Info about that error has been sent to developers! Please, restart app!",
-		"ok": "Okay",
-		"responseDescription": "Something happened while sending request",
-		"responseTitle": "Request failed",
-		"title": "Something happened not as intended"
-	},
-	"flood": {
-		"description": "Place to connect with other students, only last 50 messages will be saved",
-		"online": "online",
-		"title": "Flood"
-	},
-	"routes": {
-		"Admin": "New poll",
-		"ContactUs": "Contact us",
-		"Conversations": "Chat",
-		"DetailedLesson": "Details",
-		"Instagram": "Instagram",
-		"Language": "Language",
-		"PollHistory": "Polls history",
-		"SearchScreen": "Schedule",
-		"Settings": "Settings",
-		"Themes": "Theme",
-		"Timetable": "Timetable",
-		"TimetableSettings": "Розклад",
-		"Twitter": "Twitter",
-		"User": "User",
-		"WebView": "WebView",
-		"Conversation": "Flood",
-		"disconnected": "Connecting"
-	},
-	"settings": {
-		"admin": {
-			"title": "Administration"
-		},
-		"languages": {
-			"en": "English",
-			"ru": "Russian",
-			"title": "Language",
-			"ua": "Ukrainian"
-		},
-		"polls": {
-			"title": "Polls history"
-		},
-		"questions": {
-			"title": "Ask guestion"
-		},
-		"themes": {
-			"anotherUserMessage": "Somebody once told me",
-			"currentUserMessage": "the world is gonna roll me",
-			"sender": "Vlad Procenko",
-			"title": "Theme"
-		},
-		"timetable": {
-			"title": "Timetable"
-		},
-		"user": {
-			"group": "Group",
-			"logOut": "Log out",
-			"username": "Name",
-			"validations": {
-				"username": "Maximum name length"
-			},
-			"privacyPolicy": "Privacy policy"
-		}
-	},
-	"tabs": {
-		"chat": "Chat",
-		"settings": "Settings",
-		"timetable": "Timetable"
-	},
-	"timetable": {
-		"loading": "Loading...",
-		"datepicker": {
-			"Choose Date": "Choose Date",
-			"End": "End",
-			"OK": "Ok",
-			"Start": "Start"
-		},
-		"error-no-server": "Can't connect to the server :-( \nCheck your network connection",
-		"error-try-later": "Something went wrong :-( \nTry again later",
-		"errorInvalidData": {
-			"description": "For successful search you need to input data range and at least one of next: group, lecturer",
-			"title": "Not enough search data!"
-		},
-		"lesson": {
-			"classroom": "Classroom",
-			"lecturer": "Lecturer",
-			"name": "Subject",
-			"streamsType": "Stream Type",
-			"group": "Subgroup",
-			"time": "Time",
-			"type": "Type"
-		},
-		"no-lesson": "No lesson, you can go play",
-		"search": {
-			"Date": "Date",
-			"From": "From",
-			"Group": "Group",
-			"GroupExample": "Example: ПМ-41",
-			"Lecturer": "Lecturer",
-			"LecturerExample": "Example: Мічута Ольга Романівна",
-			"OnlyDay": "Day",
-			"PracticsOnly": "Practics Only",
-			"Range": "Range",
-			"Search": "Search",
-			"To": "To",
-			"Type": "Type"
-		},
-		"tabs": {
-			"Search": "Search",
-			"Today": "Today",
-			"Tomorrow": "Tomorrow",
-			"Week": "Week"
-		}
-	},
-	"iosWidget": {
-		"modal": {
-			"text": "Widget allows you to see timetable for today even on locked screen",
-			"confirm": "Yes, understood"
-		},
-		"title": "Advice",
-		"text": "Use widget for fast access to timetable"
-	}
+  "SignUp": {
+    "group": "Group",
+    "name": "Name",
+    "submit": "Sign up",
+    "title": "Before we start",
+    "privacyText": "By clicking “Sign up” above, you agree to our ",
+    "privacyTitle": "Privacy Statement"
+  },
+  "admin": {
+    "deleteMessage": "Delete message",
+    "no": "No",
+    "poll": {
+      "close": {
+        "cancel": "No",
+        "confirm": "Yes",
+        "description": "You can't revert this action",
+        "title": "End last poll"
+      },
+      "options": {
+        "add": "Add another option",
+        "placeholder": "Option",
+        "title": "Options"
+      },
+      "question": {
+        "placeholder": "Ask question",
+        "title": "Question"
+      },
+      "submit": "Create"
+    },
+    "yes": "Yes",
+    "clearChat": {
+      "cancel": "No",
+      "confirm": "Yes",
+      "description": "You can't revert this action",
+      "title": "Clear flood"
+    }
+  },
+  "contactUs": {
+    "alert": "Open link in browser",
+    "cancel": "Cancel",
+    "discord": {
+      "description": "Connect to community",
+      "title": "Discord"
+    },
+    "github": {
+      "description": "Contribute to project",
+      "title": "Github"
+    },
+    "mail": {
+      "description": "Wishes and questions",
+      "title": "Mail"
+    },
+    "open": "Yes",
+    "title": "Dooptha"
+  },
+  "conversations": {
+    "messagePlaceholder": "Type something..."
+  },
+  "datePicker": {
+    "Cancel": "Cancel",
+    "Confirm": "Confirm"
+  },
+  "errors": {
+    "description": "Info about that error has been sent to developers! Please, restart app!",
+    "ok": "Okay",
+    "responseDescription": "Something happened while sending request",
+    "responseTitle": "Request failed",
+    "title": "Something happened not as intended"
+  },
+  "flood": {
+    "description": "Place to connect with other students, only last 50 messages will be saved",
+    "online": "online",
+    "title": "Flood"
+  },
+  "routes": {
+    "Admin": "New poll",
+    "ContactUs": "Contact us",
+    "Conversations": "Chat",
+    "DetailedLesson": "Details",
+    "Instagram": "Instagram",
+    "Language": "Language",
+    "PollHistory": "Polls history",
+    "SearchScreen": "Schedule",
+    "Settings": "Settings",
+    "Themes": "Theme",
+    "Timetable": "Timetable",
+    "TimetableSettings": "Розклад",
+    "Twitter": "Twitter",
+    "User": "User",
+    "WebView": "WebView",
+    "Conversation": "Flood",
+    "disconnected": "Connecting"
+  },
+  "settings": {
+    "admin": {
+      "title": "Administration"
+    },
+    "languages": {
+      "en": "English",
+      "ru": "Russian",
+      "title": "Language",
+      "ua": "Ukrainian"
+    },
+    "polls": {
+      "title": "Polls history"
+    },
+    "questions": {
+      "title": "Ask guestion"
+    },
+    "themes": {
+      "anotherUserMessage": "Somebody once told me",
+      "currentUserMessage": "the world is gonna roll me",
+      "sender": "Vlad Procenko",
+      "title": "Theme"
+    },
+    "timetable": {
+      "title": "Timetable"
+    },
+    "user": {
+      "group": "Group",
+      "logOut": "Log out",
+      "username": "Name",
+      "validations": {
+        "username": "Maximum name length"
+      },
+      "privacyPolicy": "Privacy policy"
+    }
+  },
+  "tabs": {
+    "chat": "Chat",
+    "settings": "Settings",
+    "timetable": "Timetable"
+  },
+  "timetable": {
+    "loading": "Loading...",
+    "datepicker": {
+      "Choose Date": "Choose Date",
+      "End": "End",
+      "OK": "Ok",
+      "Start": "Start"
+    },
+    "error-no-server": "Can't connect to the server :-( \nCheck your network connection",
+    "error-try-later": "Something went wrong :-( \nTry again later",
+    "errorInvalidData": {
+      "description": "For successful search you need to input data range and at least one of next: group, lecturer",
+      "title": "Not enough search data!"
+    },
+    "lesson": {
+      "classroom": "Classroom",
+      "lecturer": "Lecturer",
+      "name": "Subject",
+      "streamsType": "Stream Type",
+      "group": "Subgroup",
+      "time": "Time",
+      "type": "Type"
+    },
+    "no-lesson": "No lesson, you can go play",
+    "search": {
+      "Date": "Date",
+      "From": "From",
+      "Group": "Group",
+      "GroupExample": "Example: ПМ-41",
+      "Lecturer": "Lecturer",
+      "LecturerExample": "Example: Мічута Ольга Романівна",
+      "OnlyDay": "Day",
+      "PracticsOnly": "Practics Only",
+      "Range": "Range",
+      "Search": "Search",
+      "To": "To",
+      "Type": "Type"
+    },
+    "tabs": {
+      "Search": "Search",
+      "Today": "Today",
+      "Tomorrow": "Tomorrow",
+      "Week": "Week"
+    }
+  },
+  "iosWidget": {
+    "modal": {
+      "text": "Widget allows you to see timetable for today even on locked screen",
+      "confirm": "Yes, understood"
+    },
+    "title": "Advice",
+    "text": "Use widget for fast access to timetable"
+  }
 }

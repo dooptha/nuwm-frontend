@@ -61,3 +61,10 @@ export const getObject = async (key) => (
       return null;
     })
 );
+
+const storage = {
+  storeObject,
+  getObject,
+};
+
+export default storage;

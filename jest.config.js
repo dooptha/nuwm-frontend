@@ -1,6 +1,6 @@
 module.exports = {
   preset: 'react-native',
-  collectCoverage: false,
+  collectCoverage: true,
   moduleFileExtensions: ['js', 'jsx', 'json'],
   bail: 1,
   moduleDirectories: ['node_modules'],

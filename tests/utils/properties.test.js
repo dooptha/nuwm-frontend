@@ -1,5 +1,10 @@
 import * as RNLocalize from 'react-native-localize';
-import { getDefaultLocale } from '../../src/utils/properties';
+import storage from '../../src/utils/storage';
+import {
+  getDefaultLocale,
+  getProperties,
+  DEFAULT_PROPERTIES,
+} from '../../src/utils/properties';
 
 describe('getDefaultLocale() ', () => {
   const en = {
@@ -40,5 +45,37 @@ describe('getDefaultLocale() ', () => {
     RNLocalize.getLocales = jest.fn().mockReturnValue([notTranslatedLocale]);
 
     expect(getDefaultLocale()).toBe('en');
+  });
+});
+
+describe('getProperties()', () => {
+  it('should return object with loaded properties', () => {
+    storage.getObject = jest.fn().mockResolvedValue('property');
+
+    return getProperties()
+      .then((properties) => {
+        expect(properties.language)
+          .toBe('property');
+      });
+  });
+
+  it('should return object with default properties if no saved in storage', () => {
+    storage.getObject = jest.fn().mockResolvedValue(null);
+
+    return getProperties()
+      .then((properties) => {
+        expect(properties.language)
+          .toBe(DEFAULT_PROPERTIES.language);
+      });
+  });
+
+  it('should return object with default properties if useDefaults flag is true', () => {
+    storage.getObject = jest.fn().mockResolvedValue('property');
+
+    return getProperties(true)
+      .then((properties) => {
+        expect(properties.language)
+          .toBe(DEFAULT_PROPERTIES.language);
+      });
   });
 });

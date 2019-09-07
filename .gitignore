@@ -61,8 +61,8 @@ buck-out/
 *.jsbundle
 
 # CocoaPods
-/ios/Pods/
-/ios/Podfile.lock
+ios/Pods/
+ios/Podfile.lock
 
 # Project config override
 config/override.js

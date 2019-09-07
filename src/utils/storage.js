@@ -48,5 +48,23 @@ export const storeObject = async (key, object) => {
 
 export const getObject = async (key) => (
   getKey(key)
-    .then((value) => (JSON.parse(value)))
+    .then((value) => {
+      // if can't parse json, return raw value as a string
+      try {
+        return JSON.parse(value);
+      } catch (e) {
+        if (e instanceof SyntaxError) {
+          return value;
+        }
+      }
+
+      return null;
+    })
 );
+
+const storage = {
+  storeObject,
+  getObject,
+};
+
+export default storage;

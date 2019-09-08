@@ -41,6 +41,10 @@ class Search extends Component {
     };
 
     this.scrollViewRef = React.createRef();
+    this.groupInput = React.createRef();
+    this.lecturerInput = React.createRef();
+    this.scrollToLecturerInput = this.scrollToLecturerInput.bind(this);
+    this.scrollToGroupInput = this.scrollToGroupInput.bind(this);
     this.onContentSizeChange = this.onContentSizeChange.bind(this);
   }
 
@@ -89,7 +93,29 @@ class Search extends Component {
   }
 
   onContentSizeChange() {
-    this.scrollViewRef.current.scrollToEnd({ animated: false });
+    const lecturerFocused = this.lecturerInput.current.isFocused();
+    const groupFocused = this.groupInput.current.isFocused();
+
+    if (lecturerFocused) {
+      this.scrollToLecturerInput();
+    } else if (groupFocused) {
+      this.scrollToGroupInput();
+    }
+  }
+
+  scrollTo(y) {
+    this.scrollViewRef.current.scrollTo({
+      animated: true,
+      y,
+    });
+  }
+
+  scrollToLecturerInput() {
+    this.scrollTo(125);
+  }
+
+  scrollToGroupInput() {
+    this.scrollTo(230);
   }
 
   removeLections(schedule) {
@@ -187,6 +213,7 @@ class Search extends Component {
           ref={this.scrollViewRef}
           onContentSizeChange={this.onContentSizeChange}
           style={themedStyle.inputsContainer}
+          scrollToOverflowEnabled
         >
           <View style={themedStyle.inputContainer}>
             <DatePicker
@@ -204,6 +231,8 @@ class Search extends Component {
               value={lecturer}
               status={errors.lecturer ? 'danger' : null}
               onChangeText={(text) => this.onInputChange('lecturer', text)}
+              inputReference={this.lecturerInput}
+              onFocus={this.scrollToLecturerInput}
             />
           </View>
 
@@ -214,6 +243,8 @@ class Search extends Component {
               value={group}
               status={errors.group ? 'danger' : null}
               onChangeText={(text) => this.onInputChange('group', text)}
+              inputReference={this.groupInput}
+              onFocus={this.scrollToGroupInput}
             />
           </View>
 
@@ -267,6 +298,7 @@ export default withStyles(Search, (theme) => ({
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+    marginBottom: 10,
   },
   practicsOnlyContainer: {
     flexDirection: 'row',

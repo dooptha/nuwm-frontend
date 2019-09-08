@@ -17,6 +17,7 @@ struct Subject: Equatable {
   var name: String
   var classroom: String
   var date: Date
+  var group: String?
 }
 
 @IBDesignable class PaddingLabel: UILabel {
@@ -158,6 +159,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
       self.tableView.reloadData()
       
       if(action == .updateTable){
+        self.tableView.separatorStyle  = .singleLine
         self.tableView.backgroundView = nil;
       }
     }
@@ -235,9 +237,8 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
       self.mode = mode
       let action = self.getAction()
       self.updateTable(action: action)
-      
       if mode == .expanded {
-        preferredContentSize = CGSize(width: maxSize.width, height: CGFloat(self.data.count * 50))
+        preferredContentSize = CGSize(width: maxSize.width, height: tableView.contentSize.height)
       }
       else if activeDisplayMode == .compact {
         preferredContentSize = maxSize
@@ -249,13 +250,8 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
   // every time widget appears(even when you just swipe from lockscreen to widgets)
   
   override func viewDidAppear(_ animated: Bool){
+    preferredContentSize.height = CGFloat(53 * data.count)
     super.viewDidAppear(animated)
-    
-    if #available(iOSApplicationExtension 10.0, *) {
-      extensionContext?.widgetLargestAvailableDisplayMode = .expanded
-    }
-    self.preferredContentSize.height = CGFloat(self.data.count * 50)
-    
   }
   
   /*****
@@ -299,7 +295,8 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
                 time: time,
                 name: subject["name"].string ?? "-",
                 classroom: classroom.isEmpty ? "-" : classroom,
-                date: subjectTime
+                date: subjectTime,
+                group: subject["displayGroup"].string
               ))
             }
           }
@@ -482,9 +479,16 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     
     let item = data[indexPath.row]
     
+    var time = item.time
+    if(item.group != nil){
+      time += " • " + item.group!
+    }
+    
     cell.itemTitle.text = item.name
-    cell.itemDesc.text = item.time ?? "-"
+    cell.itemDesc.text = time
     cell.itemSubtitle.text = item.classroom
+    
+    preferredContentSize.height = tableView.contentSize.height
     
     return cell
   }

@@ -109,6 +109,7 @@ export class AutocompleteInputComponent extends Component {
       inputReference,
       themedStyle,
       status,
+      onFocus,
     } = this.props;
 
     const { menuVisible, data } = this.state;
@@ -128,6 +129,7 @@ export class AutocompleteInputComponent extends Component {
             status={status}
             onChangeText={(text) => this.onInputChange(text)}
             ref={inputReference}
+            onFocus={onFocus}
           />
           { this.renderClearInputButton() }
         </View>

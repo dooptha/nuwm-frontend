@@ -1,18 +1,15 @@
-### NUWM Frontend 
+## NUWM Frontend 
 
 <img align="right" width="120" height="120" src="https://raw.githubusercontent.com/dooptha/nuwm-frontend/develop/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png"> 
 
 This is open source React Native application designed for students by students of the [NATIONAL UNIVERSITY OF WATER AND ENVIRONMENTAL ENGINEERING](http://en.nuwm.edu.ua/).
 
-
-<p align="center">
-   <a href="https://apps.apple.com/us/app/nuwee-timetable/id1478105131?mt=8">
-       <img border="8%" src="https://linkmaker.itunes.apple.com/en-gb/badge-lrg.svg?releaseDate=2019-09-09&kind=iossoftware&bubble=ios_apps">
-   </a>
-    <a href='https://play.google.com/store/apps/details?id=com.nuwmapp&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
-        <img height="60"  alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/>
-    </a>
-</p>
+<a href="https://apps.apple.com/us/app/nuwee-timetable/id1478105131?mt=8">
+   <img height="55" src="https://raw.githubusercontent.com/Volorf/Badges/master/App%20Store/App%20Store%20Badge.png">
+</a>
+<a href='https://play.google.com/store/apps/details?id=com.nuwmapp&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
+   <img height="55"  alt='Get it on Google Play' src='https://raw.githubusercontent.com/Volorf/Badges/master/Google%20Play/Google%20Play%20Badge.png'/>
+</a>
 
 [![Build Status](https://travis-ci.com/dooptha/nuwm-frontend.svg?branch=develop)](https://travis-ci.com/dooptha/nuwm-frontend) 
 [![Maintainability](https://api.codeclimate.com/v1/badges/470fde4b1b8945fba5f0/maintainability)](https://codeclimate.com/github/dooptha/nuwm-frontend/maintainability) 

@@ -1,13 +1,15 @@
 ### NUWM Frontend 
 
+<img align="right" width="120" height="120" src="https://raw.githubusercontent.com/dooptha/nuwm-frontend/develop/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png"> 
+
+This is open source React Native application designed for students by students of the [NATIONAL UNIVERSITY OF WATER AND ENVIRONMENTAL ENGINEERING](http://en.nuwm.edu.ua/).
+
+
 <p align="center">
-    <img width="120" height="120" src="https://raw.githubusercontent.com/dooptha/nuwm-frontend/develop/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png"> 
-   <br/> 
-   <a border="8%" height="40" href="https://apps.apple.com/us/app/nuwee-timetable/id1478105131?mt=8">
-       <img src="https://linkmaker.itunes.apple.com/en-gb/badge-lrg.svg?releaseDate=2019-09-09&kind=iossoftware&bubble=ios_apps">
-    
+   <a href="https://apps.apple.com/us/app/nuwee-timetable/id1478105131?mt=8">
+       <img border="8%" src="https://linkmaker.itunes.apple.com/en-gb/badge-lrg.svg?releaseDate=2019-09-09&kind=iossoftware&bubble=ios_apps">
    </a>
-    <a height="60" href='https://play.google.com/store/apps/details?id=com.nuwmapp&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
+    <a href='https://play.google.com/store/apps/details?id=com.nuwmapp&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
         <img height="60"  alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/>
     </a>
 </p>
@@ -16,10 +18,6 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/470fde4b1b8945fba5f0/maintainability)](https://codeclimate.com/github/dooptha/nuwm-frontend/maintainability) 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/470fde4b1b8945fba5f0/test_coverage)](https://codeclimate.com/github/dooptha/nuwm-frontend/test_coverage)
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
-
-
-This is open source React Native application designed for students by students of the [NATIONAL UNIVERSITY OF WATER AND ENVIRONMENTAL ENGINEERING](http://en.nuwm.edu.ua/).
-
 
 #### Dependencies
  * Node.js _(v11.14.0)_ and NPM _(v6.7.0)_

@@ -11,51 +11,72 @@ import {
 import { getSenderColor } from '../../utils/colors';
 
 class Message extends Component {
-  constructor(props) {
-    super(props);
-
-    this.onPress = this.onPress.bind(this);
-  }
-
-  onPress() {
-    const {
-      message,
-      onMessagePress,
-    } = this.props;
-
-    onMessagePress(message);
-  }
-
   getCloudStyle() {
     const {
       messagePosition,
       themedStyle,
     } = this.props;
 
+    const style = [themedStyle.cloud];
+
     switch (messagePosition) {
       case 'first':
-        return [
-          themedStyle.cloud,
-          themedStyle.cloudFirst,
-        ];
+        style.push(themedStyle.cloudFirst);
+        break;
       case 'middle':
-        return [
-          themedStyle.cloud,
-          themedStyle.cloudMiddle,
-        ];
+        style.push(themedStyle.cloudMiddle);
+        break;
       case 'last':
-        return [
-          themedStyle.cloud,
-          themedStyle.cloudLast,
-        ];
+        style.push(themedStyle.cloudLast);
+        break;
       default:
-        return themedStyle.cloud;
     }
+
+    return style;
   }
 
   shouldHaveTriangle() {
     const { messagePosition } = this.props;
     return messagePosition !== 'middle' && messagePosition !== 'first';
+  }
+
+  calculateSenderColor() {
+    const {
+      message,
+      theme,
+    } = this.props;
+
+    return getSenderColor(
+      message.sender.username,
+      theme['color-basic-100'],
+      0.7,
+    );
+  }
+
+  renderSender() {
+    const {
+      message,
+      themedStyle,
+    } = this.props;
+
+    const { role, username } = message.sender;
+
+    const textColor = {
+      color: this.calculateSenderColor(),
+    };
+
+    return (
+      <Text
+        style={[themedStyle.sender, textColor]}
+        category="c1"
+      >
+        {username}
+        <Text style={themedStyle.admin}>
+          {role === 'admin' ? ' admin' : null}
+          {role === 'moderator' ? ' moderator' : null}
+        </Text>
+      </Text>
+    );
   }
 
   renderTriangle() {
@@ -65,31 +86,10 @@ class Message extends Component {
       <View style={themedStyle.triangleContainer}>
         {
           this.shouldHaveTriangle()
-            ? <View style={themedStyle.triangle} />
-            : <View style={themedStyle.noTriangle} />
+            ? <View style={themedStyle.triangle}/>
+            : <View style={themedStyle.noTriangle}/>
         }
       </View>
-    );
-  }
-
-  renderSender() {
-    const {
-      message,
-      themedStyle,
-      theme,
-    } = this.props;
-
-    const textColor = {
-      color: getSenderColor(message.sender.username, theme['color-basic-900'], 0.7),
-    };
-
-    return (
-      <Text
-        style={[themedStyle.sender, textColor]}
-        category="c1"
-      >
-        {message.sender.username}
-      </Text>
     );
   }
 
@@ -98,7 +98,8 @@ class Message extends Component {
 
     return (
       <View style={themedStyle.container}>
-        <TouchableWithoutFeedback onPress={this.onPress}>
+        {/* TouchableWithoutFeedback */}
+        <View>
           <View style={themedStyle.messageContainer}>
             {this.renderTriangle()}
             <View style={themedStyle.cloudContainer}>
@@ -117,7 +118,7 @@ class Message extends Component {
               </View>
             </View>
           </View>
-        </TouchableWithoutFeedback>
+        </View>
       </View>
     );
   }
@@ -211,6 +212,10 @@ export default withStyles(Message, (theme) => ({
   },
   sender: {
     textAlign: 'left',
-    color: theme['text-disabled-color'],
+    color: theme['text-hint-color'],
+  },
+  admin: {
+    color: theme['text-hint-color'],
+    fontSize: 13,
   },
 }));

@@ -8,7 +8,7 @@ import Schedule from './Schedule';
 
 import I18n from '../../utils/i18n';
 import { getScheduleOnWeek } from '../../api/timetable';
-import { storeKey, getKey } from '../../utils/storage';
+import { storeKey } from '../../utils/storage';
 import { StateContext } from '../../utils/context';
 import {
   isToday, isTomorrow, replaceDatesWithMoment, isOutdated,
@@ -32,15 +32,23 @@ export class Timetable extends Component {
     index: 1,
     // eslint-disable-next-line
     routes: [],
+    // key for unique schedule
+    scheduleKey: new Date().getTime(),
   };
 
   constructor(props) {
     super(props);
 
+    // this is needed for tabs
     this.deviceWidth = Dimensions.get('window').width;
   }
 
   componentDidMount() {
+    DefaultPreference.get('schedule').then((rawData) => {
+      const data = JSON.parse(rawData);
+      if (rawData) this.splitSchedule({ data });
+    });
+
     this.requestSchedule();
   }
 
@@ -64,11 +72,10 @@ export class Timetable extends Component {
 
     const today = schedule.filter((day) => isToday(day.date));
     const tomorrow = schedule.filter((day) => isTomorrow(day.date));
-
-    const error = schedule.length > 0 ? false : props.error || false;
+    const scheduleKey = new Date().getTime();
 
     this.setState({
-      ...props, today, tomorrow, schedule, error,
+      ...props, today, tomorrow, schedule, error: props.error, scheduleKey,
     });
   }
 
@@ -83,20 +90,10 @@ export class Timetable extends Component {
         const newState = { refreshing: false };
 
         if (resData.error || resData.length === 0) {
-          DefaultPreference.get('schedule').then((rawData) => {
-            const data = rawData ? JSON.parse(rawData) : [];
-            this.splitSchedule({
-              ...newState,
-              data,
-              error: resData.error,
-            });
-          });
+          this.setState({ ...newState, error: resData.error });
         } else {
           storeKey('schedule', JSON.stringify(resData));
-          this.splitSchedule({
-            ...newState,
-            data: resData,
-          });
+          this.splitSchedule({ ...newState, data: resData });
         }
       })
       .catch((err) => console.log({ err }));
@@ -118,7 +115,9 @@ export class Timetable extends Component {
   }
 
   renderSchedule(schedule, tabIndex) {
-    const { refreshing, error, index } = this.state;
+    const {
+      refreshing, index, scheduleKey,
+    } = this.state;
     const { themedStyle } = this.props;
 
     const refreshControl = (
@@ -128,7 +127,10 @@ export class Timetable extends Component {
       />
     );
 
-    const active = tabIndex === index;
+    const error = this.state.schedule.length > 0 ? false : this.state.error || false;
+
+    const message = error || (refreshing
+      ? I18n.t('timetable.loading') : I18n.t('timetable.no-lesson'));
 
     return (
       <ScrollView
@@ -137,9 +139,10 @@ export class Timetable extends Component {
         refreshControl={refreshControl}
       >
         <Schedule
+          scheduleKey={scheduleKey}
           schedule={schedule}
-          message={error || I18n.t('timetable.no-lesson')}
-          active={active}
+          message={message}
+          active={tabIndex === index}
         />
       </ScrollView>
     );

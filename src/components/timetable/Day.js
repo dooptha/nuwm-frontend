@@ -15,6 +15,10 @@ class Day extends Component {
     }),
   }
 
+  state = {
+    scheduleKey: -2,
+  }
+
   static defaultProps = {
     day: {
       subject: [],
@@ -22,11 +26,42 @@ class Day extends Component {
     },
   }
 
+  constructor(props) {
+    super(props);
+
+    this.lessons = [];
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const { scheduleKey } = this.state;
+
+    if (nextProps.scheduleKey !== scheduleKey) {
+      this.setState({ scheduleKey: nextProps.scheduleKey });
+      this.lessons = [];
+    }
+
+    return true;
+  }
+
   getDateLabel(moment) {
     const date = moment.format('D MMMM');
     const week = moment.format('dddd');
 
     return `${week.charAt(0).toUpperCase() + week.slice(1)}, ${date}`;
+  }
+
+  watchLessons(lesson, subjectIndex) {
+    const { index, day, watchDays } = this.props;
+
+    this.lessons[subjectIndex] = lesson;
+
+    for (let i = 0; i < day.subjects.length; i += 1) {
+      if (!this.lessons[i]) {
+        return;
+      }
+    }
+
+    watchDays(this.lessons, index);
   }
 
   renderAllSubjects() {
@@ -43,8 +78,11 @@ class Day extends Component {
 
       return (
         <Lesson
+          index={index}
+          watchLessons={(lesson, i) => this.watchLessons(lesson, i)}
+          hasDate={index === 0}
           showTime={showTime}
-          key={subject.time + subject.name}
+          key={day.dayOfYear + subject.time + subject.name + subject.group}
           subject={subject}
           isLastItem={day.subjects.length - 1 === index}
         />

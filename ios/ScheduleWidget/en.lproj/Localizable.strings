@@ -6,8 +6,9 @@
   Copyright © 2019 Facebook. All rights reserved.
 */
 
-"NoLesson" = "There is no lesson left";
+"GoSleep" = "Wake up at %@ oclock & go to the %@ campus tomorrow";
+"LessonsEnded" = "The lessons are over";
+"NoLesson" = "There are no lessons";
 "NoGroup" = "No group selected. Go to app -> settings -> timetable to select it";
 "NoServer" = "Cant update schedule";
-"GoSleep" = "There is no lesson left.\n Wake up to %@ oclock go to the %@ campus";
 "Loading" = "Loading";

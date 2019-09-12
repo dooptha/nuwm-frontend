@@ -4,8 +4,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import schedule from './data';
-import Lesson from '../../src/components/schedule/Lesson';
-import NavigationService from '../../src/navigation/NavigationService';
+import Lesson from '../../../src/components/timetable/Lesson';
+import NavigationService from '../../../src/navigation/NavigationService';
 
 describe('<Lesson> ', () => {
   it('should navigate to DetailedLesson after been pressed', () => {

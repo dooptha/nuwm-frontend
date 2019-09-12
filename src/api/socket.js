@@ -46,10 +46,9 @@ export const socketEvents = ({ dispatch, user }) => {
     return true;
   });
 
-  socket.on('message:remove', (messageId) => (
+  socket.on('messages:removed', () => (
     dispatch({
-      type: 'removeMessage',
-      messageId,
+      type: 'removeMessages',
     })
   ));
 
@@ -91,7 +90,10 @@ export const initSockets = ({ dispatch, token, user }) => {
     forceNew: true,
   });
 
-  socketEvents({ dispatch, user });
+  socketEvents({
+    dispatch,
+    user,
+  });
 };
 
 export default {

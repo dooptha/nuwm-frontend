@@ -1,181 +1,188 @@
 {
-	"SignUp": {
-		"group": "Група",
-		"name": "Имя",
-		"submit": "Продолжить",
-		"title": "Перед тем как начать",
-		"privacyText": "Продолжая, вы соглашаетесь с нашей ",
-		"privacyTitle": "Политикой конфиденциальности"
-	},
-	"admin": {
-		"deleteMessage": "Удалить сообщение",
-		"no": "Нет",
-		"poll": {
-			"close": {
-				"cancel": "Нет",
-				"confirm": "Да",
-				"description": "Это действие нельзя отменить",
-				"title": "Завершить последнее голосование"
-			},
-			"options": {
-				"add": "Добавить другой вариант",
-				"placeholder": "Вариант",
-				"title": "Варианты ответов"
-			},
-			"question": {
-				"placeholder": "Поставте вопрос",
-				"title": "Вопрос"
-			},
-			"submit": "Создать"
-		},
-		"yes": "Да"
-	},
-	"contactUs": {
-		"alert": "Перейти на выбранный ресурс",
-		"cancel": "Нет",
-		"discord": {
-			"description": "Присоединяйся к сообществу",
-			"title": "Discord"
-		},
-		"github": {
-			"description": "Помощь в разработке",
-			"title": "Github"
-		},
-		"mail": {
-			"description": "Пожелания и вопросы",
-			"title": "Почта"
-		},
-		"open": "Да",
-		"title": "Dooptha"
-	},
-	"conversations": {
-		"messagePlaceholder": "Сообщение..."
-	},
-	"datePicker": {
-		"Cancel": "Отменить",
-		"Confirm": "Подтвердить"
-	},
-	"errors": {
-		"description": "Информация про ошибку была отослана разработчикам! Пожалуйста, перезапустите предложение!",
-		"ok": "Хорошо",
-		"responseDescription": "Что-то случилось во время запроса",
-		"responseTitle": "Осуществился",
-		"title": "Что-то случилось не так как хотелось"
-	},
-	"flood": {
-		"description": "Место для общение с другими студентами, только последнее 50 сообщений сохраняются в истории",
-		"online": "oнлайн",
-		"title": "Флуд"
-	},
-	"routes": {
-		"Admin": "Новое голосование",
-		"ContactUs": "Контакты",
-		"Conversations": "Чат",
-		"DetailedLesson": "Детали",
-		"Instagram": "Инстаграм",
-		"Language": "Язык",
-		"PollHistory": "История голосований",
-		"SearchScreen": "Расписание",
-		"Settings": "Настройки",
-		"Themes": "Тема",
-		"Timetable": "Расписание",
-		"TimetableSettings": "Розклад",
-		"Twitter": "Твиттер",
-		"User": "Пользователь",
-		"WebView": "WebView",
-		"Conversation": "Флуд",
-		"disconnected": "Подключение"
-	},
-	"settings": {
-		"admin": {
-			"title": "Администрирование"
-		},
-		"languages": {
-			"en": "Английский",
-			"ru": "Русский",
-			"title": "Язык",
-			"ua": "Украинский"
-		},
-		"polls": {
-			"title": "История голосований"
-		},
-		"questions": {
-			"title": "Свяжитесь с нами"
-		},
-		"themes": {
-			"anotherUserMessage": "Когда то мне сказали",
-			"currentUserMessage": "что мир меня раздавит",
-			"sender": "Влад Проценко",
-			"title": "Тема"
-		},
-		"timetable": {
-			"title": "Расписание"
-		},
-		"user": {
-			"group": "Група",
-			"logOut": "Війті",
-			"username": "Имя",
-			"validations": {
-				"username": "Максимальное количество символов"
-			},
-			"privacyPolicy": "Политика конфиденциальности"
-		}
-	},
-	"tabs": {
-		"chat": "Чат",
-		"settings": "Настройки",
-		"timetable": "Расписание"
-	},
-	"timetable": {
-		"datepicker": {
-			"Choose Date": "Выберите дату",
-			"End": "Конец",
-			"OK": "Готово",
-			"Start": "Начало"
-		},
-		"error-no-server": "Невозможно связаться с сервером :-( \nПроверьте ваше интернет соединение",
-		"error-try-later": "Что-то пошло не так :-( \nПопробуйте позже",
-		"errorInvalidData": {
-			"description": "Для успешного поиска необходимо промежуток времени и хотя бы одно из двух: группа, преподаватель",
-			"title": "Не хватает данных для поиска!"
-		},
-		"lesson": {
-			"classroom": "Аудитория",
-			"lecturer": "Преподаватель",
-			"name": "Предмет",
-			"streams_type": "Подгруппа",
-			"subgroup": "Группа",
-			"time": "Время",
-			"type": "Тип"
-		},
-		"no-lesson": "Нету пар, можно отдыхать",
-		"search": {
-			"Date": "Дата",
-			"From": "С",
-			"Group": "Группа",
-			"GroupExample": " Пример: ПМ-41",
-			"Lecturer": "Преподаватель",
-			"LecturerExample": "Пример: Мічута Ольга Романівна",
-			"OnlyDay": "День",
-			"PracticsOnly": "Только Практика",
-			"Range": "Промежуток",
-			"Search": "Поиск",
-			"To": "По",
-			"Type": "Тип"
-		},
-		"tabs": {
-			"Search": "Поиск",
-			"Today": "Сегодня",
-			"Tomorrow": "Завтра",
-			"Week": "Неделя"
-		}
-	},
-	"iosWidget": {
-		"modal": {
-			"text": "Виджет позволяет быстро узнать расписание на сегодня, даже на заблокированном екране",
-			"confirm": "Да, понятно",
-		},
-		"title": "Совет",
-		"text": "Используйте виджет для быстрого доступа к расписанию"
-	}
+  "SignUp": {
+    "group": "Група",
+    "name": "Имя",
+    "submit": "Продолжить",
+    "title": "Перед тем как начать",
+    "privacyText": "Продолжая, вы соглашаетесь с нашей ",
+    "privacyTitle": "Политикой конфиденциальности"
+  },
+  "admin": {
+    "deleteMessage": "Удалить сообщение",
+    "no": "Нет",
+    "poll": {
+      "close": {
+        "cancel": "Нет",
+        "confirm": "Да",
+        "description": "Это действие нельзя отменить",
+        "title": "Завершить последнее голосование"
+      },
+      "options": {
+        "add": "Добавить другой вариант",
+        "placeholder": "Вариант",
+        "title": "Варианты ответов"
+      },
+      "question": {
+        "placeholder": "Поставте вопрос",
+        "title": "Вопрос"
+      },
+      "submit": "Создать"
+    },
+    "yes": "Да",
+    "clearChat": {
+      "cancel": "Нет",
+      "confirm": "Да",
+      "description": "Это действие нельзя отменить",
+      "title": "Очистить чат"
+    }
+  },
+  "contactUs": {
+    "alert": "Перейти на выбранный ресурс",
+    "cancel": "Нет",
+    "discord": {
+      "description": "Присоединяйся к сообществу",
+      "title": "Discord"
+    },
+    "github": {
+      "description": "Помощь в разработке",
+      "title": "Github"
+    },
+    "mail": {
+      "description": "Пожелания и вопросы",
+      "title": "Почта"
+    },
+    "open": "Да",
+    "title": "Dooptha"
+  },
+  "conversations": {
+    "messagePlaceholder": "Сообщение..."
+  },
+  "datePicker": {
+    "Cancel": "Отменить",
+    "Confirm": "Подтвердить"
+  },
+  "errors": {
+    "description": "Информация про ошибку была отослана разработчикам! Пожалуйста, перезапустите предложение!",
+    "ok": "Хорошо",
+    "responseDescription": "Что-то случилось во время запроса",
+    "responseTitle": "Осуществился",
+    "title": "Что-то случилось не так как хотелось"
+  },
+  "flood": {
+    "description": "Место для общение с другими студентами, только последнее 50 сообщений сохраняются в истории",
+    "online": "oнлайн",
+    "title": "Флуд"
+  },
+  "routes": {
+    "Admin": "Новое голосование",
+    "ContactUs": "Контакты",
+    "Conversations": "Чат",
+    "DetailedLesson": "Детали",
+    "Instagram": "Инстаграм",
+    "Language": "Язык",
+    "PollHistory": "История голосований",
+    "SearchScreen": "Расписание",
+    "Settings": "Настройки",
+    "Themes": "Тема",
+    "Timetable": "Расписание",
+    "TimetableSettings": "Розклад",
+    "Twitter": "Твиттер",
+    "User": "Пользователь",
+    "WebView": "WebView",
+    "Conversation": "Флуд",
+    "disconnected": "Подключение"
+  },
+  "settings": {
+    "admin": {
+      "title": "Администрирование"
+    },
+    "languages": {
+      "en": "Английский",
+      "ru": "Русский",
+      "title": "Язык",
+      "ua": "Украинский"
+    },
+    "polls": {
+      "title": "История голосований"
+    },
+    "questions": {
+      "title": "Свяжитесь с нами"
+    },
+    "themes": {
+      "anotherUserMessage": "Когда то мне сказали",
+      "currentUserMessage": "что мир меня раздавит",
+      "sender": "Влад Проценко",
+      "title": "Тема"
+    },
+    "timetable": {
+      "title": "Расписание"
+    },
+    "user": {
+      "group": "Група",
+      "logOut": "Війті",
+      "username": "Имя",
+      "validations": {
+        "username": "Максимальное количество символов"
+      },
+      "privacyPolicy": "Политика конфиденциальности"
+    }
+  },
+  "tabs": {
+    "chat": "Чат",
+    "settings": "Настройки",
+    "timetable": "Расписание"
+  },
+  "timetable": {
+    "loading": "Загрузка...",
+    "datepicker": {
+      "Choose Date": "Выберите дату",
+      "End": "Конец",
+      "OK": "Готово",
+      "Start": "Начало"
+    },
+    "error-no-server": "Невозможно связаться с сервером :-( \nПроверьте ваше интернет соединение",
+    "error-try-later": "Что-то пошло не так :-( \nПопробуйте позже",
+    "errorInvalidData": {
+      "description": "Для успешного поиска необходимо промежуток времени и хотя бы одно из двух: группа, преподаватель",
+      "title": "Не хватает данных для поиска!"
+    },
+    "lesson": {
+      "classroom": "Аудитория",
+      "lecturer": "Преподаватель",
+      "name": "Предмет",
+      "streamsType": "Тип",
+      "group": "Группа",
+      "time": "Время",
+      "type": "Вид"
+    },
+    "no-lesson": "Нету пар, можно отдыхать",
+    "search": {
+      "Date": "Дата",
+      "From": "С",
+      "Group": "Группа",
+      "GroupExample": " Пример: ПМ-41",
+      "Lecturer": "Преподаватель",
+      "LecturerExample": "Пример: Мічута Ольга Романівна",
+      "OnlyDay": "День",
+      "PracticsOnly": "Только Практика",
+      "Range": "Промежуток",
+      "Search": "Поиск",
+      "To": "По",
+      "Type": "Тип"
+    },
+    "tabs": {
+      "Search": "Поиск",
+      "Today": "Сегодня",
+      "Tomorrow": "Завтра",
+      "Week": "Неделя"
+    }
+  },
+  "iosWidget": {
+    "modal": {
+      "text": "Виджет позволяет быстро узнать расписание на сегодня, даже на заблокированном екране",
+      "confirm": "Да, понятно"
+    },
+    "title": "Совет",
+    "text": "Используйте виджет для быстрого доступа к расписанию"
+  }
 }

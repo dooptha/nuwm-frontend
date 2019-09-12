@@ -10,29 +10,60 @@ import Day from './Day';
   * when there is no subjects or when refreshing list
 */
 class Schedule extends Component {
+  state = {
+    scheduleKey: new Date().getTime(),
+  }
+
   static defaultProps = {
     schedule: [],
     onRefresh: () => console.warn('Unpredictable callback from Schedule List'),
   }
 
-  componentDidMount() {
-    if (this.timeline) {
-      this.timeline.startAnimation();
-    }
+  constructor(props) {
+    super(props);
+
+    // here we will store all lessons, after getting their sizes
+    this.lessons = [];
   }
 
-  shouldComponentUpdate() {
+  shouldComponentUpdate(nextProps) {
+    const { active } = nextProps;
+    const { scheduleKey } = this.state;
+
     if (this.timeline) {
-      this.timeline.resetAnimation();
+      if (active) this.timeline.startAnimation();
+      else {
+        this.timeline.resetTimer();
+        this.timeline.resetAnimation();
+      }
+    }
+
+    // dont rerender or update list, if get the same schedule
+    // js cant compare object, so we compare custom key parameter
+    if (nextProps.scheduleKey !== scheduleKey) {
+      this.lessons = [];
+      this.setState({ scheduleKey: nextProps.scheduleKey });
     }
 
     return true;
   }
 
-  componentDidUpdate() {
-    const { active } = this.props;
-    if (this.timeline && active) {
-      this.timeline.startAnimation();
+  watchForLessonsSizes(lessons, index) {
+    const { schedule } = this.props;
+    let concatedLessons = [];
+    this.lessons[index] = lessons;
+    const len = schedule.length;
+
+    for (let i = 0; i < len; i += 1) {
+      if (!this.lessons[i]) return;
+    }
+
+    for (let i = 0; i < len; i += 1) {
+      concatedLessons = concatedLessons.concat(this.lessons[i]);
+    }
+
+    if (this.timeline) {
+      this.timeline.updateData(schedule[0].date, schedule[len - 1].date, concatedLessons);
     }
   }
 
@@ -49,10 +80,16 @@ class Schedule extends Component {
   }
 
   renderSchedule(schedule) {
-    const { themedStyle, active } = this.props;
+    const { themedStyle, active, scheduleKey } = this.props;
 
-    const body = schedule.map((day) => (
-      <Day key={day.date} day={day} />
+    const body = schedule.map((day, dayIndex) => (
+      <Day
+        key={day.date}
+        index={dayIndex}
+        day={day}
+        scheduleKey={scheduleKey}
+        watchDays={(lessons, index) => this.watchForLessonsSizes(lessons, index)}
+      />
     ));
 
     return (
@@ -63,7 +100,7 @@ class Schedule extends Component {
           active={active}
           activeColor={themedStyle.colors.active}
           inactiveColor={themedStyle.colors.inactive}
-          ref={(node) => this.timeline = node}
+          ref={(node) => { this.timeline = node; }}
         />
         <View style={themedStyle.days}>
           { body }

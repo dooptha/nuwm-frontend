@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  VERSION: '1.0.0',
+  VERSION: '1.0.1',
   API_ENDPOINT: 'https://api.dooptha.com',
   SOCKET_IO_ENDPOINT: 'https://api.dooptha.com/flood',
   INITIAL_ROUTE_NAME: 'Timetable', /* [Timetable, Conversations, Settings] */
@@ -29,4 +29,9 @@ export default {
 
   MAXIMUM_CHARS_IN_MESSAGE: 500,
   MAX_USERNAME_LENGTH: 30,
+
+  // 604800000 = every 7 days
+  UPDATE_AUTOCOMPLETE_GROUPS_TIMER: 604800000,
+  // 604800000 = every 7 days
+  UPDATE_AUTOCOMPLETE_TEACHERS_TIMER: 604800000,
 };

@@ -17,7 +17,8 @@ import { AvoidKeyboard } from '../../../components/common';
 import { StateContext } from '../../../utils/context';
 import I18n from '../../../utils/i18n';
 import { CirclePlusIcon, CircleMinusIcon } from '../../../assets/icons';
-import api from '../../../api/poll';
+import pollApi from '../../../api/poll';
+import chatApi from '../../../api/conversation';
 
 export class NewPoll extends Component {
   constructor(props) {
@@ -63,6 +64,23 @@ export class NewPoll extends Component {
         },
         {
           text: I18n.t('admin.poll.close.cancel'),
+          style: 'cancel',
+        },
+      ],
+    );
+  }
+
+  onClearChatButtonPress() {
+    Alert.alert(
+      I18n.t('admin.clearChat.title'),
+      I18n.t('admin.clearChat.description'),
+      [
+        {
+          text: I18n.t('admin.clearChat.confirm'),
+          onPress: () => this.clearChat(),
+        },
+        {
+          text: I18n.t('admin.clearChat.cancel'),
           style: 'cancel',
         },
       ],
@@ -135,7 +153,7 @@ export class NewPoll extends Component {
     const { question, options } = this.state;
     const { navigation } = this.props;
 
-    api.createPoll(dispatch, {
+    pollApi.createPoll(dispatch, {
       question,
       options,
     }).then(() => navigation.goBack());
@@ -145,7 +163,14 @@ export class NewPoll extends Component {
     const [, dispatch] = this.context;
     const { navigation } = this.props;
 
-    api.closeLastPoll(dispatch)
+    pollApi.closeLastPoll(dispatch)
+      .then(() => navigation.goBack());
+  }
+
+  clearChat() {
+    const { navigation } = this.props;
+
+    chatApi.clearChat()
       .then(() => navigation.goBack());
   }
 
@@ -244,6 +269,15 @@ export class NewPoll extends Component {
               {I18n.t('admin.poll.close.title')}
             </Button>
           </View>
+          <View style={themedStyle.clearChatButtonContainer}>
+            <Button
+              status="danger"
+              appearance="ghost"
+              onPress={() => this.onClearChatButtonPress()}
+            >
+              {I18n.t('admin.clearChat.title')}
+            </Button>
+          </View>
         </ScrollView>
       </AvoidKeyboard>
     );
@@ -303,6 +337,7 @@ export default withStyles(NewPoll, (theme) => ({
   },
   submitButtonContainer: {
     marginTop: 50,
+    marginBottom: 10,
     paddingVertical: 5,
     backgroundColor: theme['background-basic-color-1'],
     borderTopWidth: 1,
@@ -311,7 +346,16 @@ export default withStyles(NewPoll, (theme) => ({
     borderBottomColor: theme['background-basic-color-3'],
   },
   deleteButtonContainer: {
-    marginTop: 50,
+    marginVertical: 10,
+    paddingVertical: 5,
+    backgroundColor: theme['background-basic-color-1'],
+    borderTopWidth: 1,
+    borderTopColor: theme['background-basic-color-3'],
+    borderBottomWidth: 1,
+    borderBottomColor: theme['background-basic-color-3'],
+  },
+  clearChatButtonContainer: {
+    marginTop: 10,
     marginBottom: 50,
     paddingVertical: 5,
     backgroundColor: theme['background-basic-color-1'],

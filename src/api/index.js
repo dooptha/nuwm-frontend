@@ -3,14 +3,14 @@ import config from '../../config';
 
 
 /* eslint-disable */
-if (__DEV__) {
-  // Parse all network request to the chrome dev tools
-  const _XHR = GLOBAL.originalXMLHttpRequest ?
-      GLOBAL.originalXMLHttpRequest :
-      GLOBAL.XMLHttpRequest
-
-  XMLHttpRequest = _XHR
-}
+// if (__DEV__) {
+//   // Parse all network request to the chrome dev tools
+//   const _XHR = GLOBAL.originalXMLHttpRequest ?
+//       GLOBAL.originalXMLHttpRequest :
+//       GLOBAL.XMLHttpRequest
+//
+//   XMLHttpRequest = _XHR
+// }
 /* eslint-enable */
 
 

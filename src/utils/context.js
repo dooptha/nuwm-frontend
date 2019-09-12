@@ -9,7 +9,6 @@ import {
   DEFAULT_PROPERTIES,
 } from './properties';
 import { setLocale } from './i18n';
-import { initSockets } from '../api/socket';
 import { getObject } from './storage';
 import config from '../../config';
 import mainReducer from '../reducers';
@@ -61,14 +60,20 @@ export const loadInitialData = async (dispatch) => {
   const [properties, user, deviceId] = await Promise.all([
     getProperties(config.USE_DEFAULT_PROPERTIES),
     getObject('user'),
-    DeviceInfo.getUniqueID(),
+    DeviceInfo.getUniqueId(),
   ]);
 
   setLocale(properties.language);
-  dispatch({ type: 'loadProperties', properties });
+  dispatch({
+    type: 'loadProperties',
+    properties,
+  });
 
   if (user) {
-    dispatch({ type: 'updateUser', user });
+    dispatch({
+      type: 'updateUser',
+      user,
+    });
 
     // Set auth headers for api requests
     setAuthHeaders(user.token);
@@ -82,10 +87,25 @@ export const loadInitialData = async (dispatch) => {
     });
   }
 
-  dispatch({ type: 'updateDeviceId', deviceId });
+  dispatch({
+    type: 'updateDeviceId',
+    deviceId,
+  });
 
-  // Fetch groupds list for autocomplete
-  timetableApi.getGroups(dispatch);
+  const {
+    autocompleteGroups,
+    autocompleteTeachers,
+  } = properties;
+
+  // Update autocomplete groups if needed
+  if (Date.now() - autocompleteGroups.lastUpdated >= config.UPDATE_AUTOCOMPLETE_GROUPS_TIMER) {
+    timetableApi.getGroups(dispatch);
+  }
+
+  // Update autocomplete teachers if needed
+  if (Date.now() - autocompleteTeachers.lastUpdated >= config.UPDATE_AUTOCOMPLETE_TEACHERS_TIMER) {
+    timetableApi.getTeachers(dispatch);
+  }
 
   return user;
 };

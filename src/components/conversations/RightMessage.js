@@ -12,21 +12,6 @@ import { CirclesLoader } from 'react-native-indicator';
 import { DoneAllOutlineIcon } from '../../assets/icons';
 
 class Message extends Component {
-  constructor(props) {
-    super(props);
-
-    this.onPress = this.onPress.bind(this);
-  }
-
-  onPress() {
-    const {
-      message,
-      onMessagePress,
-    } = this.props;
-
-    onMessagePress(message);
-  }
-
   getCloudStyle() {
     const {
       messagePosition,
@@ -97,7 +82,8 @@ class Message extends Component {
 
     return (
       <View style={themedStyle.container}>
-        <TouchableWithoutFeedback onPress={this.onPress}>
+        {/* TouchableWithoutFeedback */}
+        <View>
           <View style={themedStyle.messageContainer}>
             <View style={themedStyle.cloudContainer}>
               <View style={this.getCloudStyle()}>
@@ -116,7 +102,7 @@ class Message extends Component {
             </View>
             {this.renderTriangle()}
           </View>
-        </TouchableWithoutFeedback>
+        </View>
       </View>
     );
   }

@@ -12,7 +12,6 @@ import {
 } from '../../../assets/icons';
 import { StateContext } from '../../../utils/context';
 import I18n from '../../../utils/i18n';
-import api from '../../../api/user';
 import socket from '../../../api/socket';
 import config from '../../../../config';
 import SafeAreaView from '../../../navigation/components/SafeAreaView';
@@ -27,7 +26,6 @@ class Conversation extends Component {
 
     this.onNewMessageChange = this.onNewMessageChange.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
-    this.onMessagePress = this.onMessagePress.bind(this);
   }
 
   componentDidMount() {
@@ -42,35 +40,10 @@ class Conversation extends Component {
     });
   }
 
-  onMessagePress(message) {
-    const [{ user }] = this.context;
-    const { role } = user.current;
-
-    if (role === 'admin' || role === 'moderator') {
-      Alert.alert(
-        I18n.t('admin.deleteMessage'),
-        message.body,
-        [
-          {
-            text: I18n.t('admin.yes'),
-            onPress: () => this.deleteMessage(message),
-          },
-          {
-            text: I18n.t('admin.no'),
-            style: 'cancel',
-          },
-        ],
-      );
-    }
-  }
-
-  deleteMessage(message) {
-    api.deleteMessage(message);
-  }
-
   sendMessage() {
     const { newMessage } = this.state;
     const [{ user }, dispatch] = this.context;
+    const { _id, username, role } = user.current;
 
     if (newMessage.length < 1 || newMessage.length > config.MAXIMUM_CHARS_IN_MESSAGE) return false;
 
@@ -78,8 +51,9 @@ class Conversation extends Component {
       body: newMessage,
       date: new Date(),
       sender: {
-        id: user.current._id,
-        username: user.current.username,
+        id: _id,
+        username,
+        role,
       },
     };
 
@@ -135,7 +109,6 @@ class Conversation extends Component {
           <Chat
             style={themedStyle.chatContainer}
             data={conversations.messages}
-            onMessagePress={this.onMessagePress}
             current={user.current}
           />
           <View style={themedStyle.inputContainer}>

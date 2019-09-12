@@ -9,6 +9,6 @@ module.exports = {
   },
   setupFilesAfterEnv: ['<rootDir>/tests/setup.js'],
   transformIgnorePatterns: ['node_modules/(?!(jest-)?react-native)'],
-  testPathIgnorePatterns: ['<rootDir>/tests'],
+  testPathIgnorePatterns: ['<rootDir>/tests/containers', '<rootDir>/tests/components'],
   collectCoverageFrom: ["src/**/*.js"]
 };

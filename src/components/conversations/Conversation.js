@@ -27,7 +27,7 @@ class Conversation extends Component {
   }
 
   renderListItem(info) {
-    const { onMessagePress, current, data } = this.props;
+    const { current, data } = this.props;
     const message = info.item;
 
     if (!message) return null;
@@ -52,7 +52,6 @@ class Conversation extends Component {
       <Message
         index={message.id}
         message={message}
-        onMessagePress={onMessagePress}
         current={current}
         messagePosition={messagePosition}
       />

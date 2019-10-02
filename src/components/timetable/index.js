@@ -55,7 +55,7 @@ const heightValues = {
 
 const rotateValues = {
   inputRange: [0, 180],
-  outputRange: ['0deg', '100deg'],
+  outputRange: ['0deg', '180deg'],
 };
 
 const Subject = (props) => {

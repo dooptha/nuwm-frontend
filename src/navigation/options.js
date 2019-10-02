@@ -45,20 +45,7 @@ const SheduleTopNavigationParams = {
     const { routeName } = getCurrentRouteState(navigation);
     const index = getCurrentRouteIndex(navigation);
 
-    return (
-      <StateContext.Consumer>
-        {
-          ([{ app }]) => (
-            <TopNavigationBar
-              title={I18n.t(`routes.${routeName}`)}
-              backIcon={backIconIfNeeded(index)}
-              onBackPress={() => navigation.goBack(null)}
-              connected={app.connected}
-            />
-          )
-        }
-      </StateContext.Consumer>
-    );
+    return null;
   },
 };
 

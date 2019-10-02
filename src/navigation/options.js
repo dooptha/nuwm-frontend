@@ -11,13 +11,14 @@ import {
 } from './util';
 import I18n from '../utils/i18n';
 import { StateContext } from '../utils/context';
+import EmptyTopNavigationBar from './components/EmptyTopNavigationBar';
 
 const backIconIfNeeded = (index) => (
   isRootRoute(index)
     ? ArrowIosBackFill : null
 );
 
-const MenuTopNavigationParams = {
+export const MenuNavigationOptions = {
   header: ({ navigation }) => {
     const { routeName } = getCurrentRouteState(navigation);
     const index = getCurrentRouteIndex(navigation);
@@ -40,29 +41,7 @@ const MenuTopNavigationParams = {
   },
 };
 
-const SheduleTopNavigationParams = {
-  header: ({ navigation }) => {
-    const { routeName } = getCurrentRouteState(navigation);
-    const index = getCurrentRouteIndex(navigation);
-
-    return (
-      <StateContext.Consumer>
-        {
-          ([{ app }]) => (
-            <TopNavigationBar
-              title={I18n.t(`routes.${routeName}`)}
-              backIcon={backIconIfNeeded(index)}
-              onBackPress={() => navigation.goBack(null)}
-              connected={app.connected}
-            />
-          )
-        }
-      </StateContext.Consumer>
-    );
-  },
-};
-
-const UserSettingsNavigationParams = {
+export const UserSettingsNavigationOptions = {
   header: ({ navigation }) => {
     const { routeName } = getCurrentRouteState(navigation);
     const index = getCurrentRouteIndex(navigation);
@@ -87,7 +66,7 @@ const UserSettingsNavigationParams = {
   },
 };
 
-const TimetableSettingsNavigationParams = {
+export const TimetableSettingsNavigationOptions = {
   header: ({ navigation }) => {
     const { routeName } = getCurrentRouteState(navigation);
     const index = getCurrentRouteIndex(navigation);
@@ -112,7 +91,7 @@ const TimetableSettingsNavigationParams = {
   },
 };
 
-const WebViewNavigationParams = {
+export const WebViewNavigationOptions = {
   header: ({ navigation }) => {
     const route = navigation.state.routes[2]
       || navigation.state.routes[1];
@@ -132,22 +111,6 @@ const WebViewNavigationParams = {
   },
 };
 
-export const WebViewNavigationOptions = {
-  ...WebViewNavigationParams,
-};
-
-export const MenuNavigationOptions = {
-  ...MenuTopNavigationParams,
-};
-
-export const SheduleNavigationOptions = {
-  ...SheduleTopNavigationParams,
-};
-
-export const UserSettingsNavigationOptions = {
-  ...UserSettingsNavigationParams,
-};
-
-export const TimetableSettingsNavigationOptions = {
-  ...TimetableSettingsNavigationParams,
-};
+export const NoHeaderNavigationOptions = (themeBackgroundColor) => ({
+  header: () => <EmptyTopNavigationBar themeBackgroundColor={themeBackgroundColor} />,
+});

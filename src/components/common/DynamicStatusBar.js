@@ -36,10 +36,7 @@ class DynamicStatusBar extends Component {
 
 export default withStyles(DynamicStatusBar, (theme) => ({
   container: {
-    backgroundColor: theme['background-basic-color-1'],
-    height: Platform.select({
-      ios: 10,
-      android: 0,
-    }),
+    backgroundColor: theme['background-basic-color-2'],
+    height: 0,
   },
 }));

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   View,
-  Alert,
   Platform,
 } from 'react-native';
 import { withStyles, Input, Button } from 'react-native-ui-kitten';
@@ -19,18 +18,14 @@ import SafeAreaView from '../../../navigation/components/SafeAreaView';
 class Conversation extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      newMessage: '',
-    };
-
+    this.state = { newMessage: '' };
+    this.chatRef = React.createRef();
     this.onNewMessageChange = this.onNewMessageChange.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
   }
 
   componentDidMount() {
     const [, dispatch] = this.context;
-
     dispatch({ type: 'readMessages' });
   }
 
@@ -63,9 +58,8 @@ class Conversation extends Component {
     });
 
     socket.emit('message:send', message);
-
     this.setState({ newMessage: '' });
-
+    this.chatRef.current.scrollToLastMessage();
     return true;
   }
 
@@ -95,10 +89,14 @@ class Conversation extends Component {
     const { newMessage } = this.state;
     const [{ conversations, user }] = this.context;
     const { themedStyle } = this.props;
+    const forceInset = {
+      top: 'never',
+      bottom: 'always',
+    };
 
     return (
       <SafeAreaView
-        forceInset={{ top: 'never', bottom: 'always' }}
+        forceInset={forceInset}
         style={themedStyle.container}
       >
         <AvoidKeyboard
@@ -107,14 +105,15 @@ class Conversation extends Component {
           offset={this.keyboardOffset}
         >
           <Chat
+            ref={this.chatRef}
             style={themedStyle.chatContainer}
-            data={conversations.messages}
+            data={conversations.messages.slice()
+              .reverse()}
             current={user.current}
           />
           <View style={themedStyle.inputContainer}>
             <Input
               style={themedStyle.messageInput}
-              textStyle={themedStyle.text}
               size="small"
               multiline
               value={newMessage}
@@ -151,8 +150,6 @@ export default withStyles(Conversation, (theme) => ({
     justifyContent: 'space-between',
     backgroundColor: theme['background-basic-color-2'],
   },
-  addMessageButtonIcon: {
-  },
   addMessageButton: {
     alignItems: 'center',
     width: 24,
@@ -165,8 +162,5 @@ export default withStyles(Conversation, (theme) => ({
     marginRight: 5,
     backgroundColor: theme['background-basic-color-1'],
     borderRadius: 24,
-  },
-  text: {
-    fontFamily: 'Roboto',
   },
 }));

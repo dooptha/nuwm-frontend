@@ -171,7 +171,6 @@ dependencies {
     implementation project(':rollbar-react-native')
     implementation project(':react-native-sound')
     implementation project(':react-native-exception-handler')
-    implementation project(':react-native-device-info')
     implementation project(':react-native-linear-gradient')
     implementation project(':react-native-webview')
     implementation project(':@react-native-community_async-storage')

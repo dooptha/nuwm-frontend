@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import * as Animatable from 'react-native-animatable';
 import { View, Text, Animated, Easing, ScrollView, TouchableOpacity, PanResponder, Dimensions } from 'react-native';
-import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 import DatePicker from 'rn-lightweight-date-picker';
 import { ArrowUpIcon } from '../../assets/icons';
 
 const linesColor = '#e0e0e0';
 const calendarMinSize = 0.85, calendarMaxSize = 1;
-const scheduleMinHeight = 0.45, scheduleMaxHeight = 0.97;
-const minSpeedToForce = 2;
+const scheduleMaxHeight = 0.93;
+const minSpeedToForce = 1.5;
+let scheduleMinHeight = 0.45;
+let minimized = true;
 
 const styles = {
   wrapper: {
@@ -21,7 +22,6 @@ const styles = {
     top: 0,
     selfAling: 'flex-start',
     position: 'absolute',
-    height: '70%',
     width: '100%',
     backgroundColor: 'white',
   },
@@ -54,8 +54,8 @@ const heightValues = {
 };
 
 const rotateValues = {
-  inputRange: [0, 180],
-  outputRange: ['0deg', '180deg'],
+  inputRange: [0, 360],
+  outputRange: ['0deg', '360deg'],
 };
 
 const Subject = (props) => {
@@ -83,10 +83,9 @@ const Subject = (props) => {
 };
 
 const Date = (props) => {
-
   return (
-    <View style={[{ borderBottomColor: linesColor, borderBottomWidth: 0.5, marginLeft: 20, paddingBottom: 13, paddingTop: 13 }, props.first ? {} : { borderTopColor: linesColor, borderTopWidth: 0.5 }]}>
-      <Text style={{ color: '#9c9a9a' }}>{ "Friday, " + props.d + " September" }</Text>
+    <View style={[{ borderBottomColor: linesColor, borderBottomWidth: 0.5, marginLeft: 20, paddingBottom: 13, }, props.first ? {} : { borderTopColor: linesColor, borderTopWidth: 0.5, paddingTop: 13 }]}>
+      <Text style={{ color: '#9c9a9a' }}>{ "sFriday, " + props.d + " September" }</Text>
     </View>
   )
 };
@@ -112,6 +111,9 @@ const List = (props = { count: 0, d: 1 }) => {
 const screenHeight = Dimensions.get('window').height;
 const swipeHeight = 0;
 
+let wrapperHeight = 1;
+let calendarHeight = 1;
+
 const Timetable = () => {
 
   const [isMinimized, setMinimized] = useState(false);
@@ -126,7 +128,7 @@ const Timetable = () => {
 
     const speed = Math.abs(value - height) / (scheduleMaxHeight - scheduleMinHeight) * 350;
 
-    console.log(speed)
+    minimized = value === scheduleMinHeight;
 
     Animated.timing(
       animatedHeight,
@@ -148,7 +150,7 @@ const Timetable = () => {
       Animated.timing(
         flip,
         {
-          toValue: 360,
+          toValue: 180,
           duration: 500,
         },
       ).start();
@@ -166,10 +168,10 @@ const Timetable = () => {
   const [panResponder, setPanResponder] = useState(
     PanResponder.create({
       onStartShouldSetPanResponder: (evt, gestureState) => true,
-      onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
-      onMoveShouldSetPanResponder: (evt, gestureState) => true,
-      onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
-
+      onMoveShouldSetPanResponder: (evt, gestureState) => {
+        const {dx, dy} = gestureState;
+        return (Math.abs(dx) > 10) || (Math.abs(dy) > 10);
+      },
       onPanResponderGrant: (evt, gestureState) => {
         console.log('start');
         swipping = true;
@@ -229,14 +231,30 @@ const Timetable = () => {
     setDate(parseInt(d));
   };
 
+  const pressed = () => {
+    console.log('pressed')
+    if (minimized) {
+      animate(scheduleMaxHeight, scheduleMinHeight);
+    } else {
+      animate(scheduleMinHeight, scheduleMaxHeight);
+    }
+  };
+
   return (
-    <View style={styles.wrapper}>
-      <Animated.View style={[styles.calendar, { transform: [{ scale: animatedScaleX }] }]}>
-        <DatePicker onDateChange={onDate} format="d" mode="single" />
+    <View style={styles.wrapper} onLayout={(event) => { wrapperHeight = event.nativeEvent.layout.height; console.log(calendarHeight, wrapperHeight); animatedHeight.setValue(1 - calendarHeight / wrapperHeight); console.log((1 - calendarHeight / wrapperHeight) + "%"); scheduleMinHeight = 1 - calendarHeight / wrapperHeight; }}>
+      <Animated.View style={[styles.calendar, {  transform: [{ scale: animatedScaleX }] }]} onLayout={(event) => { calendarHeight = event.nativeEvent.layout.height; console.log(calendarHeight, wrapperHeight); animatedHeight.setValue(1 - calendarHeight / wrapperHeight); console.log((1 - calendarHeight / wrapperHeight) + "%"); scheduleMinHeight = 1 - calendarHeight / wrapperHeight; }}>
+        <DatePicker
+          onDateChange={onDate}
+          format="d"
+          mode="single"
+          showControls={false}
+          rowHeight={25}
+          rowPadding={5}
+        />
       </Animated.View>
       <Animated.View style={[styles.schedule, { height: animatedHeight.interpolate(heightValues) }]}>
         <View {...panResponder.panHandlers}>
-          <TouchableOpacity style={{ marginTop: 5, height: 30, alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
+          <TouchableOpacity onPress={() => pressed()} style={{ marginBottom: 13, marginTop: 5, height: 30, alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
             <Animated.View style={{ transform: [{ rotateX: flip.interpolate(rotateValues) }] }}>
               { ArrowUpIcon({ width: 40, height: 15, tintColor: linesColor }) }
             </Animated.View>

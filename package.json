@@ -41,7 +41,7 @@
     "react-native-ui-kitten": "^4.1.0",
     "react-native-webview": ">=7.0.1",
     "react-navigation": "^3.11.0",
-    "rn-lightweight-date-picker": "^1.0.1",
+    "rn-lightweight-date-picker": "1.1.0",
     "rollbar-react-native": "^0.5.0",
     "socket.io-client": "^2.2.0",
     "ws": ">=3.3.1"

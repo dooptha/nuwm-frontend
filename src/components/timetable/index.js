@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import * as Animatable from 'react-native-animatable';
 import { View, Text, Animated, Easing, ScrollView, TouchableOpacity, PanResponder, Dimensions } from 'react-native';
 import DatePicker from 'rn-lightweight-date-picker';
-import { ArrowUpIcon } from '../../assets/icons';
+import { ArrowUpIcon, settingsIcon } from '../../assets/icons';
 
 const linesColor = '#e0e0e0';
 const calendarMinSize = 0.85, calendarMaxSize = 1;
-const scheduleMaxHeight = 0.93;
+const scheduleMaxHeight = 0.97;
 const minSpeedToForce = 1.5;
 let scheduleMinHeight = 0.45;
 let minimized = true;
 
-const back = '#cae9f8';
+const back = '#F7F9FC';
 
 const styles = {
   wrapper: {
@@ -38,8 +38,8 @@ const styles = {
       width: 0,
       height: 0,
     },
-    shadowRadius: 5,
-    shadowOpacity: 0.3,
+    shadowRadius: 10,
+    shadowOpacity: 0.2,
   },
 };
 
@@ -242,6 +242,10 @@ const Timetable = () => {
     }
   };
 
+  const openSettings = () => {
+
+  };
+
   return (
     <View style={styles.wrapper} onLayout={(event) => { wrapperHeight = event.nativeEvent.layout.height; console.log(calendarHeight, wrapperHeight); animatedHeight.setValue(1 - calendarHeight / wrapperHeight); console.log((1 - calendarHeight / wrapperHeight) + "%"); scheduleMinHeight = 1 - calendarHeight / wrapperHeight; }}>
       <Animated.View style={[styles.calendar, {  transform: [{ scale: animatedScaleX }] }]} onLayout={(event) => { calendarHeight = event.nativeEvent.layout.height; console.log(calendarHeight, wrapperHeight); animatedHeight.setValue(1 - calendarHeight / wrapperHeight); console.log((1 - calendarHeight / wrapperHeight) + "%"); scheduleMinHeight = 1 - calendarHeight / wrapperHeight; }}>
@@ -252,10 +256,26 @@ const Timetable = () => {
           showControls={false}
           rowHeight={25}
           rowPadding={5}
+          titleFadeDuration={500}
           userColors={{
             wrapper: back
           }}
+          userStyles={{
+            topBar: {
+              justifyContent: 'flex-start',
+            },
+            head: {
+              flexDirection: 'row-reverse',
+            },
+            title: {
+              marginRight: 15,
+              paddingBottom: 5,
+            }
+          }}
         />
+        <TouchableOpacity onPress={() => openSettings()} style={{ position: 'absolute', right: 20, top: 18 }}>
+          { settingsIcon({ width: 30, height: 30, tintColor: '#53628c' }) }
+        </TouchableOpacity>
       </Animated.View>
       <Animated.View style={[styles.schedule, { height: animatedHeight.interpolate(heightValues) }]}>
         <View {...panResponder.panHandlers}>

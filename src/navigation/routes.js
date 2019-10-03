@@ -24,10 +24,10 @@ import {
 } from '../containers/conversations';
 import {
   MenuNavigationOptions,
-  SheduleNavigationOptions,
   UserSettingsNavigationOptions,
   TimetableSettingsNavigationOptions,
   WebViewNavigationOptions,
+  NoHeaderNavigationOptions,
 } from './options';
 import Schedule from '../components/timetable';
 import DetailedLesson from '../components/timetable/LessonScreen';
@@ -81,26 +81,26 @@ const SettingsNavigationMap = {
   },
 };
 
-const ConversationsNavigationMap = {
-  Conversation: {
-    screen: Conversation,
-    navigationOptions: MenuNavigationOptions,
-  },
-};
-
 const TimetableNavigator = createStackNavigator(
   {
     Timetable: Schedule,
   }, {
-    defaultNavigationOptions: SheduleNavigationOptions,
+    defaultNavigationOptions: NoHeaderNavigationOptions('background-basic-color-2'),
   },
 );
+
+const ConversationsNavigationMap = {
+  Conversation: {
+    screen: Conversation,
+    navigationOptions: NoHeaderNavigationOptions('background-basic-color-3'),
+  },
+};
 
 const ConversationsNavigator = createStackNavigator(
   {
     Conversations: ConversationsContainer,
   }, {
-    defaultNavigationOptions: MenuNavigationOptions,
+    defaultNavigationOptions: NoHeaderNavigationOptions('background-basic-color-2'),
   },
 );
 

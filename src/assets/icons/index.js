@@ -5,13 +5,23 @@ import {
   CircleIcon,
 } from './icon.component';
 
+
+
+export const settingsIcon = (style) => {
+  const source = {
+    imageSource: require('./eva/settings-2-outline.png'),
+  };
+
+  return Icon(source, style);
+};
+
 export const ArrowUpIcon = (style) => {
   const source = {
     imageSource: require('./eva/arrow-ios-upward-outline.png'),
   };
 
   return Icon(source, style);
-}
+};
 
 export const ArrowheadUpIcon = (style) => {
   const source = {

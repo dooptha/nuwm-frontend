@@ -9,6 +9,7 @@ const calendarMinSize = 0.85, calendarMaxSize = 1;
 const scheduleMaxHeight = 0.97;
 const minSpeedToForce = 1.5;
 let scheduleMinHeight = 0.45;
+
 let minimized = true;
 
 const back = '#F7F9FC';
@@ -110,6 +111,12 @@ const List = (props = { count: 0, d: 1 }) => {
   );
 };
 
+const Forms = () => {
+  return(
+    <Text>Settings should be here, but for some reason not exists</Text>
+  );
+};
+
 const screenHeight = Dimensions.get('window').height;
 const swipeHeight = 0;
 
@@ -123,6 +130,7 @@ const Timetable = () => {
   const [animatedScaleX, setAnimatedScaleX] = useState(new Animated.Value(1));
   const [date, setDate] = useState(1);
   const [flip, setFlip] = useState(new Animated.Value(1));
+  const [settingsOpened, setSettingsOpened] = useState(false);
 
   let swipping = false;
 
@@ -243,7 +251,7 @@ const Timetable = () => {
   };
 
   const openSettings = () => {
-
+    setSettingsOpened(!settingsOpened);
   };
 
   return (
@@ -274,7 +282,7 @@ const Timetable = () => {
           }}
         />
         <TouchableOpacity onPress={() => openSettings()} style={{ position: 'absolute', right: 20, top: 18 }}>
-          { settingsIcon({ width: 30, height: 30, tintColor: '#53628c' }) }
+          { settingsIcon({ width: 30, height: 30, tintColor: '#10245c' }) }
         </TouchableOpacity>
       </Animated.View>
       <Animated.View style={[styles.schedule, { height: animatedHeight.interpolate(heightValues) }]}>
@@ -285,10 +293,12 @@ const Timetable = () => {
             </Animated.View>
           </TouchableOpacity>
         </View>
-        <ScrollView>
-          <List count={20} d={date} first />
-          <List count={20} d={date + 1} />
-        </ScrollView>
+        {settingsOpened ? <Forms /> :
+          <ScrollView>
+            <List count={20} d={date} first />
+            <List count={20} d={date + 1} />
+          </ScrollView>
+        }
       </Animated.View>
     </View>
   )

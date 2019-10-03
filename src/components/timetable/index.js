@@ -11,12 +11,14 @@ const minSpeedToForce = 1.5;
 let scheduleMinHeight = 0.45;
 let minimized = true;
 
+const back = '#cae9f8';
+
 const styles = {
   wrapper: {
     height: '100%',
     flexDirection: 'column',
     justifyContent: 'flex-end',
-    backgroundColor: 'white',
+    backgroundColor: back,
   },
   calendar: {
     top: 0,
@@ -250,6 +252,9 @@ const Timetable = () => {
           showControls={false}
           rowHeight={25}
           rowPadding={5}
+          userColors={{
+            wrapper: back
+          }}
         />
       </Animated.View>
       <Animated.View style={[styles.schedule, { height: animatedHeight.interpolate(heightValues) }]}>

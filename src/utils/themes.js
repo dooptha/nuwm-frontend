@@ -79,3 +79,9 @@ export const customMapping = {
     },
   },
 };
+
+// Parse color as #111111 from kitten theme object
+export const getColorFromTheme = (color, theme) => {
+  const str = theme[color];
+  return str.charAt(0) === '$' ? theme[str.slice(1)] : str;
+};

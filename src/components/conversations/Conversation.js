@@ -1,41 +1,29 @@
 import React, { Component } from 'react';
-import {
-  List,
-} from 'react-native-ui-kitten';
+import { List } from 'react-native-ui-kitten';
 import Message from './Message';
 
 class Conversation extends Component {
   constructor(props) {
     super(props);
-
     this.listRef = React.createRef();
-    this.scrollToLastMessageTimeout = null;
-  }
-
-  componentWillUnmount() {
-    if (this.scrollToLastMessageTimeout) {
-      clearTimeout(this.scrollToLastMessageTimeout);
-    }
-  }
-
-  onListContentSizeChange() {
-    this.scrollToLastMessageTimeout = setTimeout(() => this.scrollToLastMessage(), 0);
+    this.renderItem = this.renderItem.bind(this);
   }
 
   scrollToLastMessage() {
-    this.listRef.current.scrollToEnd({ animated: false });
+    this.listRef.current.scrollToIndex({
+      index: 0,
+      animated: false,
+    });
   }
 
-  renderListItem(info) {
+  renderItem({ item, index }) {
+    if (!item) return null;
+
     const { current, data } = this.props;
-    const message = info.item;
-
-    if (!message) return null;
-
-    const prevMessage = data[info.index - 1];
-    const nextMessage = data[info.index + 1];
-    const prevSender = prevMessage && (message.sender.id === prevMessage.sender.id);
-    const nextSender = nextMessage && (message.sender.id === nextMessage.sender.id);
+    const prevMessage = data[index + 1];
+    const nextMessage = data[index - 1];
+    const prevSender = prevMessage && (item.sender.id === prevMessage.sender.id);
+    const nextSender = nextMessage && (item.sender.id === nextMessage.sender.id);
     let messagePosition = 'solo';
 
     if (nextSender) {
@@ -50,8 +38,8 @@ class Conversation extends Component {
 
     return (
       <Message
-        index={message.id}
-        message={message}
+        index={item.id}
+        message={item}
         current={current}
         messagePosition={messagePosition}
       />
@@ -65,9 +53,9 @@ class Conversation extends Component {
       <List
         style={style}
         ref={this.listRef}
-        onContentSizeChange={() => this.onListContentSizeChange()}
         data={data}
-        renderItem={(info) => this.renderListItem(info)}
+        renderItem={this.renderItem}
+        inverted
       />
     );
   }

@@ -52,7 +52,7 @@ const Poll = ({
     <View style={[themedStyle.container, styles.container]}>
       {renderExitButton()}
       <Text
-        category="h3"
+        category="p1"
         style={[themedStyle.question, styles.question]}
       >
         {question}

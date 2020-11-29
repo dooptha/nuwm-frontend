@@ -65,14 +65,14 @@ export const customMapping = {
         default: {
           mapping: {
             borderWidth: 2,
-            backgroundColor: 'color-warning-400',
-            borderColor: 'white',
-            state: {
-              active: {
-                borderColor: 'color-warning-400',
-                outlineBackgroundColor: 'white',
-              },
-            },
+            // backgroundColor: 'color-warning-400',
+            // borderColor: 'white',
+            // state: {
+            //   active: {
+            //     borderColor: 'color-warning-400',
+            //     outlineBackgroundColor: 'white',
+            //   },
+            // },
           },
         },
       },

@@ -31,11 +31,14 @@ const Option = ({
     canVote()
       ? (
         <Radio
-          style={themedStyle.radio}
+          // status="primary"
           onChange={() => onVote(option.id)}
         />
       ) : (
-        <Text style={[styles.text, themedStyle.text]}>
+        <Text
+          style={[styles.text, themedStyle.text]}
+          category="s1"
+        >
           {votes}
         </Text>
       )
@@ -59,7 +62,7 @@ const Option = ({
 
       <View style={themedStyle.textContainer}>
         <Text
-          category="s1"
+          category="p1"
           style={[styles.text, themedStyle.text]}
         >
           {option.value}
@@ -97,9 +100,6 @@ export default withStyles(Option, (theme) => ({
     alignItems: 'flex-end',
     justifyContent: 'center',
   },
-  radio: {
-    color: theme['color-warning-400'],
-  },
   textContainer: {
     flex: 1,
   },
@@ -115,7 +115,7 @@ export default withStyles(Option, (theme) => ({
   progressBar: {
     borderRadius: 5,
     overflow: 'hidden',
-    backgroundColor: theme['text-basic-color'],
+    backgroundColor: theme['color-primary-default'],
   },
   text: {
     fontFamily: 'Roboto',

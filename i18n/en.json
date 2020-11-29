@@ -55,7 +55,10 @@
     "title": "Dooptha"
   },
   "conversations": {
-    "messagePlaceholder": "Type something..."
+    "messagePlaceholder": "Type something...",
+    "poll": "Voting",
+    "events": "Events",
+    "showMore": "Show more"
   },
   "datePicker": {
     "Cancel": "Cancel",
@@ -69,7 +72,7 @@
     "title": "Something happened not as intended"
   },
   "flood": {
-    "description": "Place to connect with other students, only last 50 messages will be saved",
+    "description": "Place to connect with other students",
     "online": "online",
     "title": "Flood"
   },
@@ -129,7 +132,7 @@
     }
   },
   "tabs": {
-    "chat": "Chat",
+    "chat": "Social",
     "settings": "Settings",
     "timetable": "Timetable"
   },

@@ -1,177 +1,181 @@
-import React, { Component } from 'react';
+import React, { useEffect, useContext } from 'react';
 import {
   View,
   ScrollView,
   RefreshControl,
-  Platform,
+  Linking,
+  TouchableOpacity,
 } from 'react-native';
 import {
+  Text,
   withStyles,
 } from 'react-native-ui-kitten';
 import routes from './data';
 import { StateContext } from '../../../utils/context';
-import { FloodCard } from '../../../components/conversations';
+import { SquareFloodCard } from '../../../components/conversations';
 import Poll from '../../../components/polls/Poll';
 import {
-  SmallInstagramCard,
-  SmallTwitterCard,
+  SquareInstagramCard,
+  TelegramCard,
 } from '../../../components/social';
 import { androidUseLayoutAnimations } from '../../../utils/animations';
 import api from '../../../api/poll';
-import IOSWidgetModal from '../../modals/IOSWidgetModal';
+import Carousel from '../../../components/common/Carousel';
+import config from '../../../../config/index';
+import I18n from '../../../utils/i18n';
 
-class ConversationsContainer extends Component {
-  constructor(props) {
-    super(props);
+const ConversationsContainer = ({ navigation, themedStyle: style }) => {
+  const [{
+    poll,
+    app,
+    conversations,
+  }, dispatch] = useContext(StateContext);
 
-    this.initialLoaded = false;
+  const loadData = () => {
+    api.getLastPoll(dispatch);
+  };
 
-    androidUseLayoutAnimations();
-  }
-
-  componentDidMount() {
-    this.loadData()
-      .then(() => { this.initialLoaded = true; });
-  }
-
-  onVote(index) {
-    const [, dispatch] = this.context;
+  const onVote = (index) => {
     api.vote(dispatch, index);
-  }
+  };
 
-  loadData() {
-    const [, dispatch] = this.context;
-    return api.getLastPoll(dispatch);
-  }
+  const openTelegramChat = () => {
+    Linking.openURL(config.TELEGRAM_URL);
+  };
 
-  navigateTo(routeKey) {
+  const navigateTo = (routeKey) => {
     const { routeName, params } = routes[routeKey];
-    const { navigation } = this.props;
 
     navigation.navigate({
       key: 'ConversationsContainer',
       routeName,
       params,
     });
-  }
+  };
 
-  renderIOSWidgetModal() {
-    const { themedStyle } = this.props;
-    const [{ app }, dispatch] = this.context;
+  useEffect(() => {
+    androidUseLayoutAnimations();
+    loadData();
+  }, []);
 
-    return Platform.OS === 'ios' && !(app.properties.IOSWidgetTutorialComplete === 'completed')
-      ? (
-        <View style={themedStyle.shadowBox}>
-          <IOSWidgetModal dispatch={dispatch} />
-        </View>
-      ) : null;
-  }
+  const refresh = (
+    <RefreshControl
+      refreshing={poll.isLoading}
+      onRefresh={loadData}
+    />
+  );
 
-  render() {
-    const { themedStyle } = this.props;
-
-    const [{
-      poll,
-      app,
-      conversations,
-    }, dispatch] = this.context;
-
-    return (
-      <ScrollView
-        style={themedStyle.container}
-        refreshControl={(
-          <RefreshControl
-            refreshing={poll.isLoading && this.initialLoaded}
-            onRefresh={() => this.loadData()}
-          />
+  return (
+    <ScrollView
+      style={style.container}
+      refreshControl={refresh}
+    >
+      <View style={style.pollContainer}>
+        {poll.current && (
+          <Text category="h4">{I18n.t('conversations.poll')}</Text>
         )}
-      >
-        <View style={themedStyle.box}>
-          <Poll
-            style={themedStyle.poll}
-            poll={poll.current}
-            onVote={(i) => this.onVote(i)}
-            votingFor={poll.votingFor}
-            dispatch={dispatch}
-            exitButton
-          />
+        <Poll
+          style={style.poll}
+          poll={poll.current}
+          onVote={onVote}
+          votingFor={poll.votingFor}
+          dispatch={dispatch}
+        />
+      </View>
+      {poll.current && <View style={style.divider}/>}
+      <View style={style.events.container}>
+        <View style={style.events.titles}>
+          <Text category="h4">{I18n.t('conversations.events')}</Text>
+          <TouchableOpacity
+            onPress={() => navigateTo('events')}
+          >
+            <Text style={style.showAllButton}>
+              {I18n.t('conversations.showMore')}
+            </Text>
+          </TouchableOpacity>
         </View>
-        {this.renderIOSWidgetModal()}
-        <View style={themedStyle.shadowBox}>
-          <View style={themedStyle.box}>
-            <FloodCard
-              onlineCounter={app.onlineCounter}
-              unreadCounter={conversations.unreadCounter}
-              navigateToChat={() => this.navigateTo('chat')}
-            />
-          </View>
+        <View style={style.events.content}>
+          <Carousel/>
         </View>
-        <View style={themedStyle.socialContainer}>
-          <View style={themedStyle.instagramContainer}>
-            <SmallInstagramCard onPress={() => this.navigateTo('instagram')} />
-          </View>
-          <View style={themedStyle.twitterContainer}>
-            <SmallTwitterCard onPress={() => this.navigateTo('twitter')} />
-          </View>
-        </View>
-      </ScrollView>
-    );
-  }
-}
-
-ConversationsContainer.contextType = StateContext;
+      </View>
+      <View style={style.divider}/>
+      <View style={style.telegram}>
+        <TelegramCard
+          onPress={openTelegramChat}
+          count={100}
+        />
+      </View>
+      {/*<View style={style.divider}/>*/}
+      {/*<View style={style.row}>*/}
+      {/*  <SquareInstagramCard onPress={() => navigateTo('instagram')}/>*/}
+      {/*  <SquareFloodCard*/}
+      {/*    onlineCounter={app.onlineCounter}*/}
+      {/*    unreadCounter={conversations.unreadCounter}*/}
+      {/*    navigateToChat={() => navigateTo('chat')}*/}
+      {/*  />*/}
+      {/*</View>*/}
+      <View style={style.end}/>
+    </ScrollView>
+  );
+};
 
 export default withStyles(ConversationsContainer, (theme) => ({
   container: {
     backgroundColor: theme['background-basic-color-2'],
     flex: 1,
     paddingTop: 20,
-    paddingLeft: 15,
-    paddingRight: 15,
-
+    paddingHorizontal: 16,
   },
-  box: {
-    borderRadius: 20,
-    overflow: 'hidden',
-    marginBottom: 20,
+  divider: {
+    borderBottomWidth: 1,
+    borderBottomColor: theme['background-basic-color-4'],
+    marginTop: 16,
+    marginHorizontal: 8,
+  },
+  events: {
+    container: {
+      marginTop: 8,
+    },
+    titles: {
+      marginLeft: 8,
+      flexDirection: 'row',
+      alignItems: 'flex-end',
+      justifyContent: 'space-between',
+    },
+    content: {
+      marginTop: 8,
+    },
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  pollContainer: {
+    marginHorizontal: 8,
   },
   poll: {
     container: {
-      backgroundColor: theme['color-warning-400'],
-    },
-    question: {
-      color: 'white',
-    },
-    option: {
-      text: {
-        color: 'white',
-      },
-      progressBar: {
-        backgroundColor: 'white',
-      },
+      backgroundColor: 'none',
+      borderRadius: 16,
+      marginBottom: 16,
+      // marginHorizontal: 8,
+      paddingTop: 8,
+      paddingBottom: 8,
+      paddingLeft: 0,
+      paddingRight: 8,
     },
   },
-  shadowBox: {
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 8,
-    },
-    shadowOpacity: 0.20,
-    shadowRadius: 11.14,
-
-    elevation: 17,
+  telegram: {
+    marginHorizontal: 8,
   },
-  socialContainer: {
-    flexDirection: 'row',
+  showAllButton: {
+    fontSize: 16,
+    color: theme['color-primary-default'],
+    paddingVertical: 4,
+    paddingHorizontal: 8,
   },
-  instagramContainer: {
-    flex: 1,
-    marginBottom: 20,
-    marginRight: 10,
-  },
-  twitterContainer: {
-    flex: 1,
-    marginBottom: 100,
+  end: {
+    height: 64,
   },
 }));

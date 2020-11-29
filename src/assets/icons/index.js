@@ -228,3 +228,12 @@ export const SearchIcon = (style) => {
 
   return Icon(source, style);
 }
+
+export const TelegramIcon = (style) => {
+  const source = {
+    imageSource: require('./telegram.png'),
+  };
+
+  return Icon(source, style);
+};
+

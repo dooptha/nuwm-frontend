@@ -55,7 +55,10 @@
     "title": "Dooptha"
   },
   "conversations": {
-    "messagePlaceholder": "Повідомлення..."
+    "messagePlaceholder": "Повідомлення...",
+    "poll": "Голоcування",
+    "events": "Оголошення",
+    "showMore": "Показати усі"
   },
   "datePicker": {
     "Cancel": "Відмінити",

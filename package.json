@@ -6,7 +6,7 @@
     "start": "react-native start",
     "test": "jest --detectOpenHandles --forceExit",
     "style": "eslint .",
-    "ios": "react-native run-ios --simulator='iPhone 7'",
+    "ios": "react-native run-ios --simulator='iPhone 8'",
     "android": "react-native run-android --deviceId=08e9b953",
     "postinstall": "npx jetify"
   },

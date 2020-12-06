@@ -5,14 +5,6 @@ import {
   CircleIcon,
 } from './icon.component';
 
-export const ArrowUpIcon = (style) => {
-  const source = {
-    imageSource: require('./eva/arrow-ios-upward-outline.png'),
-  };
-
-  return Icon(source, style);
-}
-
 export const ArrowheadUpIcon = (style) => {
   const source = {
     imageSource: require('./eva/arrowhead-up.png'),

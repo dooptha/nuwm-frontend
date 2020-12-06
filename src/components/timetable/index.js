@@ -1,254 +1,228 @@
-import React, { useState } from 'react';
-import * as Animatable from 'react-native-animatable';
-import { View, Text, Animated, Easing, ScrollView, TouchableOpacity, PanResponder, Dimensions } from 'react-native';
-import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
-import DatePicker from 'rn-lightweight-date-picker';
-import { ArrowUpIcon } from '../../assets/icons';
+import React, { Component } from 'react';
+import { ScrollView, RefreshControl, Dimensions } from 'react-native';
+import { withStyles } from 'react-native-ui-kitten';
+import { TabView, TabBar } from 'react-native-tab-view';
+import DefaultPreference from 'react-native-default-preference';
+import Search from './search';
+import Schedule from './Schedule';
 
-const linesColor = '#e0e0e0';
-const calendarMinSize = 0.85, calendarMaxSize = 1;
-const scheduleMinHeight = 0.45, scheduleMaxHeight = 0.97;
-const minSpeedToForce = 2;
+import I18n from '../../utils/i18n';
+import { getScheduleOnWeek } from '../../api/timetable';
+import { storeKey } from '../../utils/storage';
+import { StateContext } from '../../utils/context';
+import {
+  isToday, isTomorrow, replaceDatesWithMoment, isOutdated,
+} from './helper';
 
-const styles = {
-  wrapper: {
-    height: '100%',
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
-    backgroundColor: 'white',
-  },
-  calendar: {
-    top: 0,
-    selfAling: 'flex-start',
-    position: 'absolute',
-    height: '70%',
-    width: '100%',
-    backgroundColor: 'white',
-  },
-  schedule: {
-    backgroundColor: 'white',
-    height: '5%',
-    borderTopRightRadius: 15,
-    borderTopLeftRadius: 15,
+export class Timetable extends Component {
+  static contextType = StateContext;
 
-    shadowColor: '#000000',
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowRadius: 5,
-    shadowOpacity: 0.3,
-  },
-};
+  state = {
+    /** data without moment objects */
+    data: [],
+    /** data with moment objects */
+    schedule: [],
+    today: [],
+    tomorrow: [],
+    /** store language to detect when it changes */
+    language: '',
+    refreshing: false,
+    error: false,
+    /** current tab index */
+    index: 1,
+    // eslint-disable-next-line
+    routes: [],
+    // key for unique schedule
+    scheduleKey: new Date().getTime(),
+  };
 
-const subjects = {
-  time: ["8:00-9:20", "9:40-11:00", "11:15-12:35", "13:00-14:00"],
-  classroom: ["410", "127", "256a", "228"],
-  name: ["Функціональний аналіз", "Фізична підготовка", "Майнкрафт", "Математична залупа", "ОБЖ", "Інформатика", "Трансгуманізм", "Теорія керування"],
-  type: ["Лабораторна робота", "Практична робота", "Лекція"],
-};
+  constructor(props) {
+    super(props);
 
-const heightValues = {
-  inputRange: [0, 1],
-  outputRange: ['0%', '100%'],
-};
-
-const rotateValues = {
-  inputRange: [0, 180],
-  outputRange: ['0deg', '100deg'],
-};
-
-const Subject = (props) => {
-
-  const time = subjects.time[Math.floor((Math.random() * subjects.time.length))];
-  const classroom = subjects.classroom[Math.floor((Math.random() * subjects.classroom.length))];
-  const name = subjects.name[Math.floor((Math.random() * subjects.name.length))];
-  const type = subjects.type[Math.floor((Math.random() * subjects.type.length))];
-
-  const times = time.split('-');
-
-  return (
-    <View style={{ flexDirection: 'row', paddingLeft: 15, paddingRight: 15, paddingTop: 12 }}>
-      <View style={{ flexDirection: 'column', width: '30%' }}>
-        <Text style={{ marginBottom: 7 }}>{ times[0] + " " + times[1] }</Text>
-        <Text style={{ color: 'gray' }}>{ classroom }</Text>
-      </View>
-      <View style={[{ flexDirection: 'column', width: '100%', paddingBottom: 12 }, !props.last ? { borderBottomColor: linesColor, borderBottomWidth: 0.5 } : {}]}>
-        <Text style={{ fontWeight: 'bold', marginBottom: 7 }}>{ name }</Text>
-        <Text style={{ color: 'gray', paddingLeft: 2 }}>{ type }</Text>
-      </View>
-
-    </View>
-  );
-};
-
-const Date = (props) => {
-
-  return (
-    <View style={[{ borderBottomColor: linesColor, borderBottomWidth: 0.5, marginLeft: 20, paddingBottom: 13, paddingTop: 13 }, props.first ? {} : { borderTopColor: linesColor, borderTopWidth: 0.5 }]}>
-      <Text style={{ color: '#9c9a9a' }}>{ "Friday, " + props.d + " September" }</Text>
-    </View>
-  )
-};
-
-const List = (props = { count: 0, d: 1 }) => {
-  const list = [];
-
-  const count = Math.floor(Math.random() * 4 + 1);
-
-  for (let i = 0; i < count; i += 1) {
-    list.push(<Subject last={count - 1 === i} />);
+    // this is needed for tabs
+    this.deviceWidth = Dimensions.get('window').width;
   }
 
-  return (
-    <View>
-      <Date d={props.d} first={props.first} />
+  componentDidMount() {
+    DefaultPreference.get('schedule').then((rawData) => {
+      const data = JSON.parse(rawData);
+      if (rawData) this.splitSchedule({ data });
+    });
 
-      { list }
-    </View>
-  );
-};
+    this.requestSchedule();
+  }
 
-const screenHeight = Dimensions.get('window').height;
-const swipeHeight = 0;
+  onRefresh() {
+    this.requestSchedule();
+  }
 
-const Timetable = () => {
+  switchTab = (index) => {
+    this.setState({ index });
+  }
 
-  const [isMinimized, setMinimized] = useState(false);
-  const [animatedHeight, setAnimatedheight] = useState(new Animated.Value(scheduleMinHeight));
-  const [animatedScaleX, setAnimatedScaleX] = useState(new Animated.Value(1));
-  const [date, setDate] = useState(1);
-  const [flip, setFlip] = useState(new Animated.Value(1));
+  splitSchedule(props = {}) {
+    const { data } = this.state;
 
-  let swipping = false;
+    let schedule = replaceDatesWithMoment(props.data || data);
 
-  const animate = (value, height) => {
+    if (schedule[0] && schedule[0].date && isOutdated(schedule[0].date)) {
+      DefaultPreference.clear('schedule');
+      schedule = [];
+    }
 
-    const speed = Math.abs(value - height) / (scheduleMaxHeight - scheduleMinHeight) * 350;
+    const today = schedule.filter((day) => isToday(day.date));
+    const tomorrow = schedule.filter((day) => isTomorrow(day.date));
+    const scheduleKey = new Date().getTime();
 
-    console.log(speed)
+    this.setState({
+      ...props, today, tomorrow, schedule, error: props.error, scheduleKey,
+    });
+  }
 
-    Animated.timing(
-      animatedHeight,
-      {
-        toValue: value,
-        duration: speed,
-      },
-    ).start();
+  requestSchedule() {
+    this.setState({ refreshing: true });
 
-    Animated.timing(
-      animatedScaleX,
-      {
-        toValue: value === scheduleMaxHeight ? calendarMinSize : calendarMaxSize,
-        duration: speed,
-      },
-    ).start();
+    const [{ app }] = this.context;
+    const { group } = app.properties;
 
-    if (value === scheduleMaxHeight) {
-      Animated.timing(
-        flip,
-        {
-          toValue: 360,
-          duration: 500,
-        },
-      ).start();
-    } else {
-      Animated.timing(
-        flip,
-        {
-          toValue: 0,
-          duration: 500,
-        },
-      ).start();
+    getScheduleOnWeek(group)
+      .then((resData) => {
+        const newState = { refreshing: false };
+
+        if (resData.error || resData.length === 0) {
+          this.setState({ ...newState, error: resData.error });
+        } else {
+          storeKey('schedule', JSON.stringify(resData));
+          this.splitSchedule({ ...newState, data: resData });
+        }
+      })
+      .catch((err) => console.log({ err }));
+  }
+
+  updateLocales() {
+    const { language } = this.state;
+    const [{ app: { properties } }] = this.context;
+
+    if (language !== properties.language) {
+      const routes = [
+        { key: 'search', title: I18n.t('timetable.tabs.Search') },
+        { key: 'today', title: I18n.t('timetable.tabs.Today') },
+        { key: 'tomorrow', title: I18n.t('timetable.tabs.Tomorrow') },
+        { key: 'week', title: I18n.t('timetable.tabs.Week') },
+      ];
+      this.splitSchedule({ routes, language: properties.language });
+    }
+  }
+
+  renderSchedule(schedule, tabIndex) {
+    const {
+      refreshing, index, scheduleKey,
+    } = this.state;
+    const { themedStyle } = this.props;
+
+    const refreshControl = (
+      <RefreshControl
+        refreshing={refreshing}
+        onRefresh={() => this.onRefresh()}
+      />
+    );
+
+    const error = this.state.schedule.length > 0 ? false : this.state.error || false;
+
+    const message = error || (refreshing
+      ? I18n.t('timetable.loading') : I18n.t('timetable.no-lesson'));
+
+    return (
+      <ScrollView
+        style={themedStyle.scrollContainer}
+        contentContainerStyle={themedStyle.scroll}
+        refreshControl={refreshControl}
+      >
+        <Schedule
+          scheduleKey={scheduleKey}
+          schedule={schedule}
+          message={message}
+          active={tabIndex === index}
+        />
+      </ScrollView>
+    );
+  }
+
+  renderScene = ({ route }) => {
+    const { today, tomorrow, schedule } = this.state;
+
+    switch (route.key) {
+      case 'search':
+        return <Search />;
+      case 'today':
+        return this.renderSchedule(today, 1);
+      case 'tomorrow':
+        return this.renderSchedule(tomorrow, 2);
+      case 'week':
+        return this.renderSchedule(schedule, 3);
+      default:
+        return null;
     }
   };
 
-  const [panResponder, setPanResponder] = useState(
-    PanResponder.create({
-      onStartShouldSetPanResponder: (evt, gestureState) => true,
-      onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
-      onMoveShouldSetPanResponder: (evt, gestureState) => true,
-      onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
+  render() {
+    const { props: { themedStyle } } = this;
 
-      onPanResponderGrant: (evt, gestureState) => {
-        console.log('start');
-        swipping = true;
-      },
-      onPanResponderRelease: (evt, gestureState) => {
-        console.log('released');
+    this.updateLocales();
 
-        if (swipping) {
-          const { moveY } = gestureState;
-          const height = 1 - moveY / screenHeight;
-
-          if (Math.abs(height - scheduleMinHeight) > Math.abs(height - scheduleMaxHeight)) {
-            console.log('to up');
-            animate(scheduleMaxHeight, height);
-          } else {
-            console.log('to down');
-            animate(scheduleMinHeight, height);
-          }
-        }
-
-        swipping = false;
-      },
-      onPanResponderMove: (evt, gestureState) => {
-        const { vy } = gestureState;
-        const height = 1 - gestureState.moveY / screenHeight;
-
-        if (swipping) {
-          if (vy > minSpeedToForce) {
-            console.log('force down');
-            animate(scheduleMinHeight, height);
-            swipping = false;
-          } else if (vy < -minSpeedToForce) {
-            console.log('force up');
-            animate(scheduleMaxHeight, height);
-            swipping = false;
-          } else {
-            animatedHeight.setValue(height);
-
-            if (height >= scheduleMinHeight && height <= scheduleMaxHeight) {
-              const h = 1 - (height - scheduleMinHeight) * (calendarMaxSize - calendarMinSize) / (scheduleMaxHeight - scheduleMinHeight);
-              animatedScaleX.setValue(h);
-            }
-          }
-        }
-      },
-      onPanResponderTerminationRequest: (evt, gestureState) => true,
-
-      onPanResponderTerminate: (evt, gestureState) => {
-      },
-      onShouldBlockNativeResponder: (evt, gestureState) => {
-        return true;
-      },
-    })
-  );
-
-  const onDate = (d) => {
-    setDate(parseInt(d));
-  };
-
-  return (
-    <View style={styles.wrapper}>
-      <Animated.View style={[styles.calendar, { transform: [{ scale: animatedScaleX }] }]}>
-        <DatePicker onDateChange={onDate} format="d" mode="single" />
-      </Animated.View>
-      <Animated.View style={[styles.schedule, { height: animatedHeight.interpolate(heightValues) }]}>
-        <View {...panResponder.panHandlers}>
-          <TouchableOpacity style={{ marginTop: 5, height: 30, alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
-            <Animated.View style={{ transform: [{ rotateX: flip.interpolate(rotateValues) }] }}>
-              { ArrowUpIcon({ width: 40, height: 15, tintColor: linesColor }) }
-            </Animated.View>
-          </TouchableOpacity>
-        </View>
-        <ScrollView>
-          <List count={20} d={date} first />
-          <List count={20} d={date + 1} />
-        </ScrollView>
-      </Animated.View>
-    </View>
-  )
+    return (
+      <TabView
+        renderTabBar={(props) => (
+          <TabBar
+            style={themedStyle.tabBar}
+            labelStyle={themedStyle.tabBarLabel}
+            indicatorStyle={themedStyle.tabBarIndicator}
+            {...props}
+            activeColor={themedStyle.activeColor.color}
+            inactiveColor={themedStyle.inactiveColor.color}
+          />
+        )}
+        navigationState={this.state}
+        renderScene={this.renderScene}
+        onIndexChange={this.switchTab}
+        initialLayout={{ width: this.deviceWidth }}
+      />
+    );
+  }
 }
 
-export default Timetable;
+export default withStyles(Timetable, (theme) => ({
+  activeColor: {
+    color: theme['background-primary-color-1'],
+  },
+  inactiveColor: {
+    color: theme['text-hint-color'],
+  },
+  tabBarLabel: {
+    fontWeight: 'bold',
+    width: '100%',
+    fontSize: 13,
+    textTransform: 'capitalize',
+  },
+  tabBarIndicator: {
+    backgroundColor: theme['background-primary-color-1'],
+  },
+  tabBar: {
+    height: 40,
+    marginTop: -10,
+    backgroundColor: theme['background-basic-color-1'],
+  },
+  tabView: {
+    height: '100%',
+    backgroundColor: theme['background-basic-color-1'],
+  },
+  scroll: {
+    flexDirection: 'row',
+    minHeight: '100%',
+  },
+  scrollContainer: {
+    backgroundColor: theme['background-basic-color-1'],
+    borderTopColor: theme['border-basic-color-4'],
+    borderTopWidth: 1,
+  },
+}));

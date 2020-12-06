@@ -1,13 +1,11 @@
 module.exports = {
-  root: false,
   "extends": "airbnb",
   "parser": "babel-eslint",
   "env": {
     "browser": true,
     "node": true,
     "es6": true,
-    "mocha": true,
-    "jest/globals": true
+    "mocha": true
   },
   "plugins": ["jest"],
   "rules": {
@@ -30,6 +28,9 @@ module.exports = {
     "arrow-parens": [2, "always"],
     "class-methods-use-this": [0],
     "no-underscore-dangle": ["error", { "allow": ["_id", "_navigator"] }]
+  },
+  "env": {
+    "jest/globals": true
   },
   "overrides": [
       {

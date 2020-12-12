@@ -118,7 +118,7 @@ export default withStyles(SubjectsList, (theme) => ({
   },
   timelineWrapper: {
     borderLeftWidth: 2,
-    borderLeftColor: theme['background-basic-color-4'],
+    borderLeftColor: theme['color-primary-default'],
     height: '100%',
     marginBottom: -55
   },

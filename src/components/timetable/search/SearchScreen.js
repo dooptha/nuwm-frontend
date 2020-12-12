@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import {Button, Text, withStyles} from "react-native-ui-kitten";
 import Datepicker from 'rn-lightweight-date-picker';
 import {Alert, ScrollView, View} from "react-native";
@@ -23,6 +23,10 @@ const SearchScreen = ({ themedStyle }) => {
   const [endDate, setEndDate] = useState(null);
 
   const [loading, setLoading] = useState(false);
+
+  const lecturerInput = useRef(null);
+  const groupInput = useRef(null);
+  const scrollRef = useRef(null);
 
   const fetchSchedule = () => {
     let isEnoughData = true;
@@ -78,12 +82,48 @@ const SearchScreen = ({ themedStyle }) => {
     </Button>
   );
 
+  const scrollTo = (y) => {
+    scrollRef.current.scrollTo({
+      animated: true,
+      y,
+    });
+  }
+
+  const onInputChange = (key, text) => {
+    const clearError = {};
+
+    // Reset input error
+    clearError[key] = false;
+    setErrors({ ...errors, ...clearError })
+
+    if(key === 'lecturer'){
+      setLecturer(text);
+    }
+
+    if(key === 'group'){
+      setGroup(text);
+    }
+  }
+
+  const onContentSizeChange = () => {
+    const lecturerFocused = lecturerInput.current.isFocused();
+    const groupFocused = groupInput.current.isFocused();
+
+    if (lecturerFocused) {
+      scrollTo(275);
+    } else if (groupFocused) {
+      scrollTo(380);
+    }
+  }
+
   return(
     <ScrollView
+      ref={scrollRef}
+      onContentSizeChange={onContentSizeChange}
       style={themedStyle.wrapper}
       contentContainerStyle={themedStyle.scroll}
     >
-      <View style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'flex-start' }}>
+      <View style={{ display: 'flex', flexDirection: 'column', height: '100%', marginBottom: 150, justifyContent: 'flex-start' }}>
         <Datepicker
           showControls={true}
           mode="range"
@@ -104,7 +144,9 @@ const SearchScreen = ({ themedStyle }) => {
             name="lecturer"
             value={lecturer}
             status={errors.lecturer ? 'danger' : null}
-            onChangeText={(text) => setLecturer(text)}
+            onChangeText={(text) => onInputChange('lecturer', text)}
+            inputReference={lecturerInput}
+            onFocus={() => scrollTo(135)}
           />
         </View>
 
@@ -114,7 +156,9 @@ const SearchScreen = ({ themedStyle }) => {
             name="group"
             value={group}
             status={errors.group ? 'danger' : null}
-            onChangeText={(text) => setGroup(text)}
+            onChangeText={(text) => onInputChange('group', text)}
+            inputReference={groupInput}
+            onFocus={() => scrollTo(230)}
           />
         </View>
         <View style={themedStyle.buttonWrapper}>

@@ -220,3 +220,11 @@ export const CircleMinusIcon = (color) => {
 
   return CircleIcon(source, color);
 }
+
+export const SearchIcon = (style) => {
+  const source = {
+    imageSource: require('./eva/search-outline.png'),
+  };
+
+  return Icon(source, style);
+}

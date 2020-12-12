@@ -4,17 +4,17 @@ import I18n from '../utils/i18n';
 import { storeObject } from '../utils/storage';
 
 const errorParser = (err) => {
-  if (err.message === 'Network Error') return I18n.t('timetable.error-no-server');
+  if (err.message === 'Network Error') return { error: I18n.t('timetable.error-no-server') };
 
   if (err.response) {
     switch (err.response.status) {
-      case 404: return I18n.t('timetable.no-lesson');
-      case 400: return I18n.t('timetable.error-try-later');
-      default: return I18n.t('timetable.error-try-later');
+      case 404: return [];
+      case 400: return { error: I18n.t('timetable.error-try-later') };
+      default: return { error: I18n.t('timetable.error-try-later') };
     }
   }
 
-  return I18n.t('timetable.error-try-later');
+  return { error: I18n.t('timetable.error-try-later') };
 };
 
 const dateToApiFormat = (date) => (date.format('DD.MM.YYYY'));
@@ -33,7 +33,7 @@ export const getScheduleOnWeek = (group) => {
       if (response.data.schedule) return response.data.schedule;
       return { error: I18n.t('timetable.error-try-later') };
     })
-    .catch((err) => ({ error: errorParser(err) }));
+    .catch((err) => (errorParser(err)));
 };
 
 export const getSchedule = (data) => api.get('/timetable', {
@@ -43,7 +43,7 @@ export const getSchedule = (data) => api.get('/timetable', {
     if (response.data.schedule) return response.data.schedule;
     return response.data.schedule;
   })
-  .catch((err) => ({ error: errorParser(err) }));
+  .catch((err) => (errorParser(err)));
 
 const getGroups = (dispatch) => (
   api.get('/timetable/groups')
@@ -92,4 +92,5 @@ module.exports = {
   getSchedule,
   getGroups,
   getTeachers,
+  dateToApiFormat
 };

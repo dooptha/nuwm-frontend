@@ -27,7 +27,7 @@ I18n.translations = {
   en,
 };
 
-const getMomentLocale = () => {
+export const getMomentLocale = () => {
   switch (I18n.locale) {
     case 'ua': return 'uk';
     case 'ru': return 'ru';

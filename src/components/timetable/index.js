@@ -1,228 +1,190 @@
-import React, { Component } from 'react';
-import { ScrollView, RefreshControl, Dimensions } from 'react-native';
-import { withStyles } from 'react-native-ui-kitten';
-import { TabView, TabBar } from 'react-native-tab-view';
+import React, { useEffect, useState, useContext } from 'react';
+import { RefreshControl, View, TouchableOpacity } from 'react-native';
+import { withStyles, Text } from 'react-native-ui-kitten';
 import DefaultPreference from 'react-native-default-preference';
-import Search from './search';
-import Schedule from './Schedule';
-
-import I18n from '../../utils/i18n';
-import { getScheduleOnWeek } from '../../api/timetable';
+import Schedule from './schedule/Schedule';
+import Datepicker from 'rn-lightweight-date-picker';
+import { SearchIcon } from '../../assets/icons';
+import { getSchedule, dateToApiFormat } from '../../api/timetable';
 import { storeKey } from '../../utils/storage';
 import { StateContext } from '../../utils/context';
-import {
-  isToday, isTomorrow, replaceDatesWithMoment, isOutdated,
-} from './helper';
+import { replaceDatesWithMoment } from './helper';
+import moment from "moment";
+import NavigationService from "../../navigation/NavigationService";
 
-export class Timetable extends Component {
-  static contextType = StateContext;
+const Timetable = ({ themedStyle }) => {
+  const [{ app }] = useContext(StateContext);
+  const { group } = app.properties;
 
-  state = {
-    /** data without moment objects */
-    data: [],
-    /** data with moment objects */
-    schedule: [],
-    today: [],
-    tomorrow: [],
-    /** store language to detect when it changes */
-    language: '',
-    refreshing: false,
-    error: false,
-    /** current tab index */
-    index: 1,
-    // eslint-disable-next-line
-    routes: [],
-    // key for unique schedule
-    scheduleKey: new Date().getTime(),
-  };
+  const [schedule, setSchedule] = useState([]);
+  const [refreshing, setRefreshing] = useState(true);
+  const [error, setError] = useState(false);
+  const [chosenDate, setChosenDate] = useState(new Date());
 
-  constructor(props) {
-    super(props);
+  // behaviour pattern:
+  /*
+    on launch tries to fetch schedule from the server
+    if server cant be reached - load schedule from storage
+    if can be - save schedule to storage and display data
+   */
 
-    // this is needed for tabs
-    this.deviceWidth = Dimensions.get('window').width;
-  }
+  const requestSchedule = (startDate, endDate) => {
+    setRefreshing(true);
 
-  componentDidMount() {
-    DefaultPreference.get('schedule').then((rawData) => {
-      const data = JSON.parse(rawData);
-      if (rawData) this.splitSchedule({ data });
-    });
-
-    this.requestSchedule();
-  }
-
-  onRefresh() {
-    this.requestSchedule();
-  }
-
-  switchTab = (index) => {
-    this.setState({ index });
-  }
-
-  splitSchedule(props = {}) {
-    const { data } = this.state;
-
-    let schedule = replaceDatesWithMoment(props.data || data);
-
-    if (schedule[0] && schedule[0].date && isOutdated(schedule[0].date)) {
-      DefaultPreference.clear('schedule');
-      schedule = [];
-    }
-
-    const today = schedule.filter((day) => isToday(day.date));
-    const tomorrow = schedule.filter((day) => isTomorrow(day.date));
-    const scheduleKey = new Date().getTime();
-
-    this.setState({
-      ...props, today, tomorrow, schedule, error: props.error, scheduleKey,
-    });
-  }
-
-  requestSchedule() {
-    this.setState({ refreshing: true });
-
-    const [{ app }] = this.context;
-    const { group } = app.properties;
-
-    getScheduleOnWeek(group)
+    return getSchedule({ group, startDate, endDate })
       .then((resData) => {
-        const newState = { refreshing: false };
+        setRefreshing(false);
 
-        if (resData.error || resData.length === 0) {
-          this.setState({ ...newState, error: resData.error });
-        } else {
-          storeKey('schedule', JSON.stringify(resData));
-          this.splitSchedule({ ...newState, data: resData });
+        if (resData.error) {
+          setError(resData.error);
+        }else{
+          setError(false);
         }
+
+        return resData;
       })
-      .catch((err) => console.log({ err }));
-  }
-
-  updateLocales() {
-    const { language } = this.state;
-    const [{ app: { properties } }] = this.context;
-
-    if (language !== properties.language) {
-      const routes = [
-        { key: 'search', title: I18n.t('timetable.tabs.Search') },
-        { key: 'today', title: I18n.t('timetable.tabs.Today') },
-        { key: 'tomorrow', title: I18n.t('timetable.tabs.Tomorrow') },
-        { key: 'week', title: I18n.t('timetable.tabs.Week') },
-      ];
-      this.splitSchedule({ routes, language: properties.language });
-    }
-  }
-
-  renderSchedule(schedule, tabIndex) {
-    const {
-      refreshing, index, scheduleKey,
-    } = this.state;
-    const { themedStyle } = this.props;
-
-    const refreshControl = (
-      <RefreshControl
-        refreshing={refreshing}
-        onRefresh={() => this.onRefresh()}
-      />
-    );
-
-    const error = this.state.schedule.length > 0 ? false : this.state.error || false;
-
-    const message = error || (refreshing
-      ? I18n.t('timetable.loading') : I18n.t('timetable.no-lesson'));
-
-    return (
-      <ScrollView
-        style={themedStyle.scrollContainer}
-        contentContainerStyle={themedStyle.scroll}
-        refreshControl={refreshControl}
-      >
-        <Schedule
-          scheduleKey={scheduleKey}
-          schedule={schedule}
-          message={message}
-          active={tabIndex === index}
-        />
-      </ScrollView>
-    );
-  }
-
-  renderScene = ({ route }) => {
-    const { today, tomorrow, schedule } = this.state;
-
-    switch (route.key) {
-      case 'search':
-        return <Search />;
-      case 'today':
-        return this.renderSchedule(today, 1);
-      case 'tomorrow':
-        return this.renderSchedule(tomorrow, 2);
-      case 'week':
-        return this.renderSchedule(schedule, 3);
-      default:
-        return null;
-    }
+      .catch((err) => {
+        console.error(err)
+      });
   };
 
-  render() {
-    const { props: { themedStyle } } = this;
+  // fetch schedule for next 7 days, this schedule will be saved to local storage and
+  // will be reused if server couldnt be reached, this storage is also used by widget
+  useEffect(() => {
+    const startDate = dateToApiFormat(moment(new Date()));
+    const endDate = dateToApiFormat(moment(new Date()).add(14, 'days'));
 
-    this.updateLocales();
+    requestSchedule(startDate, endDate).then((rawData) => {
+      if(!rawData.error){
+        DefaultPreference.clear('schedule');
+        storeKey('schedule', JSON.stringify(rawData));
 
-    return (
-      <TabView
-        renderTabBar={(props) => (
-          <TabBar
-            style={themedStyle.tabBar}
-            labelStyle={themedStyle.tabBarLabel}
-            indicatorStyle={themedStyle.tabBarIndicator}
-            {...props}
-            activeColor={themedStyle.activeColor.color}
-            inactiveColor={themedStyle.inactiveColor.color}
-          />
-        )}
-        navigationState={this.state}
-        renderScene={this.renderScene}
-        onIndexChange={this.switchTab}
-        initialLayout={{ width: this.deviceWidth }}
+        storeKey('scheduleDate', new Date().toJSON());
+        let serializedData = replaceDatesWithMoment(rawData);
+
+        setSchedule(serializedData.filter((day) => day.date.isSame(moment(new Date()), 'day')))
+      }
+    });
+  }, []);
+
+  // if date in datepicker was changed - automatically fetch new day
+  useEffect(() => {
+
+    const startDate = dateToApiFormat(moment(chosenDate));
+    const endDate = dateToApiFormat(moment(chosenDate));
+
+    requestSchedule(startDate, endDate).then(rawData => {
+      if(!rawData.error){
+        let serializedData = replaceDatesWithMoment(rawData);
+        setSchedule(serializedData);
+      }
+    })
+  }, [chosenDate])
+
+  return (
+    <View style={themedStyle.wrapper}>
+      <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: 15, marginBottom: 5 }}>
+        <Datepicker
+          minimized={true}
+          showControls={true}
+          mode="single"
+          locale={app.properties.language === 'ua' ? 'uk' : app.properties.language}
+          initialDate={new Date()}
+          start={new Date()}
+          onDateChange={(date) => setChosenDate(date)}
+          userStyles={themedStyle.calendar}
+          userColors={themedStyle.userColors}
+          leftControl={<Text appearance="hint">{'<'}</Text>}
+          rightControl={<Text appearance="hint">{'>'}</Text>}
+        />
+      </View>
+      <Schedule
+        data={schedule}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={() => setChosenDate(new Date(chosenDate))} />}
+        refreshing={refreshing}
+        error={error}
+        chosenDate={chosenDate}
       />
-    );
-  }
+      <TouchableOpacity onPress={() => NavigationService.navigate('SearchScreen')} style={themedStyle.searchButton}>
+        { SearchIcon(themedStyle.searchIcon) }
+      </TouchableOpacity>
+    </View>
+  );
 }
 
 export default withStyles(Timetable, (theme) => ({
-  activeColor: {
-    color: theme['background-primary-color-1'],
-  },
-  inactiveColor: {
-    color: theme['text-hint-color'],
-  },
-  tabBarLabel: {
-    fontWeight: 'bold',
-    width: '100%',
-    fontSize: 13,
-    textTransform: 'capitalize',
-  },
-  tabBarIndicator: {
-    backgroundColor: theme['background-primary-color-1'],
-  },
-  tabBar: {
-    height: 40,
-    marginTop: -10,
-    backgroundColor: theme['background-basic-color-1'],
-  },
-  tabView: {
+  wrapper: {
     height: '100%',
-    backgroundColor: theme['background-basic-color-1'],
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    backgroundColor: theme['background-basic-color-1']
+  },
+  calendar: {
+    wrapper: { flex: 1, paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0 },
+    subtitle: { display: 'none' },
+    topBar: { paddingTop: 0, paddingBottom: 15 },
+    title: { fontSize: 16 }
+  },
+  userColors: {
+    wrapper: theme['background-basic-color-1'],
+    title: theme['text-basic-color'],
+    selectedDay: theme['color-primary-active'],
+    initialDay: theme['color-primary-active'],
+    dayOfTheWeek: theme['text-hint-color'],
+    range: theme['background-basic-color-2'],
+    dayText: theme['text-basic-color'],
+    unavailable: theme['text-hint-color']
   },
   scroll: {
     flexDirection: 'row',
-    minHeight: '100%',
   },
   scrollContainer: {
-    backgroundColor: theme['background-basic-color-1'],
+    backgroundColor: theme['background-basic-color-2'],
     borderTopColor: theme['border-basic-color-4'],
     borderTopWidth: 1,
+    height: '100%'
   },
+  searchIcon: {
+    tintColor: 'white',
+    width: 30,
+    height: 30
+  },
+  searchButton: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 65,
+    height: 65,
+    backgroundColor: theme['color-primary-active'],
+    borderRadius: 100,
+    position: 'absolute',
+    bottom: 20,
+    right: 10
+  },
+  noLessonImage: {
+    height: 100,
+    resizeMode: 'contain',
+    marginBottom: 15,
+    tintColor: theme['text-hint-color']
+  },
+  archiveMessageWrapper: {
+    marginTop: 5,
+    backgroundColor: theme['color-warning-600'],
+    width: '100%',
+    padding: 5,
+    display: 'flex',
+    justifyContent: 'center'
+  },
+  errorMessageWrapper: {
+    marginTop: 5,
+    backgroundColor: theme['color-danger-600'],
+    width: '100%',
+    padding: 5,
+    display: 'flex',
+    justifyContent: 'center'
+  },
+  archiveMessage: {
+    color: 'white',
+    textAlign: 'center'
+  }
 }));

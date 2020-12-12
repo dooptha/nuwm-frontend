@@ -30,7 +30,8 @@ import {
   NoHeaderNavigationOptions,
 } from './options';
 import Schedule from '../components/timetable';
-import DetailedLesson from '../components/timetable/LessonScreen';
+import DetailedLesson from '../components/timetable/schedule/SubjectScreen';
+import SearchResultsScreen from '../components/timetable/search/SearchResultsScreen';
 import SearchScreen from '../components/timetable/search/SearchScreen';
 import SplashScreen from '../containers/SplashScreen';
 import SignUpScreen from '../containers/auth/SignUp';
@@ -46,6 +47,10 @@ const ScheduleNavigationMap = {
   },
   SearchScreen: {
     screen: SearchScreen,
+    navigationOptions: MenuNavigationOptions,
+  },
+  SearchResultsScreen: {
+    screen: SearchResultsScreen,
     navigationOptions: MenuNavigationOptions,
   },
 };

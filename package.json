@@ -36,7 +36,7 @@
     "react-native-sound": "^0.11.0",
     "react-native-tab-view": "^2.10.0",
     "react-native-ui-kitten": "^4.1.0",
-    "react-native-webview": ">=7.0.1",
+    "react-native-webview": ">=11.0.0",
     "react-navigation": "^3.11.0",
     "rn-lightweight-date-picker": "1.3.0-beta.0",
     "rollbar-react-native": "^0.6.1",

@@ -82,6 +82,7 @@
     "Language": "Language",
     "PollHistory": "Polls history",
     "SearchScreen": "Schedule",
+    "SearchResultsScreen": "Results",
     "Settings": "Settings",
     "Themes": "Theme",
     "Timetable": "Timetable",
@@ -133,6 +134,8 @@
     "timetable": "Timetable"
   },
   "timetable": {
+    "archiveShown": "Couldn't reach server. Archive is shown.",
+    "noLesson": "No classes",
     "loading": "Loading...",
     "datepicker": {
       "Choose Date": "Choose Date",
@@ -140,6 +143,8 @@
       "OK": "Ok",
       "Start": "Start"
     },
+    "noServer": "Something went wrong",
+    "tryLater": "Check your internet connection or try later",
     "error-no-server": "Can't connect to the server :-( \nCheck your network connection",
     "error-try-later": "Something went wrong :-( \nTry again later",
     "errorInvalidData": {

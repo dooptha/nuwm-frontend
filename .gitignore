@@ -69,3 +69,4 @@ config/override.js
 
 # Environment variables
 .env
+/src/components/timetable/rn-lightweight-date-picker/

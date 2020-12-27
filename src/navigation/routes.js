@@ -27,7 +27,7 @@ import {
   UserSettingsNavigationOptions,
   TimetableSettingsNavigationOptions,
   WebViewNavigationOptions,
-  NoHeaderNavigationOptions,
+  NoHeaderNavigationOptions, HeaderNoBorderNavigationOptions,
 } from './options';
 import Schedule from '../components/timetable';
 import DetailedLesson from '../components/timetable/schedule/SubjectScreen';
@@ -39,6 +39,7 @@ import NewPoll from '../containers/admin/NewPoll';
 import WebView from '../containers/common/WebView';
 
 import config from '../../config';
+import Events from '../containers/events';
 
 const ScheduleNavigationMap = {
   DetailedLesson: {
@@ -98,6 +99,10 @@ const ConversationsNavigationMap = {
   Conversation: {
     screen: Conversation,
     navigationOptions: NoHeaderNavigationOptions('background-basic-color-3'),
+  },
+  Events: {
+    screen: Events,
+    navigationOptions: HeaderNoBorderNavigationOptions,
   },
 };
 

@@ -1,34 +1,24 @@
 import config from '../../../../config';
 
 export default {
-  chat: {
-    routeName: 'Conversation',
-    params: {
-      conversation: {
-        id: '0',
-        title: 'Flood',
-      },
-    },
-  },
-  // twitter: {
-  //   routeName: 'WebView',
-  //   params: {
-  //     url: `https://twitter.com/hashtag/${config.TWITTER_HASHTAG}?f=tweets&vertical=default&src=unkn`,
-  //     title: 'Twitter',
-  //   },
-  // },
-  instagram: {
-    routeName: 'WebView',
-    params: {
-      url: `https://www.instagram.com/explore/tags/${config.INSTAGRAM_HASHTAG}/?hl=uk`,
-      title: 'Instagram',
-    },
-  },
-  telegram: {
+  telegram: () => ({
     routeName: 'WebView',
     params: {
       url: `${config.TELEGRAM_URL}`,
       title: 'Telegram',
     },
-  },
+  }),
+  events: () => ({
+    routeName: 'Events',
+    params: {
+      title: 'Event',
+    },
+  }),
+  event: ({ url }) => ({
+    routeName: 'WebView',
+    params: {
+      url,
+      title: 'Event',
+    },
+  }),
 };

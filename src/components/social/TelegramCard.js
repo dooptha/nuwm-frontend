@@ -17,7 +17,7 @@ const TelegramCard = ({
   <TouchableOpacity
     style={themedStyle.container}
     onPress={onPress}
-    activeOpacity={0.5}
+    activeOpacity={0.8}
   >
     <View style={themedStyle.content}>
       <Text style={themedStyle.title} category="h4">
@@ -58,7 +58,7 @@ export default withStyles(TelegramCard, (theme) => ({
     tintColor: 'white',
   },
   content: {
-    width: '55%',
+    maxWidth: '60%',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
   },

@@ -114,3 +114,25 @@ export const WebViewNavigationOptions = {
 export const NoHeaderNavigationOptions = (themeBackgroundColor) => ({
   header: () => <EmptyTopNavigationBar themeBackgroundColor={themeBackgroundColor} />,
 });
+
+export const HeaderNoBorderNavigationOptions = {
+  header: ({ navigation }) => {
+    const { routeName } = getCurrentRouteState(navigation);
+    const index = getCurrentRouteIndex(navigation);
+
+    return (
+      <StateContext.Consumer>
+        {
+          () => (
+            <TopNavigationBar
+              title={I18n.t(`routes.${routeName}`)}
+              backIcon={backIconIfNeeded(index)}
+              onBackPress={() => navigation.goBack(null)}
+              connected
+            />
+          )
+        }
+      </StateContext.Consumer>
+    );
+  },
+};

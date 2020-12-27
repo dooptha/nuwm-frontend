@@ -5,7 +5,9 @@ export default {
   SOCKET_IO_ENDPOINT: 'https://api.dooptha.com/flood',
   INITIAL_ROUTE_NAME: 'Timetable', /* [Timetable, Conversations, Settings] */
   INSTAGRAM_HASHTAG: 'нувгп',
-  TELEGRAM_URL: 'https://t.me/nuwee_chat',
+  TELEGRAM_URL: 'tg://resolve?domain=nuwee_chat',
+  TELEGRAM_CHANNEL_URL: 'tg://resolve?domain=nuwee_feed',
+  TELEGRAM_BOT_URL: 'tg://resolve?domain=nuwee_bot',
   TWITTER_HASHTAG: 'нувгп',
   CONTACT_EMAIL: 'dooptha@gmail.com',
   WEBSITE_URL: 'https://dooptha.com',

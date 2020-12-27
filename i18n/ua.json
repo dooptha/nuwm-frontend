@@ -94,6 +94,7 @@
     "User": "Користувач",
     "WebView": "WebView",
     "Conversation": "Флуд",
+    "Events": "Оголошення",
     "disconnected": "Підключення"
   },
   "settings": {
@@ -132,7 +133,7 @@
     }
   },
   "tabs": {
-    "chat": "Розмови",
+    "chat": "Спільнота",
     "settings": "Налаштування",
     "timetable": "Розклад"
   },

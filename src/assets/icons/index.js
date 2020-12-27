@@ -63,7 +63,7 @@ export const ArrowForwardOutline = (style) => {
 
 export const GridIconOutline = (style) => {
   const source = {
-    imageSource: require('./eva/grid-outline.png'),
+    imageSource: require('./eva/settings-2-outline.png'),
   };
 
   return Icon(source, style);
@@ -71,7 +71,7 @@ export const GridIconOutline = (style) => {
 
 export const LayoutIconOutline = (style) => {
   const source = {
-    imageSource: require('./eva/layout-outline.png'),
+    imageSource: require('./eva/calendar-outline.png'),
   };
 
   return Icon(source, style);
@@ -79,7 +79,7 @@ export const LayoutIconOutline = (style) => {
 
 export const MessageCircleIcon = (style) => {
   const source = {
-    imageSource: require('./eva/message-circle.png'),
+    imageSource: require('./eva/people.png'),
   };
 
   return Icon(source, style);
@@ -236,4 +236,3 @@ export const TelegramIcon = (style) => {
 
   return Icon(source, style);
 };
-

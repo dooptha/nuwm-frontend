@@ -19,38 +19,44 @@ import {
   TelegramCard,
 } from '../../../components/social';
 import { androidUseLayoutAnimations } from '../../../utils/animations';
-import api from '../../../api/poll';
+import pollApi from '../../../api/poll';
+import eventsApi from '../../../api/events';
 import Carousel from '../../../components/common/Carousel';
 import config from '../../../../config/index';
 import I18n from '../../../utils/i18n';
+import { buildTelegramPostDeepLink } from '../../../utils/string';
 
 const ConversationsContainer = ({ navigation, themedStyle: style }) => {
   const [{
     poll,
-    app,
-    conversations,
+    events,
   }, dispatch] = useContext(StateContext);
 
   const loadData = () => {
-    api.getLastPoll(dispatch);
+    pollApi.getLastPoll(dispatch);
+    eventsApi.getEvents(dispatch);
   };
 
   const onVote = (index) => {
-    api.vote(dispatch, index);
+    pollApi.vote(dispatch, index);
   };
 
-  const openTelegramChat = () => {
-    Linking.openURL(config.TELEGRAM_URL);
-  };
-
-  const navigateTo = (routeKey) => {
-    const { routeName, params } = routes[routeKey];
+  const navigateTo = (routeKey, options) => {
+    const { routeName, params } = routes[routeKey](options);
 
     navigation.navigate({
       key: 'ConversationsContainer',
       routeName,
       params,
     });
+  };
+
+  const openTelegramChat = () => {
+    Linking.openURL(config.TELEGRAM_URL);
+  };
+
+  const openEvent = (event) => {
+    Linking.openURL(buildTelegramPostDeepLink(event.url));
   };
 
   useEffect(() => {
@@ -95,7 +101,7 @@ const ConversationsContainer = ({ navigation, themedStyle: style }) => {
           </TouchableOpacity>
         </View>
         <View style={style.events.content}>
-          <Carousel/>
+          <Carousel items={events.items} handleClick={openEvent} />
         </View>
       </View>
       <View style={style.divider}/>
@@ -156,14 +162,21 @@ export default withStyles(ConversationsContainer, (theme) => ({
   },
   poll: {
     container: {
-      backgroundColor: 'none',
-      borderRadius: 16,
+      background: theme['background-basic-color-1'],
+      borderRadius: 4,
+      marginTop: 8,
       marginBottom: 16,
-      // marginHorizontal: 8,
-      paddingTop: 8,
-      paddingBottom: 8,
-      paddingLeft: 0,
-      paddingRight: 8,
+      paddingTop: 16,
+      paddingBottom: 16,
+      paddingLeft: 32,
+      paddingRight: 32,
+      shadowColor: '#6c6c6c',
+      shadowOffset: {
+        width: 0,
+        height: 0,
+      },
+      shadowRadius: 10,
+      shadowOpacity: 0.1,
     },
   },
   telegram: {

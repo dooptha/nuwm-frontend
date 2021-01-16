@@ -163,7 +163,7 @@ export default withStyles(ConversationsContainer, (theme) => ({
   poll: {
     container: {
       background: theme['background-basic-color-1'],
-      borderRadius: 4,
+      borderRadius: 16,
       marginTop: 8,
       marginBottom: 16,
       paddingTop: 16,

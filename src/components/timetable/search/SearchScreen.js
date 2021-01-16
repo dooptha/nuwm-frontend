@@ -176,8 +176,8 @@ export default withStyles(SearchScreen, (theme) => ({
   userColors: {
     wrapper: theme['background-basic-color-1'],
     title: theme['text-basic-color'],
-    selectedDay: theme['color-primary-active'],
-    initialDay: theme['color-primary-active'],
+    selectedDay: theme['color-primary-default'],
+    initialDay: theme['color-primary-default'],
     dayOfTheWeek: theme['text-hint-color'],
     range: theme['border-basic-color-3'],
     dayText: theme['text-basic-color'],

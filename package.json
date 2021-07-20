@@ -21,7 +21,7 @@
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
     "react": "16.8.6",
-    "react-native": "0.60.0",
+    "react-native": "0.62.3",
     "react-native-date-ranges": "github:roman-sereda/react-native-date-ranges",
     "react-native-default-preference": "^1.4.0",
     "react-native-device-info": "^4.0.1-beta.1",

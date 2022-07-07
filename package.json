@@ -18,7 +18,7 @@
     "fuse.js": "^3.4.5",
     "i18n-js": "^3.3.0",
     "jetifier": "^1.6.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "prop-types": "^15.7.2",
     "react": "16.8.6",
     "react-native": "0.60.0",
